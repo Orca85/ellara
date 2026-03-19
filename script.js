@@ -306,7 +306,7 @@
    ========================================================= */
 (function () {
   const materials = {
-    copper: { rho: 0.0175, name: 'Koppar (Cu)', color: '#FF9B4D' },
+    copper: { rho: 0.018, name: 'Koppar (Cu)', color: '#FF9B4D' },
     aluminium: { rho: 0.028, name: 'Aluminium (Al)', color: '#AAAACC' },
   };
   let selected = 'copper';
@@ -346,7 +346,7 @@
    VOLTAGE DROP CALC
    ========================================================= */
 (function () {
-  const rho = { copper: 0.0175, aluminium: 0.028 };
+  const rho = { copper: 0.018, aluminium: 0.028 };
 
   function calcDrop() {
     const I    = parseFloat(document.getElementById('vd-I').value);
@@ -402,7 +402,7 @@
         ['Steg 2:', 'Dividera resultatet med arean A'],
         ['Enhet:', 'Svaret ges i Ohm (Ω)'],
       ],
-      example: 'Koppar (ρ = 0,0175), L = 50 m, A = 2,5 mm² → <strong>R = 0,0175 × 50 ÷ 2,5 = 0,35 Ω</strong>',
+      example: 'Koppar (ρ = 0,018), L = 50 m, A = 2,5 mm² → <strong>R = 0,018 × 50 ÷ 2,5 = 0,36 Ω</strong>',
     },
     rho: {
       color: '#C0A0FF',
@@ -414,7 +414,7 @@
         ['Steg 2:', 'Dividera med längden L'],
         ['Enhet:', 'Svaret ges i Ω·mm²/m (materialets resistivitet)'],
       ],
-      example: 'R = 0,35 Ω, A = 2,5 mm², L = 50 m → <strong>ρ = 0,35 × 2,5 ÷ 50 = 0,0175 Ω·mm²/m (Koppar)</strong>',
+      example: 'R = 0,36 Ω, A = 2,5 mm², L = 50 m → <strong>ρ = 0,36 × 2,5 ÷ 50 = 0,018 Ω·mm²/m (Koppar)</strong>',
     },
     L: {
       color: '#4ECDC4',
@@ -426,7 +426,7 @@
         ['Steg 2:', 'Dividera med resistiviteten ρ'],
         ['Enhet:', 'Svaret ges i meter (m)'],
       ],
-      example: 'R = 0,35 Ω, A = 2,5 mm², ρ = 0,0175 (Koppar) → <strong>L = 0,35 × 2,5 ÷ 0,0175 = 50 m</strong>',
+      example: 'R = 0,36 Ω, A = 2,5 mm², ρ = 0,018 (Koppar) → <strong>L = 0,36 × 2,5 ÷ 0,018 = 50 m</strong>',
     },
     A: {
       color: '#4CFFA0',
@@ -438,7 +438,7 @@
         ['Steg 2:', 'Dividera med resistansen R'],
         ['Enhet:', 'Svaret ges i mm² — välj närmast standardarea (1,5 / 2,5 / 4,0 mm²)'],
       ],
-      example: 'ρ = 0,0175 (Koppar), L = 50 m, R = 0,35 Ω → <strong>A = 0,0175 × 50 ÷ 0,35 = 2,5 mm²</strong>',
+      example: 'ρ = 0,018 (Koppar), L = 50 m, R = 0,36 Ω → <strong>A = 0,018 × 50 ÷ 0,36 = 2,5 mm²</strong>',
     },
   };
 
@@ -605,44 +605,44 @@
 (function () {
   const INDEX = [
     // Atomfysik
-    { title: 'Atomens uppbyggnad', section: 'Atomfysik', anchor: '#atomfysik', keywords: 'atom proton neutron elektron kärna partikel' },
-    { title: 'Laddning & Statisk elektricitet', section: 'Atomfysik', anchor: '#atomfysik', keywords: 'laddning statisk elektricitet överskott underskott plus minus' },
-    { title: 'AC vs DC – Likström & Växelström', section: 'Atomfysik', anchor: '#atomfysik', keywords: 'ac dc likström växelström sinuskurva batteri vägguttag riktning' },
-    { title: 'Hz – Hertz & frekvens', section: 'Atomfysik', anchor: '#atomfysik', keywords: 'hz hertz frekvens 50hz 60hz svängningar sekund europa usa' },
+    { title: 'Atomens uppbyggnad', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'atom proton neutron elektron kärna partikel' },
+    { title: 'Laddning & Statisk elektricitet', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'laddning statisk elektricitet överskott underskott plus minus' },
+    { title: 'AC vs DC – Likström & Växelström', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'ac dc likström växelström sinuskurva batteri vägguttag riktning' },
+    { title: 'Hz – Hertz & frekvens', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'hz hertz frekvens 50hz 60hz svängningar sekund europa usa' },
     // Material
-    { title: 'Ledare, Halvledare & Isolatorer', section: 'Material', anchor: '#material', keywords: 'ledare halvledare isolator koppar aluminium resistivitet material' },
-    { title: 'Resistivitetstabell', section: 'Material', anchor: '#material', keywords: 'resistivitet rho tabell koppar aluminium silver guld järn' },
+    { title: 'Ledare, Halvledare & Isolatorer', section: 'Material', anchor: 'material.html', keywords: 'ledare halvledare isolator koppar aluminium resistivitet material' },
+    { title: 'Resistivitetstabell', section: 'Material', anchor: 'material.html', keywords: 'resistivitet rho tabell koppar aluminium silver guld järn' },
     // Symboler
-    { title: 'Elsymboler (IEC 60617)', section: 'Symboler', anchor: '#symboler', keywords: 'elsymboler iec kretschema batteri resistor kondensator spole lampa strömbrytare' },
-    { title: 'Vad är IEC?', section: 'Symboler', anchor: '#symboler', keywords: 'iec international electrotechnical commission standard organisation' },
-    { title: 'Minneslista – storheter & enheter', section: 'Symboler', anchor: '#symboler', keywords: 'storhet enhet volt ampere ohm watt hertz joule coulomb symbol' },
+    { title: 'Elsymboler (IEC 60617)', section: 'Symboler', anchor: 'symboler.html', keywords: 'elsymboler iec kretschema batteri resistor kondensator spole lampa strömbrytare' },
+    { title: 'Vad är IEC?', section: 'Symboler', anchor: 'symboler.html', keywords: 'iec international electrotechnical commission standard organisation' },
+    { title: 'Minneslista – storheter & enheter', section: 'Symboler', anchor: 'symboler.html', keywords: 'storhet enhet volt ampere ohm watt hertz joule coulomb symbol' },
     // Kabeltyper
-    { title: 'Kabeltyper – EK, FK, MK, RK', section: 'Kabeltyper', anchor: '#kopplingar', keywords: 'kabel ek fk mk rk enfasig trefasig installation kabeltyp' },
+    { title: 'Kabeltyper – EK, FK, MK, RK', section: 'Kabeltyper', anchor: 'kabeltyper.html', keywords: 'kabel ek fk mk rk enfasig trefasig installation kabeltyp' },
     // Kretsar
-    { title: 'Ohms lag – U = R · I', section: 'Kretsar', anchor: '#kretsar', keywords: 'ohm ohms lag u r i spänning resistans ström beräkna formel' },
-    { title: 'Effektlagen – P = U · I', section: 'Kretsar', anchor: '#kretsar', keywords: 'effekt p u i watt effektlagen formel beräkna' },
-    { title: 'R = ρ · L/A – alla varianter', section: 'Kretsar', anchor: '#kretsar', keywords: 'rho resistivitet längd area resistans ledare formel varianter' },
-    { title: 'Seriekoppling', section: 'Kretsar', anchor: '#kretsar', keywords: 'serie seriekrets seriekoppling rtot summera resistans ström itot ur1 ur2' },
-    { title: 'Parallellkoppling', section: 'Kretsar', anchor: '#kretsar', keywords: 'parallell parallellkrets parallellkoppling rtot invers bråk spänning grenar i1 i2' },
-    { title: 'Kirchhoffs strömlag – KCL', section: 'Kretsar', anchor: '#kretsar', keywords: 'kirchhoff kcl strömlag nod ström in ut summa förgrening kirchoffs lag' },
-    { title: 'Kirchhoffs spänningslag – KVL', section: 'Kretsar', anchor: '#kretsar', keywords: 'kirchhoff kvl spänningslag slinga summa noll spänningsfall källspänning kirchoffs lag' },
-    { title: 'Mätteknik – Amperemeter & Voltmeter', section: 'Kretsar', anchor: '#kretsar', keywords: 'amperemeter voltmeter mäta serie parallell koppla mätteknik' },
-    { title: 'Beteckningar – Utot, UR1, Itot m.fl.', section: 'Kretsar', anchor: '#kretsar', keywords: 'beteckning utot ur1 ur2 itot i1 i2 rtot rpar index notation spänning ström resistans förklaring' },
-    { title: 'Exempelräkning – Seriekrets', section: 'Kretsar', anchor: '#kretsar', keywords: 'exempel exempelräkning seriekrets serie rtot itot ur1 ur2 steg beräkning genomgång' },
-    { title: 'Exempelräkning – Parallellkrets', section: 'Kretsar', anchor: '#kretsar', keywords: 'exempel exempelräkning parallellkrets parallell rtot itot i1 i2 steg beräkning genomgång' },
-    { title: 'Exempelräkning – Kombinerad krets', section: 'Kretsar', anchor: '#kretsar', keywords: 'exempel exempelräkning kombinerad krets kombi blandad serie parallell rpar rtot steg beräkning' },
+    { title: 'Ohms lag – U = R · I', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'ohm ohms lag u r i spänning resistans ström beräkna formel' },
+    { title: 'Effektlagen – P = U · I', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'effekt p u i watt effektlagen formel beräkna' },
+    { title: 'R = ρ · L/A – alla varianter', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'rho resistivitet längd area resistans ledare formel varianter' },
+    { title: 'Seriekoppling', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'serie seriekrets seriekoppling rtot summera resistans ström itot ur1 ur2' },
+    { title: 'Parallellkoppling', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'parallell parallellkrets parallellkoppling rtot invers bråk spänning grenar i1 i2' },
+    { title: 'Kirchhoffs strömlag – KCL', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'kirchhoff kcl strömlag nod ström in ut summa förgrening kirchoffs lag' },
+    { title: 'Kirchhoffs spänningslag – KVL', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'kirchhoff kvl spänningslag slinga summa noll spänningsfall källspänning kirchoffs lag' },
+    { title: 'Mätteknik – Amperemeter & Voltmeter', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'amperemeter voltmeter mäta serie parallell koppla mätteknik' },
+    { title: 'Beteckningar – Utot, UR1, Itot m.fl.', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'beteckning utot ur1 ur2 itot i1 i2 rtot rpar index notation spänning ström resistans förklaring' },
+    { title: 'Exempelräkning – Seriekrets', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'exempel exempelräkning seriekrets serie rtot itot ur1 ur2 steg beräkning genomgång' },
+    { title: 'Exempelräkning – Parallellkrets', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'exempel exempelräkning parallellkrets parallell rtot itot i1 i2 steg beräkning genomgång' },
+    { title: 'Exempelräkning – Kombinerad krets', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'exempel exempelräkning kombinerad krets kombi blandad serie parallell rpar rtot steg beräkning' },
     // Installation
-    { title: 'Resistans i ledare – R = ρ·L/A', section: 'Installation', anchor: '#installation', keywords: 'resistans ledare koppar aluminium längd area kalkylator' },
-    { title: 'Säkringstabell & Ledarfärger', section: 'Installation', anchor: '#installation', keywords: 'säkring säkringstabell 6a 10a 16a 20a 25a ledarfärg area kabel grön röd grå blå gul' },
-    { title: 'Spänningsfall – förklaring & kalkylator', section: 'Installation', anchor: '#installation', keywords: 'spänningsfall spänningsfall deltau 4% olagligt kalkylator installation standard vad är hur uppstår resistans ledare' },
+    { title: 'Resistans i ledare – R = ρ·L/A', section: 'Installation', anchor: 'installation.html', keywords: 'resistans ledare koppar aluminium längd area kalkylator' },
+    { title: 'Säkringstabell & Ledarfärger', section: 'Installation', anchor: 'installation.html', keywords: 'säkring säkringstabell 6a 10a 16a 20a 25a ledarfärg area kabel grön röd grå blå gul' },
+    { title: 'Spänningsfall – förklaring & kalkylator', section: 'Installation', anchor: 'installation.html', keywords: 'spänningsfall spänningsfall deltau 4% olagligt kalkylator installation standard vad är hur uppstår resistans ledare' },
     // Teckenförklaring
-    { title: 'Teckenförklaring – Elektriska variabler (U, I, R, P…)', section: 'Tecken', anchor: '#tecken', keywords: 'teckenförklaring symbol variabel spänning u volt ström i ampere resistans r ohm effekt p watt frekvens hz laddning coulomb tid sekund' },
-    { title: 'Teckenförklaring – Materialegenskaper (ρ, L, A)', section: 'Tecken', anchor: '#tecken', keywords: 'teckenförklaring rho ro resistivitet längd area material koppar aluminium ledare' },
-    { title: 'Teckenförklaring – Index och beteckningar (tot, par, Δ)', section: 'Tecken', anchor: '#tecken', keywords: 'teckenförklaring index beteckning tot total par parallell delta förändring skillnad oändlighet ungefär notation' },
-    { title: 'Teckenförklaring – Enhetsprefix (M, k, m, μ)', section: 'Tecken', anchor: '#tecken', keywords: 'teckenförklaring prefix mega kilo milli mikro enhet potens faktor storlek' },
-    { title: 'Teckenförklaring – Alla formler samlade', section: 'Tecken', anchor: '#tecken', keywords: 'teckenförklaring formel ohms lag effektlag ledarresistans spänningsfall seriekoppling parallellkoppling' },
-    { title: 'Teckenförklaring – Kretsschema-symboler', section: 'Tecken', anchor: '#tecken', keywords: 'teckenförklaring symbol batteri resistor lampa kondensator spole diod brytare säkring jord amperemeter voltmeter kretsschema' },
-    { title: 'Teckenförklaring – Kabeltyp-beteckningar (EK, FK, MK, RK)', section: 'Tecken', anchor: '#tecken', keywords: 'teckenförklaring kabel ek fk mk rk kabeltyp beteckning installation' },
+    { title: 'Teckenförklaring – Elektriska variabler (U, I, R, P…)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring symbol variabel spänning u volt ström i ampere resistans r ohm effekt p watt frekvens hz laddning coulomb tid sekund' },
+    { title: 'Teckenförklaring – Materialegenskaper (ρ, L, A)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring rho ro resistivitet längd area material koppar aluminium ledare' },
+    { title: 'Teckenförklaring – Index och beteckningar (tot, par, Δ)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring index beteckning tot total par parallell delta förändring skillnad oändlighet ungefär notation' },
+    { title: 'Teckenförklaring – Enhetsprefix (M, k, m, μ)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring prefix mega kilo milli mikro enhet potens faktor storlek' },
+    { title: 'Teckenförklaring – Alla formler samlade', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring formel ohms lag effektlag ledarresistans spänningsfall seriekoppling parallellkoppling' },
+    { title: 'Teckenförklaring – Kretsschema-symboler', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring symbol batteri resistor lampa kondensator spole diod brytare säkring jord amperemeter voltmeter kretsschema' },
+    { title: 'Teckenförklaring – Kabeltyp-beteckningar (EK, FK, MK, RK)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring kabel ek fk mk rk kabeltyp beteckning installation' },
   ];
 
   let activeIdx = -1;
@@ -683,7 +683,7 @@
   }
 
   function goTo(anchor) {
-    document.querySelector(anchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.location.href = anchor;
     closeResults();
     document.getElementById('search-input').blur();
   }
@@ -873,12 +873,12 @@ function format(n) {
       exercises: [
         {
           type: 'numeric',
-          question: 'Beräkna resistansen i en kopparledare: L = 25 m, A = 1,5 mm². (ρ_Cu = 0,0175 Ω·mm²/m)',
+          question: 'Beräkna resistansen i en kopparledare: L = 25 m, A = 1,5 mm². (ρ_Cu = 0,018 Ω·mm²/m)',
           hint: 'R = ρ · L / A',
-          answer: 0.2917,
+          answer: 0.30,
           unit: 'Ω',
           tolerance: 0.03,
-          explanation: 'R = 0,0175 · 25 / 1,5 = 0,4375 / 1,5 ≈ 0,29 Ω'
+          explanation: 'R = 0,018 · 25 / 1,5 = 0,45 / 1,5 = 0,30 Ω'
         },
         {
           type: 'mc',
@@ -889,12 +889,12 @@ function format(n) {
         },
         {
           type: 'numeric',
-          question: 'Beräkna spänningsfallet i %: I = 16 A, L = 30 m, A = 2,5 mm², koppar (ρ = 0,0175), U_nom = 230 V.',
-          hint: 'ΔU = 2·ρ·L·I / A  →  % = ΔU/U_nom · 100',
-          answer: 2.92,
+          question: 'Beräkna spänningsfallet i %: I = 16 A, L = 30 m, A = 2,5 mm², koppar (ρ = 0,018), U_nom = 230 V.',
+          hint: 'U_fall = 2·ρ·L·I / A  →  % = U_fall/U_nom · 100',
+          answer: 3.01,
           unit: '%',
-          tolerance: 0.05,
-          explanation: 'ΔU = 2 · 0,0175 · 30 · 16 / 2,5 = 6,72 V  →  6,72 / 230 · 100 ≈ 2,92 %  (OK – under 4 %)'
+          tolerance: 0.1,
+          explanation: 'U_fall = 2 · 0,018 · 30 · 16 / 2,5 = 6,912 V  →  6,912 / 230 · 100 ≈ 3,0 %  (OK – under 4 %)'
         },
         {
           type: 'mc',

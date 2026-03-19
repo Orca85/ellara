@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kretsar – Ellära &amp; Matte 1</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit"><span>⚡</span> Ellära &amp; Matte 1</a></div>
+    <ul class="nav-links">
+      <li><a href="atomfysik.html">Atomfysik</a></li>
+      <li><a href="material.html">Material</a></li>
+      <li><a href="symboler.html">Symboler</a></li>
+      <li><a href="kabeltyper.html">Kabeltyper</a></li>
+      <li class="active"><a href="kretsar.html">Kretsar</a></li>
+      <li><a href="installation.html">Installation</a></li>
+      <li><a href="tecken.html">Tecken</a></li>
+      <li><a href="ovningar.html" style="color:var(--yellow);font-weight:700">Övningar</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="Sök — t.ex. Ohms lag, Hz, seriekoppling, säkring…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<section class="section" id="kretsar">
+  <div class="section-header">
+    <div class="section-icon">🔌</div>
+    <div>
+      <h4>Avsnitt 2</h4>
+      <h2>Kretsar &amp; Beräkningar</h2>
+    </div>
+  </div>
+
+  <!-- Triangles reference -->
+  <div class="triangle-ref-grid">
+
+    <!-- Ohms law triangle -->
+    <div class="triangle-ref-card">
+      <h3>Ohms lag</h3>
+      <p class="triangle-instruction">Täck det du söker – resten visar formeln.</p>
+      <div class="triangle-wrap">
+        <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" class="triangle-svg">
+          <!-- Top section – U -->
+          <polygon points="100,12 47,90 153,90" fill="rgba(255,215,0,0.18)" stroke="#FFD700" stroke-width="2" stroke-linejoin="round"/>
+          <!-- Bottom-left – R -->
+          <polygon points="10,155 47,90 100,90 100,155" fill="rgba(255,155,77,0.18)" stroke="#FF9B4D" stroke-width="2" stroke-linejoin="round"/>
+          <!-- Bottom-right – I -->
+          <polygon points="190,155 153,90 100,90 100,155" fill="rgba(78,205,196,0.18)" stroke="#4ECDC4" stroke-width="2" stroke-linejoin="round"/>
+          <!-- Divider lines (drawn on top for clarity) -->
+          <line x1="47" y1="90" x2="153" y2="90" stroke="#1a1a1a" stroke-width="3"/>
+          <line x1="100" y1="90" x2="100" y2="155" stroke="#1a1a1a" stroke-width="3"/>
+          <!-- Variable labels -->
+          <text x="100" y="62" text-anchor="middle" font-size="28" font-weight="900" fill="#FFD700">U</text>
+          <text x="63"  y="133" text-anchor="middle" font-size="26" font-weight="900" fill="#FF9B4D">R</text>
+          <text x="137" y="133" text-anchor="middle" font-size="26" font-weight="900" fill="#4ECDC4">I</text>
+          <!-- × symbol between R and I -->
+          <text x="100" y="133" text-anchor="middle" font-size="14" fill="#666">×</text>
+          <!-- Outer triangle border -->
+          <polygon points="100,12 10,155 190,155" fill="none" stroke="#444" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <!-- Formula hints -->
+        <div class="triangle-hints">
+          <div class="hint hint-u"><span class="hint-cover" style="background:var(--yellow);color:#111">U</span> = R × I</div>
+          <div class="hint hint-r"><span class="hint-cover" style="background:#FF9B4D;color:#111">R</span> = <span class="frac"><span>U</span><span>I</span></span></div>
+          <div class="hint hint-i"><span class="hint-cover" style="background:var(--teal);color:#111">I</span> = <span class="frac"><span>U</span><span>R</span></span></div>
+        </div>
+      </div>
+      <div class="triangle-units">
+        <span style="color:var(--yellow)">U = Volt (V)</span>
+        <span style="color:#FF9B4D">R = Ohm (Ω)</span>
+        <span style="color:var(--teal)">I = Ampere (A)</span>
+      </div>
+    </div>
+
+    <!-- Power law triangle -->
+    <div class="triangle-ref-card">
+      <h3>Effektlagen</h3>
+      <p class="triangle-instruction">Täck det du söker – resten visar formeln.</p>
+      <div class="triangle-wrap">
+        <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" class="triangle-svg">
+          <!-- Top section – P -->
+          <polygon points="100,12 47,90 153,90" fill="rgba(76,255,160,0.15)" stroke="#4CFFA0" stroke-width="2" stroke-linejoin="round"/>
+          <!-- Bottom-left – U -->
+          <polygon points="10,155 47,90 100,90 100,155" fill="rgba(255,215,0,0.18)" stroke="#FFD700" stroke-width="2" stroke-linejoin="round"/>
+          <!-- Bottom-right – I -->
+          <polygon points="190,155 153,90 100,90 100,155" fill="rgba(78,205,196,0.18)" stroke="#4ECDC4" stroke-width="2" stroke-linejoin="round"/>
+          <!-- Divider lines -->
+          <line x1="47" y1="90" x2="153" y2="90" stroke="#1a1a1a" stroke-width="3"/>
+          <line x1="100" y1="90" x2="100" y2="155" stroke="#1a1a1a" stroke-width="3"/>
+          <!-- Variable labels -->
+          <text x="100" y="62" text-anchor="middle" font-size="28" font-weight="900" fill="#4CFFA0">P</text>
+          <text x="63"  y="133" text-anchor="middle" font-size="26" font-weight="900" fill="#FFD700">U</text>
+          <text x="137" y="133" text-anchor="middle" font-size="26" font-weight="900" fill="#4ECDC4">I</text>
+          <!-- × symbol -->
+          <text x="100" y="133" text-anchor="middle" font-size="14" fill="#666">×</text>
+          <!-- Outer border -->
+          <polygon points="100,12 10,155 190,155" fill="none" stroke="#444" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="triangle-hints">
+          <div class="hint"><span class="hint-cover" style="background:var(--lime);color:#111">P</span> = U × I</div>
+          <div class="hint"><span class="hint-cover" style="background:var(--yellow);color:#111">U</span> = <span class="frac"><span>P</span><span>I</span></span></div>
+          <div class="hint"><span class="hint-cover" style="background:var(--teal);color:#111">I</span> = <span class="frac"><span>P</span><span>U</span></span></div>
+        </div>
+      </div>
+      <div class="triangle-units">
+        <span style="color:var(--lime)">P = Watt (W)</span>
+        <span style="color:var(--yellow)">U = Volt (V)</span>
+        <span style="color:var(--teal)">I = Ampere (A)</span>
+      </div>
+    </div>
+
+  </div><!-- /triangle-ref-grid -->
+
+  <!-- R = ρ·L/A formula variants -->
+  <div class="card" style="margin-top:1.5rem" id="rla-card">
+    <h3>📐 R = ρ · <span class="frac"><span>L</span><span>A</span></span> — alla varianter</h3>
+    <p style="font-size:0.9rem;color:var(--muted)">Klicka på variabeln du vill <strong style="color:var(--yellow)">beräkna</strong> för att se hur.</p>
+    <div class="fv-grid">
+      <button class="fv-item fv-btn" data-rla="R">
+        <div class="fv-label" style="color:var(--yellow)">R</div>
+        <div class="fv-eq">R = ρ · <span class="frac"><span>L</span><span>A</span></span></div>
+        <div class="fv-unit">Resistans — Ohm (Ω)</div>
+      </button>
+      <button class="fv-item fv-btn" data-rla="rho">
+        <div class="fv-label" style="color:#C0A0FF">ρ</div>
+        <div class="fv-eq">ρ = <span class="frac"><span>R · A</span><span>L</span></span></div>
+        <div class="fv-unit">Resistivitet — Ω·mm²/m</div>
+      </button>
+      <button class="fv-item fv-btn" data-rla="L">
+        <div class="fv-label" style="color:var(--teal)">L</div>
+        <div class="fv-eq">L = <span class="frac"><span>R · A</span><span>ρ</span></span></div>
+        <div class="fv-unit">Längd — meter (m)</div>
+      </button>
+      <button class="fv-item fv-btn" data-rla="A">
+        <div class="fv-label" style="color:var(--lime)">A</div>
+        <div class="fv-eq">A = <span class="frac"><span>ρ · L</span><span>R</span></span></div>
+        <div class="fv-unit">Area — mm²</div>
+      </button>
+    </div>
+    <div class="var-explain" id="rla-explain"></div>
+  </div>
+
+  <!-- Formula wheels -->
+  <div class="formula-section">
+
+    <!-- Ohms lag -->
+    <div class="formula-wheel" id="ohm-wheel">
+      <div class="wheel-title">⚡ Ohms lag — U = R · I</div>
+      <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-bottom:1rem">Klicka på det du vill <strong style="color:var(--yellow)">beräkna</strong>, fyll i de andra två.</p>
+
+      <div class="wheel-triangle">
+        <button class="wheel-btn" data-var="U">U<small>Spänning (V)</small></button>
+        <button class="wheel-btn" data-var="R">R<small>Resistans (Ω)</small></button>
+        <button class="wheel-btn" data-var="I">I<small>Ström (A)</small></button>
+      </div>
+
+      <div class="var-explain" id="ohm-explain"></div>
+
+      <div class="wheel-inputs">
+        <div class="input-group">
+          <label for="ohm-u">Spänning (V)</label>
+          <input type="number" id="ohm-u" step="any" placeholder="0">
+        </div>
+        <div class="input-group">
+          <label for="ohm-r">Resistans (Ω)</label>
+          <input type="number" id="ohm-r" step="any" placeholder="0">
+        </div>
+        <div class="input-group" style="grid-column:1/-1">
+          <label for="ohm-i">Ström (A)</label>
+          <input type="number" id="ohm-i" step="any" placeholder="0">
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <button class="calc-btn" id="ohm-calc">Beräkna</button>
+        <button class="clear-btn" id="ohm-clear">Rensa</button>
+      </div>
+      <div class="result-box" id="ohm-result"></div>
+
+      <div style="margin-top:1rem;font-size:0.8rem;color:var(--muted);background:var(--bg-card);border-radius:8px;padding:0.75rem;text-align:center">
+        U = R · I &nbsp;|&nbsp; R = <span class="frac"><span>U</span><span>I</span></span> &nbsp;|&nbsp; I = <span class="frac"><span>U</span><span>R</span></span>
+      </div>
+    </div>
+
+    <!-- Effektlagen -->
+    <div class="formula-wheel" id="power-wheel">
+      <div class="wheel-title">💡 Effektlagen — P = U · I</div>
+      <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-bottom:1rem">Klicka på det du vill <strong style="color:var(--yellow)">beräkna</strong>, fyll i de andra två.</p>
+
+      <div class="wheel-triangle">
+        <button class="wheel-btn" data-var="P">P<small>Effekt (W)</small></button>
+        <button class="wheel-btn" data-var="U">U<small>Spänning (V)</small></button>
+        <button class="wheel-btn" data-var="I">I<small>Ström (A)</small></button>
+      </div>
+
+      <div class="var-explain" id="power-explain"></div>
+
+      <div class="wheel-inputs">
+        <div class="input-group">
+          <label for="pow-p">Effekt (W)</label>
+          <input type="number" id="pow-p" step="any" placeholder="0">
+        </div>
+        <div class="input-group">
+          <label for="pow-u">Spänning (V)</label>
+          <input type="number" id="pow-u" step="any" placeholder="0">
+        </div>
+        <div class="input-group" style="grid-column:1/-1">
+          <label for="pow-i">Ström (A)</label>
+          <input type="number" id="pow-i" step="any" placeholder="0">
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <button class="calc-btn" id="power-calc">Beräkna</button>
+        <button class="clear-btn" id="power-clear">Rensa</button>
+      </div>
+      <div class="result-box" id="power-result"></div>
+
+      <div style="margin-top:1rem;font-size:0.8rem;color:var(--muted);background:var(--bg-card);border-radius:8px;padding:0.75rem;text-align:center">
+        P = U · I &nbsp;|&nbsp; U = <span class="frac"><span>P</span><span>I</span></span> &nbsp;|&nbsp; I = <span class="frac"><span>P</span><span>U</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seriekoppling -->
+  <div class="card-grid" style="margin-top:1.5rem">
+    <div class="card">
+      <h3>🔗 Seriekoppling</h3>
+      <p style="font-size:0.9rem">Resistanser summeras direkt. Samma ström genom alla komponenter.</p>
+      <div class="formula-display">R_tot = R₁ + R₂ + R₃ + …</div>
+
+      <div id="serie-inputs">
+        <div class="circuit-row">
+          <span class="symbol">R1</span>
+          <input type="number" min="0" step="any" placeholder="Ω" aria-label="R1">
+        </div>
+        <div class="circuit-row">
+          <span class="symbol">R2</span>
+          <input type="number" min="0" step="any" placeholder="Ω" aria-label="R2">
+          <button class="remove-btn" title="Ta bort" onclick="this.closest('.circuit-row').remove(); serieCalc()">✕</button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:0.5rem;margin:0.75rem 0">
+        <button class="add-btn" id="serie-add" title="Lägg till resistor">+ R</button>
+        <button class="calc-btn" id="serie-calc-btn" style="flex:1">Beräkna</button>
+        <button class="clear-btn" id="serie-clear">Rensa</button>
+      </div>
+      <div class="result-box" id="serie-result"></div>
+    </div>
+
+    <div class="card">
+      <h3>⚡ Parallellkoppling</h3>
+      <p style="font-size:0.9rem">Inverterade resistanser summeras. Samma spänning över alla grenar.</p>
+      <div class="formula-display"><span class="frac"><span>1</span><span>R<sub>tot</sub></span></span> = <span class="frac"><span>1</span><span>R₁</span></span> + <span class="frac"><span>1</span><span>R₂</span></span> + …</div>
+
+      <div id="parallel-inputs">
+        <div class="circuit-row">
+          <span class="symbol">R1</span>
+          <input type="number" min="0.001" step="any" placeholder="Ω" aria-label="R1">
+        </div>
+        <div class="circuit-row">
+          <span class="symbol">R2</span>
+          <input type="number" min="0.001" step="any" placeholder="Ω" aria-label="R2">
+          <button class="remove-btn" title="Ta bort" onclick="this.closest('.circuit-row').remove(); parallelCalc()">✕</button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:0.5rem;margin:0.75rem 0">
+        <button class="add-btn" id="parallel-add" title="Lägg till resistor">+ R</button>
+        <button class="calc-btn" id="parallel-calc-btn" style="flex:1">Beräkna</button>
+        <button class="clear-btn" id="parallel-clear">Rensa</button>
+      </div>
+      <div class="result-box" id="parallel-result"></div>
+    </div>
+  </div>
+
+  <!-- Beteckningar & Exempelräkningar -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>📖 Vad betyder beteckningarna?</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">I kretsscheman används index för att hålla isär spänningar och strömmar för olika komponenter.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;margin-bottom:1rem">
+
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FFD700">
+        <div style="color:var(--yellow);font-weight:700;font-size:1rem;margin-bottom:0.4rem">U<sub>tot</sub> / U<sub>källa</sub></div>
+        <div style="font-size:0.85rem;color:var(--muted)">Den totala spänningen som källan (batteriet/uttaget) levererar. Fördelas sedan över komponenterna.</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">Exempel: U<sub>tot</sub> = 30 V</div>
+      </div>
+
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FF9B4D">
+        <div style="color:#FF9B4D;font-weight:700;font-size:1rem;margin-bottom:0.4rem">U<sub>R1</sub>, U<sub>R2</sub></div>
+        <div style="font-size:0.85rem;color:var(--muted)">Spänningen som faller över just den komponenten. I en seriekrets: U<sub>R1</sub> + U<sub>R2</sub> = U<sub>tot</sub></div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">Beräknas med Ohms lag: U<sub>R1</sub> = R1 × I</div>
+      </div>
+
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #4ECDC4">
+        <div style="color:var(--teal);font-weight:700;font-size:1rem;margin-bottom:0.4rem">I<sub>tot</sub></div>
+        <div style="font-size:0.85rem;color:var(--muted)">Den totala strömmen från källan. I en seriekrets är den samma överallt. I parallell delas den upp.</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">I<sub>tot</sub> = U<sub>tot</sub> ÷ R<sub>tot</sub></div>
+      </div>
+
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #4CFFA0">
+        <div style="color:var(--lime);font-weight:700;font-size:1rem;margin-bottom:0.4rem">I<sub>1</sub>, I<sub>2</sub></div>
+        <div style="font-size:0.85rem;color:var(--muted)">Strömmen genom en specifik gren i en parallellkrets. Grenar med lägre R får mer ström.</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">I<sub>1</sub> = U<sub>tot</sub> ÷ R1 &nbsp; (samma U över alla grenar)</div>
+      </div>
+
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #C0A0FF">
+        <div style="color:#C0A0FF;font-weight:700;font-size:1rem;margin-bottom:0.4rem">R<sub>tot</sub></div>
+        <div style="font-size:0.85rem;color:var(--muted)">Den totala resistansen som källan "ser". Bestäms av hur komponenterna är kopplade (serie eller parallell).</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">Serie: summeras &nbsp;|&nbsp; Parallell: inverteras</div>
+      </div>
+
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FF4C4C">
+        <div style="color:#FF4C4C;font-weight:700;font-size:1rem;margin-bottom:0.4rem">R<sub>par</sub></div>
+        <div style="font-size:0.85rem;color:var(--muted)">Den ekvivalenta resistansen för en parallellgrupp i en kombinerad krets — används som ett block i seriedelen.</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">1/R<sub>par</sub> = 1/R2 + 1/R3</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Exempelräkningar -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>🧮 Exempelräkningar</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1.25rem">Klicka på en kretstyp för att se fullständig genomräkning steg för steg.</p>
+
+    <!-- Flikar -->
+    <div class="ex-tabs">
+      <button class="ex-tab active" data-ex="serie">🔗 Seriekrets</button>
+      <button class="ex-tab" data-ex="parallell">⚡ Parallellkrets</button>
+      <button class="ex-tab" data-ex="kombi">🔀 Kombinerad krets</button>
+    </div>
+
+    <!-- SERIE -->
+    <div class="ex-panel" id="ex-serie">
+      <div class="ex-given">
+        <strong>Givet:</strong> R1 = 10 Ω &nbsp;|&nbsp; R2 = 20 Ω &nbsp;|&nbsp; U<sub>tot</sub> = 30 V
+      </div>
+
+      <svg viewBox="0 0 380 110" xmlns="http://www.w3.org/2000/svg" class="ex-svg">
+        <!-- Yttre ram -->
+        <line x1="20" y1="30" x2="360" y2="30" stroke="#555" stroke-width="2"/>
+        <line x1="20" y1="80" x2="360" y2="80" stroke="#555" stroke-width="2"/>
+        <line x1="20" y1="30" x2="20" y2="80" stroke="#555" stroke-width="2"/>
+        <line x1="360" y1="30" x2="360" y2="80" stroke="#555" stroke-width="2"/>
+        <!-- Källa -->
+        <line x1="20" y1="42" x2="20" y2="68" stroke="#FFD700" stroke-width="4"/>
+        <line x1="12" y1="48" x2="28" y2="48" stroke="#FFD700" stroke-width="3"/>
+        <line x1="15" y1="62" x2="25" y2="62" stroke="#FFD700" stroke-width="1.5"/>
+        <text x="20" y="100" text-anchor="middle" font-size="9" fill="#FFD700">30 V</text>
+        <!-- R1 zick-zack -->
+        <rect x="106" y="22" width="36" height="16" fill="none" stroke="#FF9B4D" stroke-width="2" rx="2"/>
+        <text x="124" y="13" text-anchor="middle" font-size="9" fill="#FF9B4D">R1 = 10 Ω</text>
+        <text x="124" y="100" text-anchor="middle" font-size="8" fill="#FF9B4D">U_R1 = 10 V</text>
+        <!-- R2 IEC -->
+        <rect x="236" y="22" width="36" height="16" fill="none" stroke="#4ECDC4" stroke-width="2" rx="2"/>
+        <text x="254" y="13" text-anchor="middle" font-size="9" fill="#4ECDC4">R2 = 20 Ω</text>
+        <text x="254" y="100" text-anchor="middle" font-size="8" fill="#4ECDC4">U_R2 = 20 V</text>
+        <!-- Strömpil -->
+        <text x="190" y="27" text-anchor="middle" font-size="8" fill="#aaa">I = 1 A →</text>
+      </svg>
+
+      <div class="ex-steps">
+        <div class="ex-step">
+          <div class="ex-step-num">1</div>
+          <div>
+            <div class="ex-step-title">Beräkna R<sub>tot</sub></div>
+            <div class="ex-step-body">I en seriekrets summeras alla resistanser:<br>
+            R<sub>tot</sub> = R1 + R2 = 10 + 20 = <strong>30 Ω</strong></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">2</div>
+          <div>
+            <div class="ex-step-title">Beräkna I<sub>tot</sub></div>
+            <div class="ex-step-body">Ohms lag — samma ström flödar genom hela kretsen:<br>
+            I<sub>tot</sub> = U<sub>tot</sub> ÷ R<sub>tot</sub> = 30 ÷ 30 = <strong>1 A</strong></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">3</div>
+          <div>
+            <div class="ex-step-title">Beräkna U<sub>R1</sub></div>
+            <div class="ex-step-body">Spänningen över R1 — Ohms lag:<br>
+            U<sub>R1</sub> = R1 × I = 10 × 1 = <strong>10 V</strong></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">4</div>
+          <div>
+            <div class="ex-step-title">Beräkna U<sub>R2</sub></div>
+            <div class="ex-step-body">Spänningen över R2:<br>
+            U<sub>R2</sub> = R2 × I = 20 × 1 = <strong>20 V</strong></div>
+          </div>
+        </div>
+        <div class="ex-check">
+          ✅ Kontroll: U<sub>R1</sub> + U<sub>R2</sub> = 10 + 20 = <strong>30 V = U<sub>tot</sub></strong> &nbsp;— stämmer!
+        </div>
+      </div>
+    </div>
+
+    <!-- PARALLELL -->
+    <div class="ex-panel hidden" id="ex-parallell">
+      <div class="ex-given">
+        <strong>Givet:</strong> R1 = 6 Ω &nbsp;|&nbsp; R2 = 12 Ω &nbsp;|&nbsp; U<sub>tot</sub> = 12 V
+      </div>
+
+      <svg viewBox="0 0 380 130" xmlns="http://www.w3.org/2000/svg" class="ex-svg">
+        <!-- Vänster ledare -->
+        <line x1="20" y1="20" x2="20" y2="110" stroke="#555" stroke-width="2"/>
+        <!-- Höger ledare -->
+        <line x1="360" y1="20" x2="360" y2="110" stroke="#555" stroke-width="2"/>
+        <!-- Övre horisontell -->
+        <line x1="20" y1="20" x2="360" y2="20" stroke="#555" stroke-width="2"/>
+        <!-- Undre horisontell -->
+        <line x1="20" y1="110" x2="360" y2="110" stroke="#555" stroke-width="2"/>
+        <!-- Mittdelning vänster -->
+        <line x1="80" y1="20" x2="80" y2="110" stroke="#333" stroke-width="1.5"/>
+        <!-- Mittdelning höger -->
+        <line x1="300" y1="20" x2="300" y2="110" stroke="#333" stroke-width="1.5"/>
+        <!-- Källa -->
+        <line x1="12" y1="48" x2="28" y2="48" stroke="#FFD700" stroke-width="3"/>
+        <line x1="15" y1="62" x2="25" y2="62" stroke="#FFD700" stroke-width="1.5"/>
+        <text x="20" y="125" text-anchor="middle" font-size="9" fill="#FFD700">12 V</text>
+        <!-- R1 övre gren -->
+        <rect x="126" y="12" width="36" height="16" fill="none" stroke="#FF9B4D" stroke-width="2" rx="2"/>
+        <text x="145" y="6" text-anchor="middle" font-size="9" fill="#FF9B4D">R1 = 6 Ω</text>
+        <text x="145" y="38" text-anchor="middle" font-size="8" fill="#aaa">I₁ = 2 A</text>
+        <!-- R2 undre gren IEC -->
+        <rect x="126" y="102" width="36" height="16" fill="none" stroke="#4ECDC4" stroke-width="2" rx="2"/>
+        <text x="145" y="95" text-anchor="middle" font-size="9" fill="#4ECDC4">R2 = 12 Ω</text>
+        <text x="145" y="125" text-anchor="middle" font-size="8" fill="#aaa">I₂ = 1 A</text>
+        <!-- Strömpil tot -->
+        <text x="50" y="67" text-anchor="middle" font-size="8" fill="#FFD700">I_tot</text>
+        <text x="50" y="78" text-anchor="middle" font-size="8" fill="#FFD700">= 3 A</text>
+        <!-- U-etikett -->
+        <text x="340" y="67" text-anchor="middle" font-size="8" fill="#4CFFA0">U =</text>
+        <text x="340" y="78" text-anchor="middle" font-size="8" fill="#4CFFA0">12 V</text>
+      </svg>
+
+      <div class="ex-steps">
+        <div class="ex-step">
+          <div class="ex-step-num">1</div>
+          <div>
+            <div class="ex-step-title">Beräkna R<sub>tot</sub></div>
+            <div class="ex-step-body">
+            1/R<sub>tot</sub> = 1/R1 + 1/R2 = 1/6 + 1/12 = 2/12 + 1/12 = 3/12<br>
+            R<sub>tot</sub> = 12 ÷ 3 = <strong>4 Ω</strong></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">2</div>
+          <div>
+            <div class="ex-step-title">Beräkna I<sub>tot</sub></div>
+            <div class="ex-step-body">Total ström från källan:<br>
+            I<sub>tot</sub> = U<sub>tot</sub> ÷ R<sub>tot</sub> = 12 ÷ 4 = <strong>3 A</strong></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">3</div>
+          <div>
+            <div class="ex-step-title">Beräkna I<sub>1</sub> (gren med R1)</div>
+            <div class="ex-step-body">Samma spänning (12 V) ligger över varje gren:<br>
+            I<sub>1</sub> = U<sub>tot</sub> ÷ R1 = 12 ÷ 6 = <strong>2 A</strong></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">4</div>
+          <div>
+            <div class="ex-step-title">Beräkna I<sub>2</sub> (gren med R2)</div>
+            <div class="ex-step-body">
+            I<sub>2</sub> = U<sub>tot</sub> ÷ R2 = 12 ÷ 12 = <strong>1 A</strong></div>
+          </div>
+        </div>
+        <div class="ex-check">
+          ✅ Kontroll: I<sub>1</sub> + I<sub>2</sub> = 2 + 1 = <strong>3 A = I<sub>tot</sub></strong> &nbsp;— stämmer!
+        </div>
+      </div>
+    </div>
+
+    <!-- KOMBINERAD -->
+    <div class="ex-panel hidden" id="ex-kombi">
+      <div class="ex-given">
+        <strong>Givet:</strong> R1 = 5 Ω (serie) &nbsp;|&nbsp; R2 = 10 Ω &nbsp;|&nbsp; R3 = 10 Ω (parallell med R2) &nbsp;|&nbsp; U<sub>tot</sub> = 20 V
+      </div>
+
+      <svg viewBox="0 0 420 130" xmlns="http://www.w3.org/2000/svg" class="ex-svg">
+        <!-- Yttre ram -->
+        <line x1="20" y1="20" x2="400" y2="20" stroke="#555" stroke-width="2"/>
+        <line x1="20" y1="110" x2="400" y2="110" stroke="#555" stroke-width="2"/>
+        <line x1="20" y1="20" x2="20" y2="110" stroke="#555" stroke-width="2"/>
+        <line x1="400" y1="20" x2="400" y2="110" stroke="#555" stroke-width="2"/>
+        <!-- Källa -->
+        <line x1="12" y1="48" x2="28" y2="48" stroke="#FFD700" stroke-width="3"/>
+        <line x1="15" y1="62" x2="25" y2="62" stroke="#FFD700" stroke-width="1.5"/>
+        <text x="20" y="125" text-anchor="middle" font-size="9" fill="#FFD700">20 V</text>
+        <!-- R1 serie -->
+        <rect x="76" y="12" width="36" height="16" fill="none" stroke="#C0A0FF" stroke-width="2" rx="2"/>
+        <text x="94" y="6" text-anchor="middle" font-size="9" fill="#C0A0FF">R1 = 5 Ω</text>
+        <text x="94" y="105" text-anchor="middle" font-size="8" fill="#aaa">U_R1=10V</text>
+        <!-- Delningspunkt -->
+        <line x1="180" y1="20" x2="180" y2="110" stroke="#333" stroke-width="1.5"/>
+        <line x1="360" y1="20" x2="360" y2="110" stroke="#333" stroke-width="1.5"/>
+        <!-- R2 övre gren IEC -->
+        <rect x="216" y="12" width="36" height="16" fill="none" stroke="#FF9B4D" stroke-width="2" rx="2"/>
+        <text x="234" y="6" text-anchor="middle" font-size="9" fill="#FF9B4D">R2 = 10 Ω</text>
+        <text x="234" y="38" text-anchor="middle" font-size="8" fill="#aaa">I₂ = 1 A</text>
+        <!-- R3 undre gren IEC -->
+        <rect x="216" y="102" width="36" height="16" fill="none" stroke="#4ECDC4" stroke-width="2" rx="2"/>
+        <text x="234" y="95" text-anchor="middle" font-size="9" fill="#4ECDC4">R3 = 10 Ω</text>
+        <text x="234" y="125" text-anchor="middle" font-size="8" fill="#aaa">I₃ = 1 A</text>
+        <!-- Strömpil -->
+        <text x="50" y="60" text-anchor="middle" font-size="8" fill="#FFD700">I=2A →</text>
+        <!-- U_par -->
+        <text x="390" y="63" text-anchor="middle" font-size="8" fill="#4CFFA0">U_par</text>
+        <text x="390" y="74" text-anchor="middle" font-size="8" fill="#4CFFA0">=10V</text>
+      </svg>
+
+      <div class="ex-steps">
+        <div class="ex-step">
+          <div class="ex-step-num">1</div>
+          <div>
+            <div class="ex-step-title">Förenkla parallellgruppen (R2 ∥ R3)</div>
+            <div class="ex-step-body">
+            1/R<sub>par</sub> = 1/10 + 1/10 = 2/10<br>
+            R<sub>par</sub> = 10 ÷ 2 = <strong>5 Ω</strong></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">2</div>
+          <div>
+            <div class="ex-step-title">Beräkna R<sub>tot</sub></div>
+            <div class="ex-step-body">Nu är kretsen förenklad till R1 i serie med R<sub>par</sub>:<br>
+            R<sub>tot</sub> = R1 + R<sub>par</sub> = 5 + 5 = <strong>10 Ω</strong></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">3</div>
+          <div>
+            <div class="ex-step-title">Beräkna I<sub>tot</sub></div>
+            <div class="ex-step-body">
+            I<sub>tot</sub> = U<sub>tot</sub> ÷ R<sub>tot</sub> = 20 ÷ 10 = <strong>2 A</strong></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">4</div>
+          <div>
+            <div class="ex-step-title">Beräkna U<sub>R1</sub></div>
+            <div class="ex-step-body">Seriedelen — samma ström (2 A) genom R1:<br>
+            U<sub>R1</sub> = R1 × I<sub>tot</sub> = 5 × 2 = <strong>10 V</strong></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">5</div>
+          <div>
+            <div class="ex-step-title">Beräkna U<sub>par</sub> (spänning över parallellgruppen)</div>
+            <div class="ex-step-body">
+            U<sub>par</sub> = U<sub>tot</sub> − U<sub>R1</sub> = 20 − 10 = <strong>10 V</strong><br>
+            <span style="color:var(--muted);font-size:0.85em">Eller: U<sub>par</sub> = R<sub>par</sub> × I<sub>tot</sub> = 5 × 2 = 10 V ✓</span></div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">6</div>
+          <div>
+            <div class="ex-step-title">Beräkna I<sub>2</sub> och I<sub>3</sub></div>
+            <div class="ex-step-body">Samma spänning (10 V) över varje gren:<br>
+            I<sub>2</sub> = 10 ÷ 10 = <strong>1 A</strong> &nbsp;|&nbsp; I<sub>3</sub> = 10 ÷ 10 = <strong>1 A</strong></div>
+          </div>
+        </div>
+        <div class="ex-check">
+          ✅ Kontroll: I<sub>2</sub> + I<sub>3</sub> = 1 + 1 = 2 A = I<sub>tot</sub> &nbsp;|&nbsp; U<sub>R1</sub> + U<sub>par</sub> = 10 + 10 = 20 V = U<sub>tot</sub> &nbsp;— stämmer!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kirchhoffs lagar -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>⚡ Kirchhoffs lagar</h3>
+    <p>Kirchhoffs lagar är grundreglerna för alla elektriska kretsar — de gäller alltid, oavsett hur komplex kretsen är. Uppkallade efter den tyske fysikern <strong>Gustav Kirchhoff</strong> (1824–1887).</p>
+
+    <!-- KCL -->
+    <div style="margin-top:1.5rem">
+      <h4 style="color:var(--teal);margin-bottom:0.5rem">KCL — Kirchhoffs strömlag (1:a lagen)</h4>
+      <div style="background:rgba(78,205,196,0.07);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:0.75rem 1rem;margin-bottom:0.75rem">
+        <span style="font-size:1.05rem;font-weight:700;color:var(--teal)">ΣI<sub>in</sub> = ΣI<sub>ut</sub></span>
+        <span style="color:var(--muted);font-size:0.85rem;margin-left:1rem">Summan av all ström in i en nod = summan ut ur noden</span>
+      </div>
+      <p style="font-size:0.9rem;margin-bottom:0.75rem">En <strong>nod</strong> är en punkt där tre eller fler ledare möts. Ström kan inte "försvinna" eller "skapas" i en nod — precis som vatten i ett rör. Det som flödar in måste flöda ut.</p>
+
+      <!-- KCL SVG -->
+      <svg viewBox="0 0 300 140" style="width:100%;max-width:400px;display:block;margin:0 auto 1rem" xmlns="http://www.w3.org/2000/svg">
+        <!-- Nod -->
+        <circle cx="150" cy="70" r="7" fill="var(--teal)" stroke="none"/>
+        <text x="150" y="58" text-anchor="middle" font-size="10" fill="var(--teal)" font-weight="bold">Nod</text>
+        <!-- IN: I1 från vänster -->
+        <line x1="30" y1="70" x2="143" y2="70" stroke="#FFD700" stroke-width="2.5"/>
+        <polygon points="138,65 148,70 138,75" fill="#FFD700"/>
+        <text x="80" y="62" text-anchor="middle" font-size="11" fill="#FFD700" font-weight="bold">I₁ = 5 A</text>
+        <!-- IN: I2 uppifrån -->
+        <line x1="150" y1="10" x2="150" y2="63" stroke="#4CFFA0" stroke-width="2.5"/>
+        <polygon points="145,58 150,68 155,58" fill="#4CFFA0"/>
+        <text x="168" y="40" font-size="11" fill="#4CFFA0" font-weight="bold">I₂ = 3 A</text>
+        <!-- UT: I3 till höger -->
+        <line x1="157" y1="70" x2="270" y2="70" stroke="#FF9B4D" stroke-width="2.5"/>
+        <polygon points="262,65 272,70 262,75" fill="#FF9B4D"/>
+        <text x="215" y="62" text-anchor="middle" font-size="11" fill="#FF9B4D" font-weight="bold">I₃ = ?</text>
+        <!-- UT: I4 nedåt -->
+        <line x1="150" y1="77" x2="150" y2="130" stroke="#C0A0FF" stroke-width="2.5"/>
+        <polygon points="145,122 150,132 155,122" fill="#C0A0FF"/>
+        <text x="168" y="115" font-size="11" fill="#C0A0FF" font-weight="bold">I₄ = 2 A</text>
+        <!-- labels in/ut -->
+        <text x="55" y="90" font-size="9" fill="var(--muted)">IN</text>
+        <text x="140" y="25" font-size="9" fill="var(--muted)">IN</text>
+        <text x="235" y="90" font-size="9" fill="var(--muted)">UT</text>
+        <text x="158" y="128" font-size="9" fill="var(--muted)">UT</text>
+      </svg>
+
+      <div style="background:var(--bg-light);border-radius:10px;padding:1rem;font-size:0.88rem;margin-bottom:0.5rem">
+        <div style="color:var(--teal);font-weight:700;margin-bottom:0.5rem">Exempelräkning</div>
+        <div style="margin-bottom:0.4rem"><strong>Givet:</strong> I₁ = 5 A (in), I₂ = 3 A (in), I₄ = 2 A (ut) — sök I₃ (ut)</div>
+        <div style="border-left:2px solid var(--teal);padding-left:0.75rem;margin-top:0.5rem;line-height:2">
+          <div>ΣI<sub>in</sub> = ΣI<sub>ut</sub></div>
+          <div>I₁ + I₂ = I₃ + I₄</div>
+          <div>5 + 3 = I₃ + 2</div>
+          <div>8 = I₃ + 2</div>
+          <div style="color:var(--teal);font-weight:700">I₃ = 8 − 2 = <strong>6 A</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KVL -->
+    <div style="margin-top:2rem">
+      <h4 style="color:var(--yellow);margin-bottom:0.5rem">KVL — Kirchhoffs spänningslag (2:a lagen)</h4>
+      <div style="background:rgba(255,215,0,0.07);border-left:3px solid var(--yellow);border-radius:0 8px 8px 0;padding:0.75rem 1rem;margin-bottom:0.75rem">
+        <span style="font-size:1.05rem;font-weight:700;color:var(--yellow)">ΣU = 0</span>
+        <span style="color:var(--muted);font-size:0.85rem;margin-left:1rem">Summan av alla spänningar runt en sluten slinga = 0</span>
+      </div>
+      <p style="font-size:0.9rem;margin-bottom:0.75rem">Tänk dig att du vandrar runt en slinga i kretsen och noterar varje spänningssteg — uppåt (+) om du går med strömmen genom en källa, nedåt (−) om du går mot strömmen eller över en last. När du är tillbaka vid start är summan alltid noll.</p>
+      <p style="font-size:0.9rem;margin-bottom:0.75rem">I praktiken: <strong>källans spänning = summan av alla spänningsfall</strong> runt slingan.</p>
+
+      <!-- KVL SVG -->
+      <svg viewBox="0 0 320 160" style="width:100%;max-width:450px;display:block;margin:0 auto 1rem" xmlns="http://www.w3.org/2000/svg">
+        <!-- Krets: batteri + R1 + R2 + R3 i serie -->
+        <!-- Toppled wire -->
+        <line x1="50" y1="30" x2="270" y2="30" stroke="#FFD700" stroke-width="2"/>
+        <!-- Bottom wire -->
+        <line x1="50" y1="130" x2="270" y2="130" stroke="#FFD700" stroke-width="2"/>
+        <!-- Left wire (battery) -->
+        <line x1="50" y1="30" x2="50" y2="55" stroke="#FFD700" stroke-width="2"/>
+        <rect x="38" y="55" width="24" height="40" fill="#333" rx="3" stroke="#888" stroke-width="1.5"/>
+        <text x="50" y="72" text-anchor="middle" font-size="9" fill="#4CFFA0" font-weight="bold">+</text>
+        <text x="50" y="89" text-anchor="middle" font-size="9" fill="#FF4C4C" font-weight="bold">−</text>
+        <text x="50" y="109" text-anchor="middle" font-size="9" fill="#FFD700">12 V</text>
+        <line x1="50" y1="95" x2="50" y2="130" stroke="#FFD700" stroke-width="2"/>
+        <!-- R1 -->
+        <rect x="85" y="20" width="50" height="20" fill="#2a2a2a" stroke="#FF9B4D" stroke-width="1.5" rx="3"/>
+        <text x="110" y="33" text-anchor="middle" font-size="9" fill="#FF9B4D">R₁ = 2 Ω</text>
+        <!-- R2 -->
+        <rect x="165" y="20" width="50" height="20" fill="#2a2a2a" stroke="#FF9B4D" stroke-width="1.5" rx="3"/>
+        <text x="190" y="33" text-anchor="middle" font-size="9" fill="#FF9B4D">R₂ = 3 Ω</text>
+        <!-- Right wire -->
+        <line x1="270" y1="30" x2="270" y2="130" stroke="#FFD700" stroke-width="2"/>
+        <!-- Spänningsfall labels -->
+        <text x="110" y="58" text-anchor="middle" font-size="9" fill="#C0A0FF">U_R1 = ?</text>
+        <text x="190" y="58" text-anchor="middle" font-size="9" fill="#C0A0FF">U_R2 = ?</text>
+        <!-- Rotation arrow (slinga) -->
+        <path d="M 155 85 m -40 0 a 40 25 0 1 0 80 0" fill="none" stroke="rgba(255,215,0,0.3)" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <polygon points="193,88 197,80 201,89" fill="rgba(255,215,0,0.4)"/>
+        <text x="155" y="120" text-anchor="middle" font-size="8" fill="rgba(255,215,0,0.5)">slinga</text>
+        <!-- Current arrow -->
+        <polygon points="152,26 162,30 152,34" fill="#4CFFA0" opacity="0.8"/>
+        <text x="148" y="17" font-size="8" fill="#4CFFA0">I</text>
+      </svg>
+
+      <div style="background:var(--bg-light);border-radius:10px;padding:1rem;font-size:0.88rem">
+        <div style="color:var(--yellow);font-weight:700;margin-bottom:0.5rem">Exempelräkning</div>
+        <div style="margin-bottom:0.4rem"><strong>Givet:</strong> U<sub>källa</sub> = 12 V, R₁ = 2 Ω, R₂ = 3 Ω i serie — sök U<sub>R1</sub> och U<sub>R2</sub></div>
+        <div style="border-left:2px solid var(--yellow);padding-left:0.75rem;margin-top:0.5rem;line-height:2">
+          <div>Steg 1 — beräkna strömmen:</div>
+          <div style="padding-left:0.5rem">R<sub>tot</sub> = R₁ + R₂ = 2 + 3 = 5 Ω</div>
+          <div style="padding-left:0.5rem">I = U ÷ R<sub>tot</sub> = 12 ÷ 5 = <strong>2,4 A</strong></div>
+          <div style="margin-top:0.4rem">Steg 2 — beräkna spänningsfallen (Ohms lag):</div>
+          <div style="padding-left:0.5rem">U<sub>R1</sub> = I × R₁ = 2,4 × 2 = <strong style="color:var(--yellow)">4,8 V</strong></div>
+          <div style="padding-left:0.5rem">U<sub>R2</sub> = I × R₂ = 2,4 × 3 = <strong style="color:var(--yellow)">7,2 V</strong></div>
+          <div style="margin-top:0.4rem">Steg 3 — kontroll med KVL:</div>
+          <div style="padding-left:0.5rem">U<sub>källa</sub> − U<sub>R1</sub> − U<sub>R2</sub> = 0</div>
+          <div style="padding-left:0.5rem">12 − 4,8 − 7,2 = <strong style="color:var(--lime)">0 ✓</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Samband KCL + KVL -->
+    <div style="margin-top:1.5rem;background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.15);border-radius:10px;padding:1rem">
+      <div style="font-weight:700;color:var(--yellow);margin-bottom:0.5rem">KCL + KVL tillsammans</div>
+      <p style="font-size:0.88rem;margin-bottom:0.5rem">De två lagarna kompletterar varandra och används alltid ihop när man analyserar komplexa kretsar:</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;font-size:0.85rem">
+        <div style="background:rgba(78,205,196,0.08);border-radius:8px;padding:0.6rem">
+          <div style="color:var(--teal);font-weight:700">KCL — noder</div>
+          <div style="color:#CCC;margin-top:0.2rem">Används vid förgreningar. Hur mycket ström går in resp. ut i varje gren?</div>
+        </div>
+        <div style="background:rgba(255,215,0,0.08);border-radius:8px;padding:0.6rem">
+          <div style="color:var(--yellow);font-weight:700">KVL — slingor</div>
+          <div style="color:#CCC;margin-top:0.2rem">Används längs slingor. Källans spänning fördelas ut på alla komponenter.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mätteknik -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>🔬 Mätteknik – Amperemeter &amp; Voltmeter</h3>
+    <p>Hur man kopplar mätinstrument korrekt är avgörande för rätt mätresultat – och för att inte bränna instrumentet!</p>
+
+    <div class="meter-grid">
+      <div class="meter-card">
+        <h4 style="color:var(--lime)">Amperemeter – kopplas i SERIE</h4>
+        <!-- INNAN: sluten krets utan amperemeter -->
+        <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.25rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">Innan — vanlig sluten krets</div>
+        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="25" width="10" height="30" fill="#555" rx="2"/>
+          <text x="3" y="34" font-size="7" fill="#4CFFA0">+</text>
+          <text x="3" y="50" font-size="7" fill="#FF4C4C">−</text>
+          <line x1="20" y1="30" x2="170" y2="30" stroke="#FFD700" stroke-width="2"/>
+          <rect x="130" y="22" width="30" height="16" fill="#2a2a2a" stroke="#888" stroke-width="1.5" rx="3"/>
+          <text x="145" y="33" text-anchor="middle" font-size="9" fill="#CCC">R</text>
+          <line x1="170" y1="30" x2="185" y2="30" stroke="#FFD700" stroke-width="2"/>
+          <line x1="185" y1="30" x2="185" y2="60" stroke="#FFD700" stroke-width="2"/>
+          <line x1="185" y1="60" x2="20" y2="60" stroke="#FFD700" stroke-width="2"/>
+          <line x1="20" y1="60" x2="20" y2="40" stroke="#FFD700" stroke-width="2"/>
+          <!-- kabel markerad -->
+          <rect x="35" y="24" width="60" height="12" fill="none" stroke="#FF4C4C" stroke-width="1" stroke-dasharray="3,2" rx="3"/>
+          <text x="65" y="20" text-anchor="middle" font-size="7" fill="#FF4C4C">klipp här</text>
+        </svg>
+
+        <!-- PIL ned -->
+        <div style="text-align:center;font-size:1.3rem;color:var(--lime);margin:0.2rem 0">↓</div>
+
+        <!-- EFTER: med amperemeter insatt -->
+        <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.25rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">Efter — amperemeter isatt i glappet</div>
+        <svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="30" width="10" height="30" fill="#555" rx="2"/>
+          <text x="3" y="39" font-size="7" fill="#4CFFA0">+</text>
+          <text x="3" y="55" font-size="7" fill="#FF4C4C">−</text>
+          <!-- kabel till A -->
+          <line x1="20" y1="35" x2="55" y2="35" stroke="#FFD700" stroke-width="2"/>
+          <!-- Amperemeter -->
+          <circle cx="75" cy="35" r="16" fill="#1a2a1a" stroke="#4CFFA0" stroke-width="2"/>
+          <text x="75" y="39" text-anchor="middle" font-size="11" font-weight="bold" fill="#4CFFA0">A</text>
+          <!-- kabel från A till R -->
+          <line x1="91" y1="35" x2="130" y2="35" stroke="#FFD700" stroke-width="2"/>
+          <!-- Resistor -->
+          <rect x="130" y="27" width="30" height="16" fill="#2a2a2a" stroke="#888" stroke-width="1.5" rx="3"/>
+          <text x="145" y="38" text-anchor="middle" font-size="9" fill="#CCC">R</text>
+          <!-- retur -->
+          <line x1="160" y1="35" x2="185" y2="35" stroke="#FFD700" stroke-width="2"/>
+          <line x1="185" y1="35" x2="185" y2="65" stroke="#FFD700" stroke-width="2"/>
+          <line x1="185" y1="65" x2="20" y2="65" stroke="#FFD700" stroke-width="2"/>
+          <line x1="20" y1="65" x2="20" y2="45" stroke="#FFD700" stroke-width="2"/>
+          <!-- strömpilar -->
+          <polygon points="42,31 52,35 42,39" fill="#4CFFA0" opacity="0.8"/>
+          <polygon points="108,31 118,35 108,39" fill="#4CFFA0" opacity="0.8"/>
+          <text x="100" y="82" text-anchor="middle" font-size="8" fill="#4CFFA0">Batteriet sitter kvar — kabeln är bruten och A sitter i glappet</text>
+        </svg>
+
+        <div style="margin-top:0.9rem;display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.8rem">
+          <div style="background:rgba(76,255,160,0.08);border:1px solid rgba(76,255,160,0.2);border-radius:8px;padding:0.5rem">
+            <div style="color:var(--lime);font-weight:700;margin-bottom:0.2rem">Rätt</div>
+            <div style="color:#CCC">Sitter i serie. R<sub>intern</sub> ≈ 0 Ω — stör inte kretsen.</div>
+          </div>
+          <div style="background:rgba(255,76,76,0.08);border:1px solid rgba(255,76,76,0.2);border-radius:8px;padding:0.5rem">
+            <div style="color:var(--red);font-weight:700;margin-bottom:0.2rem">Fel (parallell)</div>
+            <div style="color:#CCC">R<sub>intern</sub> ≈ 0 = kortslutning! Säkring löser ut eller instrumentet bränns.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="meter-card">
+        <h4 style="color:#FF9B4D">Voltmeter – kopplas i PARALLELL</h4>
+        <svg viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg">
+          <!-- Battery -->
+          <rect x="10" y="40" width="10" height="30" fill="#555" rx="2"/>
+          <text x="3" y="49" font-size="7" fill="#4CFFA0">+</text>
+          <text x="3" y="65" font-size="7" fill="#FF4C4C">−</text>
+          <!-- main wires -->
+          <line x1="20" y1="45" x2="130" y2="45" stroke="#FFD700" stroke-width="2"/>
+          <!-- Resistor -->
+          <rect x="130" y="36" width="30" height="18" fill="#2a2a2a" stroke="#888" stroke-width="1.5" rx="3"/>
+          <text x="145" y="48" text-anchor="middle" font-size="9" fill="#CCC">R</text>
+          <line x1="160" y1="45" x2="185" y2="45" stroke="#FFD700" stroke-width="2"/>
+          <line x1="185" y1="45" x2="185" y2="75" stroke="#FFD700" stroke-width="2"/>
+          <line x1="185" y1="75" x2="20" y2="75" stroke="#FFD700" stroke-width="2"/>
+          <line x1="20" y1="75" x2="20" y2="55" stroke="#FFD700" stroke-width="2"/>
+          <!-- Voltmeter parallel -->
+          <line x1="130" y1="45" x2="130" y2="20" stroke="#FF9B4D" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <line x1="160" y1="45" x2="160" y2="20" stroke="#FF9B4D" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <circle cx="145" cy="20" r="14" fill="#2a1a0a" stroke="#FF9B4D" stroke-width="2"/>
+          <text x="145" y="24" text-anchor="middle" font-size="11" font-weight="bold" fill="#FF9B4D">V</text>
+          <!-- label -->
+          <text x="100" y="95" text-anchor="middle" font-size="8" fill="#FF9B4D">Kopplas parallellt med lasten</text>
+        </svg>
+        <ul style="font-size:0.85rem;color:#CCC;padding-left:1.2rem;margin-top:0.5rem">
+          <li>Koppla instrumentet parallellt med komponenten</li>
+          <li>Internmotstånd ≈ ∞ (tar ingen ström)</li>
+          <li>Fel koppling = kortslutning av källan!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tryit">
+    <div class="tryit-header">✏️ Försök själv</div>
+    <ol>
+      <li>En krets har U = 12 V och R = 6 Ω. Hur stor är strömmen?</li>
+      <li>En lampa drar 0,5 A vid 230 V. Vad är effekten i watt?</li>
+      <li>Tre resistorer 10 Ω, 20 Ω och 30 Ω kopplas i serie. Vad är R_tot?</li>
+      <li>Samma resistorer kopplas istället i parallell. Vad är R_tot? (Använd kalkylatorn!)</li>
+    </ol>
+  </div>
+
+  <!-- ============================================================
+       GUIDAD KRETSLÖSARE
+       ============================================================ -->
+  <div class="card" id="krets-losare" style="margin-top:1.5rem">
+    <h3>🧮 Guidad kretslösare</h3>
+    <p>Välj kretstyp, fyll i dina värden — sidan visar varje beräkningssteg med förklaring.</p>
+
+    <div class="kk-type-row">
+      <button class="kk-type-btn active" data-type="serie" onclick="kkSelectType('serie')">📐 Serie + ledningsresistans</button>
+      <button class="kk-type-btn" data-type="parallell" onclick="kkSelectType('parallell')">🔀 Parallell + ledningsresistans</button>
+    </div>
+
+    <div id="kk-diagram" style="margin:1rem 0;text-align:center"></div>
+    <div class="kk-inputs-grid" id="kk-inputs"></div>
+
+    <div class="calc-row" style="margin-top:1rem">
+      <button class="calc-btn" onclick="kkSolve()">Lös steg för steg →</button>
+      <button class="clear-btn" onclick="kkClear()">Rensa</button>
+    </div>
+
+    <div id="kk-steps" style="margin-top:1.25rem"></div>
+  </div>
+
+  <!-- ============================================================
+       FLERSTEGSÖVNINGAR
+       ============================================================ -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>📝 Flerstegsövningar</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1.25rem">Lös uppgifterna steg för steg — nästa delfråga låses upp när du svarar rätt.</p>
+
+    <!-- Uppgift 1 -->
+    <div class="ms-exercise">
+      <div class="ms-ex-header">
+        <span class="ms-ex-badge">Uppgift 1</span>
+        <span class="ms-ex-title">Seriekrets med ledningsresistans</span>
+      </div>
+      <div class="ms-ex-given">
+        <strong>Givet:</strong> U = 110 V &nbsp;|&nbsp; R<sub>b</sub> = 15 Ω &nbsp;|&nbsp; Total kabellängd L = 30 m &nbsp;|&nbsp; Area A = 1,5 mm² &nbsp;|&nbsp; Koppar (ρ = 0,018 Ω·mm²/m)
+      </div>
+      <svg viewBox="0 0 320 110" class="ms-svg" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="38" width="12" height="34" fill="#444" rx="2"/>
+        <text x="26" y="50" text-anchor="middle" font-size="8" fill="#4CFFA0">+</text>
+        <text x="26" y="68" text-anchor="middle" font-size="8" fill="#FF4C4C">−</text>
+        <text x="26" y="84" text-anchor="middle" font-size="9" fill="#FFD700">110 V</text>
+        <line x1="32" y1="43" x2="75" y2="43" stroke="#FFD700" stroke-width="2"/>
+        <rect x="75" y="34" width="70" height="18" fill="#2a2a2a" stroke="#C0A0FF" stroke-width="1.5" rx="3"/>
+        <text x="110" y="45" text-anchor="middle" font-size="8" fill="#C0A0FF">R_led = ?</text>
+        <text x="110" y="30" text-anchor="middle" font-size="7" fill="#C0A0FF">L=30 m, A=1,5 mm²</text>
+        <line x1="145" y1="43" x2="195" y2="43" stroke="#FFD700" stroke-width="2"/>
+        <rect x="195" y="34" width="65" height="18" fill="#2a2a2a" stroke="#FF9B4D" stroke-width="1.5" rx="3"/>
+        <text x="227" y="45" text-anchor="middle" font-size="9" fill="#FF9B4D">R_b = 15 Ω</text>
+        <line x1="260" y1="43" x2="295" y2="43" stroke="#FFD700" stroke-width="2"/>
+        <line x1="295" y1="43" x2="295" y2="80" stroke="#FFD700" stroke-width="2"/>
+        <line x1="295" y1="80" x2="32" y2="80" stroke="#FFD700" stroke-width="2"/>
+        <line x1="32" y1="80" x2="32" y2="55" stroke="#FFD700" stroke-width="2"/>
+        <polygon points="158,39 168,43 158,47" fill="#4CFFA0" opacity="0.8"/>
+      </svg>
+      <div class="ms-subqs">
+        <div class="ms-subq" id="ms1-a">
+          <div class="ms-subq-label">a) Beräkna ledningsresistansen R<sub>led</sub></div>
+          <div class="ms-subq-hint">R<sub>led</sub> = ρ × L ÷ A &nbsp;(L = total kabellängd)</div>
+          <div class="ms-input-row">
+            <input type="number" step="0.001" placeholder="Svar i Ω" id="ms1a-in" class="ms-input"/>
+            <button class="ms-check-btn" onclick="msCheck(1,'a',0.36,'Ω',0.01)">Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms1a-fb"></div>
+        </div>
+        <div class="ms-subq locked" id="ms1-b">
+          <div class="ms-subq-label">b) Hur stor är totala resistansen R<sub>tot</sub>?</div>
+          <div class="ms-subq-hint">Serie: R<sub>tot</sub> = R<sub>led</sub> + R<sub>b</sub></div>
+          <div class="ms-input-row">
+            <input type="number" step="0.01" placeholder="Svar i Ω" id="ms1b-in" class="ms-input" disabled/>
+            <button class="ms-check-btn" onclick="msCheck(1,'b',15.36,'Ω',0.05)" disabled>Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms1b-fb"></div>
+        </div>
+        <div class="ms-subq locked" id="ms1-c">
+          <div class="ms-subq-label">c) Hur stor är strömmen I?</div>
+          <div class="ms-subq-hint">Ohms lag: I = U ÷ R<sub>tot</sub></div>
+          <div class="ms-input-row">
+            <input type="number" step="0.01" placeholder="Svar i A" id="ms1c-in" class="ms-input" disabled/>
+            <button class="ms-check-btn" onclick="msCheck(1,'c',7.16,'A',0.1)" disabled>Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms1c-fb"></div>
+        </div>
+        <div class="ms-subq locked" id="ms1-d">
+          <div class="ms-subq-label">d) Hur stort är spänningsfallet i ledningen U_fall?</div>
+          <div class="ms-subq-hint">U_fall = I × R<sub>led</sub></div>
+          <div class="ms-input-row">
+            <input type="number" step="0.01" placeholder="Svar i V" id="ms1d-in" class="ms-input" disabled/>
+            <button class="ms-check-btn" onclick="msCheck(1,'d',2.58,'V',0.1)" disabled>Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms1d-fb"></div>
+        </div>
+        <div class="ms-subq locked" id="ms1-e">
+          <div class="ms-subq-label">e) Hur stor är spänningen över R<sub>b</sub>?</div>
+          <div class="ms-subq-hint">U<sub>Rb</sub> = U − U_fall &nbsp;(eller I × R<sub>b</sub>)</div>
+          <div class="ms-input-row">
+            <input type="number" step="0.01" placeholder="Svar i V" id="ms1e-in" class="ms-input" disabled/>
+            <button class="ms-check-btn" onclick="msCheck(1,'e',107.42,'V',0.2)" disabled>Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms1e-fb"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Uppgift 2 -->
+    <div class="ms-exercise" style="margin-top:1.5rem">
+      <div class="ms-ex-header">
+        <span class="ms-ex-badge">Uppgift 2</span>
+        <span class="ms-ex-title">Parallellkrets med ledningsresistans</span>
+      </div>
+      <div class="ms-ex-given">
+        <strong>Givet:</strong> U = 120 V &nbsp;|&nbsp; R₁ = 15 Ω &nbsp;|&nbsp; R₂ = 10 Ω &nbsp;|&nbsp; Avstånd till last 12 m → total kabellängd L = 24 m &nbsp;|&nbsp; Area A = 2 mm² &nbsp;|&nbsp; Koppar (ρ = 0,018 Ω·mm²/m)
+      </div>
+      <svg viewBox="0 0 350 140" class="ms-svg" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="52" width="12" height="36" fill="#444" rx="2"/>
+        <text x="21" y="64" text-anchor="middle" font-size="8" fill="#4CFFA0">+</text>
+        <text x="21" y="82" text-anchor="middle" font-size="8" fill="#FF4C4C">−</text>
+        <text x="21" y="99" text-anchor="middle" font-size="9" fill="#FFD700">120 V</text>
+        <line x1="27" y1="57" x2="60" y2="57" stroke="#FFD700" stroke-width="2"/>
+        <rect x="60" y="48" width="65" height="18" fill="#2a2a2a" stroke="#C0A0FF" stroke-width="1.5" rx="3"/>
+        <text x="92" y="59" text-anchor="middle" font-size="8" fill="#C0A0FF">R_led = ?</text>
+        <text x="92" y="44" text-anchor="middle" font-size="7" fill="#C0A0FF">L=24 m, A=2 mm²</text>
+        <line x1="125" y1="57" x2="170" y2="57" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="170" cy="57" r="4" fill="#FFD700"/>
+        <line x1="170" y1="57" x2="170" y2="30" stroke="#FFD700" stroke-width="2"/>
+        <line x1="170" y1="30" x2="220" y2="30" stroke="#FFD700" stroke-width="2"/>
+        <rect x="220" y="21" width="55" height="18" fill="#2a2a2a" stroke="#4CFFA0" stroke-width="1.5" rx="3"/>
+        <text x="247" y="32" text-anchor="middle" font-size="9" fill="#4CFFA0">R₁ = 15 Ω</text>
+        <line x1="275" y1="30" x2="310" y2="30" stroke="#FFD700" stroke-width="2"/>
+        <line x1="170" y1="57" x2="170" y2="84" stroke="#FFD700" stroke-width="2"/>
+        <line x1="170" y1="84" x2="220" y2="84" stroke="#FFD700" stroke-width="2"/>
+        <rect x="220" y="75" width="55" height="18" fill="#2a2a2a" stroke="#FF9B4D" stroke-width="1.5" rx="3"/>
+        <text x="247" y="86" text-anchor="middle" font-size="9" fill="#FF9B4D">R₂ = 10 Ω</text>
+        <line x1="275" y1="84" x2="310" y2="84" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="310" cy="57" r="4" fill="#FFD700"/>
+        <line x1="310" y1="30" x2="310" y2="57" stroke="#FFD700" stroke-width="2"/>
+        <line x1="310" y1="57" x2="310" y2="84" stroke="#FFD700" stroke-width="2"/>
+        <line x1="310" y1="57" x2="330" y2="57" stroke="#FFD700" stroke-width="2"/>
+        <line x1="330" y1="57" x2="330" y2="115" stroke="#FFD700" stroke-width="2"/>
+        <line x1="330" y1="115" x2="27" y2="115" stroke="#FFD700" stroke-width="2"/>
+        <line x1="27" y1="115" x2="27" y2="88" stroke="#FFD700" stroke-width="2"/>
+        <polygon points="143,53 153,57 143,61" fill="#4CFFA0" opacity="0.8"/>
+        <polygon points="185,26 195,30 185,34" fill="#4CFFA0" opacity="0.6"/>
+        <text x="180" y="20" font-size="7" fill="#4CFFA0">I₁</text>
+        <polygon points="185,80 195,84 185,88" fill="#FF9B4D" opacity="0.6"/>
+        <text x="180" y="76" font-size="7" fill="#FF9B4D">I₂</text>
+      </svg>
+      <div class="ms-subqs">
+        <div class="ms-subq" id="ms2-a">
+          <div class="ms-subq-label">a) Beräkna ersättningsresistansen R<sub>ers</sub> för R₁ och R₂</div>
+          <div class="ms-subq-hint">R<sub>ers</sub> = (R₁ × R₂) ÷ (R₁ + R₂)</div>
+          <div class="ms-input-row">
+            <input type="number" step="0.01" placeholder="Svar i Ω" id="ms2a-in" class="ms-input"/>
+            <button class="ms-check-btn" onclick="msCheck(2,'a',6,'Ω',0.05)">Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms2a-fb"></div>
+        </div>
+        <div class="ms-subq locked" id="ms2-b">
+          <div class="ms-subq-label">b) Beräkna ledningsresistansen R<sub>led</sub></div>
+          <div class="ms-subq-hint">R<sub>led</sub> = ρ × L ÷ A &nbsp;(L = 24 m total)</div>
+          <div class="ms-input-row">
+            <input type="number" step="0.001" placeholder="Svar i Ω" id="ms2b-in" class="ms-input" disabled/>
+            <button class="ms-check-btn" onclick="msCheck(2,'b',0.216,'Ω',0.01)" disabled>Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms2b-fb"></div>
+        </div>
+        <div class="ms-subq locked" id="ms2-c">
+          <div class="ms-subq-label">c) Hur stor är totala resistansen R<sub>tot</sub>?</div>
+          <div class="ms-subq-hint">R<sub>tot</sub> = R<sub>led</sub> + R<sub>ers</sub></div>
+          <div class="ms-input-row">
+            <input type="number" step="0.01" placeholder="Svar i Ω" id="ms2c-in" class="ms-input" disabled/>
+            <button class="ms-check-btn" onclick="msCheck(2,'c',6.216,'Ω',0.05)" disabled>Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms2c-fb"></div>
+        </div>
+        <div class="ms-subq locked" id="ms2-d">
+          <div class="ms-subq-label">d) Beräkna huvudströmmen I<sub>tot</sub></div>
+          <div class="ms-subq-hint">I<sub>tot</sub> = U ÷ R<sub>tot</sub></div>
+          <div class="ms-input-row">
+            <input type="number" step="0.01" placeholder="Svar i A" id="ms2d-in" class="ms-input" disabled/>
+            <button class="ms-check-btn" onclick="msCheck(2,'d',19.31,'A',0.15)" disabled>Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms2d-fb"></div>
+        </div>
+        <div class="ms-subq locked" id="ms2-e">
+          <div class="ms-subq-label">e) Beräkna spänningsfallet U_fall i ledningarna</div>
+          <div class="ms-subq-hint">U_fall = I<sub>tot</sub> × R<sub>led</sub></div>
+          <div class="ms-input-row">
+            <input type="number" step="0.01" placeholder="Svar i V" id="ms2e-in" class="ms-input" disabled/>
+            <button class="ms-check-btn" onclick="msCheck(2,'e',4.17,'V',0.1)" disabled>Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms2e-fb"></div>
+        </div>
+        <div class="ms-subq locked" id="ms2-f">
+          <div class="ms-subq-label">f) Hur stor är spänningen U<sub>last</sub> över belastningarna?</div>
+          <div class="ms-subq-hint">U<sub>last</sub> = U − U_fall</div>
+          <div class="ms-input-row">
+            <input type="number" step="0.01" placeholder="Svar i V" id="ms2f-in" class="ms-input" disabled/>
+            <button class="ms-check-btn" onclick="msCheck(2,'f',115.83,'V',0.2)" disabled>Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms2f-fb"></div>
+        </div>
+        <div class="ms-subq locked" id="ms2-g">
+          <div class="ms-subq-label">g) Beräkna grenströmmarna I₁ och I₂</div>
+          <div class="ms-subq-hint">I₁ = U<sub>last</sub> ÷ R₁ &nbsp;&nbsp; I₂ = U<sub>last</sub> ÷ R₂</div>
+          <div class="ms-input-row">
+            <input type="number" step="0.01" placeholder="I₁ i A" id="ms2g1-in" class="ms-input" style="width:130px" disabled/>
+            <input type="number" step="0.01" placeholder="I₂ i A" id="ms2g2-in" class="ms-input" style="width:130px" disabled/>
+            <button class="ms-check-btn" onclick="msCheckDouble()" disabled>Kontrollera</button>
+          </div>
+          <div class="ms-feedback" id="ms2g-fb"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära &amp; Matematik 1</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+/* === GUIDAD KRETSLÖSARE === */
+(function () {
+  const RHO = { koppar: 0.018, aluminium: 0.028 };
+  let kkType = 'serie';
+
+  function f(n, d) { return parseFloat(n.toFixed(d === undefined ? 3 : d)); }
+
+  window.kkSelectType = function (type) {
+    kkType = type;
+    document.querySelectorAll('.kk-type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === type));
+    renderDiagram();
+    renderInputs();
+    document.getElementById('kk-steps').innerHTML = '';
+  };
+
+  function renderDiagram() {
+    const el = document.getElementById('kk-diagram');
+    if (kkType === 'serie') {
+      el.innerHTML = `<svg viewBox="0 0 320 95" style="max-width:420px;width:100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="32" width="12" height="31" fill="#444" rx="2"/>
+        <text x="24" y="43" text-anchor="middle" font-size="8" fill="#4CFFA0">+</text>
+        <text x="24" y="60" text-anchor="middle" font-size="8" fill="#FF4C4C">−</text>
+        <text x="24" y="75" text-anchor="middle" font-size="9" fill="#FFD700">U</text>
+        <line x1="30" y1="37" x2="78" y2="37" stroke="#FFD700" stroke-width="2"/>
+        <rect x="78" y="28" width="72" height="18" fill="#2a2a2a" stroke="#C0A0FF" stroke-width="1.5" rx="3"/>
+        <text x="114" y="39" text-anchor="middle" font-size="9" fill="#C0A0FF">R_led (ρ·L/A)</text>
+        <line x1="150" y1="37" x2="198" y2="37" stroke="#FFD700" stroke-width="2"/>
+        <rect x="198" y="28" width="64" height="18" fill="#2a2a2a" stroke="#FF9B4D" stroke-width="1.5" rx="3"/>
+        <text x="230" y="39" text-anchor="middle" font-size="9" fill="#FF9B4D">R_last</text>
+        <line x1="262" y1="37" x2="295" y2="37" stroke="#FFD700" stroke-width="2"/>
+        <line x1="295" y1="37" x2="295" y2="72" stroke="#FFD700" stroke-width="2"/>
+        <line x1="295" y1="72" x2="30" y2="72" stroke="#FFD700" stroke-width="2"/>
+        <line x1="30" y1="72" x2="30" y2="47" stroke="#FFD700" stroke-width="2"/>
+        <polygon points="162,33 172,37 162,41" fill="#4CFFA0" opacity="0.7"/>
+      </svg>`;
+    } else {
+      el.innerHTML = `<svg viewBox="0 0 340 125" style="max-width:430px;width:100%" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="44" width="12" height="37" fill="#444" rx="2"/>
+        <text x="20" y="56" text-anchor="middle" font-size="8" fill="#4CFFA0">+</text>
+        <text x="20" y="75" text-anchor="middle" font-size="8" fill="#FF4C4C">−</text>
+        <text x="20" y="91" text-anchor="middle" font-size="9" fill="#FFD700">U</text>
+        <line x1="26" y1="49" x2="58" y2="49" stroke="#FFD700" stroke-width="2"/>
+        <rect x="58" y="40" width="65" height="18" fill="#2a2a2a" stroke="#C0A0FF" stroke-width="1.5" rx="3"/>
+        <text x="90" y="51" text-anchor="middle" font-size="8" fill="#C0A0FF">R_led (ρ·L/A)</text>
+        <line x1="123" y1="49" x2="163" y2="49" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="163" cy="49" r="3.5" fill="#FFD700"/>
+        <line x1="163" y1="49" x2="163" y2="26" stroke="#FFD700" stroke-width="2"/>
+        <line x1="163" y1="26" x2="215" y2="26" stroke="#FFD700" stroke-width="2"/>
+        <rect x="215" y="17" width="52" height="18" fill="#2a2a2a" stroke="#4CFFA0" stroke-width="1.5" rx="3"/>
+        <text x="241" y="28" text-anchor="middle" font-size="9" fill="#4CFFA0">R₁</text>
+        <line x1="267" y1="26" x2="305" y2="26" stroke="#FFD700" stroke-width="2"/>
+        <line x1="163" y1="49" x2="163" y2="72" stroke="#FFD700" stroke-width="2"/>
+        <line x1="163" y1="72" x2="215" y2="72" stroke="#FFD700" stroke-width="2"/>
+        <rect x="215" y="63" width="52" height="18" fill="#2a2a2a" stroke="#FF9B4D" stroke-width="1.5" rx="3"/>
+        <text x="241" y="74" text-anchor="middle" font-size="9" fill="#FF9B4D">R₂</text>
+        <line x1="267" y1="72" x2="305" y2="72" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="305" cy="49" r="3.5" fill="#FFD700"/>
+        <line x1="305" y1="26" x2="305" y2="49" stroke="#FFD700" stroke-width="2"/>
+        <line x1="305" y1="49" x2="305" y2="72" stroke="#FFD700" stroke-width="2"/>
+        <line x1="305" y1="49" x2="323" y2="49" stroke="#FFD700" stroke-width="2"/>
+        <line x1="323" y1="49" x2="323" y2="100" stroke="#FFD700" stroke-width="2"/>
+        <line x1="323" y1="100" x2="26" y2="100" stroke="#FFD700" stroke-width="2"/>
+        <line x1="26" y1="100" x2="26" y2="81" stroke="#FFD700" stroke-width="2"/>
+        <polygon points="138,45 148,49 138,53" fill="#4CFFA0" opacity="0.7"/>
+      </svg>`;
+    }
+  }
+
+  function renderInputs() {
+    const el = document.getElementById('kk-inputs');
+    const mats = `<option value="koppar">Koppar (ρ = 0,018)</option><option value="aluminium">Aluminium (ρ = 0,028)</option>`;
+    if (kkType === 'serie') {
+      el.innerHTML = `
+        <div class="kk-field"><label>Spänning U (V)</label><input type="number" id="kk-U" placeholder="t.ex. 110"/></div>
+        <div class="kk-field"><label>Lastresistans R<sub>last</sub> (Ω)</label><input type="number" id="kk-Rl" placeholder="t.ex. 15"/></div>
+        <div class="kk-field"><label>Total kabellängd L (m)</label><input type="number" id="kk-L" placeholder="t.ex. 30"/></div>
+        <div class="kk-field"><label>Kabelarea A (mm²)</label><input type="number" id="kk-A" placeholder="t.ex. 1.5"/></div>
+        <div class="kk-field"><label>Material</label><select id="kk-mat">${mats}</select></div>`;
+    } else {
+      el.innerHTML = `
+        <div class="kk-field"><label>Spänning U (V)</label><input type="number" id="kk-U" placeholder="t.ex. 120"/></div>
+        <div class="kk-field"><label>R₁ (Ω)</label><input type="number" id="kk-R1" placeholder="t.ex. 15"/></div>
+        <div class="kk-field"><label>R₂ (Ω)</label><input type="number" id="kk-R2" placeholder="t.ex. 10"/></div>
+        <div class="kk-field"><label>Total kabellängd L (m)</label><input type="number" id="kk-L" placeholder="t.ex. 24"/></div>
+        <div class="kk-field"><label>Kabelarea A (mm²)</label><input type="number" id="kk-A" placeholder="t.ex. 2"/></div>
+        <div class="kk-field"><label>Material</label><select id="kk-mat">${mats}</select></div>`;
+    }
+  }
+
+  function buildSteps(steps) {
+    return steps.map(s => `
+      <div class="kk-step${s.warn ? ' kk-warn' : ''}">
+        <div class="kk-step-num">${s.n}</div>
+        <div class="kk-step-body">
+          <div class="kk-step-title">${s.title}</div>
+          <div class="kk-step-formula">${s.formula}</div>
+          ${s.note ? `<div class="kk-step-sub">${s.note}</div>` : ''}
+          <div class="kk-step-calc">= ${s.calc}</div>
+          <div class="kk-step-result">${s.result}</div>
+        </div>
+      </div>`).join('');
+  }
+
+  window.kkSolve = function () {
+    const U = parseFloat(document.getElementById('kk-U')?.value);
+    const L = parseFloat(document.getElementById('kk-L')?.value);
+    const A = parseFloat(document.getElementById('kk-A')?.value);
+    const rho = RHO[document.getElementById('kk-mat')?.value] || 0.018;
+    if ([U, L, A].some(isNaN)) { alert('Fyll i alla fält!'); return; }
+
+    const stepsEl = document.getElementById('kk-steps');
+
+    if (kkType === 'serie') {
+      const Rl = parseFloat(document.getElementById('kk-Rl')?.value);
+      if (isNaN(Rl)) { alert('Fyll i alla fält!'); return; }
+      const Rled = rho * L / A;
+      const Rtot = Rled + Rl;
+      const I    = U / Rtot;
+      const dU   = I * Rled;
+      const Ul   = I * Rl;
+      const pct  = (dU / U) * 100;
+      const ok   = pct <= 4;
+      stepsEl.innerHTML = buildSteps([
+        { n:1, title:'Ledarresistans', formula:'R<sub>led</sub> = ρ × L ÷ A', note:'L = total kabellängd (fram + retur ingår)', calc:`${rho} × ${L} ÷ ${A}`, result:`R<sub>led</sub> = <strong>${f(Rled)} Ω</strong>` },
+        { n:2, title:'Total resistans', formula:'R<sub>tot</sub> = R<sub>led</sub> + R<sub>last</sub>', calc:`${f(Rled)} + ${Rl}`, result:`R<sub>tot</sub> = <strong>${f(Rtot)} Ω</strong>` },
+        { n:3, title:'Ström — Ohms lag', formula:'I = U ÷ R<sub>tot</sub>', calc:`${U} ÷ ${f(Rtot)}`, result:`I = <strong>${f(I)} A</strong>` },
+        { n:4, title:'Spänningsfall i ledningen', formula:'U_fall = I × R<sub>led</sub>', calc:`${f(I)} × ${f(Rled)}`, result:`U_fall = <strong>${f(dU)} V</strong> &nbsp;(${f(pct,1)} % av ${U} V) ${ok ? '<span style="color:var(--lime)">✓ OK</span>' : '<span style="color:var(--red)">⚠️ Överstiger 4 %!</span>'}`, warn:!ok },
+        { n:5, title:'Spänning över lasten', formula:'U<sub>last</sub> = I × R<sub>last</sub>', calc:`${f(I)} × ${Rl}`, result:`U<sub>last</sub> = <strong>${f(Ul)} V</strong>` },
+        { n:6, title:'Kontroll — KVL', formula:'U_fall + U<sub>last</sub> = U ?', calc:`${f(dU)} + ${f(Ul)} = ${f(dU+Ul)} V`, result:`<span style="color:var(--lime)">✓ Stämmer!</span>` },
+      ]);
+    } else {
+      const R1 = parseFloat(document.getElementById('kk-R1')?.value);
+      const R2 = parseFloat(document.getElementById('kk-R2')?.value);
+      if ([R1, R2].some(isNaN)) { alert('Fyll i alla fält!'); return; }
+      const Rers = (R1 * R2) / (R1 + R2);
+      const Rled = rho * L / A;
+      const Rtot = Rled + Rers;
+      const Itot = U / Rtot;
+      const dU   = Itot * Rled;
+      const Ul   = U - dU;
+      const I1   = Ul / R1;
+      const I2   = Ul / R2;
+      const pct  = (dU / U) * 100;
+      const ok   = pct <= 4;
+      stepsEl.innerHTML = buildSteps([
+        { n:1, title:'Ersättningsresistans (parallell)', formula:'R<sub>ers</sub> = (R₁ × R₂) ÷ (R₁ + R₂)', calc:`(${R1} × ${R2}) ÷ (${R1} + ${R2})`, result:`R<sub>ers</sub> = <strong>${f(Rers)} Ω</strong>` },
+        { n:2, title:'Ledarresistans', formula:'R<sub>led</sub> = ρ × L ÷ A', note:'L = total kabellängd (fram + retur ingår)', calc:`${rho} × ${L} ÷ ${A}`, result:`R<sub>led</sub> = <strong>${f(Rled)} Ω</strong>` },
+        { n:3, title:'Total resistans', formula:'R<sub>tot</sub> = R<sub>led</sub> + R<sub>ers</sub>', calc:`${f(Rled)} + ${f(Rers)}`, result:`R<sub>tot</sub> = <strong>${f(Rtot)} Ω</strong>` },
+        { n:4, title:'Huvudström', formula:'I<sub>tot</sub> = U ÷ R<sub>tot</sub>', calc:`${U} ÷ ${f(Rtot)}`, result:`I<sub>tot</sub> = <strong>${f(Itot)} A</strong>` },
+        { n:5, title:'Spänningsfall i ledningarna', formula:'U_fall = I<sub>tot</sub> × R<sub>led</sub>', calc:`${f(Itot)} × ${f(Rled)}`, result:`U_fall = <strong>${f(dU)} V</strong> &nbsp;(${f(pct,1)} %) ${ok ? '<span style="color:var(--lime)">✓ OK</span>' : '<span style="color:var(--red)">⚠️ Överstiger 4 %!</span>'}`, warn:!ok },
+        { n:6, title:'Spänning över belastningarna', formula:'U<sub>last</sub> = U − U_fall', calc:`${U} − ${f(dU)}`, result:`U<sub>last</sub> = <strong>${f(Ul)} V</strong>` },
+        { n:7, title:'Grenströmmar — KCL', formula:'I₁ = U<sub>last</sub> ÷ R₁ &nbsp;|&nbsp; I₂ = U<sub>last</sub> ÷ R₂', calc:`${f(Ul)} ÷ ${R1} &nbsp;|&nbsp; ${f(Ul)} ÷ ${R2}`, result:`I₁ = <strong>${f(I1)} A</strong> &nbsp;|&nbsp; I₂ = <strong>${f(I2)} A</strong>` },
+        { n:8, title:'Kontroll — KCL', formula:'I₁ + I₂ = I<sub>tot</sub> ?', calc:`${f(I1)} + ${f(I2)} = ${f(I1+I2)} A`, result:`<span style="color:var(--lime)">✓ Stämmer!</span>` },
+      ]);
+    }
+  };
+
+  window.kkClear = function () {
+    document.getElementById('kk-steps').innerHTML = '';
+    document.querySelectorAll('#kk-inputs input').forEach(i => i.value = '');
+  };
+
+  renderDiagram();
+  renderInputs();
+})();
+
+/* === FLERSTEGSÖVNINGAR === */
+(function () {
+  const ORDER = { 1: ['a','b','c','d','e'], 2: ['a','b','c','d','e','f','g'] };
+
+  function fb(id, ok, msg) {
+    const el = document.getElementById(id);
+    el.className = 'ms-feedback ' + (ok ? 'ms-correct' : 'ms-wrong');
+    el.innerHTML = msg;
+  }
+
+  function unlock(ex, sub) {
+    const order = ORDER[ex];
+    const next  = order[order.indexOf(sub) + 1];
+    if (!next) return;
+    const el = document.getElementById('ms' + ex + '-' + next);
+    if (el) {
+      el.classList.remove('locked');
+      el.querySelectorAll('input, button').forEach(e => e.disabled = false);
+    }
+  }
+
+  window.msCheck = function (ex, sub, correct, unit, tol) {
+    const val = parseFloat(document.getElementById('ms' + ex + sub + '-in')?.value);
+    const fbId = 'ms' + ex + sub + '-fb';
+    if (isNaN(val)) { fb(fbId, false, 'Ange ett värde!'); return; }
+    if (Math.abs(val - correct) <= tol) {
+      fb(fbId, true, '✓ Rätt! Svaret är ' + correct + ' ' + unit);
+      unlock(ex, sub);
+    } else {
+      fb(fbId, false, '✗ Inte riktigt — du fick ' + val + ' ' + unit + '. Kontrollera formeln och avrundningen.');
+    }
+  };
+
+  window.msCheckDouble = function () {
+    const v1 = parseFloat(document.getElementById('ms2g1-in')?.value);
+    const v2 = parseFloat(document.getElementById('ms2g2-in')?.value);
+    const fbId = 'ms2g-fb';
+    if (isNaN(v1) || isNaN(v2)) { fb(fbId, false, 'Fyll i båda svaren!'); return; }
+    const c1 = 7.72, c2 = 11.58, tol = 0.12;
+    const ok = (Math.abs(v1-c1)<=tol && Math.abs(v2-c2)<=tol) || (Math.abs(v1-c2)<=tol && Math.abs(v2-c1)<=tol);
+    if (ok) {
+      fb(fbId, true, '✓ Rätt! I₁ = 7,72 A, I₂ = 11,58 A — Kontroll: I₁ + I₂ ≈ 19,31 A = I<sub>tot</sub> ✓');
+    } else {
+      fb(fbId, false, '✗ Inte riktigt. Dela U<sub>last</sub> (från f) med rätt R-värde för varje gren.');
+    }
+  };
+})();
+</script>
+</body>
+</html>

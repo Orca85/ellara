@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grunder &amp; Atomfysik – Ellära &amp; Matte 1</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit"><span>⚡</span> Ellära &amp; Matte 1</a></div>
+    <ul class="nav-links">
+      <li class="active"><a href="atomfysik.html">Atomfysik</a></li>
+      <li><a href="material.html">Material</a></li>
+      <li><a href="symboler.html">Symboler</a></li>
+      <li><a href="kabeltyper.html">Kabeltyper</a></li>
+      <li><a href="kretsar.html">Kretsar</a></li>
+      <li><a href="installation.html">Installation</a></li>
+      <li><a href="tecken.html">Tecken</a></li>
+      <li><a href="ovningar.html" style="color:var(--yellow);font-weight:700">Övningar</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="Sök — t.ex. Ohms lag, Hz, seriekoppling, säkring…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<section class="section" id="atomfysik">
+  <div class="section-header">
+    <div class="section-icon">⚛️</div>
+    <div>
+      <h4>Avsnitt 1</h4>
+      <h2>Grunder &amp; Atomfysik</h2>
+    </div>
+  </div>
+
+  <!-- Atomens uppbyggnad -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Atomens uppbyggnad</h3>
+    <p>En atom består av tre typer av partiklar: <strong>protoner</strong> (+), <strong>neutroner</strong> (neutrala) i kärnan och <strong>elektroner</strong> (−) som kretsar runt.</p>
+
+    <div class="atom-container">
+      <div class="atom">
+        <div class="nucleus">
+          <div class="nucleus-label">P⁺ N⁰<br>Kärna</div>
+        </div>
+        <div class="orbit orbit-1"><div class="electron"></div></div>
+        <div class="orbit orbit-2"><div class="electron"></div></div>
+        <div class="orbit orbit-3"><div class="electron"></div></div>
+      </div>
+    </div>
+
+    <div class="atom-legend">
+      <span><span class="legend-dot" style="background:radial-gradient(circle at 35% 35%,#ff8c00,#cc4400)"></span>Proton (+)</span>
+      <span><span class="legend-dot" style="background:#666"></span>Neutron (0)</span>
+      <span><span class="legend-dot" style="background:radial-gradient(circle at 35% 35%,#7af,#26f)"></span>Elektron (−)</span>
+    </div>
+
+    <div style="margin-top:1rem">
+      <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+        <thead>
+          <tr style="color:var(--muted);text-align:left">
+            <th style="padding:0.5rem">Partikel</th>
+            <th style="padding:0.5rem">Laddning</th>
+            <th style="padding:0.5rem">Plats</th>
+            <th style="padding:0.5rem">Massa (rel.)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:var(--bg-light)">
+            <td style="padding:0.5rem;border-radius:6px 0 0 6px">Proton</td>
+            <td style="padding:0.5rem;color:#FF9B4D">+1</td>
+            <td style="padding:0.5rem">Kärnan</td>
+            <td style="padding:0.5rem;border-radius:0 6px 6px 0">1</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem">Neutron</td>
+            <td style="padding:0.5rem;color:var(--muted)">0</td>
+            <td style="padding:0.5rem">Kärnan</td>
+            <td style="padding:0.5rem">1</td>
+          </tr>
+          <tr style="background:var(--bg-light)">
+            <td style="padding:0.5rem;border-radius:6px 0 0 6px">Elektron</td>
+            <td style="padding:0.5rem;color:#7af">−1</td>
+            <td style="padding:0.5rem">Skalen (omlopp)</td>
+            <td style="padding:0.5rem;border-radius:0 6px 6px 0">~1/1836</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Laddning -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Laddning &amp; Statisk elektricitet</h3>
+    <p>Normalt har en atom lika många protoner som elektroner → <strong>elektriskt neutral</strong>. Om elektroner tillsätts eller tas bort uppstår en <em>nettoladdning</em>.</p>
+
+    <div class="charge-demo">
+      <div class="charge-ball">
+        <div class="ball negative">−</div>
+        <div class="ball-label">Överskott av elektroner<br><strong style="color:#7af">Negativt laddad</strong></div>
+      </div>
+      <div class="charge-ball">
+        <div class="ball neutral">○</div>
+        <div class="ball-label">Lika många +/−<br><strong style="color:var(--muted)">Neutral</strong></div>
+      </div>
+      <div class="charge-ball">
+        <div class="ball positive">+</div>
+        <div class="ball-label">Underskott av elektroner<br><strong style="color:#FF9B4D">Positivt laddad</strong></div>
+      </div>
+    </div>
+
+    <p style="margin-top:1rem;font-size:0.9rem;color:var(--muted)">Statisk elektricitet uppstår när elektroner överförs mellan material (t.ex. gummi mot ull). Laddningar med <strong>olika tecken</strong> attraherar varandra, <strong>lika tecken</strong> repellerar.</p>
+  </div>
+
+  <!-- AC vs DC -->
+  <div class="card">
+    <h3>AC vs DC – Likström &amp; Växelström</h3>
+    <p>Elektrisk ström kan flöda på två sätt:</p>
+
+    <div class="wave-grid">
+      <div class="wave-card">
+        <h4>🔋 DC – Likström (Direct Current)</h4>
+        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- axes -->
+          <line x1="10" y1="60" x2="190" y2="60" stroke="#444" stroke-width="1"/>
+          <line x1="10" y1="15" x2="10" y2="65" stroke="#444" stroke-width="1"/>
+          <text x="195" y="63" font-size="9" fill="#666">t</text>
+          <text x="12" y="13" font-size="9" fill="#666">U</text>
+          <!-- DC line -->
+          <line x1="15" y1="35" x2="185" y2="35" stroke="#FFD700" stroke-width="2.5"/>
+          <!-- label -->
+          <text x="80" y="25" font-size="9" fill="#FFD700">Konstant spänning</text>
+        </svg>
+        <p style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem">Spänningen är konstant. Exempel: batteri, solcell, USB. Strömmen flödar alltid i <strong>samma riktning</strong>.</p>
+
+        <div style="margin-top:0.75rem;background:var(--bg-light);border-left:3px solid #FFD700;border-radius:0 8px 8px 0;padding:0.75rem 1rem;font-size:0.85rem">
+          <strong style="color:var(--yellow)">Hur fungerar DC?</strong>
+          <ul style="margin-top:0.5rem;margin-left:1rem;color:var(--muted);line-height:1.9">
+            <li><strong style="color:var(--white)">Polerna:</strong> En DC-källa har alltid en <span style="color:#FF4C4C">minus (−)</span> och en <span style="color:#FF9B4D">plus (+)</span> pol — elektroner vandrar alltid från − till +</li>
+            <li><strong style="color:var(--white)">Konstant spänning:</strong> Till skillnad från AC håller spänningen samma nivå hela tiden (t.ex. alltid 12 V i en bilbatteri)</li>
+            <li><strong style="color:var(--white)">Batteri:</strong> En kemisk reaktion inuti skapar ett överskott av elektroner vid minuspolen — det är det som driver strömmen</li>
+            <li><strong style="color:var(--white)">Urladdning:</strong> När batteriet laddas ur jämnas skillnaden ut — ingen spänningsskillnad = ingen ström</li>
+            <li><strong style="color:var(--white)">Vanliga spänningar:</strong> 1,5 V (AA-batteri), 9 V (blockbatteri), 12 V (bil), 5 V (USB), 24 V (industri)</li>
+            <li><strong style="color:var(--white)">AC → DC:</strong> Väggadaptern till din telefon omvandlar 230 V AC från uttaget till 5 V DC via en likriktare</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="wave-card">
+        <h4>🔌 AC – Växelström (Alternating Current)</h4>
+        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- axes -->
+          <line x1="10" y1="40" x2="190" y2="40" stroke="#444" stroke-width="1"/>
+          <line x1="10" y1="10" x2="10" y2="70" stroke="#444" stroke-width="1"/>
+          <text x="195" y="43" font-size="9" fill="#666">t</text>
+          <text x="12" y="10" font-size="9" fill="#666">U</text>
+          <!-- sine wave -->
+          <path d="M15,40
+            C25,40 30,10 40,10
+            C50,10 55,40 65,40
+            C75,40 80,70 90,70
+            C100,70 105,40 115,40
+            C125,40 130,10 140,10
+            C150,10 155,40 165,40
+            C175,40 180,70 185,70"
+            fill="none" stroke="#4ECDC4" stroke-width="2.5"/>
+          <!-- label -->
+          <text x="60" y="12" font-size="9" fill="#4ECDC4">Sinuskurva (50 Hz)</text>
+        </svg>
+        <p style="font-size:0.85rem;color:var(--muted);margin-top:0.5rem">Spänningen varierar sinusformigt. Frekvens i Sverige: <strong>50 Hz</strong>. Används i vägguttag (230 V). Strömmen byter riktning 100 gånger/sekund.</p>
+
+        <div style="margin-top:0.75rem;background:var(--bg-light);border-left:3px solid #4ECDC4;border-radius:0 8px 8px 0;padding:0.75rem 1rem;font-size:0.85rem">
+          <strong style="color:var(--teal)">Vad betyder Hz (Hertz)?</strong><br>
+          <span style="color:var(--muted)">Hz = antal svängningar per sekund.</span>
+          <ul style="margin-top:0.5rem;margin-left:1rem;color:var(--muted);line-height:1.9">
+            <li><strong style="color:var(--white)">50 Hz</strong> = strömmen byter riktning 50 gånger/sekund — det är standarden i Sverige och Europa</li>
+            <li><strong style="color:var(--white)">60 Hz</strong> = USA och delar av Asien använder 60 Hz — apparater är inte alltid kompatibla</li>
+            <li><strong style="color:var(--white)">100 gånger/sekund</strong> — varför? Varje svängning har två riktningsbyten (+ → − → +), så 50 Hz × 2 = 100 byten/sek</li>
+            <li><strong style="color:var(--white)">Namngivet efter</strong> Heinrich Hertz, tysk fysiker som bevisade elektromagnetiska vågor (1888)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:1rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:0.9rem">
+      <div style="background:var(--bg-light);padding:0.75rem;border-radius:8px">
+        <strong style="color:var(--yellow)">DC</strong><br>
+        Batteri, solcell, fordon<br>
+        Konstant polaritet<br>
+        Enkel elektronik
+      </div>
+      <div style="background:var(--bg-light);padding:0.75rem;border-radius:8px">
+        <strong style="color:var(--teal)">AC</strong><br>
+        Elnät, vägguttag<br>
+        230 V / 50 Hz (SE)<br>
+        Transformerbar
+      </div>
+    </div>
+
+    <!-- Kabelvisualisering DC vs AC -->
+    <div style="margin-top:1.5rem">
+      <h4 style="margin-bottom:1rem;color:var(--muted);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.05em">Hur elektroner rör sig i kabeln</h4>
+
+      <!-- DC -->
+      <div style="margin-bottom:1.25rem">
+        <div style="font-size:0.85rem;font-weight:700;color:var(--yellow);margin-bottom:0.4rem">🔋 DC — Likström: elektroner rör sig alltid åt samma håll</div>
+        <div class="cable-vis" id="cable-dc">
+          <div class="cable-wire">
+            <div class="cable-label" style="color:var(--yellow)">+</div>
+            <div class="cable-track">
+              <div class="cable-electron dc-e" style="animation-delay:0s"></div>
+              <div class="cable-electron dc-e" style="animation-delay:0.4s"></div>
+              <div class="cable-electron dc-e" style="animation-delay:0.8s"></div>
+              <div class="cable-electron dc-e" style="animation-delay:1.2s"></div>
+              <div class="cable-electron dc-e" style="animation-delay:1.6s"></div>
+            </div>
+            <div class="cable-label" style="color:var(--muted)">−</div>
+          </div>
+          <div class="cable-arrow dc-arrow">→ → → → →</div>
+        </div>
+      </div>
+
+      <!-- AC -->
+      <div>
+        <div style="font-size:0.85rem;font-weight:700;color:var(--teal);margin-bottom:0.4rem">🔌 AC — Växelström: elektroner oscillerar fram och tillbaka</div>
+        <div class="cable-vis" id="cable-ac">
+          <div class="cable-wire">
+            <div class="cable-label ac-phase" id="ac-label-l">L</div>
+            <div class="cable-track">
+              <div class="cable-electron ac-e" style="animation-delay:0s"></div>
+              <div class="cable-electron ac-e" style="animation-delay:0.25s"></div>
+              <div class="cable-electron ac-e" style="animation-delay:0.5s"></div>
+              <div class="cable-electron ac-e" style="animation-delay:0.75s"></div>
+              <div class="cable-electron ac-e" style="animation-delay:1.0s"></div>
+            </div>
+            <div class="cable-label ac-phase">N</div>
+          </div>
+          <div class="cable-arrow ac-arrow" id="ac-dir-arrow">← →</div>
+        </div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem">
+          Elektronerna rör sig <strong style="color:var(--white)">inte</strong> längs hela kabeln — de vibrerar på stället. Det är <em>energin</em> (vågen) som vandrar framåt, inte elektronerna själva.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tryit">
+    <div class="tryit-header">✏️ Försök själv</div>
+    <ol>
+      <li>Hur många elektroner har en neutral kolatom (6 protoner)?</li>
+      <li>En atom förlorar 3 elektroner – vilken laddning får den?</li>
+      <li>Varför kan man <em>inte</em> transformera DC som AC?</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära &amp; Matematik 1</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

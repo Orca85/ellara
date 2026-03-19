@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teckenförklaring – Ellära &amp; Matte 1</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit"><span>⚡</span> Ellära &amp; Matte 1</a></div>
+    <ul class="nav-links">
+      <li><a href="atomfysik.html">Atomfysik</a></li>
+      <li><a href="material.html">Material</a></li>
+      <li><a href="symboler.html">Symboler</a></li>
+      <li><a href="kabeltyper.html">Kabeltyper</a></li>
+      <li><a href="kretsar.html">Kretsar</a></li>
+      <li><a href="installation.html">Installation</a></li>
+      <li class="active"><a href="tecken.html">Tecken</a></li>
+      <li><a href="ovningar.html" style="color:var(--yellow);font-weight:700">Övningar</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="Sök — t.ex. Ohms lag, Hz, seriekoppling, säkring…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<section class="section" id="tecken">
+  <div class="section-header">
+    <div class="section-icon">📋</div>
+    <div>
+      <h4>Referens</h4>
+      <h2>Teckenförklaring</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">Komplett referens över alla variabler, enheter, prefix, beteckningar och symboler som används inom ellära.</p>
+
+  <!-- 1. Variabler -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>⚡ Elektriska variabler</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">De grundläggande storheterna du räknar med i alla kretsar.</p>
+    <div class="legend-table-wrap">
+      <table class="legend-table">
+        <thead><tr><th>Tecken</th><th>Storhet</th><th>Enhet</th><th>Enhetstecken</th><th>Förklaring</th></tr></thead>
+        <tbody>
+          <tr><td class="lt-sym" style="color:var(--yellow)">U</td><td>Spänning</td><td>Volt</td><td class="lt-unit">V</td><td>Elektrisk "tryckkraft" som driver strömmen. Mäts mellan två punkter.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--teal)">I</td><td>Ström</td><td>Ampere</td><td class="lt-unit">A</td><td>Antal elektroner som passerar en punkt per sekund. Mäts i serie.</td></tr>
+          <tr><td class="lt-sym" style="color:#FF9B4D">R</td><td>Resistans</td><td>Ohm</td><td class="lt-unit">Ω</td><td>Motståndet mot strömflödet i en ledare eller komponent.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--lime)">P</td><td>Effekt</td><td>Watt</td><td class="lt-unit">W</td><td>Energi per tidsenhet. Hur mycket arbete en krets utför per sekund.</td></tr>
+          <tr><td class="lt-sym" style="color:#C0A0FF">f</td><td>Frekvens</td><td>Hertz</td><td class="lt-unit">Hz</td><td>Antal svängningar per sekund. Sverige/Europa: 50 Hz.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--muted)">Q</td><td>Laddning</td><td>Coulomb</td><td class="lt-unit">C</td><td>Mängden elektrisk laddning. 1 C = 6,24 × 10¹⁸ elektroner.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--muted)">t</td><td>Tid</td><td>Sekund</td><td class="lt-unit">s</td><td>Används vid effektberäkning: energi = P × t.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--red)">ΔU</td><td>Spänningsfall</td><td>Volt</td><td class="lt-unit">V</td><td>Spänning som "förbrukas" i kabeln på vägen till lasten. Max 4 % tillåtet.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2. Materialegenskaper -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>🔩 Materialegenskaper &amp; geometri</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Används i formeln R = ρ · L / A för att beräkna en ledares resistans.</p>
+    <div class="legend-table-wrap">
+      <table class="legend-table">
+        <thead><tr><th>Tecken</th><th>Storhet</th><th>Enhet</th><th>Förklaring</th></tr></thead>
+        <tbody>
+          <tr><td class="lt-sym" style="color:#C0A0FF">ρ</td><td>Resistivitet</td><td class="lt-unit">Ω·mm²/m</td><td>Materialets motstånd per meter. Koppar: 0,018 — Aluminium: 0,028.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--teal)">L</td><td>Längd</td><td class="lt-unit">m</td><td>Kabelns längd i meter. Längre kabel = högre resistans.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--lime)">A</td><td>Tvärsnittsarea</td><td class="lt-unit">mm²</td><td>Kabelns tjocklek i tvärsnitt. Tjockare kabel = lägre resistans.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. Index-beteckningar -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>🔢 Index och beteckningar</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Index skrivs som nedsänkt text och preciserar vilken komponent eller del av kretsen man menar.</p>
+    <div class="legend-table-wrap">
+      <table class="legend-table">
+        <thead><tr><th>Beteckning</th><th>Exempel</th><th>Förklaring</th></tr></thead>
+        <tbody>
+          <tr><td class="lt-sym" style="font-size:1rem">tot</td><td style="color:var(--yellow)">R<sub>tot</sub>, I<sub>tot</sub></td><td>Total resistans eller total ström — hela kretsens sammanlagda värde.</td></tr>
+          <tr><td class="lt-sym" style="font-size:1rem">1, 2, 3…</td><td style="color:#FF9B4D">R<sub>1</sub>, U<sub>R2</sub></td><td>Anger specifik komponent. U<sub>R1</sub> = spänningen över just R1.</td></tr>
+          <tr><td class="lt-sym" style="font-size:1rem">par</td><td style="color:var(--teal)">R<sub>par</sub></td><td>Ekvivalent resistans för en parallellgrupp i en kombinerad krets.</td></tr>
+          <tr><td class="lt-sym" style="font-size:1rem">nom</td><td style="color:var(--muted)">U<sub>nom</sub></td><td>Nominellt värde — det spänningsvärde systemet är designat för (t.ex. 230 V).</td></tr>
+          <tr><td class="lt-sym" style="font-size:1rem">Δ</td><td style="color:var(--red)">ΔU</td><td>Delta (Δ) = förändring eller skillnad. ΔU = spänningsskillnad (spänningsfall).</td></tr>
+          <tr><td class="lt-sym" style="font-size:1rem">∞</td><td style="color:var(--muted)">R = ∞</td><td>Oändlighet. En voltmeter har R ≈ ∞ för att inte störa kretsen.</td></tr>
+          <tr><td class="lt-sym" style="font-size:1rem">≈</td><td style="color:var(--muted)">R ≈ 0</td><td>Ungefär lika med. En amperemeter har R ≈ 0 Ω.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 4. Enhetsprefix -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>📏 Enhetsprefix</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Prefix sätts före enheten för att ange storlek. T.ex. 1 kΩ = 1 000 Ω.</p>
+    <div class="legend-table-wrap">
+      <table class="legend-table">
+        <thead><tr><th>Prefix</th><th>Tecken</th><th>Faktor</th><th>Exempel</th></tr></thead>
+        <tbody>
+          <tr><td>Mega</td><td class="lt-sym lt-unit">M</td><td>× 1 000 000 (10⁶)</td><td style="color:var(--muted)">1 MΩ = 1 000 000 Ω</td></tr>
+          <tr><td>Kilo</td><td class="lt-sym lt-unit">k</td><td>× 1 000 (10³)</td><td style="color:var(--muted)">1 kV = 1 000 V</td></tr>
+          <tr><td><em>(ingen)</em></td><td class="lt-sym lt-unit">—</td><td>× 1 (10⁰)</td><td style="color:var(--muted)">230 V, 16 A, 10 Ω</td></tr>
+          <tr><td>Milli</td><td class="lt-sym lt-unit">m</td><td>× 0,001 (10⁻³)</td><td style="color:var(--muted)">1 mA = 0,001 A</td></tr>
+          <tr><td>Mikro</td><td class="lt-sym lt-unit">μ</td><td>× 0,000001 (10⁻⁶)</td><td style="color:var(--muted)">100 μF (kondensator)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 5. Formler -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>📐 Alla formler samlade</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Samtliga formler som används på den här sidan.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem">
+      <div class="legend-formula-card">
+        <div class="lf-title" style="color:var(--yellow)">Ohms lag</div>
+        <div class="lf-eq">U = R × I</div>
+        <div class="lf-variants">R = U ÷ I &nbsp;|&nbsp; I = U ÷ R</div>
+        <div class="lf-desc">Sambandet mellan spänning, resistans och ström.</div>
+      </div>
+      <div class="legend-formula-card">
+        <div class="lf-title" style="color:var(--lime)">Effektlagen</div>
+        <div class="lf-eq">P = U × I</div>
+        <div class="lf-variants">U = P ÷ I &nbsp;|&nbsp; I = P ÷ U</div>
+        <div class="lf-desc">Effekten är produkten av spänning och ström.</div>
+      </div>
+      <div class="legend-formula-card">
+        <div class="lf-title" style="color:#C0A0FF">Ledarresistans</div>
+        <div class="lf-eq">R = ρ × L ÷ A</div>
+        <div class="lf-variants">L = R × A ÷ ρ &nbsp;|&nbsp; A = ρ × L ÷ R</div>
+        <div class="lf-desc">Beräknar en kabels resistans utifrån material, längd och area.</div>
+      </div>
+      <div class="legend-formula-card">
+        <div class="lf-title" style="color:var(--red)">Spänningsfall</div>
+        <div class="lf-eq">ΔU = 2 × ρ × L × I ÷ A</div>
+        <div class="lf-variants">Faktorn 2 = fram- + returledare</div>
+        <div class="lf-desc">Max tillåtet: 4 % av nominell spänning (9,2 V vid 230 V).</div>
+      </div>
+      <div class="legend-formula-card">
+        <div class="lf-title" style="color:#FF9B4D">Seriekoppling</div>
+        <div class="lf-eq">R<sub>tot</sub> = R<sub>1</sub> + R<sub>2</sub> + …</div>
+        <div class="lf-variants">Samma ström I överallt</div>
+        <div class="lf-desc">Resistanser summeras. Spänningen delas upp proportionellt.</div>
+      </div>
+      <div class="legend-formula-card">
+        <div class="lf-title" style="color:var(--teal)">Parallellkoppling</div>
+        <div class="lf-eq">1/R<sub>tot</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + …</div>
+        <div class="lf-variants">Samma spänning U överallt</div>
+        <div class="lf-desc">R<sub>tot</sub> blir alltid lägre än minsta grenen. Strömmen delas upp.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Kretsschema-symboler -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>🔣 Kretsschema-symboler (IEC 60617)</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Grafiska symboler som används i kretsscheman enligt europeisk standard.</p>
+    <div class="legend-sym-grid">
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="17" y2="20" stroke="currentColor" stroke-width="2"/><line x1="17" y1="10" x2="17" y2="30" stroke="currentColor" stroke-width="3"/><line x1="23" y1="14" x2="23" y2="26" stroke="currentColor" stroke-width="1.5"/><line x1="29" y1="10" x2="29" y2="30" stroke="currentColor" stroke-width="3"/><line x1="35" y1="14" x2="35" y2="26" stroke="currentColor" stroke-width="1.5"/><line x1="41" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Batteri / DC-källa</div>
+        <div class="legend-sym-sub">Lång linje = plus (+), kort = minus (−)</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="17" y2="20" stroke="currentColor" stroke-width="2"/><rect x="17" y="12" width="46" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="2"/><line x1="63" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Resistor (IEC)</div>
+        <div class="legend-sym-sub">Rektangel = motstånd</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="22" y2="20" stroke="currentColor" stroke-width="2"/><circle cx="40" cy="20" r="16" stroke="currentColor" stroke-width="2" fill="none"/><line x1="30" y1="10" x2="50" y2="30" stroke="currentColor" stroke-width="2"/><line x1="50" y1="10" x2="30" y2="30" stroke="currentColor" stroke-width="2"/><line x1="56" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Lampa / Last</div>
+        <div class="legend-sym-sub">Cirkel med kryss</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="2"/><line x1="20" y1="10" x2="20" y2="30" stroke="currentColor" stroke-width="2"/><line x1="28" y1="10" x2="28" y2="30" stroke="currentColor" stroke-width="2"/><line x1="28" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Kondensator</div>
+        <div class="legend-sym-sub">Laddningslagring</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="15" y2="20" stroke="currentColor" stroke-width="2"/><path d="M15,20 C20,20 20,8 25,8 C30,8 30,32 35,32 C40,32 40,8 45,8 C50,8 50,32 55,32 C60,32 60,20 65,20" fill="none" stroke="currentColor" stroke-width="2"/><line x1="65" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Spole / Induktor</div>
+        <div class="legend-sym-sub">Induktiv komponent</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="2"/><polygon points="25,10 25,30 50,20" fill="none" stroke="currentColor" stroke-width="2"/><line x1="50" y1="10" x2="50" y2="30" stroke="currentColor" stroke-width="2"/><line x1="50" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Diod</div>
+        <div class="legend-sym-sub">Leder enbart en riktning (A→K)</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="35" y2="20" stroke="currentColor" stroke-width="2"/><line x1="35" y1="10" x2="35" y2="30" stroke="currentColor" stroke-width="2"/><line x1="45" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">NO-brytare</div>
+        <div class="legend-sym-sub">Normalt öppen kontakt</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="2"/><line x1="25" y1="10" x2="25" y2="30" stroke="currentColor" stroke-width="2"/><line x1="55" y1="10" x2="55" y2="30" stroke="currentColor" stroke-width="2"/><line x1="55" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/><line x1="25" y1="15" x2="55" y2="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4,3"/></svg>
+        <div class="legend-sym-name">Säkring</div>
+        <div class="legend-sym-sub">Kortslutningsskydd</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="40" y1="5" x2="40" y2="20" stroke="currentColor" stroke-width="2"/><line x1="28" y1="20" x2="52" y2="20" stroke="currentColor" stroke-width="2"/><line x1="32" y1="26" x2="48" y2="26" stroke="currentColor" stroke-width="2"/><line x1="36" y1="32" x2="44" y2="32" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Jordning</div>
+        <div class="legend-sym-sub">Skydds- / funktionsjord</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><circle cx="40" cy="20" r="15" stroke="currentColor" stroke-width="2" fill="none"/><text x="40" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="currentColor">A</text><line x1="5" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="2"/><line x1="55" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Amperemeter</div>
+        <div class="legend-sym-sub">Kopplas i serie</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><circle cx="40" cy="20" r="15" stroke="currentColor" stroke-width="2" fill="none"/><text x="40" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="currentColor">V</text><line x1="5" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="2"/><line x1="55" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Voltmeter</div>
+        <div class="legend-sym-sub">Kopplas parallellt</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="22" y2="20" stroke="currentColor" stroke-width="2"/><circle cx="40" cy="20" r="16" stroke="currentColor" stroke-width="2" fill="none"/><path d="M30,20 C33,13 37,27 40,20 C43,13 47,27 50,20" fill="none" stroke="currentColor" stroke-width="2"/><line x1="58" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">AC-källa</div>
+        <div class="legend-sym-sub">Växelströmskälla</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Kabeltyper -->
+  <div class="card">
+    <h3>🔌 Kabeltyp-beteckningar</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Bokstavskoder som beskriver kabelns konstruktion och flexibilitet.</p>
+    <div class="legend-table-wrap">
+      <table class="legend-table">
+        <thead><tr><th>Kod</th><th>Namn</th><th>Trådar</th><th>Flexibilitet</th><th>Typisk användning</th></tr></thead>
+        <tbody>
+          <tr><td class="lt-sym" style="color:var(--yellow)">EK</td><td>Enkardelig</td><td>1 massiv tråd</td><td>Stel</td><td>Fast installation i rör, eldosor, apparatskåp</td></tr>
+          <tr><td class="lt-sym" style="color:var(--yellow)">FK</td><td>Flerkardelig</td><td>7 trådar</td><td>Halvflexibel</td><td>Allmän fast installation, apparatledningar</td></tr>
+          <tr><td class="lt-sym" style="color:var(--teal)">MK</td><td>Mångkardelig</td><td>19 trådar</td><td>Flexibel</td><td>Apparatsladdar, förlängningskablar, maskiner</td></tr>
+          <tr><td class="lt-sym" style="color:#FF9B4D">RK</td><td>Rikkardelig</td><td>49+ trådar</td><td>Mycket flexibel</td><td>Svetsutrustning, robotarmar, konstant rörelse</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära &amp; Matematik 1</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

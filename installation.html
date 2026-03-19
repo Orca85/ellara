@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation – Ellära &amp; Matte 1</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit"><span>⚡</span> Ellära &amp; Matte 1</a></div>
+    <ul class="nav-links">
+      <li><a href="atomfysik.html">Atomfysik</a></li>
+      <li><a href="material.html">Material</a></li>
+      <li><a href="symboler.html">Symboler</a></li>
+      <li><a href="kabeltyper.html">Kabeltyper</a></li>
+      <li><a href="kretsar.html">Kretsar</a></li>
+      <li class="active"><a href="installation.html">Installation</a></li>
+      <li><a href="tecken.html">Tecken</a></li>
+      <li><a href="ovningar.html" style="color:var(--yellow);font-weight:700">Övningar</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="Sök — t.ex. Ohms lag, Hz, seriekoppling, säkring…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<section class="section" id="installation">
+  <div class="section-header">
+    <div class="section-icon">🏗️</div>
+    <div>
+      <h4>Avsnitt 3</h4>
+      <h2>Installation &amp; Dimensionering</h2>
+    </div>
+  </div>
+
+  <!-- Resistans i ledare -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>📐 Resistans i ledare — R = ρ · <span class="frac"><span>L</span><span>A</span></span></h3>
+    <p>En ledares resistans beror på materialet (resistivitet ρ), längden L och tvärsnittsarean A.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+      <div style="background:var(--bg-light);padding:0.75rem;border-radius:8px;font-size:0.85rem">
+        <strong style="color:var(--yellow)">Formel:</strong><br>
+        R = ρ · <span class="frac"><span>L</span><span>A</span></span><br><br>
+        <span style="color:var(--muted)">R</span> = resistans (Ω)<br>
+        <span style="color:var(--muted)">ρ</span> = resistivitet (Ω·mm²/m)<br>
+        <span style="color:var(--muted)">L</span> = ledarlängd (m)<br>
+        <span style="color:var(--muted)">A</span> = tvärsnittsarea (mm²)
+      </div>
+      <div style="background:var(--bg-light);padding:0.75rem;border-radius:8px;font-size:0.85rem">
+        <strong style="color:var(--yellow)">Materialvärden:</strong><br>
+        🟠 Koppar: ρ = 0,018 Ω·mm²/m<br>
+        🔵 Aluminium: ρ = 0,028 Ω·mm²/m<br><br>
+        <span style="color:var(--muted)">Koppar leder bättre (lägre ρ) men kostar mer.</span>
+      </div>
+    </div>
+
+    <h4 style="margin-bottom:0.75rem;color:var(--muted)">Välj material</h4>
+    <div class="rho-table">
+      <div class="rho-item" data-mat="copper">
+        <strong>🟠 Koppar</strong>
+        <small>ρ = 0,018 Ω·mm²/m</small>
+      </div>
+      <div class="rho-item" data-mat="aluminium">
+        <strong>🔵 Aluminium</strong>
+        <small>ρ = 0,028 Ω·mm²/m</small>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem">
+      <div class="input-group">
+        <label for="rho-L">Längd L (m)</label>
+        <input type="number" id="rho-L" step="any" min="0.001" placeholder="t.ex. 50">
+      </div>
+      <div class="input-group">
+        <label for="rho-A">Area A (mm²)</label>
+        <input type="number" id="rho-A" step="any" min="0.001" placeholder="t.ex. 2,5">
+      </div>
+    </div>
+
+    <div class="calc-row">
+      <button class="calc-btn" id="rho-calc-btn">Beräkna resistans</button>
+      <button class="clear-btn" id="rho-clear">Rensa</button>
+    </div>
+    <div class="result-box" id="rho-result" style="margin-top:0.75rem"></div>
+  </div>
+
+  <!-- Säkringstabell -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>🔒 Säkringstabell &amp; Ledarfärger</h3>
+    <p style="font-size:0.9rem">Välj rätt ledararea till säkringen – för liten area ger överhettning och brandrisk.</p>
+
+    <div style="overflow-x:auto">
+      <table class="fuse-table">
+        <thead>
+          <tr>
+            <th>Säkring</th>
+            <th>Ledararea</th>
+            <th>Isolationsfärg</th>
+            <th>Typisk användning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="fuse-row">
+            <td><span class="fuse-amp">6 A</span></td>
+            <td>0,75 mm²</td>
+            <td>
+              <span class="color-swatch">
+                <span class="swatch" style="background:#2d8c2d"></span> Grön
+              </span>
+            </td>
+            <td style="color:var(--muted);font-size:0.9rem">Lamputtag, belysning</td>
+          </tr>
+          <tr class="fuse-row highlight">
+            <td><span class="fuse-amp">10 A</span></td>
+            <td>1,5 mm²</td>
+            <td>
+              <span class="color-swatch">
+                <span class="swatch" style="background:#b22222"></span> Röd
+              </span>
+            </td>
+            <td style="color:var(--muted);font-size:0.9rem">Belysningskretsar</td>
+          </tr>
+          <tr class="fuse-row highlight">
+            <td><span class="fuse-amp">16 A</span></td>
+            <td>2,5 mm²</td>
+            <td>
+              <span class="color-swatch">
+                <span class="swatch" style="background:#888"></span> Grå
+              </span>
+            </td>
+            <td style="color:var(--muted);font-size:0.9rem">Vanliga eluttag</td>
+          </tr>
+          <tr class="fuse-row">
+            <td><span class="fuse-amp">20 A</span></td>
+            <td>4,0 mm²</td>
+            <td>
+              <span class="color-swatch">
+                <span class="swatch" style="background:#1a5eb0"></span> Blå
+              </span>
+            </td>
+            <td style="color:var(--muted);font-size:0.9rem">Diskmaskin, tvättmaskin</td>
+          </tr>
+          <tr class="fuse-row">
+            <td><span class="fuse-amp">25 A</span></td>
+            <td>6,0 mm²</td>
+            <td>
+              <span class="color-swatch">
+                <span class="swatch" style="background:#b8a000"></span> Gul
+              </span>
+            </td>
+            <td style="color:var(--muted);font-size:0.9rem">Spis, torktumlare</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:1rem;font-size:0.85rem;color:var(--muted)">
+      <strong style="color:var(--yellow)">Kom ihåg:</strong> Vid parallellkoppling av uttag delar alla på samma säkring. Räkna alltid på worst-case-last.
+    </p>
+  </div>
+
+  <!-- Spänningsfall -->
+  <div class="card">
+    <h3>⚠️ Spänningsfallskalkylator</h3>
+
+    <!-- Förklaring -->
+    <div style="margin-bottom:1.5rem">
+      <h4 style="color:var(--yellow);margin-bottom:0.75rem">Vad är spänningsfall?</h4>
+      <p style="font-size:0.9rem;margin-bottom:0.75rem">
+        En kabel har alltid en viss resistans. När ström flödar genom resistansen förbrukas en del av spänningen längs vägen — det är spänningsfallet. Apparaten i slutet av kabeln får därför <strong>lite lägre spänning</strong> än vad som matas in.
+      </p>
+
+      <!-- SVG-illustration -->
+      <div style="margin:1rem 0">
+        <svg viewBox="0 0 420 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;display:block;margin:0 auto">
+          <!-- Källa -->
+          <rect x="2" y="25" width="52" height="40" rx="6" fill="#2a2a00" stroke="#FFD700" stroke-width="1.5"/>
+          <text x="28" y="41" text-anchor="middle" font-size="9" fill="#FFD700" font-weight="bold">Källa</text>
+          <text x="28" y="56" text-anchor="middle" font-size="10" fill="#FFD700">230 V</text>
+
+          <!-- Ledare fram (övre) -->
+          <line x1="54" y1="33" x2="310" y2="33" stroke="#FF9B4D" stroke-width="4" stroke-linecap="round"/>
+          <text x="182" y="24" text-anchor="middle" font-size="8" fill="#FF9B4D">Framledare (L)</text>
+
+          <!-- Ledare retur (nedre) -->
+          <line x1="54" y1="57" x2="310" y2="57" stroke="#888" stroke-width="4" stroke-linecap="round"/>
+          <text x="182" y="70" text-anchor="middle" font-size="8" fill="#888">Returledare (N)</text>
+
+          <!-- Resistans-symbol (zick-zack) i mitten av framledaren -->
+          <rect x="156" y="25" width="52" height="16" fill="none" stroke="#FF9B4D" stroke-width="2" rx="2"/>
+          <text x="182" y="15" text-anchor="middle" font-size="7.5" fill="#aaa">R (kabelns resistans)</text>
+
+          <!-- Spänningspil vid källa -->
+          <text x="28" y="80" text-anchor="middle" font-size="7.5" fill="#4CFFA0">U_in = 230 V</text>
+
+          <!-- Last/apparat -->
+          <rect x="310" y="25" width="52" height="40" rx="6" fill="#1a1a2a" stroke="#4ECDC4" stroke-width="1.5"/>
+          <text x="336" y="41" text-anchor="middle" font-size="9" fill="#4ECDC4" font-weight="bold">Apparat</text>
+          <text x="336" y="56" text-anchor="middle" font-size="10" fill="#4ECDC4">≈ 221 V</text>
+          <text x="336" y="80" text-anchor="middle" font-size="7.5" fill="#FF4C4C">U_app &lt; 230 V</text>
+
+          <!-- U_fall-pil -->
+          <line x1="363" y1="33" x2="418" y2="33" stroke="#FF4C4C" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="363" y1="57" x2="418" y2="57" stroke="#FF4C4C" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="415" y1="33" x2="415" y2="57" stroke="#FF4C4C" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="419" y="47" font-size="8" fill="#FF4C4C">U_fall</text>
+        </svg>
+      </div>
+
+      <!-- Punktlista -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;font-size:0.85rem;margin-bottom:1rem">
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FF9B4D">
+          <strong style="color:#FF9B4D">Varför uppstår det?</strong><br>
+          <span style="color:var(--muted)">Alla kablar har resistans. Ju längre och tunnare kabel, desto högre resistans och större spänningsfall.</span>
+        </div>
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #4ECDC4">
+          <strong style="color:var(--teal)">Faktorn 2 i formeln</strong><br>
+          <span style="color:var(--muted)">Strömmen går <em>fram</em> i L-ledaren och <em>tillbaka</em> i N-ledaren — båda bidrar till fallet, därav × 2.</span>
+        </div>
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FF4C4C">
+          <strong style="color:#FF4C4C">Konsekvenser</strong><br>
+          <span style="color:var(--muted)">Motorer kan överhettas, lampor lyser svagare, elektronik kan fungera sämre eller gå sönder.</span>
+        </div>
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #4CFFA0">
+          <strong style="color:var(--lime)">Hur minskar man det?</strong><br>
+          <span style="color:var(--muted)">Använd tjockare kabel (större A), kortare dragning, eller flytta säkringsskåpet närmare lasten.</span>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem 1rem;font-size:0.85rem">
+        <strong style="color:var(--yellow)">Formeln:</strong>
+        &nbsp; U_fall = <strong>2 · ρ · L · I / A</strong>
+        &nbsp;|&nbsp;
+        <span style="color:var(--muted)">ρ = resistivitet &nbsp; L = ledarlängd (m) &nbsp; I = ström (A) &nbsp; A = area (mm²)</span><br>
+        <span style="color:var(--muted);font-size:0.8rem;margin-top:0.25rem;display:block">Tillåten gräns: <strong style="color:var(--yellow)">max 4 %</strong> av nominell spänning — vid 230 V innebär det max <strong style="color:var(--yellow)">9,2 V</strong> fall.</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.25rem">
+      <div style="background:var(--bg-light);border-left:3px solid var(--yellow);border-radius:0 8px 8px 0;padding:0.75rem 1rem;font-size:0.9rem">
+        <div style="color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem">Beräkna spänningsfallet</div>
+        <strong>U_fall = <span class="frac"><span>2 · ρ · L · I</span><span>A</span></span></strong>
+        <div style="color:var(--muted);font-size:0.8rem;margin-top:0.4rem">Faktorn 2 = fram- och returledare</div>
+        <div style="color:var(--muted);font-size:0.78rem;margin-top:0.5rem;border-top:1px solid rgba(255,255,255,0.07);padding-top:0.4rem">
+          <strong style="color:var(--yellow)">Vad är U_fall?</strong><br>
+          Skillnaden i spänning mellan källan och belastningen. Exempel: källan ger 230 V men lampan får bara 223 V → U_fall = 7 V. <em style="color:var(--muted)">(Kallas även ΔU i läroböcker)</em>
+        </div>
+      </div>
+      <div style="background:var(--bg-light);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:0.75rem 1rem;font-size:0.9rem">
+        <div style="color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem">Spänning vid belastningen</div>
+        <strong style="color:var(--teal)">U<sub>bel</sub> = U<sub>tot</sub> − U_fall</strong>
+        <div style="color:var(--muted);font-size:0.8rem;margin-top:0.4rem">Det som "är kvar" efter spänningsfallet i kabeln</div>
+      </div>
+    </div>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem">Tillåten gräns: <strong style="color:var(--yellow)">max 4 %</strong> av nominell spänning (= max 9,2 V vid 230 V).</p>
+
+    <div class="vdrop-grid">
+      <div class="input-group">
+        <label for="vd-I">Ström I (A)</label>
+        <input type="number" id="vd-I" step="any" min="0.01" placeholder="t.ex. 16">
+      </div>
+      <div class="input-group">
+        <label for="vd-L">Ledarlängd L (m)</label>
+        <input type="number" id="vd-L" step="any" min="0.1" placeholder="t.ex. 30">
+      </div>
+      <div class="input-group">
+        <label for="vd-A">Ledararea A (mm²)</label>
+        <input type="number" id="vd-A" step="any" min="0.1" placeholder="t.ex. 2.5">
+      </div>
+      <div class="input-group">
+        <label for="vd-Unom">Nominell spänning (V)</label>
+        <input type="number" id="vd-Unom" step="1" min="1" placeholder="230" value="230">
+      </div>
+      <div class="input-group">
+        <label for="vd-mat">Material</label>
+        <select id="vd-mat">
+          <option value="copper">Koppar (Cu)</option>
+          <option value="aluminium">Aluminium (Al)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="calc-row">
+      <button class="calc-btn" id="vd-calc-btn">Beräkna spänningsfall</button>
+      <button class="clear-btn" id="vd-clear">Rensa</button>
+    </div>
+
+    <div class="vdrop-result" id="vd-result" style="margin-top:1rem">
+      <span class="vdrop-value">–</span>
+    </div>
+
+    <div style="margin-top:1rem;background:var(--bg-light);border-radius:8px;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted)">
+      <strong style="color:var(--yellow)">Regel:</strong> Spänningsfall &gt; 4 % av 230 V = &gt; 9,2 V är <strong style="color:var(--red)">inte tillåtet</strong> enligt SS 437 01 40. Välj tjockare ledare eller kortare dragning.
+    </div>
+  </div>
+
+  <div class="tryit">
+    <div class="tryit-header">✏️ Försök själv</div>
+    <ol>
+      <li>Beräkna resistansen i en 25 m lång kopparledare med area 1,5 mm².</li>
+      <li>Vilken ledararea behövs för en 16 A säkring?</li>
+      <li>En krets är 40 m lång, 2,5 mm² koppar, 10 A last (230 V). Är spänningsfallet OK?</li>
+      <li>Vad händer om du väljer 0,75 mm² kabel till ett 16 A uttag?</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära &amp; Matematik 1</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

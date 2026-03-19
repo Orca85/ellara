@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Övningar – Ellära &amp; Matte 1</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit"><span>⚡</span> Ellära &amp; Matte 1</a></div>
+    <ul class="nav-links">
+      <li><a href="atomfysik.html">Atomfysik</a></li>
+      <li><a href="material.html">Material</a></li>
+      <li><a href="symboler.html">Symboler</a></li>
+      <li><a href="kabeltyper.html">Kabeltyper</a></li>
+      <li><a href="kretsar.html">Kretsar</a></li>
+      <li><a href="installation.html">Installation</a></li>
+      <li><a href="tecken.html">Tecken</a></li>
+      <li class="active"><a href="ovningar.html" style="color:var(--yellow);font-weight:700">Övningar</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="Sök — t.ex. Ohms lag, Hz, seriekoppling, säkring…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<section class="section" id="ovningar">
+  <div class="section-header">
+    <div class="section-icon">📝</div>
+    <div>
+      <h4>Avsnitt 4</h4>
+      <h2>Övningar &amp; Quiz</h2>
+    </div>
+  </div>
+
+  <!-- Score board -->
+  <div class="score-board" id="score-board">
+    <div class="score-numbers">
+      <span class="score-correct" id="score-correct">0</span>
+      <span class="score-sep">/</span>
+      <span class="score-total" id="score-total">0</span>
+      <span class="score-label">rätt</span>
+    </div>
+    <div class="score-bar-wrap">
+      <div class="score-bar" id="score-bar" style="width:0%"></div>
+    </div>
+    <button class="reset-btn" id="reset-all-btn">↺ Återställ alla</button>
+  </div>
+
+  <!-- Exercises rendered by JS -->
+  <div id="exercises-root"></div>
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära &amp; Matematik 1</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

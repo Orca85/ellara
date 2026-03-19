@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kabeltyper – Ellära &amp; Matte 1</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit"><span>⚡</span> Ellära &amp; Matte 1</a></div>
+    <ul class="nav-links">
+      <li><a href="atomfysik.html">Atomfysik</a></li>
+      <li><a href="material.html">Material</a></li>
+      <li><a href="symboler.html">Symboler</a></li>
+      <li class="active"><a href="kabeltyper.html">Kabeltyper</a></li>
+      <li><a href="kretsar.html">Kretsar</a></li>
+      <li><a href="installation.html">Installation</a></li>
+      <li><a href="tecken.html">Tecken</a></li>
+      <li><a href="ovningar.html" style="color:var(--yellow);font-weight:700">Övningar</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="Sök — t.ex. Ohms lag, Hz, seriekoppling, säkring…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<section class="section" id="kopplingar">
+  <div class="section-header">
+    <div class="section-icon">🔌</div>
+    <div>
+      <h4>Avsnitt 1c</h4>
+      <h2>Kabeltyper – EK, FK, MK, RK</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">Fyra grundläggande kabeltyper inom elinstallation. Beteckningen beskriver kabelns konstruktion och användningsområde.</p>
+
+  <div class="koppling-grid">
+
+    <!-- EK – Enkardelig kabel -->
+    <div class="koppling-card">
+      <div class="koppling-header">
+        <span class="koppling-badge">EK</span>
+        <span class="koppling-name">Enkardelig kabel</span>
+      </div>
+      <p class="koppling-desc">Ledaren består av <strong>en enda massiv tråd</strong> (heltråd). Stel och formstabil – behåller sin form när den böjs.</p>
+      <!-- EK cross-section SVG -->
+      <svg class="koppling-svg" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer insulation -->
+        <circle cx="100" cy="45" r="38" fill="#1a2a00" stroke="#88cc00" stroke-width="2"/>
+        <!-- Conductor (single solid wire) -->
+        <circle cx="100" cy="45" r="18" fill="#FF9B4D" stroke="#cc6600" stroke-width="1.5"/>
+        <!-- Label -->
+        <text x="100" y="50" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Ledare</text>
+        <!-- Arrows + labels -->
+        <line x1="148" y1="20" x2="158" y2="10" stroke="#888" stroke-width="1"/>
+        <text x="160" y="9" font-size="8" fill="#88cc00">Isolering</text>
+        <line x1="118" y1="33" x2="138" y2="20" stroke="#888" stroke-width="1"/>
+      </svg>
+      <div style="text-align:center;font-size:0.8rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">En massiv tråd</div>
+      <div class="koppling-use">Fast installation i rör · eldosor · apparatskåp · styvt, formbart</div>
+      <ul class="mat-list" style="margin-top:0.5rem">
+        <li>Stel – behåller formen vid bockning</li>
+        <li>Enkel att skala och ansluta i plint</li>
+        <li>Vanlig dimension: 1,5 mm² och 2,5 mm²</li>
+        <li>Passar ej för flexibel dragning (kablar som rör sig)</li>
+      </ul>
+    </div>
+
+    <!-- FK – Flerkardelig kabel -->
+    <div class="koppling-card">
+      <div class="koppling-header">
+        <span class="koppling-badge">FK</span>
+        <span class="koppling-name">Flerkardelig kabel</span>
+      </div>
+      <p class="koppling-desc">Ledaren består av <strong>ett fåtal trådar</strong> (typiskt 7 st) sammanflätade. Något mjukare än EK men fortfarande relativt stel.</p>
+      <!-- FK cross-section SVG: 7 strands (1 center + 6 ring) -->
+      <svg class="koppling-svg" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer insulation -->
+        <circle cx="100" cy="45" r="36" fill="#1a2a00" stroke="#88cc00" stroke-width="2"/>
+        <!-- 7 strands: center + 6 at r=13 -->
+        <circle cx="100" cy="45"  r="6.5" fill="#FF9B4D" stroke="#cc6600" stroke-width="1"/>
+        <circle cx="113" cy="45"  r="6.5" fill="#FF9B4D" stroke="#cc6600" stroke-width="1"/>
+        <circle cx="106" cy="34"  r="6.5" fill="#FF9B4D" stroke="#cc6600" stroke-width="1"/>
+        <circle cx="94"  cy="34"  r="6.5" fill="#FF9B4D" stroke="#cc6600" stroke-width="1"/>
+        <circle cx="87"  cy="45"  r="6.5" fill="#FF9B4D" stroke="#cc6600" stroke-width="1"/>
+        <circle cx="94"  cy="56"  r="6.5" fill="#FF9B4D" stroke="#cc6600" stroke-width="1"/>
+        <circle cx="106" cy="56"  r="6.5" fill="#FF9B4D" stroke="#cc6600" stroke-width="1"/>
+        <!-- Labels -->
+        <line x1="145" y1="18" x2="155" y2="9" stroke="#888" stroke-width="1"/>
+        <text x="157" y="9" font-size="8" fill="#88cc00">Isolering</text>
+      </svg>
+      <div style="text-align:center;font-size:0.8rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">7 trådar</div>
+      <div class="koppling-use">Allmän fast installation · något böjbarare än EK · apparatledningar</div>
+      <ul class="mat-list" style="margin-top:0.5rem">
+        <li>Vanligast: 7 trådar i hexagonalt mönster</li>
+        <li>Lättare att dra i rör än EK tack vare viss flexibilitet</li>
+        <li>Bättre vibrationsbeständighet än EK</li>
+        <li>Standard i t.ex. 2,5–16 mm² installationskablar</li>
+      </ul>
+    </div>
+
+    <!-- MK – Mångkardelig kabel -->
+    <div class="koppling-card">
+      <div class="koppling-header">
+        <span class="koppling-badge" style="background:rgba(78,205,196,0.15);color:var(--teal);border-color:rgba(78,205,196,0.3)">MK</span>
+        <span class="koppling-name">Mångkardelig kabel</span>
+      </div>
+      <p class="koppling-desc">Ledaren består av <strong>många trådar</strong> (typiskt 19 st) i flera ringar. Tydligt mjukare och mer böjlig än FK.</p>
+      <!-- MK cross-section SVG: 19 strands (1+6+12) -->
+      <svg class="koppling-svg" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer insulation -->
+        <circle cx="100" cy="45" r="36" fill="#001a1a" stroke="#4ECDC4" stroke-width="2"/>
+        <!-- Ring 2: 12 strands at r=20 -->
+        <circle cx="120" cy="45"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="117" cy="35"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="110" cy="28"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="100" cy="25"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="90"  cy="28"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="83"  cy="35"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="80"  cy="45"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="83"  cy="55"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="90"  cy="62"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="100" cy="65"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="110" cy="62"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="117" cy="55"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <!-- Ring 1: 6 strands at r=10 -->
+        <circle cx="110" cy="45"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="105" cy="36"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="95"  cy="36"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="90"  cy="45"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="95"  cy="54"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <circle cx="105" cy="54"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <!-- Center -->
+        <circle cx="100" cy="45"  r="4" fill="#4ECDC4" stroke="#2a9a90" stroke-width="0.8"/>
+        <!-- Labels -->
+        <line x1="145" y1="18" x2="155" y2="9" stroke="#888" stroke-width="1"/>
+        <text x="157" y="9" font-size="8" fill="#4ECDC4">Isolering</text>
+      </svg>
+      <div style="text-align:center;font-size:0.8rem;color:#4ECDC4;margin:0.2rem 0 0.5rem">19 trådar (1+6+12)</div>
+      <div class="koppling-use" style="border-color:rgba(78,205,196,0.3);color:var(--teal)">Flexibla sladdar · apparatkablar · maskiner · verktyg · rörliga delar</div>
+      <ul class="mat-list" style="margin-top:0.5rem">
+        <li>Vanligast: 19 trådar (1 + 6 + 12 ringar)</li>
+        <li>Mjuk – tål fler böjningar utan att brytas</li>
+        <li>Används i apparatsladdar, förlängningskablar</li>
+        <li>Vanlig beteckning: H05VV-F, H07RN-F</li>
+      </ul>
+    </div>
+
+    <!-- RK – Rikkardelig kabel -->
+    <div class="koppling-card">
+      <div class="koppling-header">
+        <span class="koppling-badge" style="background:rgba(255,155,77,0.15);color:#FF9B4D;border-color:rgba(255,155,77,0.3)">RK</span>
+        <span class="koppling-name">Rikkardelig kabel</span>
+      </div>
+      <p class="koppling-desc">Ledaren består av <strong>väldigt många mycket fina trådar</strong> (49+ st). Extremt mjuk och böjlig – tål konstant rörelse och vibrationer.</p>
+      <!-- RK cross-section SVG: many fine strands (~37 shown) -->
+      <svg class="koppling-svg" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer insulation -->
+        <circle cx="100" cy="45" r="36" fill="#2a1400" stroke="#FF9B4D" stroke-width="2"/>
+        <!-- Ring 3: 18 tiny strands at r=22 -->
+        <circle cx="122" cy="45"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="119" cy="34"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="111" cy="26"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="100" cy="23"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="89"  cy="26"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="81"  cy="34"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="78"  cy="45"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="81"  cy="56"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="89"  cy="64"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="100" cy="67"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="111" cy="64"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="119" cy="56"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="115" cy="40"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="115" cy="50"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="85"  cy="40"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="85"  cy="50"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="100" cy="67"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="105" cy="29"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <!-- Ring 2: 12 strands at r=13 -->
+        <circle cx="113" cy="45"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="110" cy="37"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="104" cy="32"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="96"  cy="32"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="90"  cy="37"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="87"  cy="45"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="90"  cy="53"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="96"  cy="58"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="104" cy="58"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="110" cy="53"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="108" cy="43"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="92"  cy="43"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <!-- Ring 1: 6 + center -->
+        <circle cx="107" cy="45"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="104" cy="39"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="96"  cy="39"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="93"  cy="45"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="96"  cy="51"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="104" cy="51"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+        <circle cx="100" cy="45"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
+      </svg>
+      <div style="text-align:center;font-size:0.8rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">49+ trådar – extremt flexibel</div>
+      <div class="koppling-use" style="border-color:rgba(255,155,77,0.3);color:#FF9B4D">Svetskablar · gruvdrift · industrirobotar · kablar med konstant rörelse</div>
+      <ul class="mat-list" style="margin-top:0.5rem">
+        <li>49, 133 eller fler mycket tunna trådar</li>
+        <li>Extremt böjlig – tål tusentals böjcykler</li>
+        <li>Används i svetstänger, porttelefoner, hisslinor</li>
+        <li>Vanlig beteckning: H01N2-D (svetskabel)</li>
+      </ul>
+    </div>
+
+  </div><!-- /koppling-grid -->
+
+  <!-- Comparison table -->
+  <div class="card" style="margin-top:1.5rem;overflow-x:auto">
+    <h3>Jämförelse – kabeltyper (kardelighet)</h3>
+    <table style="width:100%;border-collapse:separate;border-spacing:0 5px;font-size:0.88rem;margin-top:0.75rem">
+      <thead>
+        <tr style="color:var(--muted);font-size:0.77rem;text-transform:uppercase;letter-spacing:0.04em">
+          <th style="padding:0.4rem 0.75rem;text-align:left">Typ</th>
+          <th style="padding:0.4rem 0.75rem;text-align:left">Antal trådar</th>
+          <th style="padding:0.4rem 0.75rem;text-align:left">Böjbarhet</th>
+          <th style="padding:0.4rem 0.75rem;text-align:left">Typisk användning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:var(--bg-light)">
+          <td style="padding:0.5rem 0.75rem;border-radius:6px 0 0 6px;font-weight:700;color:var(--yellow)">EK – Enkardelig</td>
+          <td style="padding:0.5rem 0.75rem;font-family:monospace">1 (heltråd)</td>
+          <td style="padding:0.5rem 0.75rem">Stel ████░░░░</td>
+          <td style="padding:0.5rem 0.75rem;border-radius:0 6px 6px 0;color:var(--muted)">Fast installation i rör/dosor</td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem 0.75rem;font-weight:700;color:var(--yellow)">FK – Flerkardelig</td>
+          <td style="padding:0.5rem 0.75rem;font-family:monospace">~7</td>
+          <td style="padding:0.5rem 0.75rem">Halvt ███░░░░░</td>
+          <td style="padding:0.5rem 0.75rem;color:var(--muted)">Allmän installation, apparatledningar</td>
+        </tr>
+        <tr style="background:var(--bg-light)">
+          <td style="padding:0.5rem 0.75rem;border-radius:6px 0 0 6px;font-weight:700;color:var(--teal)">MK – Mångkardelig</td>
+          <td style="padding:0.5rem 0.75rem;font-family:monospace">~19</td>
+          <td style="padding:0.5rem 0.75rem">Mjuk ██████░░</td>
+          <td style="padding:0.5rem 0.75rem;border-radius:0 6px 6px 0;color:var(--muted)">Apparatsladdar, förlängningskablar</td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem 0.75rem;font-weight:700;color:#FF9B4D">RK – Rikkardelig</td>
+          <td style="padding:0.5rem 0.75rem;font-family:monospace">49–133+</td>
+          <td style="padding:0.5rem 0.75rem">Extremt ████████</td>
+          <td style="padding:0.5rem 0.75rem;color:var(--muted)">Svetskablar, industri, robotar</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:0.75rem;background:var(--bg-light);border-radius:8px;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted)">
+      <strong style="color:var(--yellow)">Tumregel:</strong> Fler trådar = mjukare kabel = tål mer böjning. Välj kardelighetsklass efter hur mycket kabeln ska röra sig i sin installation.
+    </div>
+  </div>
+
+  <div class="tryit">
+    <div class="tryit-header">✏️ Försök själv</div>
+    <ol>
+      <li>En kabel ska dras fast i en vägg till ett eluttag. Vilken kardelighet väljer du – EK eller MK? Varför?</li>
+      <li>Varför lämpar sig inte en EK-kabel som förlängningssladd till en bormaskin?</li>
+      <li>Rangordna EK, FK, MK, RK från stelast till mest böjlig.</li>
+      <li>Varför används RK-kablar till svetsutrustning?</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära &amp; Matematik 1</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

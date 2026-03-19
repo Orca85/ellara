@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Symboler – Ellära &amp; Matte 1</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit"><span>⚡</span> Ellära &amp; Matte 1</a></div>
+    <ul class="nav-links">
+      <li><a href="atomfysik.html">Atomfysik</a></li>
+      <li><a href="material.html">Material</a></li>
+      <li class="active"><a href="symboler.html">Symboler</a></li>
+      <li><a href="kabeltyper.html">Kabeltyper</a></li>
+      <li><a href="kretsar.html">Kretsar</a></li>
+      <li><a href="installation.html">Installation</a></li>
+      <li><a href="tecken.html">Tecken</a></li>
+      <li><a href="ovningar.html" style="color:var(--yellow);font-weight:700">Övningar</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="Sök — t.ex. Ohms lag, Hz, seriekoppling, säkring…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<section class="section" id="symboler">
+  <div class="section-header">
+    <div class="section-icon">📐</div>
+    <div>
+      <h4>Referens</h4>
+      <h2>Elsymboler</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.25rem">Standardiserade symboler enligt IEC 60617 som används i kretsscheman och ritningar.</p>
+
+  <div class="card" style="margin-bottom:1.75rem;display:flex;gap:1.25rem;align-items:flex-start">
+    <div style="font-size:2rem;line-height:1;flex-shrink:0">🌐</div>
+    <div>
+      <h4 style="color:var(--yellow);margin-bottom:0.4rem">Vad är IEC?</h4>
+      <p style="font-size:0.9rem;margin-bottom:0.5rem">
+        <strong>IEC</strong> står för <strong>International Electrotechnical Commission</strong> (Internationella elektrotekniska kommissionen) — en global organisation grundad 1906 som tar fram internationella standarder för all elektrisk och elektronisk teknik.
+      </p>
+      <p style="font-size:0.9rem;margin-bottom:0.5rem">
+        IEC:s standarder används i över 170 länder och säkerställer att utrustning, symboler och säkerhetskrav fungerar och tolkas likadant oavsett var i världen du befinner dig.
+      </p>
+      <p style="font-size:0.9rem;color:var(--muted)">
+        Standarden <strong style="color:var(--white)">IEC 60617</strong> är den som definierar de grafiska symbolerna du ser i kretsscheman — precis de symboler som visas nedan.
+      </p>
+    </div>
+  </div>
+
+  <div class="sym-grid">
+
+    <!-- BATTERI -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="19" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <line x1="19" y1="13" x2="19" y2="37" stroke="#FFD700" stroke-width="1.5"/>
+        <line x1="26" y1="19" x2="26" y2="31" stroke="#FFD700" stroke-width="4"/>
+        <line x1="35" y1="13" x2="35" y2="37" stroke="#FFD700" stroke-width="1.5"/>
+        <line x1="42" y1="19" x2="42" y2="31" stroke="#FFD700" stroke-width="4"/>
+        <line x1="42" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <text x="16" y="10" font-size="8" fill="#4CFFA0">+</text>
+        <text x="31" y="10" font-size="8" fill="#FF4C4C">−</text>
+      </svg>
+      <div class="sym-name">Batteri</div>
+      <div class="sym-sub">DC-spänningskälla</div>
+    </div>
+
+    <!-- AC-KÄLLA -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="19" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/>
+        <path d="M27,25 C30,25 31,17 34,17 C37,17 38,25 41,25 C44,25 45,33 48,33 C51,33 52,25 53,25"
+              fill="none" stroke="#4ECDC4" stroke-width="1.5"/>
+        <line x1="56" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+      <div class="sym-name">AC-källa</div>
+      <div class="sym-sub">Växelströmskälla</div>
+    </div>
+
+    <!-- RESISTOR -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="17" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <rect x="17" y="17" width="46" height="16" stroke="#FFD700" stroke-width="2" fill="none" rx="2"/>
+        <line x1="63" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+      <div class="sym-name">Resistor</div>
+      <div class="sym-sub">Motstånd (IEC)</div>
+    </div>
+
+    <!-- LAMPA -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="22" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/>
+        <line x1="29" y1="14" x2="51" y2="36" stroke="#FFD700" stroke-width="2"/>
+        <line x1="51" y1="14" x2="29" y2="36" stroke="#FFD700" stroke-width="2"/>
+        <line x1="56" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+      <div class="sym-name">Lampa</div>
+      <div class="sym-sub">Glödlampa / last</div>
+    </div>
+
+    <!-- KONDENSATOR -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="33" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <line x1="33" y1="12" x2="33" y2="38" stroke="#FFD700" stroke-width="3"/>
+        <line x1="42" y1="12" x2="42" y2="38" stroke="#FFD700" stroke-width="3"/>
+        <line x1="42" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+      <div class="sym-name">Kondensator</div>
+      <div class="sym-sub">Laddningslagring</div>
+    </div>
+
+    <!-- SPOLE / INDUKTOR -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="14" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <path d="M14,25 A7,7 0 0,1 28,25" fill="none" stroke="#FFD700" stroke-width="2"/>
+        <path d="M28,25 A7,7 0 0,1 42,25" fill="none" stroke="#FFD700" stroke-width="2"/>
+        <path d="M42,25 A7,7 0 0,1 56,25" fill="none" stroke="#FFD700" stroke-width="2"/>
+        <path d="M56,25 A7,7 0 0,1 66,25" fill="none" stroke="#FFD700" stroke-width="2"/>
+        <line x1="66" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+      <div class="sym-name">Spole</div>
+      <div class="sym-sub">Induktor / lindning</div>
+    </div>
+
+    <!-- DIOD -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="22" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <polygon points="22,13 22,37 52,25" stroke="#FFD700" stroke-width="2" fill="rgba(255,215,0,0.1)"/>
+        <line x1="52" y1="13" x2="52" y2="37" stroke="#FFD700" stroke-width="2.5"/>
+        <line x1="52" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <text x="29" y="47" font-size="7" fill="#666">A</text>
+        <text x="49" y="47" font-size="7" fill="#666">K</text>
+      </svg>
+      <div class="sym-name">Diod</div>
+      <div class="sym-sub">Likriktning (A→K)</div>
+    </div>
+
+    <!-- NO BRYTARE -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="33" x2="24" y2="33" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="24" cy="33" r="3" fill="#FFD700"/>
+        <circle cx="56" cy="33" r="3" fill="#FFD700"/>
+        <line x1="56" y1="33" x2="75" y2="33" stroke="#FFD700" stroke-width="2"/>
+        <!-- Open blade from left contact going diagonally up -->
+        <line x1="24" y1="33" x2="52" y2="14" stroke="#FFD700" stroke-width="2"/>
+        <text x="26" y="48" font-size="8" fill="#888">NO</text>
+      </svg>
+      <div class="sym-name">NO-brytare</div>
+      <div class="sym-sub">Normalöppen kontakt</div>
+    </div>
+
+    <!-- NC BRYTARE -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="33" x2="24" y2="33" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="24" cy="33" r="3" fill="#FFD700"/>
+        <circle cx="56" cy="33" r="3" fill="#FFD700"/>
+        <line x1="56" y1="33" x2="75" y2="33" stroke="#FFD700" stroke-width="2"/>
+        <!-- Closed blade: contacts connected -->
+        <line x1="24" y1="33" x2="56" y2="33" stroke="#FFD700" stroke-width="2"/>
+        <!-- NC diagonal bar indicator through middle -->
+        <line x1="38" y1="40" x2="44" y2="17" stroke="#FFD700" stroke-width="2"/>
+        <text x="26" y="48" font-size="8" fill="#888">NC</text>
+      </svg>
+      <div class="sym-name">NC-brytare</div>
+      <div class="sym-sub">Normalt sluten kontakt</div>
+    </div>
+
+    <!-- SÄKRING -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="18" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <rect x="18" y="17" width="44" height="16" stroke="#FFD700" stroke-width="2" fill="none" rx="3"/>
+        <!-- Wire through fuse -->
+        <line x1="18" y1="25" x2="62" y2="25" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <line x1="62" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+      <div class="sym-name">Säkring</div>
+      <div class="sym-sub">Kortslutningsskydd</div>
+    </div>
+
+    <!-- JORDNING -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="40" y1="5" x2="40" y2="20" stroke="#FFD700" stroke-width="2"/>
+        <line x1="20" y1="20" x2="60" y2="20" stroke="#FFD700" stroke-width="2.5"/>
+        <line x1="26" y1="28" x2="54" y2="28" stroke="#FFD700" stroke-width="2"/>
+        <line x1="32" y1="36" x2="48" y2="36" stroke="#FFD700" stroke-width="1.5"/>
+        <line x1="36" y1="43" x2="44" y2="43" stroke="#FFD700" stroke-width="1"/>
+      </svg>
+      <div class="sym-name">Jordning</div>
+      <div class="sym-sub">Skydds- / funktionsjord</div>
+    </div>
+
+    <!-- AMPEREMETER -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="18" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/>
+        <text x="40" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#4CFFA0">A</text>
+        <line x1="56" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+      <div class="sym-name">Amperemeter</div>
+      <div class="sym-sub">Mäter ström (serie)</div>
+    </div>
+
+    <!-- VOLTMETER -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="18" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/>
+        <text x="40" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#FF9B4D">V</text>
+        <line x1="56" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+      <div class="sym-name">Voltmeter</div>
+      <div class="sym-sub">Mäter spänning (parallell)</div>
+    </div>
+
+    <!-- TRANSFORMATOR -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <!-- Primary winding (left arcs - go upward) -->
+        <line x1="5" y1="25" x2="14" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <path d="M14,25 A6,6 0 0,1 26,25" fill="none" stroke="#FFD700" stroke-width="2"/>
+        <path d="M26,25 A6,6 0 0,1 38,25" fill="none" stroke="#FFD700" stroke-width="2"/>
+        <!-- Core -->
+        <line x1="40" y1="10" x2="40" y2="40" stroke="#aaa" stroke-width="1.5"/>
+        <line x1="43" y1="10" x2="43" y2="40" stroke="#aaa" stroke-width="1.5"/>
+        <!-- Secondary winding (right arcs - mirror) -->
+        <path d="M45,25 A6,6 0 0,0 57,25" fill="none" stroke="#FFD700" stroke-width="2"/>
+        <path d="M57,25 A6,6 0 0,0 69,25" fill="none" stroke="#FFD700" stroke-width="2"/>
+        <line x1="69" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+      <div class="sym-name">Transformator</div>
+      <div class="sym-sub">Spänningsomvandling</div>
+    </div>
+
+    <!-- LYSDIOD / LED -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="22" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <polygon points="22,13 22,37 50,25" stroke="#FFD700" stroke-width="2" fill="rgba(255,215,0,0.1)"/>
+        <line x1="50" y1="13" x2="50" y2="37" stroke="#FFD700" stroke-width="2.5"/>
+        <line x1="50" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <!-- Light rays -->
+        <line x1="54" y1="10" x2="62" y2="4"  stroke="#4CFFA0" stroke-width="1.5"/>
+        <line x1="58" y1="15" x2="68" y2="11" stroke="#4CFFA0" stroke-width="1.5"/>
+        <line x1="60" y1="21" x2="71" y2="20" stroke="#4CFFA0" stroke-width="1.5"/>
+      </svg>
+      <div class="sym-name">LED</div>
+      <div class="sym-sub">Lysdiod</div>
+    </div>
+
+    <!-- MOTOR -->
+    <div class="sym-card">
+      <svg class="sym-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+        <line x1="5" y1="25" x2="18" y2="25" stroke="#FFD700" stroke-width="2"/>
+        <circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/>
+        <text x="40" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#7af">M</text>
+        <line x1="56" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/>
+      </svg>
+      <div class="sym-name">Motor</div>
+      <div class="sym-sub">Elektrisk motor</div>
+    </div>
+
+  </div><!-- /sym-grid -->
+
+  <!-- Quick reference table -->
+  <div class="card" style="margin-top:2rem">
+    <h3>Minneslista – vanliga storheter</h3>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:separate;border-spacing:0 5px;font-size:0.9rem">
+        <thead>
+          <tr style="color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.04em">
+            <th style="padding:0.4rem 0.75rem;text-align:left">Symbol</th>
+            <th style="padding:0.4rem 0.75rem;text-align:left">Storhet</th>
+            <th style="padding:0.4rem 0.75rem;text-align:left">Enhet</th>
+            <th style="padding:0.4rem 0.75rem;text-align:left">Enhetssymbol</th>
+            <th style="padding:0.4rem 0.75rem;text-align:left">Mätinstrument</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:var(--bg-light)">
+            <td style="padding:0.5rem 0.75rem;border-radius:6px 0 0 6px;font-weight:700;font-size:1.1rem;color:var(--yellow)">U</td>
+            <td style="padding:0.5rem 0.75rem">Spänning</td>
+            <td style="padding:0.5rem 0.75rem">Volt</td>
+            <td style="padding:0.5rem 0.75rem;font-weight:700">V</td>
+            <td style="padding:0.5rem 0.75rem;border-radius:0 6px 6px 0;color:var(--muted)">Voltmeter (parallell)</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem 0.75rem;font-weight:700;font-size:1.1rem;color:var(--yellow)">I</td>
+            <td style="padding:0.5rem 0.75rem">Ström</td>
+            <td style="padding:0.5rem 0.75rem">Ampere</td>
+            <td style="padding:0.5rem 0.75rem;font-weight:700">A</td>
+            <td style="padding:0.5rem 0.75rem;color:var(--muted)">Amperemeter (serie)</td>
+          </tr>
+          <tr style="background:var(--bg-light)">
+            <td style="padding:0.5rem 0.75rem;border-radius:6px 0 0 6px;font-weight:700;font-size:1.1rem;color:var(--yellow)">R</td>
+            <td style="padding:0.5rem 0.75rem">Resistans</td>
+            <td style="padding:0.5rem 0.75rem">Ohm</td>
+            <td style="padding:0.5rem 0.75rem;font-weight:700">Ω</td>
+            <td style="padding:0.5rem 0.75rem;border-radius:0 6px 6px 0;color:var(--muted)">Ohmmeter (frånkopplad)</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem 0.75rem;font-weight:700;font-size:1.1rem;color:var(--yellow)">P</td>
+            <td style="padding:0.5rem 0.75rem">Effekt</td>
+            <td style="padding:0.5rem 0.75rem">Watt</td>
+            <td style="padding:0.5rem 0.75rem;font-weight:700">W</td>
+            <td style="padding:0.5rem 0.75rem;color:var(--muted)">Wattmeter / beräknas</td>
+          </tr>
+          <tr style="background:var(--bg-light)">
+            <td style="padding:0.5rem 0.75rem;border-radius:6px 0 0 6px;font-weight:700;font-size:1.1rem;color:var(--yellow)">f</td>
+            <td style="padding:0.5rem 0.75rem">Frekvens</td>
+            <td style="padding:0.5rem 0.75rem">Hertz</td>
+            <td style="padding:0.5rem 0.75rem;font-weight:700">Hz</td>
+            <td style="padding:0.5rem 0.75rem;border-radius:0 6px 6px 0;color:var(--muted)">Oscilloskop / multimeter</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem 0.75rem;font-weight:700;font-size:1.1rem;color:var(--yellow)">ρ</td>
+            <td style="padding:0.5rem 0.75rem">Resistivitet</td>
+            <td style="padding:0.5rem 0.75rem">Ohm·mm²/m</td>
+            <td style="padding:0.5rem 0.75rem;font-weight:700">Ω·mm²/m</td>
+            <td style="padding:0.5rem 0.75rem;color:var(--muted)">Materialkonstant (tabell)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära &amp; Matematik 1</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
