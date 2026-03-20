@@ -9,21 +9,28 @@
 <body>
 
 <nav>
-  <div class="nav-inner">
-    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit"><span>⚡</span> Ellära &amp; Matte 1</a></div>
-    <ul class="nav-links">
-      <li><a href="atomfysik.html">Atomfysik</a></li>
-      <li><a href="material.html">Material</a></li>
-      <li><a href="symboler.html">Symboler</a></li>
-      <li><a href="kabeltyper.html">Kabeltyper</a></li>
-      <li><a href="kretsar.html">Kretsar</a></li>
-      <li><a href="installation.html">Installation</a></li>
-      <li class="active"><a href="tecken.html">Tecken</a></li>
-      <li><a href="ovningar.html" style="color:var(--yellow);font-weight:700">Övningar</a></li>
-    </ul>
-    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-  </div>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära &amp; Matte 1</a>
+  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
 </nav>
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära &amp; Matte 1</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link "><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html" class="sidebar-link "><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html" class="sidebar-link "><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html" class="sidebar-link "><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html" class="sidebar-link "><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kretsar.html" class="sidebar-link "><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html" class="sidebar-link active"><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
+    </nav>
+  </aside>
+  <div class="main-content">
 
 <div class="search-bar-wrap" id="search-wrap">
   <div class="search-inner">
@@ -263,5 +270,7 @@
 </footer>
 
 <script src="script.js"></script>
+  </div><!-- /main-content -->
+</div><!-- /layout-wrapper -->
 </body>
 </html>

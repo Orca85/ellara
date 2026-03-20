@@ -568,7 +568,7 @@
 
   function init() {
     const saved = localStorage.getItem('theme');
-    apply(saved === 'light');
+    apply(saved !== 'dark'); // light is default when no preference saved
 
     document.getElementById('theme-toggle').addEventListener('click', () => {
       const isLight = document.body.classList.toggle('light');
@@ -1156,4 +1156,160 @@ function format(n) {
     if (resetBtn) resetBtn.addEventListener('click', resetAll);
   });
 
+})();
+
+
+/* =========================================================
+   MS-SUBQ ZOOM OVERLAY
+   ========================================================= */
+(function () {
+  const overlay = document.createElement('div');
+  overlay.className = 'ms-zoom-overlay';
+  overlay.innerHTML = `
+    <div class="ms-zoom-card">
+      <div class="ms-zoom-label"></div>
+      <div class="ms-zoom-hint"></div>
+      <div class="ms-zoom-row ms-input-row">
+        <input class="ms-input ms-zoom-input" type="number" step="any" placeholder="Svar…"/>
+        <button class="ms-check-btn ms-zoom-check">Kontrollera</button>
+      </div>
+      <div class="ms-feedback ms-zoom-feedback"></div>
+    </div>`;
+  document.body.appendChild(overlay);
+
+  const oLabel    = overlay.querySelector('.ms-zoom-label');
+  const oHint     = overlay.querySelector('.ms-zoom-hint');
+  const oInput    = overlay.querySelector('.ms-zoom-input');
+  const oCheck    = overlay.querySelector('.ms-zoom-check');
+  const oFeedback = overlay.querySelector('.ms-zoom-feedback');
+
+  let origInput = null;
+  let origBtn   = null;
+  let origFb    = null;
+
+  function close() { overlay.classList.remove('visible'); }
+  overlay.addEventListener('click', close);
+  overlay.querySelector('.ms-zoom-card').addEventListener('click', e => e.stopPropagation());
+
+  oInput.addEventListener('keydown', e => { if (e.key === 'Enter') oCheck.click(); });
+
+  oCheck.addEventListener('click', () => {
+    if (origInput) origInput.value = oInput.value;
+    if (origBtn)   origBtn.click();
+    if (origFb) {
+      oFeedback.className = 'ms-feedback ms-zoom-feedback ' + (origFb.classList.contains('ms-correct') ? 'ms-correct' : origFb.classList.contains('ms-wrong') ? 'ms-wrong' : '');
+      oFeedback.innerHTML = origFb.innerHTML;
+      if (origFb.classList.contains('ms-correct')) setTimeout(close, 1400);
+    }
+  });
+
+  document.querySelectorAll('.ms-subq:not(.locked)').forEach(subq => {
+    subq.addEventListener('click', e => {
+      if (e.target.closest('input, button')) return;
+      e.stopPropagation();
+
+      oLabel.innerHTML    = subq.querySelector('.ms-subq-label')?.innerHTML || '';
+      oHint.innerHTML     = subq.querySelector('.ms-subq-hint')?.innerHTML  || '';
+      origInput           = subq.querySelector('.ms-input');
+      origBtn             = subq.querySelector('.ms-check-btn');
+      origFb              = subq.querySelector('.ms-feedback');
+
+      oInput.value        = origInput?.value || '';
+      oInput.placeholder  = origInput?.placeholder || 'Svar…';
+      oInput.step         = origInput?.step || 'any';
+      oFeedback.className = 'ms-feedback ms-zoom-feedback';
+      oFeedback.innerHTML = origFb?.innerHTML || '';
+      if (origFb?.classList.contains('ms-correct')) oFeedback.classList.add('ms-correct');
+      if (origFb?.classList.contains('ms-wrong'))   oFeedback.classList.add('ms-wrong');
+
+      overlay.classList.add('visible');
+      setTimeout(() => oInput.focus(), 80);
+    });
+  });
+})();
+
+/* =========================================================
+   SYM-CARD & TRIANGLE ZOOM OVERLAY
+   ========================================================= */
+(function () {
+  const overlay = document.createElement('div');
+  overlay.className = 'sym-zoom-overlay';
+  overlay.innerHTML = '<div class="sym-zoom-card"><svg></svg><div class="sym-zoom-name"></div><div class="sym-zoom-sub"></div><div class="sym-zoom-extra"></div></div>';
+  document.body.appendChild(overlay);
+
+  const oSvg   = overlay.querySelector('svg');
+  const oName  = overlay.querySelector('.sym-zoom-name');
+  const oSub   = overlay.querySelector('.sym-zoom-sub');
+  const oExtra = overlay.querySelector('.sym-zoom-extra');
+
+  // Only close when clicking the backdrop, not the card
+  overlay.querySelector('.sym-zoom-card').addEventListener('click', e => e.stopPropagation());
+
+  function close() { overlay.classList.remove('visible'); }
+  overlay.addEventListener('click', close);
+
+  function resetCard() {
+    oSvg.style.display = '';
+    oSub.innerHTML  = '';
+    oExtra.innerHTML = '';
+  }
+
+  // Symbol cards
+  document.querySelectorAll('.sym-card').forEach(card => {
+    card.addEventListener('click', e => {
+      e.stopPropagation();
+      resetCard();
+      const src = card.querySelector('svg');
+      oSvg.setAttribute('viewBox', src.getAttribute('viewBox'));
+      oSvg.innerHTML = src.innerHTML;
+      oName.textContent = card.querySelector('.sym-name')?.textContent || '';
+      oSub.textContent  = card.querySelector('.sym-sub')?.textContent  || '';
+      overlay.classList.add('visible');
+    });
+  });
+
+  // Triangle cards
+  document.querySelectorAll('.triangle-ref-card').forEach(card => {
+    card.addEventListener('click', e => {
+      e.stopPropagation();
+      resetCard();
+      const src = card.querySelector('.triangle-svg');
+      oSvg.setAttribute('viewBox', src.getAttribute('viewBox'));
+      oSvg.innerHTML = src.innerHTML;
+      oName.textContent = card.querySelector('h3')?.textContent || '';
+      const hints = card.querySelector('.triangle-hints');
+      const units = card.querySelector('.triangle-units');
+      if (hints) oExtra.appendChild(hints.cloneNode(true));
+      if (units) oExtra.appendChild(units.cloneNode(true));
+      overlay.classList.add('visible');
+    });
+  });
+
+  // Guided solver steps — event delegation (steps are dynamically rendered)
+  document.addEventListener('click', e => {
+    const step = e.target.closest('.kk-step');
+    if (!step) return;
+    e.stopPropagation();
+
+    const num     = step.querySelector('.kk-step-num')?.textContent   || '';
+    const title   = step.querySelector('.kk-step-title')?.innerHTML   || '';
+    const formula = step.querySelector('.kk-step-formula')?.innerHTML || '';
+    const note    = step.querySelector('.kk-step-sub')?.innerHTML     || '';
+    const calc    = step.querySelector('.kk-step-calc')?.innerHTML    || '';
+    const result  = step.querySelector('.kk-step-result')?.innerHTML  || '';
+
+    oSvg.setAttribute('viewBox', '0 0 1 1');
+    oSvg.innerHTML = '';
+    oSvg.style.display = 'none';
+
+    oName.innerHTML = `<span style="font-size:1rem;font-weight:600;color:#9ca3af;letter-spacing:.05em">STEG ${num}</span><br>${title}`;
+    oSub.innerHTML  = '';
+    oExtra.innerHTML = `
+      <div class="kk-zoom-formula">${formula}</div>
+      ${note ? `<div class="kk-zoom-note">${note}</div>` : ''}
+      <div class="kk-zoom-calc">${calc}</div>
+      <div class="kk-zoom-result">${result}</div>`;
+
+    overlay.classList.add('visible');
+  });
 })();

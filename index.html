@@ -8,25 +8,29 @@
 </head>
 <body>
 
-<!-- ======================================================
-     NAVIGATION
-     ====================================================== -->
 <nav>
-  <div class="nav-inner">
-    <div class="nav-logo"><span>⚡</span> Ellära &amp; Matte 1</div>
-    <ul class="nav-links">
-      <li><a href="atomfysik.html">Atomfysik</a></li>
-      <li><a href="material.html">Material</a></li>
-      <li><a href="symboler.html">Symboler</a></li>
-      <li><a href="kabeltyper.html">Kabeltyper</a></li>
-      <li><a href="kretsar.html">Kretsar</a></li>
-      <li><a href="installation.html">Installation</a></li>
-      <li><a href="tecken.html">Tecken</a></li>
-      <li><a href="ovningar.html" style="color:var(--yellow);font-weight:700">Övningar</a></li>
-    </ul>
-    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-  </div>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära &amp; Matte 1</a>
+  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
 </nav>
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära &amp; Matte 1</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link active"><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html" class="sidebar-link "><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html" class="sidebar-link "><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html" class="sidebar-link "><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html" class="sidebar-link "><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kretsar.html" class="sidebar-link "><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
+    </nav>
+  </aside>
+  <div class="main-content">
 
 <!-- ======================================================
      SÖK
@@ -1057,35 +1061,32 @@
       <p class="triangle-instruction">Täck det du söker – resten visar formeln.</p>
       <div class="triangle-wrap">
         <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" class="triangle-svg">
-          <!-- Top section – U -->
-          <polygon points="100,12 47,90 153,90" fill="rgba(255,215,0,0.18)" stroke="#FFD700" stroke-width="2" stroke-linejoin="round"/>
-          <!-- Bottom-left – R -->
-          <polygon points="10,155 47,90 100,90 100,155" fill="rgba(255,155,77,0.18)" stroke="#FF9B4D" stroke-width="2" stroke-linejoin="round"/>
-          <!-- Bottom-right – I -->
-          <polygon points="190,155 153,90 100,90 100,155" fill="rgba(78,205,196,0.18)" stroke="#4ECDC4" stroke-width="2" stroke-linejoin="round"/>
-          <!-- Divider lines (drawn on top for clarity) -->
-          <line x1="47" y1="90" x2="153" y2="90" stroke="#1a1a1a" stroke-width="3"/>
-          <line x1="100" y1="90" x2="100" y2="155" stroke="#1a1a1a" stroke-width="3"/>
-          <!-- Variable labels -->
-          <text x="100" y="62" text-anchor="middle" font-size="28" font-weight="900" fill="#FFD700">U</text>
-          <text x="63"  y="133" text-anchor="middle" font-size="26" font-weight="900" fill="#FF9B4D">R</text>
-          <text x="137" y="133" text-anchor="middle" font-size="26" font-weight="900" fill="#4ECDC4">I</text>
-          <!-- × symbol between R and I -->
-          <text x="100" y="133" text-anchor="middle" font-size="14" fill="#666">×</text>
-          <!-- Outer triangle border -->
-          <polygon points="100,12 10,155 190,155" fill="none" stroke="#444" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- Section fills -->
+          <polygon points="100,12 47,92 153,92" fill="#FEF3C7"/>
+          <polygon points="10,158 47,92 100,92 100,158" fill="#FFEDD5"/>
+          <polygon points="190,158 153,92 100,92 100,158" fill="#CCFBF1"/>
+          <!-- Outer border -->
+          <polygon points="100,12 10,158 190,158" fill="none" stroke="#374151" stroke-width="2.5" stroke-linejoin="round"/>
+          <!-- Dividers -->
+          <line x1="47" y1="92" x2="153" y2="92" stroke="#374151" stroke-width="2"/>
+          <line x1="100" y1="92" x2="100" y2="158" stroke="#374151" stroke-width="2"/>
+          <!-- Labels -->
+          <text x="100" y="63" text-anchor="middle" dominant-baseline="middle" font-size="34" font-weight="900" fill="#D97706" font-family="Plus Jakarta Sans, sans-serif">U</text>
+          <text x="65"  y="130" text-anchor="middle" dominant-baseline="middle" font-size="30" font-weight="900" fill="#EA580C" font-family="Plus Jakarta Sans, sans-serif">R</text>
+          <text x="135" y="130" text-anchor="middle" dominant-baseline="middle" font-size="30" font-weight="900" fill="#0D9488" font-family="Plus Jakarta Sans, sans-serif">I</text>
+          <text x="100" y="130" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#9CA3AF">×</text>
         </svg>
         <!-- Formula hints -->
         <div class="triangle-hints">
-          <div class="hint hint-u"><span class="hint-cover" style="background:var(--yellow);color:#111">U</span> = R × I</div>
-          <div class="hint hint-r"><span class="hint-cover" style="background:#FF9B4D;color:#111">R</span> = <span class="frac"><span>U</span><span>I</span></span></div>
-          <div class="hint hint-i"><span class="hint-cover" style="background:var(--teal);color:#111">I</span> = <span class="frac"><span>U</span><span>R</span></span></div>
+          <div class="hint hint-u"><span class="hint-cover" style="background:#FDE68A;color:#78350F">U</span> = R × I</div>
+          <div class="hint hint-r"><span class="hint-cover" style="background:#FED7AA;color:#7C2D12">R</span> = <span class="frac"><span>U</span><span>I</span></span></div>
+          <div class="hint hint-i"><span class="hint-cover" style="background:#99F6E4;color:#134E4A">I</span> = <span class="frac"><span>U</span><span>R</span></span></div>
         </div>
       </div>
       <div class="triangle-units">
-        <span style="color:var(--yellow)">U = Volt (V)</span>
-        <span style="color:#FF9B4D">R = Ohm (Ω)</span>
-        <span style="color:var(--teal)">I = Ampere (A)</span>
+        <span style="color:#D97706">U = Volt (V)</span>
+        <span style="color:#EA580C">R = Ohm (Ω)</span>
+        <span style="color:#0D9488">I = Ampere (A)</span>
       </div>
     </div>
 
@@ -1095,34 +1096,31 @@
       <p class="triangle-instruction">Täck det du söker – resten visar formeln.</p>
       <div class="triangle-wrap">
         <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" class="triangle-svg">
-          <!-- Top section – P -->
-          <polygon points="100,12 47,90 153,90" fill="rgba(76,255,160,0.15)" stroke="#4CFFA0" stroke-width="2" stroke-linejoin="round"/>
-          <!-- Bottom-left – U -->
-          <polygon points="10,155 47,90 100,90 100,155" fill="rgba(255,215,0,0.18)" stroke="#FFD700" stroke-width="2" stroke-linejoin="round"/>
-          <!-- Bottom-right – I -->
-          <polygon points="190,155 153,90 100,90 100,155" fill="rgba(78,205,196,0.18)" stroke="#4ECDC4" stroke-width="2" stroke-linejoin="round"/>
-          <!-- Divider lines -->
-          <line x1="47" y1="90" x2="153" y2="90" stroke="#1a1a1a" stroke-width="3"/>
-          <line x1="100" y1="90" x2="100" y2="155" stroke="#1a1a1a" stroke-width="3"/>
-          <!-- Variable labels -->
-          <text x="100" y="62" text-anchor="middle" font-size="28" font-weight="900" fill="#4CFFA0">P</text>
-          <text x="63"  y="133" text-anchor="middle" font-size="26" font-weight="900" fill="#FFD700">U</text>
-          <text x="137" y="133" text-anchor="middle" font-size="26" font-weight="900" fill="#4ECDC4">I</text>
-          <!-- × symbol -->
-          <text x="100" y="133" text-anchor="middle" font-size="14" fill="#666">×</text>
+          <!-- Section fills -->
+          <polygon points="100,12 47,92 153,92" fill="#D1FAE5"/>
+          <polygon points="10,158 47,92 100,92 100,158" fill="#FEF3C7"/>
+          <polygon points="190,158 153,92 100,92 100,158" fill="#CCFBF1"/>
           <!-- Outer border -->
-          <polygon points="100,12 10,155 190,155" fill="none" stroke="#444" stroke-width="1.5" stroke-linejoin="round"/>
+          <polygon points="100,12 10,158 190,158" fill="none" stroke="#374151" stroke-width="2.5" stroke-linejoin="round"/>
+          <!-- Dividers -->
+          <line x1="47" y1="92" x2="153" y2="92" stroke="#374151" stroke-width="2"/>
+          <line x1="100" y1="92" x2="100" y2="158" stroke="#374151" stroke-width="2"/>
+          <!-- Labels -->
+          <text x="100" y="63" text-anchor="middle" dominant-baseline="middle" font-size="34" font-weight="900" fill="#059669" font-family="Plus Jakarta Sans, sans-serif">P</text>
+          <text x="65"  y="130" text-anchor="middle" dominant-baseline="middle" font-size="30" font-weight="900" fill="#D97706" font-family="Plus Jakarta Sans, sans-serif">U</text>
+          <text x="135" y="130" text-anchor="middle" dominant-baseline="middle" font-size="30" font-weight="900" fill="#0D9488" font-family="Plus Jakarta Sans, sans-serif">I</text>
+          <text x="100" y="130" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#9CA3AF">×</text>
         </svg>
         <div class="triangle-hints">
-          <div class="hint"><span class="hint-cover" style="background:var(--lime);color:#111">P</span> = U × I</div>
-          <div class="hint"><span class="hint-cover" style="background:var(--yellow);color:#111">U</span> = <span class="frac"><span>P</span><span>I</span></span></div>
-          <div class="hint"><span class="hint-cover" style="background:var(--teal);color:#111">I</span> = <span class="frac"><span>P</span><span>U</span></span></div>
+          <div class="hint"><span class="hint-cover" style="background:#A7F3D0;color:#064E3B">P</span> = U × I</div>
+          <div class="hint"><span class="hint-cover" style="background:#FDE68A;color:#78350F">U</span> = <span class="frac"><span>P</span><span>I</span></span></div>
+          <div class="hint"><span class="hint-cover" style="background:#99F6E4;color:#134E4A">I</span> = <span class="frac"><span>P</span><span>U</span></span></div>
         </div>
       </div>
       <div class="triangle-units">
-        <span style="color:var(--lime)">P = Watt (W)</span>
-        <span style="color:var(--yellow)">U = Volt (V)</span>
-        <span style="color:var(--teal)">I = Ampere (A)</span>
+        <span style="color:#059669">P = Watt (W)</span>
+        <span style="color:#D97706">U = Volt (V)</span>
+        <span style="color:#0D9488">I = Ampere (A)</span>
       </div>
     </div>
 
@@ -2387,5 +2385,7 @@
 </footer>
 
 <script src="script.js"></script>
+  </div><!-- /main-content -->
+</div><!-- /layout-wrapper -->
 </body>
 </html>

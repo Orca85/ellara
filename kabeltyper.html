@@ -3,27 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kabeltyper – Ellära &amp; Matte 1</title>
+  <title>Kabeltyper – Ellära </title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <nav>
-  <div class="nav-inner">
-    <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit"><span>⚡</span> Ellära &amp; Matte 1</a></div>
-    <ul class="nav-links">
-      <li><a href="atomfysik.html">Atomfysik</a></li>
-      <li><a href="material.html">Material</a></li>
-      <li><a href="symboler.html">Symboler</a></li>
-      <li class="active"><a href="kabeltyper.html">Kabeltyper</a></li>
-      <li><a href="kretsar.html">Kretsar</a></li>
-      <li><a href="installation.html">Installation</a></li>
-      <li><a href="tecken.html">Tecken</a></li>
-      <li><a href="ovningar.html" style="color:var(--yellow);font-weight:700">Övningar</a></li>
-    </ul>
-    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-  </div>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära &amp; Matte 1</a>
+  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
 </nav>
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära &amp; Matte 1</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link "><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html" class="sidebar-link "><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html" class="sidebar-link "><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html" class="sidebar-link "><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html" class="sidebar-link active"><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kretsar.html" class="sidebar-link "><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
+    </nav>
+  </aside>
+  <div class="main-content">
 
 <div class="search-bar-wrap" id="search-wrap">
   <div class="search-inner">
@@ -73,7 +80,7 @@
         <text x="160" y="9" font-size="8" fill="#88cc00">Isolering</text>
         <line x1="118" y1="33" x2="138" y2="20" stroke="#888" stroke-width="1"/>
       </svg>
-      <div style="text-align:center;font-size:0.8rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">En massiv tråd</div>
+      <div style="text-align:center;font-size:1.2rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">En massiv tråd</div>
       <div class="koppling-use">Fast installation i rör · eldosor · apparatskåp · styvt, formbart</div>
       <ul class="mat-list" style="margin-top:0.5rem">
         <li>Stel – behåller formen vid bockning</li>
@@ -106,7 +113,7 @@
         <line x1="145" y1="18" x2="155" y2="9" stroke="#888" stroke-width="1"/>
         <text x="157" y="9" font-size="8" fill="#88cc00">Isolering</text>
       </svg>
-      <div style="text-align:center;font-size:0.8rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">7 trådar</div>
+      <div style="text-align:center;font-size:1.2rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">7 trådar</div>
       <div class="koppling-use">Allmän fast installation · något böjbarare än EK · apparatledningar</div>
       <ul class="mat-list" style="margin-top:0.5rem">
         <li>Vanligast: 7 trådar i hexagonalt mönster</li>
@@ -153,7 +160,7 @@
         <line x1="145" y1="18" x2="155" y2="9" stroke="#888" stroke-width="1"/>
         <text x="157" y="9" font-size="8" fill="#4ECDC4">Isolering</text>
       </svg>
-      <div style="text-align:center;font-size:0.8rem;color:#4ECDC4;margin:0.2rem 0 0.5rem">19 trådar (1+6+12)</div>
+      <div style="text-align:center;font-size:1.2rem;color:#4ECDC4;margin:0.2rem 0 0.5rem">19 trådar (1+6+12)</div>
       <div class="koppling-use" style="border-color:rgba(78,205,196,0.3);color:var(--teal)">Flexibla sladdar · apparatkablar · maskiner · verktyg · rörliga delar</div>
       <ul class="mat-list" style="margin-top:0.5rem">
         <li>Vanligast: 19 trådar (1 + 6 + 12 ringar)</li>
@@ -215,7 +222,7 @@
         <circle cx="104" cy="51"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
         <circle cx="100" cy="45"  r="3" fill="#FF9B4D" stroke="#cc6600" stroke-width="0.5"/>
       </svg>
-      <div style="text-align:center;font-size:0.8rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">49+ trådar – extremt flexibel</div>
+      <div style="text-align:center;font-size:1.2rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">49+ trådar – extremt flexibel</div>
       <div class="koppling-use" style="border-color:rgba(255,155,77,0.3);color:#FF9B4D">Svetskablar · gruvdrift · industrirobotar · kablar med konstant rörelse</div>
       <ul class="mat-list" style="margin-top:0.5rem">
         <li>49, 133 eller fler mycket tunna trådar</li>
@@ -288,5 +295,7 @@
 </footer>
 
 <script src="script.js"></script>
+  </div><!-- /main-content -->
+</div><!-- /layout-wrapper -->
 </body>
 </html>
