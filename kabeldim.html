@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kablar &amp; Dimensionering – Ellära</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .fuse-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+    .fuse-table th { font-size:0.78rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; padding:0.5rem 0.75rem; text-align:left; }
+    .fuse-table td { padding:0.6rem 0.75rem; font-size:0.9rem; border-top:1px solid var(--outline); color:var(--white); }
+    .fuse-dot { display:inline-block; width:18px; height:18px; border-radius:50%; vertical-align:middle; margin-right:0.4rem; }
+    .volt-card { background:var(--bg-card); border-radius:1rem; padding:1.5rem; box-shadow:var(--shadow); display:flex; flex-direction:column; }
+    .volt-card h4 { font-size:1rem; font-weight:700; margin-bottom:0.75rem; color:var(--white); }
+    .volt-card .volt-footer { margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid var(--outline); }
+    .volt-card .volt-svg { margin-top:auto; padding-top:1.25rem; display:block; width:100%; max-width:160px; align-self:center; }
+    .wire { display:flex; align-items:center; gap:0.5rem; margin:0.35rem 0; font-size:0.88rem; color:var(--muted); }
+    .wire-dot { width:14px; height:14px; border-radius:50%; flex-shrink:0; }
+    .vp-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+    .vp-table th, .vp-table td { padding:0.55rem 0.75rem; text-align:center; font-size:0.88rem; border-top:1px solid var(--outline); }
+    .vp-table th { font-weight:700; color:var(--muted); font-size:0.78rem; text-transform:uppercase; letter-spacing:.04em; }
+    .vp-table td { color:var(--white); }
+    .vp-table td:first-child { text-align:left; font-weight:600; color:var(--primary); }
+    .grid-node { background:var(--bg-card); border-radius:0.75rem; padding:0.85rem 1rem; box-shadow:var(--shadow); }
+    .grid-node .kv { font-size:0.75rem; font-weight:700; letter-spacing:.05em; color:var(--primary); text-transform:uppercase; }
+    .grid-node .label { font-weight:700; color:var(--white); margin:0.2rem 0; }
+    .grid-node .desc { font-size:0.8rem; color:var(--muted); }
+    .grid-arrow { display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:1.2rem; }
+    .svg-illustration { display:block; width:100%; max-width:480px; height:auto; margin-top:0.75rem; border-radius:0.75rem; overflow:hidden; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+</nav>
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link "><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html" class="sidebar-link "><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html" class="sidebar-link "><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html" class="sidebar-link "><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html" class="sidebar-link "><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kabeldim.html" class="sidebar-link active"><span class="sidebar-icon">📏</span> Kabeldim.</a>
+      <a href="kretsar.html" class="sidebar-link "><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="trefas.html" class="sidebar-link "><span class="sidebar-icon">🔄</span> Trefas</a>
+      <a href="skydd.html" class="sidebar-link "><span class="sidebar-icon">🛡️</span> Skydd</a>
+      <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
+    </nav>
+  </aside>
+  <div class="main-content">
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" class="search-input" placeholder="Sök — t.ex. kabeldimensionering, säkring, trefas, VP-rör…" autocomplete="off" spellcheck="false"/>
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<!-- SPÄNNINGAR I KABLAR -->
+<section class="section" id="spanningar">
+  <div class="section-header">
+    <div class="section-icon">⚡</div>
+    <div>
+      <h4>Avsnitt 4a</h4>
+      <h2>Spänningar i kablar</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">Spänningar mellan olika kabelparter i installationskablar anslutna till trefas-, tvåfas- och enfasbelastningar i det svenska systemet (400 VAC / 230 VAC).</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-bottom:1.5rem">
+
+    <!-- ENFASMATNING -->
+    <div class="volt-card">
+      <h4>Enfasmatning</h4>
+      <div class="wire"><div class="wire-dot" style="background:#c0392b"></div>Fasledare — 230 V</div>
+      <div class="wire"><div class="wire-dot" style="background:#2980b9"></div>Neutralledare — 0 V</div>
+      <div class="wire"><div class="wire-dot" style="background:#f1c40f;border:2px solid #888"></div>Skyddsledare (PE)</div>
+      <div class="volt-footer" style="font-size:0.82rem;color:var(--muted);display:flex;flex-direction:column;gap:0.3rem">
+        <div>Fas – Neutral &nbsp;= <strong style="color:var(--primary)">230 V</strong></div>
+        <div>PE – Fas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong style="color:var(--primary)">230 V</strong></div>
+        <div>PE – Neutral &nbsp;&nbsp;= <strong style="color:var(--muted)">0 V</strong></div>
+      </div>
+      <svg class="volt-svg" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="80" cy="68" r="55" fill="#e5e7eb" stroke="#374151" stroke-width="2"/>
+        <circle cx="57" cy="82" r="14" fill="#d4edda" stroke="#374151" stroke-width="1"/>
+        <text x="57" y="82" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="sans-serif" font-weight="700" fill="#374151">PE</text>
+        <circle cx="80" cy="88" r="14" fill="#bfdbfe" stroke="#1d4ed8" stroke-width="1"/>
+        <text x="80" y="88" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="sans-serif" font-weight="700" fill="#1d4ed8">N</text>
+        <circle cx="103" cy="82" r="14" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+        <text x="103" y="82" text-anchor="middle" dominant-baseline="middle" font-size="9" font-family="sans-serif" font-weight="700" fill="#dc2626">L</text>
+      </svg>
+    </div>
+
+    <!-- TVÅFASMATNING -->
+    <div class="volt-card">
+      <h4>Tvåfasmatning <span style="font-size:0.7rem;font-weight:500;color:var(--muted);background:rgba(255,255,255,0.07);padding:0.15rem 0.45rem;border-radius:0.4rem;vertical-align:middle">Föråldrad</span></h4>
+      <div class="wire"><div class="wire-dot" style="background:#c0392b"></div>Fasledare 1</div>
+      <div class="wire"><div class="wire-dot" style="background:#555"></div>Fasledare 2</div>
+      <div class="wire"><div class="wire-dot" style="background:#2980b9"></div>Neutralledare</div>
+      <div class="wire"><div class="wire-dot" style="background:#f1c40f;border:2px solid #888"></div>Skyddsledare (PE)</div>
+      <div class="volt-footer" style="font-size:0.82rem;color:var(--muted);display:flex;flex-direction:column;gap:0.3rem">
+        <div>Fas – Fas &nbsp;&nbsp;&nbsp;&nbsp;= <strong style="color:var(--primary)">400 V</strong></div>
+        <div>Fas – Neutral &nbsp;= <strong style="color:var(--primary)">230 V</strong></div>
+        <div>PE – Fas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong style="color:var(--primary)">230 V</strong></div>
+        <div>PE – Neutral &nbsp;&nbsp;= <strong style="color:var(--muted)">0 V</strong></div>
+        <div style="margin-top:0.25rem;font-size:0.78rem;font-style:italic">Används i äldre villor och lantbruk. Välj enfas eller trefas i nya installationer.</div>
+      </div>
+      <svg class="volt-svg" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="80" cy="72" r="55" fill="#e5e7eb" stroke="#374151" stroke-width="2"/>
+        <circle cx="52" cy="90" r="12" fill="#d4edda" stroke="#374151" stroke-width="1"/>
+        <text x="52" y="90" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="sans-serif" font-weight="700" fill="#374151">PE</text>
+        <circle cx="80" cy="96" r="12" fill="#bfdbfe" stroke="#1d4ed8" stroke-width="1"/>
+        <text x="80" y="96" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="sans-serif" font-weight="700" fill="#1d4ed8">N</text>
+        <circle cx="65" cy="52" r="12" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+        <text x="65" y="52" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="sans-serif" font-weight="700" fill="#dc2626">L1</text>
+        <circle cx="97" cy="52" r="12" fill="#e5e7eb" stroke="#374151" stroke-width="1"/>
+        <text x="97" y="52" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="sans-serif" font-weight="700" fill="#374151">L2</text>
+      </svg>
+    </div>
+
+    <!-- TREFASMATNING -->
+    <div class="volt-card">
+      <h4>Trefasmatning</h4>
+      <div class="wire"><div class="wire-dot" style="background:#c0392b"></div>Fasledare L1</div>
+      <div class="wire"><div class="wire-dot" style="background:#555"></div>Fasledare L2</div>
+      <div class="wire"><div class="wire-dot" style="background:#8e44ad"></div>Fasledare L3</div>
+      <div class="wire"><div class="wire-dot" style="background:#2980b9"></div>Neutralledare</div>
+      <div class="wire"><div class="wire-dot" style="background:#f1c40f;border:2px solid #888"></div>Skyddsledare (PE)</div>
+      <div class="volt-footer" style="font-size:0.82rem;color:var(--muted);display:flex;flex-direction:column;gap:0.3rem">
+        <div>Fas – Fas &nbsp;&nbsp;&nbsp;&nbsp;= <strong style="color:var(--primary)">400 V</strong></div>
+        <div>Fas – Neutral &nbsp;= <strong style="color:var(--primary)">230 V</strong></div>
+        <div>PE – Fas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong style="color:var(--primary)">230 V</strong></div>
+        <div>PE – Neutral &nbsp;&nbsp;= <strong style="color:var(--muted)">0 V</strong></div>
+      </div>
+      <svg class="volt-svg" viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="80" cy="72" r="55" fill="#e5e7eb" stroke="#374151" stroke-width="2"/>
+        <circle cx="80" cy="25" r="11" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+        <text x="80" y="25" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="sans-serif" font-weight="700" fill="#dc2626">L1</text>
+        <circle cx="116" cy="47" r="11" fill="#e5e7eb" stroke="#525252" stroke-width="1"/>
+        <text x="116" y="47" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="sans-serif" font-weight="700" fill="#374151">L2</text>
+        <circle cx="105" cy="95" r="11" fill="#e9d5ff" stroke="#6b7280" stroke-width="1"/>
+        <text x="105" y="95" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="sans-serif" font-weight="700" fill="#6b7280">L3</text>
+        <circle cx="55" cy="95" r="11" fill="#bfdbfe" stroke="#1d4ed8" stroke-width="1"/>
+        <text x="55" y="95" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="sans-serif" font-weight="700" fill="#1d4ed8">N</text>
+        <circle cx="44" cy="47" r="11" fill="#d4edda" stroke="#374151" stroke-width="1"/>
+        <text x="44" y="47" text-anchor="middle" dominant-baseline="middle" font-size="8" font-family="sans-serif" font-weight="700" fill="#374151">PE</text>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- KABELDIMENSIONERING -->
+<section class="section" id="kabeldim">
+  <div class="section-header">
+    <div class="section-icon">📏</div>
+    <div>
+      <h4>Avsnitt 4b</h4>
+      <h2>Kabeldimensionering</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">En korrekt dimensionering är viktig för att ingen kabel ska bli varm under normal drift och för att klara kortslutningsströmmar.</p>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Att dimensionera en starkströmskabel kräver kunskap om:</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.75rem;margin-top:0.75rem">
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.75rem">
+        <div style="font-weight:700;color:var(--primary);font-size:0.85rem">Ledarmaterial</div>
+        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">Koppar eller aluminium — koppar leder bättre men är tyngre</div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.75rem">
+        <div style="font-weight:700;color:var(--primary);font-size:0.85rem">Ström (A)</div>
+        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">Hur hög ström ska användas — bestämmer minsta area</div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.75rem">
+        <div style="font-weight:700;color:var(--primary);font-size:0.85rem">Kabelns längd</div>
+        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">Längre kabel → högre resistans → mer spänningsfall</div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.75rem">
+        <div style="font-weight:700;color:var(--primary);font-size:0.85rem">Förläggningssätt</div>
+        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">I rör, fast, i luft — påverkar hur mycket värme kabeln kan avge</div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.75rem">
+        <div style="font-weight:700;color:var(--primary);font-size:0.85rem">Omgivningstemperatur</div>
+        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">Hög temperatur minskar kabelns strömkapacitet</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Säkring → Färg → Min. kabelarea (koppar)</h3>
+    <p style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">Gäller för normala installationer med kortare längder (60–80 m). Förenklad dimensioneringsregel.</p>
+    <table class="fuse-table">
+      <thead>
+        <tr>
+          <th>Säkring</th>
+          <th>Färg</th>
+          <th>Min. kabelarea</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>6 A</td><td><span class="fuse-dot" style="background:#2e7d32"></span>Grön</td><td>1 mm²</td></tr>
+        <tr><td>10 A</td><td><span class="fuse-dot" style="background:#c62828"></span>Röd</td><td>1,5 mm²</td></tr>
+        <tr><td>16 A</td><td><span class="fuse-dot" style="background:#9e9e9e"></span>Grå</td><td>2,5 mm²</td></tr>
+        <tr><td>20 A</td><td><span class="fuse-dot" style="background:#1565c0"></span>Blå</td><td>4 mm²</td></tr>
+        <tr><td>25 A</td><td><span class="fuse-dot" style="background:#f9a825"></span>Gul</td><td>6 mm²</td></tr>
+        <tr><td>32 A</td><td><span class="fuse-dot" style="background:#212121"></span>Svart</td><td>10 mm²</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ELNÄTETS UPPBYGGNAD -->
+<section class="section" id="elnat">
+  <div class="section-header">
+    <div class="section-icon">🔋</div>
+    <div>
+      <h4>Avsnitt 4c</h4>
+      <h2>Elnätets uppbyggnad</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">Elnätet är uppbyggt i nivåer från kraftverk till fastighet — spänningen transformeras ned i steg längs vägen.</p>
+
+  <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem">
+    <div class="grid-node">
+      <div class="kv">Kraftverk → 400 kV</div>
+      <div class="label">Stamnät</div>
+      <div class="desc">Landets ryggrad — binder ihop kraftverk och regioner. Förvaltas av Svenska kraftnät.</div>
+    </div>
+    <div class="grid-arrow">↓</div>
+    <div class="grid-node">
+      <div class="kv">Stamnätsstation</div>
+      <div class="label">Transformation 400 kV → 40–130 kV</div>
+      <div class="desc">Transformerar ned till regionnätsnivå.</div>
+    </div>
+    <div class="grid-arrow">↓</div>
+    <div class="grid-node">
+      <div class="kv">Regionnät — 40–130 kV</div>
+      <div class="label">Regionnät</div>
+      <div class="desc">Distribuerar el inom en region till fördelningsstationer och större industrier.</div>
+    </div>
+    <div class="grid-arrow">↓</div>
+    <div class="grid-node">
+      <div class="kv">Fördelningsstation → 10–20 kV</div>
+      <div class="label">Mellanspänning / Lokalnät</div>
+      <div class="desc">Tar emot från regionnätet och matar lokala nätstationer. Kan vara nergrävd kabel i städer.</div>
+    </div>
+    <div class="grid-arrow">↓</div>
+    <div class="grid-node">
+      <div class="kv">Nätstation → 400 V</div>
+      <div class="label">Lågspänning / Lokalnät</div>
+      <div class="desc">Sista steget — matar hushåll och småföretag med 400 V (trefas) / 230 V (enfas).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <svg class="svg-illustration" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Elnätets uppbyggnad – flödesdiagram från kraftverk till hushåll">
+      <!-- Background -->
+      <rect width="480" height="300" fill="#ffffff"/>
+
+      <!-- ── Level 1: Stamnät ── -->
+      <rect x="140" y="15" width="200" height="42" rx="8" fill="#fef9f0" stroke="#c5a059" stroke-width="2"/>
+      <text x="240" y="32" text-anchor="middle" font-size="13" font-family="sans-serif" font-weight="800" fill="#374151">Stamnät</text>
+      <text x="240" y="48" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#c5a059">400 kV</text>
+
+      <!-- Arrow 1 -->
+      <line x1="240" y1="57" x2="240" y2="72" stroke="#374151" stroke-width="2"/>
+      <polygon points="240,77 235,68 245,68" fill="#374151"/>
+
+      <!-- ── Level 2: Regionnät ── -->
+      <rect x="155" y="78" width="170" height="38" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+      <text x="240" y="93" text-anchor="middle" font-size="11" font-family="sans-serif" font-weight="700" fill="#374151">Regionnät</text>
+      <text x="240" y="108" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#6b7280">40–130 kV</text>
+
+      <!-- Arrow 2 -->
+      <line x1="240" y1="116" x2="240" y2="131" stroke="#374151" stroke-width="2"/>
+      <polygon points="240,136 235,127 245,127" fill="#374151"/>
+
+      <!-- ── Level 3: Mellanspänning ── -->
+      <rect x="155" y="137" width="170" height="38" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+      <text x="240" y="152" text-anchor="middle" font-size="11" font-family="sans-serif" font-weight="700" fill="#374151">Mellanspänning</text>
+      <text x="240" y="167" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#6b7280">10–20 kV</text>
+
+      <!-- Arrow 3 -->
+      <line x1="240" y1="175" x2="240" y2="190" stroke="#374151" stroke-width="2"/>
+      <polygon points="240,195 235,186 245,186" fill="#374151"/>
+
+      <!-- ── Level 4: Nätstation ── -->
+      <rect x="155" y="196" width="170" height="38" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+      <text x="240" y="211" text-anchor="middle" font-size="11" font-family="sans-serif" font-weight="700" fill="#374151">Nätstation</text>
+      <text x="240" y="226" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#6b7280">→ 400 V</text>
+
+      <!-- Arrow 4 -->
+      <line x1="240" y1="234" x2="240" y2="249" stroke="#374151" stroke-width="2"/>
+      <polygon points="240,254 235,245 245,245" fill="#374151"/>
+
+      <!-- ── Level 5: Hushåll ── -->
+      <rect x="140" y="255" width="200" height="42" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <!-- Simple house icon -->
+      <polygon points="207,280 213,273 219,280" fill="#16a34a"/>
+      <rect x="209" y="280" width="8" height="7" fill="#16a34a"/>
+      <text x="228" y="270" text-anchor="start" font-size="12" font-family="sans-serif" font-weight="800" fill="#374151">Hushåll / Företag</text>
+      <text x="240" y="287" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#16a34a">230 V / 400 V</text>
+    </svg>
+  </div>
+</section>
+
+<!-- VP-RÖR -->
+<section class="section" id="vpror">
+  <div class="section-header">
+    <div class="section-icon">🔵</div>
+    <div>
+      <h4>Avsnitt 4d</h4>
+      <h2>Storlek på VP-röret</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">VP-rör (vinyl-plast-rör) används för att skydda kablar vid förläggning. Storleken beror på antal kablar och kabelarea.</p>
+
+  <div class="card">
+    <h3>Dimensioneringstabell — VP-rör (mm)</h3>
+    <table class="vp-table">
+      <thead>
+        <tr>
+          <th>Area</th>
+          <th>2 kablar</th>
+          <th>3 kablar</th>
+          <th>4 kablar</th>
+          <th>5 kablar</th>
+          <th>6 kablar</th>
+          <th>7 kablar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1,5 mm²</td><td>16</td><td>16</td><td>16</td><td>16</td><td>20</td><td>20</td></tr>
+        <tr><td>2,5 mm²</td><td>16</td><td>16</td><td>16</td><td>20</td><td>20</td><td>25</td></tr>
+        <tr><td>4 mm²</td><td>16</td><td>20</td><td>20</td><td>25</td><td>25</td><td>32</td></tr>
+        <tr><td>6 mm²</td><td>20</td><td>20</td><td>25</td><td>25</td><td>32</td><td>32</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.8rem;color:var(--muted);margin-top:0.75rem">Värdena anger rördiameter i mm. Fyll max 40 % av rörets tvärsnittsarea med kablar.</p>
+  </div>
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="script.js"></script>
+  </div><!-- /main-content -->
+</div><!-- /layout-wrapper -->
+</body>
+</html>

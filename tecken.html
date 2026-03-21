@@ -24,7 +24,10 @@
       <a href="material.html" class="sidebar-link "><span class="sidebar-icon">🧱</span> Material</a>
       <a href="symboler.html" class="sidebar-link "><span class="sidebar-icon">📐</span> Symboler</a>
       <a href="kabeltyper.html" class="sidebar-link "><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kabeldim.html" class="sidebar-link "><span class="sidebar-icon">📏</span> Kabeldim.</a>
       <a href="kretsar.html" class="sidebar-link "><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="trefas.html" class="sidebar-link "><span class="sidebar-icon">🔄</span> Trefas</a>
+      <a href="skydd.html" class="sidebar-link "><span class="sidebar-icon">🛡️</span> Skydd</a>
       <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
       <a href="tecken.html" class="sidebar-link active"><span class="sidebar-icon">🔤</span> Tecken</a>
       <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
@@ -183,9 +186,9 @@
     <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Grafiska symboler som används i kretsscheman enligt europeisk standard.</p>
     <div class="legend-sym-grid">
       <div class="legend-sym-item">
-        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="17" y2="20" stroke="currentColor" stroke-width="2"/><line x1="17" y1="10" x2="17" y2="30" stroke="currentColor" stroke-width="3"/><line x1="23" y1="14" x2="23" y2="26" stroke="currentColor" stroke-width="1.5"/><line x1="29" y1="10" x2="29" y2="30" stroke="currentColor" stroke-width="3"/><line x1="35" y1="14" x2="35" y2="26" stroke="currentColor" stroke-width="1.5"/><line x1="41" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="2"/><line x1="32" y1="8" x2="32" y2="32" stroke="currentColor" stroke-width="2"/><line x1="48" y1="14" x2="48" y2="26" stroke="currentColor" stroke-width="5"/><line x1="48" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/><text x="28" y="7" font-size="8" font-weight="bold" fill="currentColor">+</text><text x="44" y="7" font-size="8" font-weight="bold" fill="currentColor">−</text></svg>
         <div class="legend-sym-name">Batteri / DC-källa</div>
-        <div class="legend-sym-sub">Lång linje = plus (+), kort = minus (−)</div>
+        <div class="legend-sym-sub">Lång linje = plus (+), kort tjock = minus (−)</div>
       </div>
       <div class="legend-sym-item">
         <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="17" y2="20" stroke="currentColor" stroke-width="2"/><rect x="17" y="12" width="46" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="2"/><line x1="63" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
@@ -203,7 +206,7 @@
         <div class="legend-sym-sub">Laddningslagring</div>
       </div>
       <div class="legend-sym-item">
-        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="15" y2="20" stroke="currentColor" stroke-width="2"/><path d="M15,20 C20,20 20,8 25,8 C30,8 30,32 35,32 C40,32 40,8 45,8 C50,8 50,32 55,32 C60,32 60,20 65,20" fill="none" stroke="currentColor" stroke-width="2"/><line x1="65" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="13" y2="20" stroke="currentColor" stroke-width="2"/><path d="M13,20 A7,7 0 0,1 27,20" fill="none" stroke="currentColor" stroke-width="2"/><path d="M27,20 A7,7 0 0,1 41,20" fill="none" stroke="currentColor" stroke-width="2"/><path d="M41,20 A7,7 0 0,1 55,20" fill="none" stroke="currentColor" stroke-width="2"/><path d="M55,20 A7,7 0 0,1 67,20" fill="none" stroke="currentColor" stroke-width="2"/><line x1="67" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
         <div class="legend-sym-name">Spole / Induktor</div>
         <div class="legend-sym-sub">Induktiv komponent</div>
       </div>
@@ -213,19 +216,24 @@
         <div class="legend-sym-sub">Leder enbart en riktning (A→K)</div>
       </div>
       <div class="legend-sym-item">
-        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="35" y2="20" stroke="currentColor" stroke-width="2"/><line x1="35" y1="10" x2="35" y2="30" stroke="currentColor" stroke-width="2"/><line x1="45" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="28" x2="24" y2="28" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="28" r="2.5" fill="currentColor"/><circle cx="56" cy="28" r="2.5" fill="currentColor"/><line x1="56" y1="28" x2="75" y2="28" stroke="currentColor" stroke-width="2"/><line x1="24" y1="28" x2="52" y2="10" stroke="currentColor" stroke-width="2"/></svg>
         <div class="legend-sym-name">NO-brytare</div>
         <div class="legend-sym-sub">Normalt öppen kontakt</div>
       </div>
       <div class="legend-sym-item">
-        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="2"/><line x1="25" y1="10" x2="25" y2="30" stroke="currentColor" stroke-width="2"/><line x1="55" y1="10" x2="55" y2="30" stroke="currentColor" stroke-width="2"/><line x1="55" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/><line x1="25" y1="15" x2="55" y2="15" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4,3"/></svg>
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="28" x2="24" y2="28" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="28" r="2.5" fill="currentColor"/><circle cx="56" cy="28" r="2.5" fill="currentColor"/><line x1="56" y1="28" x2="75" y2="28" stroke="currentColor" stroke-width="2"/><line x1="24" y1="28" x2="56" y2="28" stroke="currentColor" stroke-width="2"/><line x1="38" y1="34" x2="44" y2="14" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">NC-brytare</div>
+        <div class="legend-sym-sub">Normalt sluten kontakt</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="18" y2="20" stroke="currentColor" stroke-width="2"/><rect x="18" y="12" width="44" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="2"/><line x1="18" y1="20" x2="62" y2="20" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4,3"/><line x1="62" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
         <div class="legend-sym-name">Säkring</div>
         <div class="legend-sym-sub">Kortslutningsskydd</div>
       </div>
       <div class="legend-sym-item">
         <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="40" y1="5" x2="40" y2="20" stroke="currentColor" stroke-width="2"/><line x1="28" y1="20" x2="52" y2="20" stroke="currentColor" stroke-width="2"/><line x1="32" y1="26" x2="48" y2="26" stroke="currentColor" stroke-width="2"/><line x1="36" y1="32" x2="44" y2="32" stroke="currentColor" stroke-width="2"/></svg>
-        <div class="legend-sym-name">Jordning</div>
-        <div class="legend-sym-sub">Skydds- / funktionsjord</div>
+        <div class="legend-sym-name">Jordjord (Earth)</div>
+        <div class="legend-sym-sub">AC-nät · skydds- och funktionsjord</div>
       </div>
       <div class="legend-sym-item">
         <svg viewBox="0 0 80 40" class="legend-sym-svg"><circle cx="40" cy="20" r="15" stroke="currentColor" stroke-width="2" fill="none"/><text x="40" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="currentColor">A</text><line x1="5" y1="20" x2="25" y2="20" stroke="currentColor" stroke-width="2"/><line x1="55" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
@@ -241,6 +249,36 @@
         <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="22" y2="20" stroke="currentColor" stroke-width="2"/><circle cx="40" cy="20" r="16" stroke="currentColor" stroke-width="2" fill="none"/><path d="M30,20 C33,13 37,27 40,20 C43,13 47,27 50,20" fill="none" stroke="currentColor" stroke-width="2"/><line x1="58" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
         <div class="legend-sym-name">AC-källa</div>
         <div class="legend-sym-sub">Växelströmskälla</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="14" y2="20" stroke="currentColor" stroke-width="2"/><path d="M14,20 A6,6 0 0,1 26,20" fill="none" stroke="currentColor" stroke-width="2"/><path d="M26,20 A6,6 0 0,1 38,20" fill="none" stroke="currentColor" stroke-width="2"/><line x1="40" y1="6" x2="40" y2="34" stroke="currentColor" stroke-width="1" opacity="0.4"/><line x1="43" y1="6" x2="43" y2="34" stroke="currentColor" stroke-width="1" opacity="0.4"/><path d="M45,20 A6,6 0 0,0 57,20" fill="none" stroke="currentColor" stroke-width="2"/><path d="M57,20 A6,6 0 0,0 69,20" fill="none" stroke="currentColor" stroke-width="2"/><line x1="69" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Transformator</div>
+        <div class="legend-sym-sub">Spänningsomvandling</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="22" y2="20" stroke="currentColor" stroke-width="2"/><polygon points="22,10 22,30 48,20" fill="none" stroke="currentColor" stroke-width="2"/><line x1="48" y1="10" x2="48" y2="30" stroke="currentColor" stroke-width="2"/><line x1="48" y1="20" x2="65" y2="20" stroke="currentColor" stroke-width="2"/><line x1="52" y1="8" x2="60" y2="2" stroke="currentColor" stroke-width="1.5" opacity="0.7"/><line x1="57" y1="12" x2="67" y2="8" stroke="currentColor" stroke-width="1.5" opacity="0.7"/></svg>
+        <div class="legend-sym-name">LED (Lysdiod)</div>
+        <div class="legend-sym-sub">Avger ljus</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="5" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="2"/><circle cx="40" cy="20" r="16" stroke="currentColor" stroke-width="2" fill="none"/><text x="40" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="currentColor">M</text><line x1="56" y1="20" x2="75" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Motor</div>
+        <div class="legend-sym-sub">Elektrisk motor</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="40" y1="2" x2="40" y2="8" stroke="currentColor" stroke-width="2"/><circle cx="40" cy="17" r="9" stroke="currentColor" stroke-width="2" fill="none"/><line x1="40" y1="17" x2="40" y2="21" stroke="currentColor" stroke-width="2"/><line x1="30" y1="21" x2="50" y2="21" stroke="currentColor" stroke-width="2.5"/><line x1="33" y1="27" x2="47" y2="27" stroke="currentColor" stroke-width="1.5"/><line x1="36" y1="33" x2="44" y2="33" stroke="currentColor" stroke-width="1"/></svg>
+        <div class="legend-sym-name">Skyddsjord (PE)</div>
+        <div class="legend-sym-sub">AC-jord · IEC 60417-5019</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="40" y1="3" x2="40" y2="14" stroke="currentColor" stroke-width="2"/><line x1="22" y1="14" x2="58" y2="14" stroke="currentColor" stroke-width="2"/><line x1="25" y1="14" x2="17" y2="30" stroke="currentColor" stroke-width="2"/><line x1="34" y1="14" x2="26" y2="30" stroke="currentColor" stroke-width="2"/><line x1="43" y1="14" x2="35" y2="30" stroke="currentColor" stroke-width="2"/><line x1="52" y1="14" x2="44" y2="30" stroke="currentColor" stroke-width="2"/></svg>
+        <div class="legend-sym-name">Chassijord</div>
+        <div class="legend-sym-sub">DC-kretsar · referens mot chassi/hölje</div>
+      </div>
+      <div class="legend-sym-item">
+        <svg viewBox="0 0 80 40" class="legend-sym-svg"><line x1="40" y1="3" x2="40" y2="13" stroke="currentColor" stroke-width="2"/><polygon points="20,13 60,13 40,36" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        <div class="legend-sym-name">Signaljord</div>
+        <div class="legend-sym-sub">Elektronik · signalreferenspotential</div>
       </div>
     </div>
   </div>

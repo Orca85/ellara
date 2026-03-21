@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trefassystem – Ellära</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+</nav>
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link "><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html" class="sidebar-link "><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html" class="sidebar-link "><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html" class="sidebar-link "><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html" class="sidebar-link "><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kabeldim.html" class="sidebar-link "><span class="sidebar-icon">📏</span> Kabeldim.</a>
+      <a href="kretsar.html" class="sidebar-link "><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="trefas.html" class="sidebar-link active"><span class="sidebar-icon">🔄</span> Trefas</a>
+      <a href="skydd.html" class="sidebar-link "><span class="sidebar-icon">🛡️</span> Skydd</a>
+      <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
+    </nav>
+  </aside>
+  <div class="main-content">
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" class="search-input" placeholder="Sök — t.ex. neutralledare, symmetri, trefas…" autocomplete="off" spellcheck="false"/>
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<!-- SYMMETRISK -->
+<section class="section" id="symmetrisk">
+  <div class="section-header">
+    <div class="section-icon">🔄</div>
+    <div>
+      <h4>Avsnitt 5a</h4>
+      <h2>Symmetriska trefastlaster</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">En symmetrisk last belastar alla tre faser lika mycket — neutralledaren bär ingen ström.</p>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Vad är en symmetrisk trefaslast?</h3>
+    <p>En symmetrisk trefaslast belastar de tre olika faserna <strong style="color:var(--primary)">lika mycket</strong>, dvs impedansen i alla tre faserna och därmed är även strömmen lika stor.</p>
+    <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.5rem;color:var(--muted)">
+      <li>Returströmmar som kommer från lasterna till neutralskenan är då lika stora för varje fas och kommer att balansera varandra i nollpunkten.</li>
+      <li>Det innebär att <strong style="color:var(--primary)">summaströmmen och spänningen blir noll i neutralpunkten</strong> (anläggningens nollpunkt).</li>
+      <li>Resulterande potential = <strong style="color:var(--primary)">Noll volt</strong> — multimetern visar 0 V.</li>
+    </ul>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">🔁 Fasströmmar</h3>
+      <p style="color:var(--muted);font-size:0.9rem">I<sub>L1</sub> = I<sub>L2</sub> = I<sub>L3</sub><br>Alla lika stora → summan = 0</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">⚖️ Nollpunktsström</h3>
+      <p style="color:var(--muted);font-size:0.9rem">I<sub>N</sub> = I<sub>L1</sub> + I<sub>L2</sub> + I<sub>L3</sub> = <strong style="color:var(--primary)">0 A</strong><br>Ingen ström i neutralledaren</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">📊 Vektordiagram</h3>
+      <p style="color:var(--muted);font-size:0.9rem">De tre vektorerna är exakt 120° förskjutna och tar ut varandra — resultanten är noll.</p>
+    </div>
+  </div>
+
+  <!-- Phasor diagrams: symmetric vs asymmetric -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Fasördiagram – symmetrisk vs osymmetrisk last</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-top:1rem">
+
+      <!-- SVG 1: Symmetric phasor -->
+      <div style="text-align:center">
+        <svg viewBox="0 0 200 220" style="max-width:200px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fasördiagram symmetrisk last">
+          <rect width="200" height="220" fill="#fff"/>
+          <!-- Dashed reference circle -->
+          <circle cx="100" cy="110" r="72" fill="none" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <!-- L1 vector: up, (100,110) → (100,38) -->
+          <line x1="100" y1="110" x2="100" y2="42" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="100,38 96,48 104,48" fill="#dc2626"/>
+          <text x="106" y="44" font-family="sans-serif" font-size="11" fill="#dc2626" font-weight="700">L1</text>
+          <!-- L2 vector: 120° CW from up → points SE, (100,110)→(162,146) -->
+          <line x1="100" y1="110" x2="158" y2="143" stroke="#525252" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="162,146 152,141 155,151" fill="#525252"/>
+          <text x="163" y="148" font-family="sans-serif" font-size="11" fill="#525252" font-weight="700">L2</text>
+          <!-- L3 vector: 240° CW from up → points SW, (100,110)→(38,146) -->
+          <line x1="100" y1="110" x2="42" y2="143" stroke="#6b7280" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="38,146 48,141 45,151" fill="#6b7280"/>
+          <text x="12" y="148" font-family="sans-serif" font-size="11" fill="#6b7280" font-weight="700">L3</text>
+          <!-- Center dot -->
+          <circle cx="100" cy="110" r="4" fill="#374151"/>
+          <!-- Sum label -->
+          <text x="100" y="174" font-family="sans-serif" font-size="11" fill="#6b7280" text-anchor="middle">∑I = 0</text>
+          <!-- Title -->
+          <text x="100" y="210" font-family="sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">Symmetrisk</text>
+        </svg>
+      </div>
+
+      <!-- SVG 2: Asymmetric phasor -->
+      <div style="text-align:center">
+        <svg viewBox="0 0 200 220" style="max-width:200px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fasördiagram osymmetrisk last">
+          <rect width="200" height="220" fill="#fff"/>
+          <!-- Dashed reference circle -->
+          <circle cx="100" cy="110" r="72" fill="none" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <!-- L1 vector: full length 72, up (100,110)→(100,38) -->
+          <line x1="100" y1="110" x2="100" y2="42" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="100,38 96,48 104,48" fill="#dc2626"/>
+          <text x="106" y="44" font-family="sans-serif" font-size="11" fill="#dc2626" font-weight="700">L1</text>
+          <!-- L2 vector: short length 44, 120° CW → (100+44*0.866, 110+44*0.5)=(138,132) -->
+          <line x1="100" y1="110" x2="135" y2="130" stroke="#525252" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="138,132 128,129 131,139" fill="#525252"/>
+          <text x="139" y="134" font-family="sans-serif" font-size="11" fill="#525252" font-weight="700">L2</text>
+          <!-- L3 vector: long length 90, 240° CW → (100-90*0.866, 110+90*0.5)=(22,155) -->
+          <line x1="100" y1="110" x2="26" y2="152" stroke="#6b7280" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="22,155 32,149 29,159" fill="#6b7280"/>
+          <text x="4" y="157" font-family="sans-serif" font-size="11" fill="#6b7280" font-weight="700">L3</text>
+          <!-- Resultant dashed gold: sum vector (0,-72)+(38,22)+(-78,45)=(-40,-5), end=(60,105) -->
+          <line x1="100" y1="110" x2="62" y2="106" stroke="#c5a059" stroke-width="2" stroke-dasharray="5,3"/>
+          <polygon points="60,105 70,101 70,110" fill="#c5a059"/>
+          <text x="50" y="96" font-family="sans-serif" font-size="9" fill="#c5a059" font-weight="700">∑I</text>
+          <!-- Center dot -->
+          <circle cx="100" cy="110" r="4" fill="#374151"/>
+          <!-- Sum label -->
+          <text x="100" y="174" font-family="sans-serif" font-size="11" fill="#dc2626" text-anchor="middle" font-weight="700">∑I ≠ 0</text>
+          <!-- Title -->
+          <text x="100" y="210" font-family="sans-serif" font-size="12" fill="#374151" text-anchor="middle" font-weight="700">Osymmetrisk</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three-phase circuit: symmetric (equal loads, meter = 0V) -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Trefaskrets – symmetrisk last</h3>
+    <div style="overflow-x:auto;margin-top:1rem">
+      <svg viewBox="0 0 480 160" style="max-width:480px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trefaskrets med symmetrisk last">
+        <rect width="480" height="160" fill="#fff"/>
+
+        <!-- Transformer block -->
+        <rect x="15" y="20" width="65" height="120" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+        <text x="47" y="55" font-family="sans-serif" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">Trafo</text>
+        <text x="47" y="70" font-family="sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">Y-Δ</text>
+
+        <!-- Phase output dots on transformer -->
+        <circle cx="80" cy="50" r="3" fill="#dc2626"/>
+        <circle cx="80" cy="80" r="3" fill="#525252"/>
+        <circle cx="80" cy="110" r="3" fill="#6b7280"/>
+        <circle cx="80" cy="135" r="3" fill="#2563eb"/>
+
+        <!-- L1 phase line -->
+        <line x1="80" y1="50" x2="360" y2="50" stroke="#dc2626" stroke-width="2"/>
+        <text x="82" y="44" font-family="sans-serif" font-size="11" fill="#dc2626" font-weight="700">L1</text>
+        <!-- Current arrow L1 -->
+        <polygon points="220,46 230,50 220,54" fill="#dc2626"/>
+
+        <!-- L2 phase line -->
+        <line x1="80" y1="80" x2="360" y2="80" stroke="#525252" stroke-width="2"/>
+        <text x="82" y="74" font-family="sans-serif" font-size="11" fill="#525252" font-weight="700">L2</text>
+        <!-- Current arrow L2 -->
+        <polygon points="220,76 230,80 220,84" fill="#525252"/>
+
+        <!-- L3 phase line -->
+        <line x1="80" y1="110" x2="360" y2="110" stroke="#6b7280" stroke-width="2"/>
+        <text x="82" y="104" font-family="sans-serif" font-size="11" fill="#6b7280" font-weight="700">L3</text>
+        <!-- Current arrow L3 -->
+        <polygon points="220,106 230,110 220,114" fill="#6b7280"/>
+
+        <!-- N neutral line -->
+        <line x1="80" y1="135" x2="450" y2="135" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="82" y="129" font-family="sans-serif" font-size="10" fill="#2563eb" font-weight="700">N</text>
+
+        <!-- Equal load boxes -->
+        <rect x="360" y="40" width="30" height="20" rx="3" fill="#fef9f0" stroke="#374151" stroke-width="1.5"/>
+        <text x="375" y="54" font-family="sans-serif" font-size="10" fill="#374151" text-anchor="middle" font-weight="700">R</text>
+
+        <rect x="360" y="70" width="30" height="20" rx="3" fill="#fef9f0" stroke="#374151" stroke-width="1.5"/>
+        <text x="375" y="84" font-family="sans-serif" font-size="10" fill="#374151" text-anchor="middle" font-weight="700">R</text>
+
+        <rect x="360" y="100" width="30" height="20" rx="3" fill="#fef9f0" stroke="#374151" stroke-width="1.5"/>
+        <text x="375" y="114" font-family="sans-serif" font-size="10" fill="#374151" text-anchor="middle" font-weight="700">R</text>
+
+        <!-- Lines from load boxes to common join at x=410 -->
+        <line x1="390" y1="50" x2="410" y2="50" stroke="#374151" stroke-width="1.5"/>
+        <line x1="390" y1="80" x2="410" y2="80" stroke="#374151" stroke-width="1.5"/>
+        <line x1="390" y1="110" x2="410" y2="110" stroke="#374151" stroke-width="1.5"/>
+        <!-- Vertical join line -->
+        <line x1="410" y1="50" x2="410" y2="110" stroke="#374151" stroke-width="1.5"/>
+        <!-- Join down to neutral -->
+        <line x1="410" y1="110" x2="410" y2="135" stroke="#374151" stroke-width="1.5"/>
+        <line x1="410" y1="135" x2="436" y2="135" stroke="#374151" stroke-width="1.5"/>
+
+        <!-- Meter circle -->
+        <circle cx="450" cy="135" r="14" fill="#fff" stroke="#374151" stroke-width="1.5"/>
+        <text x="450" y="139" font-family="sans-serif" font-size="10" fill="#059669" text-anchor="middle" font-weight="700">0V</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- OSYMMETRISK -->
+<section class="section" id="osymmetrisk">
+  <div class="section-header">
+    <div class="section-icon">⚠️</div>
+    <div>
+      <h4>Avsnitt 5b</h4>
+      <h2>Osymmetriska trefastlaster</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">En osymmetrisk last belastar faserna olika — en ström uppstår i neutralledaren.</p>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Vad händer vid osymmetrisk last?</h3>
+    <p>Detta är inte fallet vid en osymmetrisk trefaslast. I detta fallet är belastningen i de tre olika faserna <strong style="color:var(--primary)">olika stor</strong> — dvs impedansen i faserna är olika.</p>
+    <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.5rem;color:var(--muted)">
+      <li>Det innebär att strömmen i faserna <strong style="color:var(--primary)">inte balanserar varandra</strong> → nollpunktsström ≠ 0.</li>
+      <li>Strömmen i faserna (nollpunkt) inte balanserar och därmed kommer anläggningens spänningen mot neutralpunkten.</li>
+      <li>Det blir en <strong style="color:var(--primary)">potentialskillnad</strong> mellan transformatorns neutralpunkt och anläggningens neutralpunkt.</li>
+      <li>Resulterande potential = <strong style="color:var(--primary)">&gt; 0 V</strong> — multimetern visar mer än noll volt.</li>
+    </ul>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">⚡ Fasströmmar</h3>
+      <p style="color:var(--muted);font-size:0.9rem">I<sub>L1</sub> ≠ I<sub>L2</sub> ≠ I<sub>L3</sub><br>Olika stora → summan ≠ 0</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">⚖️ Nollpunktsström</h3>
+      <p style="color:var(--muted);font-size:0.9rem">I<sub>N</sub> = I<sub>L1</sub> + I<sub>L2</sub> + I<sub>L3</sub> ≠ <strong style="color:var(--primary)">0 A</strong><br>Ström flödar i neutralledaren</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">📊 Vektordiagram</h3>
+      <p style="color:var(--muted);font-size:0.9rem">Vektorerna tar inte ut varandra — resultanten är större än noll.</p>
+    </div>
+  </div>
+
+  <!-- Three-phase circuit: asymmetric (unequal loads, meter > 0V) -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Trefaskrets – osymmetrisk last</h3>
+    <div style="overflow-x:auto;margin-top:1rem">
+      <svg viewBox="0 0 480 160" style="max-width:480px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trefaskrets med osymmetrisk last">
+        <rect width="480" height="160" fill="#fff"/>
+
+        <!-- Transformer block -->
+        <rect x="15" y="20" width="65" height="120" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+        <text x="47" y="55" font-family="sans-serif" font-size="11" fill="#374151" text-anchor="middle" font-weight="700">Trafo</text>
+        <text x="47" y="70" font-family="sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">Y-Δ</text>
+
+        <!-- Phase output dots on transformer -->
+        <circle cx="80" cy="50" r="3" fill="#dc2626"/>
+        <circle cx="80" cy="80" r="3" fill="#525252"/>
+        <circle cx="80" cy="110" r="3" fill="#6b7280"/>
+        <circle cx="80" cy="135" r="3" fill="#2563eb"/>
+
+        <!-- L1 phase line -->
+        <line x1="80" y1="50" x2="360" y2="50" stroke="#dc2626" stroke-width="2"/>
+        <text x="82" y="44" font-family="sans-serif" font-size="11" fill="#dc2626" font-weight="700">L1</text>
+        <polygon points="220,46 230,50 220,54" fill="#dc2626"/>
+
+        <!-- L2 phase line -->
+        <line x1="80" y1="80" x2="360" y2="80" stroke="#525252" stroke-width="2"/>
+        <text x="82" y="74" font-family="sans-serif" font-size="11" fill="#525252" font-weight="700">L2</text>
+        <polygon points="220,76 230,80 220,84" fill="#525252"/>
+
+        <!-- L3 phase line -->
+        <line x1="80" y1="110" x2="360" y2="110" stroke="#6b7280" stroke-width="2"/>
+        <text x="82" y="104" font-family="sans-serif" font-size="11" fill="#6b7280" font-weight="700">L3</text>
+        <polygon points="220,106 230,110 220,114" fill="#6b7280"/>
+
+        <!-- N neutral line -->
+        <line x1="80" y1="135" x2="450" y2="135" stroke="#2563eb" stroke-width="1.5"/>
+        <text x="82" y="129" font-family="sans-serif" font-size="10" fill="#2563eb" font-weight="700">N</text>
+
+        <!-- UNEQUAL load boxes -->
+        <!-- L1: small box -->
+        <rect x="360" y="43" width="20" height="14" rx="3" fill="#fef9f0" stroke="#374151" stroke-width="1.5"/>
+        <text x="370" y="54" font-family="sans-serif" font-size="9" fill="#374151" text-anchor="middle" font-weight="700">R</text>
+
+        <!-- L2: medium box -->
+        <rect x="360" y="72" width="30" height="16" rx="3" fill="#fef9f0" stroke="#374151" stroke-width="1.5"/>
+        <text x="375" y="84" font-family="sans-serif" font-size="9" fill="#374151" text-anchor="middle" font-weight="700">2R</text>
+
+        <!-- L3: large box -->
+        <rect x="358" y="99" width="50" height="22" rx="3" fill="#fef9f0" stroke="#374151" stroke-width="1.5"/>
+        <text x="383" y="114" font-family="sans-serif" font-size="9" fill="#374151" text-anchor="middle" font-weight="700">3R</text>
+
+        <!-- Lines from load boxes to common join -->
+        <line x1="380" y1="50" x2="415" y2="50" stroke="#374151" stroke-width="1.5"/>
+        <line x1="390" y1="80" x2="415" y2="80" stroke="#374151" stroke-width="1.5"/>
+        <line x1="408" y1="110" x2="415" y2="110" stroke="#374151" stroke-width="1.5"/>
+        <!-- Vertical join line -->
+        <line x1="415" y1="50" x2="415" y2="110" stroke="#374151" stroke-width="1.5"/>
+        <!-- Join down to neutral -->
+        <line x1="415" y1="110" x2="415" y2="135" stroke="#374151" stroke-width="1.5"/>
+        <line x1="415" y1="135" x2="436" y2="135" stroke="#374151" stroke-width="1.5"/>
+
+        <!-- Meter circle — red >0V -->
+        <circle cx="450" cy="135" r="14" fill="#fff" stroke="#374151" stroke-width="1.5"/>
+        <text x="450" y="139" font-family="sans-serif" font-size="9" fill="#dc2626" text-anchor="middle" font-weight="700">&gt;0V</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- NEUTRALLEDAREN -->
+<section class="section" id="neutralledaren">
+  <div class="section-header">
+    <div class="section-icon">➖</div>
+    <div>
+      <h4>Avsnitt 5c</h4>
+      <h2>Neutralledaren</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">Neutralledaren kopplar ihop anläggningens neutralpunkt med transformatorns — och löser problemet med osymmetri.</p>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Varför behövs neutralledaren?</h3>
+    <p>Man löser problemet med osymmetrisk belastning genom att dra en <strong style="color:var(--primary)">neutralledare</strong> mellan anläggningens neutralpunkt och transformatorns neutralpunkt.</p>
+    <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.5rem;color:var(--muted)">
+      <li>I de fall man har en <strong style="color:var(--primary)">osymmetrisk belastning</strong> kommer det att gå en ström i neutralledaren till transformatorns neutralpunkt.</li>
+      <li>Neutralledaren "städar upp" obalansen — spänningen mot noll hålls stabil för alla faser.</li>
+      <li>Utan neutralledare (t.ex. i D-koppling) måste lasten vara symmetrisk — annars uppstår spänningsobalans.</li>
+    </ul>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">Y-koppling</h3>
+      <p style="color:var(--muted);font-size:0.9rem">Har neutralpunkt — neutralledaren kan anslutas. Möjliggör både 230 V (fas–noll) och 400 V (fas–fas).</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">D-koppling</h3>
+      <p style="color:var(--muted);font-size:0.9rem">Har ingen neutralpunkt — ingen neutralledare. Används vid symmetrisk last där I<sub>N</sub> = 0.</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">Transformator 10/04</h3>
+      <p style="color:var(--muted);font-size:0.9rem">Primär D-koppling (10 kV), sekundär Y-koppling (400 V) — ger neutralpunkt på lågspänningssidan.</p>
+    </div>
+  </div>
+
+  <!-- VAD HÄNDER OM NEUTRALEN BRYTS -->
+  <div class="card" style="margin-bottom:1.5rem;border:1px solid rgba(220,38,38,0.3)">
+    <h3>⚠️ Vad händer om neutralen bryts?</h3>
+    <p>Om neutralledaren bryts försvinner den stabila återledaren. Strömmen <strong style="color:var(--red)">tvingas gå i serie</strong> mellan apparater på olika faser — istället för var och en mot noll.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0">
+      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:0.9rem">
+        <div style="font-weight:700;color:var(--primary);margin-bottom:0.5rem;font-size:0.9rem">✓ Normalt (neutral hel)</div>
+        <p style="font-size:0.85rem;color:var(--muted)">Varje apparat får <strong style="color:var(--white)">230 V</strong> (fas–noll)<br>L1 → Apparat → N<br>Stabilt och säkert</p>
+      </div>
+      <div style="background:rgba(220,38,38,0.07);border-radius:0.6rem;padding:0.9rem">
+        <div style="font-weight:700;color:var(--red);margin-bottom:0.5rem;font-size:0.9rem">✗ Neutralen bruten</div>
+        <p style="font-size:0.85rem;color:var(--muted)">Apparaterna på L1 och L2 kopplas i serie mot varandra<br>Spänning upp till <strong style="color:var(--red)">400 V</strong> (fas–fas) fördelas</p>
+      </div>
+    </div>
+    <div style="background:rgba(220,38,38,0.07);border-radius:0.6rem;padding:0.9rem;margin-bottom:0.75rem">
+      <p style="font-size:0.88rem;color:var(--muted)"><strong style="color:var(--red)">Spänningsdelning efter impedans:</strong> Den apparat med <strong style="color:var(--white)">högst impedans</strong> (t.ex. en glödlampa) tar den största andelen av 400 V. Det kan leda till att lampor och elektronik <strong style="color:var(--white)">exploderar eller fattar eld</strong>.</p>
+    </div>
+    <div style="background:rgba(234,179,8,0.08);border-radius:0.6rem;padding:0.9rem">
+      <div style="font-weight:700;color:#ca8a04;margin-bottom:0.4rem;font-size:0.88rem">Exempel — osymmetrisk last vid neutralbrott</div>
+      <p style="font-size:0.85rem;color:var(--muted)">
+        Innan: L1 = 10 A, L2 = 8 A, L3 = 7 A → I<sub>N</sub> = 1 A går i neutralen<br>
+        Efter neutralbrott: strömmen tvingas via fas–fas (t.ex. L1–L2 = 400 V) → spänningsdelning → överspänning
+      </p>
+    </div>
+  </div>
+
+  <!-- Neutralledare diagram -->
+  <div class="card">
+    <h3>Neutralledarens funktion</h3>
+    <div style="overflow-x:auto;margin-top:1rem">
+      <svg viewBox="0 0 500 230" style="max-width:500px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Neutralledarens funktion mellan transformator och anläggning">
+        <rect width="500" height="230" rx="8" fill="#ffffff"/>
+
+        <!-- ===== TRANSFORMER BLOCK ===== -->
+        <rect x="10" y="20" width="58" height="165" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="2"/>
+        <text x="39" y="96" font-family="sans-serif" font-size="10" fill="#374151" text-anchor="middle" font-weight="700">Trafo</text>
+        <text x="39" y="112" font-family="sans-serif" font-size="9" fill="#6b7280" text-anchor="middle">Y-koppl.</text>
+
+        <!-- Transformer terminals (right side dots) -->
+        <circle cx="68" cy="52" r="3.5" fill="#dc2626"/>
+        <circle cx="68" cy="92" r="3.5" fill="#525252"/>
+        <circle cx="68" cy="132" r="3.5" fill="#6b7280"/>
+        <circle cx="68" cy="168" r="3.5" fill="#2563eb"/>
+
+        <!-- ===== PHASE LINES (with current-size arrows) ===== -->
+
+        <!-- L1 — largest current (R load, low impedance) -->
+        <line x1="68" y1="52" x2="295" y2="52" stroke="#dc2626" stroke-width="2.2"/>
+        <text x="70" y="44" font-family="sans-serif" font-size="10" fill="#dc2626" font-weight="700">L1</text>
+        <!-- fat arrow = high current -->
+        <polygon points="175,47 195,52 175,57" fill="#dc2626"/>
+
+        <!-- L2 — medium current (2R load) -->
+        <line x1="68" y1="92" x2="295" y2="92" stroke="#525252" stroke-width="2.2"/>
+        <text x="70" y="84" font-family="sans-serif" font-size="10" fill="#525252" font-weight="700">L2</text>
+        <!-- medium arrow -->
+        <polygon points="180,88 196,92 180,96" fill="#525252"/>
+
+        <!-- L3 — smallest current (3R load, high impedance) -->
+        <line x1="68" y1="132" x2="295" y2="132" stroke="#6b7280" stroke-width="2.2"/>
+        <text x="70" y="124" font-family="sans-serif" font-size="10" fill="#6b7280" font-weight="700">L3</text>
+        <!-- small arrow -->
+        <polygon points="185,129 196,132 185,135" fill="#6b7280"/>
+
+        <!-- ===== LOAD BOXES (different impedance = different size labels) ===== -->
+        <rect x="295" y="41" width="38" height="22" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+        <text x="314" y="56" font-family="sans-serif" font-size="11" fill="#D97706" text-anchor="middle" font-weight="700">R</text>
+
+        <rect x="295" y="81" width="38" height="22" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+        <text x="314" y="96" font-family="sans-serif" font-size="11" fill="#D97706" text-anchor="middle" font-weight="700">2R</text>
+
+        <rect x="295" y="121" width="38" height="22" rx="4" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+        <text x="314" y="136" font-family="sans-serif" font-size="11" fill="#D97706" text-anchor="middle" font-weight="700">3R</text>
+
+        <text x="314" y="30" font-family="sans-serif" font-size="9" fill="#6b7280" text-anchor="middle">Osymmetrisk last</text>
+
+        <!-- Lines from right side of loads to common rail x=345 -->
+        <line x1="333" y1="52" x2="350" y2="52" stroke="#374151" stroke-width="1.5"/>
+        <line x1="333" y1="92" x2="350" y2="92" stroke="#374151" stroke-width="1.5"/>
+        <line x1="333" y1="132" x2="350" y2="132" stroke="#374151" stroke-width="1.5"/>
+
+        <!-- Vertical common rail (right neutral bus) -->
+        <line x1="350" y1="52" x2="350" y2="168" stroke="#374151" stroke-width="1.5"/>
+
+        <!-- Installation neutral node dot -->
+        <circle cx="350" cy="168" r="5" fill="#2563eb"/>
+
+        <!-- ===== NEUTRAL CONDUCTOR (thick blue, arrow ← back to transformer) ===== -->
+        <line x1="72" y1="168" x2="345" y2="168" stroke="#2563eb" stroke-width="4"/>
+        <!-- Arrow pointing LEFT (return current toward transformer) -->
+        <polygon points="72,168 84,162 84,174" fill="#2563eb"/>
+
+        <!-- N label above line -->
+        <text x="210" y="156" font-family="sans-serif" font-size="12" fill="#2563eb" text-anchor="middle" font-weight="700">N  (neutralledare)</text>
+        <!-- IN arrow + label below line -->
+        <text x="210" y="185" font-family="sans-serif" font-size="10" fill="#2563eb" text-anchor="middle">← I&#x2099; = I&#x2097;&#x2081; + I&#x2097;&#x2082; + I&#x2097;&#x2083; ≠ 0</text>
+
+        <!-- ===== BOTTOM LABELS ===== -->
+        <!-- Transformer neutral point -->
+        <text x="39" y="205" font-family="sans-serif" font-size="9" fill="#374151" text-anchor="middle" font-weight="700">Transformatorns</text>
+        <text x="39" y="218" font-family="sans-serif" font-size="9" fill="#374151" text-anchor="middle">neutralpunkt</text>
+
+        <!-- Installation neutral point -->
+        <text x="350" y="205" font-family="sans-serif" font-size="9" fill="#374151" text-anchor="middle" font-weight="700">Anläggningens</text>
+        <text x="350" y="218" font-family="sans-serif" font-size="9" fill="#374151" text-anchor="middle">neutralpunkt</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- PEN → PE + N split diagram -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>PEN-ledaren delas i elcentralen</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">I TN-C-S-system kombineras skyddsjord och nolla till en <strong style="color:var(--white)">PEN-ledare</strong> fram till elcentralen. Där delas den obligatoriskt upp i separata PE- och N-skenor.</p>
+    <img src="images/PEN_PE_N.png" alt="PEN-ledaren delas till PE och N i elcentralen" style="max-width:100%;height:auto;border-radius:0.5rem;display:block">
+  </div>
+</section>
+
+<!-- GENERATOR -->
+<section class="section" id="generator">
+  <div class="section-header">
+    <div class="section-icon">🔁</div>
+    <div>
+      <h4>Avsnitt 5d</h4>
+      <h2>Generatorn &amp; Sinusformad spänning</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">Växelström skapas av generatorer som snurrar i ett magnetfält. Resultatet är en sinusformad spänning med en frekvens av 50 Hz i Sverige.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">🔩 Stator</h3>
+      <p style="color:var(--muted);font-size:0.9rem">Den <strong style="color:var(--white)">stationära</strong> delen av generatorn — innehåller lindningarna för de tre faserna (L1, L2, L3). Magnettfältet inducerar spänning i lindningarna.</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">🔄 Rotator (Rotor)</h3>
+      <p style="color:var(--muted);font-size:0.9rem">Den <strong style="color:var(--white)">roterande</strong> delen — en elektromagnet driven av t.ex. en ångturbin, vattenturbin eller dieselmotor. Snurrar inuti statorn och inducerar växelspänning.</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">⚡ En fas i taget</h3>
+      <p style="color:var(--muted);font-size:0.9rem">Rotorn passerar varje lindning en åt gången, 120° isär. Det skapar tre sinusvågor som är <strong style="color:var(--white)">120° förskjutna</strong> — ett trefassystem.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Frekvens &amp; Period</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-top:0.75rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;text-align:center">
+        <div style="font-size:1.5rem;font-weight:800;color:var(--primary)">50 Hz</div>
+        <div style="font-size:0.85rem;color:var(--muted);margin-top:0.3rem">Frekvens — 50 gånger per sekund svänger spänningen</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;text-align:center">
+        <div style="font-size:1.5rem;font-weight:800;color:var(--primary)">T = 0,02 s</div>
+        <div style="font-size:0.85rem;color:var(--muted);margin-top:0.3rem">Period — en hel cykel tar 20 millisekunder</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;text-align:center">
+        <div style="font-size:1.1rem;font-weight:800;color:var(--primary)">f = 1/T &nbsp;|&nbsp; T = 1/f</div>
+        <div style="font-size:0.85rem;color:var(--muted);margin-top:0.3rem">f = 1/0,02 = 50 Hz &nbsp;|&nbsp; T = 1/50 = 0,02 s</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Spänningsvärden – vad betyder 230 V?</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Sinusvågan varierar hela tiden — 230 V är det <em>effektiva värdet</em> (RMS), inte toppvärdet.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.75rem;margin-bottom:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.3rem">Effektivt värde (RMS)</div>
+        <div style="font-weight:800;color:var(--primary);font-size:1.2rem">230 V</div>
+        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.2rem">Det värde som mäts med voltmeter. Ger samma effekt som 230 V DC.</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.3rem">Toppspänning (U<sub>max</sub>)</div>
+        <div style="font-weight:800;color:var(--primary);font-size:1.2rem">325 V</div>
+        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.2rem">230 × √2 = 230 × 1,414 ≈ 325 V</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.3rem">Fas–fas (huvudspänning)</div>
+        <div style="font-weight:800;color:var(--primary);font-size:1.2rem">400 V</div>
+        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.2rem">230 × √3 = 230 × 1,732 ≈ 400 V</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.3rem">Fas–noll (fasspänning)</div>
+        <div style="font-weight:800;color:var(--primary);font-size:1.2rem">230 V</div>
+        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.2rem">400 / √3 = 400 / 1,732 ≈ 230 V</div>
+      </div>
+    </div>
+    <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;color:var(--muted)">
+      <strong style="color:var(--white)">Tumregler:</strong> √2 ≈ 1,414 &nbsp;|&nbsp; √3 ≈ 1,732 &nbsp;(två decimaler räcker för praktiska beräkningar)
+    </div>
+  </div>
+
+  <!-- Sinusvåg SVG -->
+  <div class="card">
+    <h3>Sinusformad spänning</h3>
+    <div style="overflow-x:auto;margin-top:0.75rem">
+      <svg viewBox="0 0 500 200" style="max-width:500px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sinusformad spänning – en period">
+        <rect width="500" height="200" rx="8" fill="#ffffff"/>
+        <!-- Grid lines -->
+        <line x1="40" y1="100" x2="480" y2="100" stroke="#e5e7eb" stroke-width="1"/>
+        <line x1="40" y1="30" x2="480" y2="30" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="40" y1="170" x2="480" y2="170" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- Axes -->
+        <line x1="40" y1="15" x2="40" y2="185" stroke="#374151" stroke-width="1.5"/>
+        <line x1="40" y1="100" x2="490" y2="100" stroke="#374151" stroke-width="1.5"/>
+        <!-- Arrow heads -->
+        <polygon points="490,100 480,96 480,104" fill="#374151"/>
+        <polygon points="40,15 36,25 44,25" fill="#374151"/>
+        <!-- Y axis labels -->
+        <text x="8" y="34" font-family="sans-serif" font-size="10" fill="#dc2626" font-weight="700">+325V</text>
+        <text x="12" y="104" font-family="sans-serif" font-size="10" fill="#374151">0</text>
+        <text x="8" y="174" font-family="sans-serif" font-size="10" fill="#2563eb" font-weight="700">−325V</text>
+        <text x="8" y="15" font-family="sans-serif" font-size="9" fill="#374151">U</text>
+        <!-- X axis label -->
+        <text x="484" y="98" font-family="sans-serif" font-size="9" fill="#374151">t</text>
+        <!-- One full sine wave: from x=50 to x=470, peak at x=160 (y=30), cross at x=270 (y=100), trough at x=380 (y=170) -->
+        <path d="M50,100 C80,100 100,30 160,30 C220,30 240,100 270,100 C300,100 320,170 380,170 C440,170 460,100 470,100" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Highlight peak -->
+        <circle cx="160" cy="30" r="4" fill="#dc2626"/>
+        <line x1="160" y1="30" x2="160" y2="100" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="162" y="62" font-family="sans-serif" font-size="9" fill="#dc2626">U<tspan baseline-shift="sub" font-size="7">max</tspan> = 325V</text>
+        <!-- Highlight trough -->
+        <circle cx="380" cy="170" r="4" fill="#2563eb"/>
+        <line x1="380" y1="170" x2="380" y2="100" stroke="#2563eb" stroke-width="1" stroke-dasharray="3,2"/>
+        <!-- Effective value line -->
+        <line x1="50" y1="57" x2="270" y2="57" stroke="#d97706" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="272" y="55" font-family="sans-serif" font-size="9" fill="#d97706" font-weight="700">230V (effektivt)</text>
+        <!-- Period markers -->
+        <line x1="50" y1="185" x2="270" y2="185" stroke="#374151" stroke-width="1"/>
+        <line x1="50" y1="181" x2="50" y2="189" stroke="#374151" stroke-width="1"/>
+        <line x1="270" y1="181" x2="270" y2="189" stroke="#374151" stroke-width="1"/>
+        <text x="150" y="197" font-family="sans-serif" font-size="9" fill="#374151" text-anchor="middle">T = 0,02 s (20 ms)</text>
+        <!-- Label 50Hz -->
+        <text x="400" y="25" font-family="sans-serif" font-size="10" fill="#059669" font-weight="700">f = 50 Hz</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard. Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="script.js"></script>
+  </div><!-- /main-content -->
+</div><!-- /layout-wrapper -->
+</body>
+</html>
