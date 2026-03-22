@@ -875,6 +875,38 @@ body.light .formula-display { background: rgba(119,90,25,0.06); border-color: va
 }
 .frac span:last-child { padding: 0.1em 0.2em 0; white-space: nowrap; }
 
+/* === TOGGLEABLE FRACTION (slash/stacked toggle) === */
+.frac-t {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  font-size: 0.9em;
+  line-height: 1.15;
+  margin: 0 0.15em;
+}
+.frac-t span:first-child {
+  border-bottom: 1.5px solid currentColor;
+  padding: 0 0.2em 0.1em;
+  white-space: nowrap;
+}
+.frac-t span:last-child { padding: 0.1em 0.2em 0; white-space: nowrap; }
+
+/* Slash-läge — body.slash-mode gör om .frac-t till inline a/b */
+body.slash-mode .frac-t {
+  display: inline;
+  vertical-align: baseline;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0 0.05em;
+}
+body.slash-mode .frac-t span:first-child {
+  border-bottom: none;
+  padding: 0;
+}
+body.slash-mode .frac-t span:first-child::after { content: '/'; }
+body.slash-mode .frac-t span:last-child { padding: 0; }
+
 /* === FORMULA VARIANTS CARD === */
 .fv-grid {
   display: grid;

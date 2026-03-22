@@ -11,6 +11,7 @@
 <nav>
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
   <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
 </nav>
 <div class="layout-wrapper">
   <aside class="sidebar">
@@ -30,6 +31,7 @@
       <a href="skydd.html" class="sidebar-link "><span class="sidebar-icon">🛡️</span> Skydd</a>
       <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
       <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="matematik.html" class="sidebar-link "><span class="sidebar-icon">🔢</span> Matematik</a>
       <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
     </nav>
   </aside>
@@ -509,8 +511,8 @@
         <div style="font-size:0.85rem;color:var(--muted);margin-top:0.3rem">Period — en hel cykel tar 20 millisekunder</div>
       </div>
       <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;text-align:center">
-        <div style="font-size:1.1rem;font-weight:800;color:var(--primary)">f = 1/T &nbsp;|&nbsp; T = 1/f</div>
-        <div style="font-size:0.85rem;color:var(--muted);margin-top:0.3rem">f = 1/0,02 = 50 Hz &nbsp;|&nbsp; T = 1/50 = 0,02 s</div>
+        <div style="font-size:1.1rem;font-weight:800;color:var(--primary)">f = <span class="frac"><span>1</span><span>T</span></span> &nbsp;|&nbsp; T = <span class="frac"><span>1</span><span>f</span></span></div>
+        <div style="font-size:0.85rem;color:var(--muted);margin-top:0.3rem">f = <span class="frac-t"><span>1</span><span>0,02</span></span> = 50 Hz &nbsp;|&nbsp; T = <span class="frac-t"><span>1</span><span>50</span></span> = 0,02 s</div>
       </div>
     </div>
   </div>
@@ -537,7 +539,7 @@
       <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem">
         <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.3rem">Fas–noll (fasspänning)</div>
         <div style="font-weight:800;color:var(--primary);font-size:1.2rem">230 V</div>
-        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.2rem">400 / √3 = 400 / 1,732 ≈ 230 V</div>
+        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.2rem"><span class="frac"><span>400</span><span>√3</span></span> = <span class="frac-t"><span>400</span><span>1,732</span></span> ≈ 230 V</div>
       </div>
     </div>
     <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;color:var(--muted)">

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test – Bråkvisning</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      margin: 0 3px;
+    }
+    .frac span:first-child {
+      border-bottom: 1.5px solid currentColor;
+      padding-bottom: 1px;
+      line-height: 1.3;
+    }
+    .frac span:last-child {
+      padding-top: 1px;
+      line-height: 1.3;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .col-bad  { border: 2px solid #FF4C4C; border-radius: 10px; padding: 1.25rem; }
+    .col-good { border: 2px solid #4ECDC4; border-radius: 10px; padding: 1.25rem; }
+
+    .col-label {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+    }
+    .col-bad  .col-label { color: #FF4C4C; }
+    .col-good .col-label { color: #4ECDC4; }
+
+    .ex-line {
+      margin: 0.4rem 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 2.2;   /* mer luft = bråken behöver plats */
+    }
+    .ex-line strong { color: var(--white); }
+
+    .section-label {
+      background: var(--bg-light);
+      border-radius: 6px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 1.25rem 0 0.5rem;
+      display: inline-block;
+    }
+
+    p.body-text {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin: 0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+</nav>
+
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:900px">
+
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">🧪</div>
+        <div>
+          <h4>Testpanel</h4>
+          <h2>Bråkvisning — jämförelse</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted)">Vänster = alla bråk som riktiga staplade bråk. Höger = slash i text, staplade bråk bara för slutresultat och formler. Scrolla och jämför.</p>
+
+      <!-- ── FALL 1: Enkel löpande text ── -->
+      <div class="card" style="margin-bottom:1.5rem">
+        <h3>Fall 1 – Löpande text i en mening</h3>
+        <div class="compare-grid">
+          <div class="col-bad">
+            <div class="col-label">❌ Alla som riktiga bråk</div>
+            <p class="body-text">
+              Bråket <span class="frac"><span>1</span><span>2</span></span> plus
+              <span class="frac"><span>1</span><span>3</span></span> ger
+              <span class="frac"><span>5</span><span>6</span></span>.
+              Tänk på att nämnaren <span class="frac"><span>1</span><span>6</span></span>
+              är den gemensamma nämnaren för
+              <span class="frac"><span>1</span><span>2</span></span> och
+              <span class="frac"><span>1</span><span>3</span></span>.
+            </p>
+          </div>
+          <div class="col-good">
+            <div class="col-label">✅ Slash i text</div>
+            <p class="body-text">
+              Bråket 1/2 plus 1/3 ger 5/6.
+              Tänk på att 1/6 är den gemensamma nämnaren för 1/2 och 1/3.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── FALL 2: Beräkningskedja ── -->
+      <div class="card" style="margin-bottom:1.5rem">
+        <h3>Fall 2 – Lång beräkningskedja</h3>
+        <div class="compare-grid">
+          <div class="col-bad">
+            <div class="col-label">❌ Alla som riktiga bråk</div>
+            <div class="ex-line">
+              <span class="frac"><span>1</span><span>R<sub>tot</sub></span></span> =
+              <span class="frac"><span>1</span><span>6</span></span> +
+              <span class="frac"><span>1</span><span>12</span></span> =
+              <span class="frac"><span>2</span><span>12</span></span> +
+              <span class="frac"><span>1</span><span>12</span></span> =
+              <span class="frac"><span>3</span><span>12</span></span>
+            </div>
+            <div class="ex-line">
+              R<sub>tot</sub> = <span class="frac"><span>12</span><span>3</span></span> = <strong>4 Ω</strong>
+            </div>
+          </div>
+          <div class="col-good">
+            <div class="col-label">✅ Slash i kedjan, bråk för slutresultat</div>
+            <div class="ex-line" style="line-height:1.7">
+              1/R<sub>tot</sub> = 1/6 + 1/12 = 2/12 + 1/12 = 3/12
+            </div>
+            <div class="ex-line" style="line-height:1.7">
+              R<sub>tot</sub> = <span class="frac"><span>12</span><span>3</span></span> = <strong>4 Ω</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── FALL 3: Steg-för-steg algebra ── -->
+      <div class="card" style="margin-bottom:1.5rem">
+        <h3>Fall 3 – Steg-för-steg algebraisk härledning</h3>
+        <div class="compare-grid">
+          <div class="col-bad">
+            <div class="col-label">❌ Alla som riktiga bråk</div>
+            <div class="ex-line">Start: &nbsp; U = R × I</div>
+            <div class="ex-line">
+              Dela med I: &nbsp;
+              <span class="frac"><span>U</span><span>I</span></span> = R ×
+              <span class="frac"><span>I</span><span>I</span></span>
+            </div>
+            <div class="ex-line">
+              <span class="frac"><span>I</span><span>I</span></span> = 1 (försvinner): &nbsp;
+              <span class="frac"><span>U</span><span>I</span></span> = R
+            </div>
+            <div class="ex-line">
+              R = <span class="frac"><span>230</span><span>5</span></span> = <strong>46 Ω</strong>
+            </div>
+          </div>
+          <div class="col-good">
+            <div class="col-label">✅ Slash i steg, bråk för slutresultat</div>
+            <div class="ex-line" style="line-height:1.7">Start: &nbsp; U = R × I</div>
+            <div class="ex-line" style="line-height:1.7">Dela med I: &nbsp; U/I = R × I/I</div>
+            <div class="ex-line" style="line-height:1.7">I/I = 1 (försvinner): &nbsp; U/I = R</div>
+            <div class="ex-line" style="line-height:1.7">
+              R = <span class="frac"><span>230</span><span>5</span></span> = <strong>46 Ω</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── FALL 4: Fristående formel — båda lika bra ── -->
+      <div class="card" style="margin-bottom:1.5rem">
+        <h3>Fall 4 – Fristående formel (båda ser bra ut)</h3>
+        <div class="compare-grid">
+          <div class="col-bad">
+            <div class="col-label">✅ Riktigt bråk — ser bra ut här</div>
+            <div style="font-size:1.4rem;font-weight:900;color:var(--yellow);text-align:center;margin:1rem 0">
+              R = <span class="frac"><span>ρ · L</span><span>A</span></span>
+            </div>
+          </div>
+          <div class="col-good">
+            <div class="col-label">⚠️ Slash — fungerar men ser mindre proffsigt ut</div>
+            <div style="font-size:1.4rem;font-weight:900;color:var(--yellow);text-align:center;margin:1rem 0">
+              R = ρ · L / A
+            </div>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:0.88rem;margin-top:0.75rem">
+          → Fristående formler i rubriker och formelrutor: riktiga bråk vinner tydligt.
+        </p>
+      </div>
+
+      <!-- ── SLUTSATS ── -->
+      <div class="card">
+        <h3>Slutsats – vad som ser bäst ut var</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:0.9rem;margin-top:0.5rem">
+          <div style="background:rgba(78,205,196,0.08);border:1px solid rgba(78,205,196,0.3);border-radius:8px;padding:0.75rem">
+            <strong style="color:var(--teal)">Riktiga staplade bråk passar för:</strong>
+            <ul style="margin-top:0.5rem;margin-left:1rem;color:var(--muted);line-height:1.8">
+              <li>Fristående formler (R = ρ·L/A)</li>
+              <li>Slutresultat i exempelrutor</li>
+              <li>Trianglarna (Ohms lag, effektlagen)</li>
+            </ul>
+          </div>
+          <div style="background:rgba(255,76,76,0.07);border:1px solid rgba(255,76,76,0.25);border-radius:8px;padding:0.75rem">
+            <strong style="color:#FF9B4D">Slash (/) passar bättre för:</strong>
+            <ul style="margin-top:0.5rem;margin-left:1rem;color:var(--muted);line-height:1.8">
+              <li>Löpande text i meningar</li>
+              <li>Långa beräkningskedjor</li>
+              <li>Algebraiska härledningssteg</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

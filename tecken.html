@@ -11,6 +11,7 @@
 <nav>
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
   <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
 </nav>
 <div class="layout-wrapper">
   <aside class="sidebar">
@@ -30,6 +31,7 @@
       <a href="skydd.html" class="sidebar-link "><span class="sidebar-icon">🛡️</span> Skydd</a>
       <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
       <a href="tecken.html" class="sidebar-link active"><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="matematik.html" class="sidebar-link "><span class="sidebar-icon">🔢</span> Matematik</a>
       <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
     </nav>
   </aside>
@@ -85,7 +87,7 @@
   <!-- 2. Materialegenskaper -->
   <div class="card" style="margin-bottom:1.5rem">
     <h3>🔩 Materialegenskaper &amp; geometri</h3>
-    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Används i formeln R = ρ · L / A för att beräkna en ledares resistans.</p>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Används i formeln R = <span class="frac"><span>ρ · L</span><span>A</span></span> för att beräkna en ledares resistans.</p>
     <div class="legend-table-wrap">
       <table class="legend-table">
         <thead><tr><th>Tecken</th><th>Storhet</th><th>Enhet</th><th>Förklaring</th></tr></thead>
@@ -144,24 +146,24 @@
       <div class="legend-formula-card">
         <div class="lf-title" style="color:var(--yellow)">Ohms lag</div>
         <div class="lf-eq">U = R × I</div>
-        <div class="lf-variants">R = U ÷ I &nbsp;|&nbsp; I = U ÷ R</div>
+        <div class="lf-variants">R = <span class="frac"><span>U</span><span>I</span></span> &nbsp;|&nbsp; I = <span class="frac"><span>U</span><span>R</span></span></div>
         <div class="lf-desc">Sambandet mellan spänning, resistans och ström.</div>
       </div>
       <div class="legend-formula-card">
         <div class="lf-title" style="color:var(--lime)">Effektlagen</div>
         <div class="lf-eq">P = U × I</div>
-        <div class="lf-variants">U = P ÷ I &nbsp;|&nbsp; I = P ÷ U</div>
+        <div class="lf-variants">U = <span class="frac"><span>P</span><span>I</span></span> &nbsp;|&nbsp; I = <span class="frac"><span>P</span><span>U</span></span></div>
         <div class="lf-desc">Effekten är produkten av spänning och ström.</div>
       </div>
       <div class="legend-formula-card">
         <div class="lf-title" style="color:#C0A0FF">Ledarresistans</div>
-        <div class="lf-eq">R = ρ × L ÷ A</div>
-        <div class="lf-variants">L = R × A ÷ ρ &nbsp;|&nbsp; A = ρ × L ÷ R</div>
+        <div class="lf-eq">R = <span class="frac"><span>ρ × L</span><span>A</span></span></div>
+        <div class="lf-variants">L = <span class="frac"><span>R × A</span><span>ρ</span></span> &nbsp;|&nbsp; A = <span class="frac"><span>ρ × L</span><span>R</span></span></div>
         <div class="lf-desc">Beräknar en kabels resistans utifrån material, längd och area.</div>
       </div>
       <div class="legend-formula-card">
         <div class="lf-title" style="color:var(--red)">Spänningsfall</div>
-        <div class="lf-eq">ΔU = 2 × ρ × L × I ÷ A</div>
+        <div class="lf-eq">ΔU = <span class="frac"><span>2 × ρ × L × I</span><span>A</span></span></div>
         <div class="lf-variants">Faktorn 2 = fram- + returledare</div>
         <div class="lf-desc">Max tillåtet: 4 % av nominell spänning (9,2 V vid 230 V).</div>
       </div>
@@ -173,7 +175,7 @@
       </div>
       <div class="legend-formula-card">
         <div class="lf-title" style="color:var(--teal)">Parallellkoppling</div>
-        <div class="lf-eq">1/R<sub>tot</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + …</div>
+        <div class="lf-eq"><span class="frac"><span>1</span><span>R<sub>tot</sub></span></span> = <span class="frac"><span>1</span><span>R<sub>1</sub></span></span> + <span class="frac"><span>1</span><span>R<sub>2</sub></span></span> + …</div>
         <div class="lf-variants">Samma spänning U överallt</div>
         <div class="lf-desc">R<sub>tot</sub> blir alltid lägre än minsta grenen. Strömmen delas upp.</div>
       </div>

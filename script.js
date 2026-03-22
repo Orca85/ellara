@@ -1,6 +1,34 @@
 'use strict';
 
 /* =========================================================
+   BRÅK-TOGGLE  –  staplade bråk / slash-bråk
+   ========================================================= */
+(function () {
+  const KEY = 'fracMode';
+
+  function applyFracMode(mode) {
+    document.body.classList.toggle('slash-mode', mode === 'slash');
+    const btn = document.getElementById('frac-toggle');
+    if (!btn) return;
+    btn.textContent = mode === 'slash' ? '½' : 'a/b';
+    btn.title = mode === 'slash' ? 'Visa staplade bråk' : 'Visa slash-bråk';
+  }
+
+  const saved = localStorage.getItem(KEY) || 'frac';
+  applyFracMode(saved);
+
+  const btn = document.getElementById('frac-toggle');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      const current = localStorage.getItem(KEY) || 'frac';
+      const next = current === 'frac' ? 'slash' : 'frac';
+      localStorage.setItem(KEY, next);
+      applyFracMode(next);
+    });
+  }
+})();
+
+/* =========================================================
    OHMS LAW WHEEL  –  U = R * I
    ========================================================= */
 (function () {
@@ -761,7 +789,7 @@ function format(n) {
   /* ------ Exercise data ------ */
   const CATEGORIES = [
     {
-      name: '⚛️ Atomfysik',
+      name: '⚛️ Atomfysik & Grundbegrepp',
       exercises: [
         {
           type: 'mc',
@@ -792,6 +820,40 @@ function format(n) {
           options: ['Den blir positivt laddad (+2)', 'Den blir negativt laddad (−2)', 'Den blir neutral', 'Den splittras'],
           answer: 0,
           explanation: 'Varje förlorad elektron (−1) ger överskott av protoner (+1). Förlorar 2 elektroner → laddning +2.'
+        },
+        {
+          type: 'numeric',
+          question: 'Elnätet i Sverige har frekvensen 50 Hz. Hur lång är en period T (i ms)?',
+          hint: 'T = <span class="frac"><span>1</span><span>f</span></span>. Svara i millisekunder.',
+          answer: 20,
+          unit: 'ms',
+          tolerance: 0,
+          explanation: 'T = <span class="frac"><span>1</span><span>f</span></span> = <span class="frac"><span>1</span><span>50</span></span> = 0,02 s = 20 ms. En hel sinussvängning tar alltså 20 millisekunder.'
+        },
+        {
+          type: 'mc',
+          question: 'Vad är en jon?',
+          options: [
+            'En atom med lika många protoner och elektroner',
+            'En atom med fler eller färre elektroner än protoner',
+            'En atomkärna utan elektronskal'
+          ],
+          answer: 1,
+          explanation: 'En jon är en laddad atom. Positiv jon (katjon) = färre elektroner än protoner. Negativ jon (anjon) = fler elektroner.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilket material är bäst lämpad som elektrisk ledare?',
+          options: ['Glas', 'Koppar', 'Plast', 'Gummi'],
+          answer: 1,
+          explanation: 'Koppar har mycket lågt resistivitet (ρ ≈ 0,017 Ω·mm²/m) och används i nästan all elkabel. Glas, plast och gummi är isolatorer.'
+        },
+        {
+          type: 'mc',
+          question: 'Vad mäter en voltmeter?',
+          options: ['Strömmen genom en komponent', 'Spänningsskillnaden mellan två punkter', 'Resistansen i en ledare'],
+          answer: 1,
+          explanation: 'En voltmeter mäter potentialskillnaden (spänningen) mellan sina mätspetsar. Den kopplas parallellt med det som ska mätas.'
         }
       ]
     },
@@ -801,10 +863,10 @@ function format(n) {
         {
           type: 'numeric',
           question: 'En krets har spänningen U = 12 V och resistansen R = 4 Ω. Hur stor är strömmen I?',
-          hint: 'I = U / R',
+          hint: 'I = <span class="frac"><span>U</span><span>R</span></span>',
           answer: 3,
           unit: 'A',
-          explanation: 'I = U / R = 12 / 4 = 3 A'
+          explanation: 'I = <span class="frac"><span>U</span><span>R</span></span> = <span class="frac"><span>12</span><span>4</span></span> = 3 A'
         },
         {
           type: 'numeric',
@@ -826,10 +888,44 @@ function format(n) {
         {
           type: 'numeric',
           question: 'En mikrovågsugn har effekten P = 1 150 W vid U = 230 V. Hur stor är strömmen I?',
-          hint: 'I = P / U',
+          hint: 'I = <span class="frac"><span>P</span><span>U</span></span>',
           answer: 5,
           unit: 'A',
-          explanation: 'I = P / U = 1 150 / 230 = 5 A'
+          explanation: 'I = <span class="frac"><span>P</span><span>U</span></span> = <span class="frac"><span>1 150</span><span>230</span></span> = 5 A'
+        },
+        {
+          type: 'numeric',
+          question: 'En elspis drar I = 13 A från elnätet (U = 230 V). Vad är resistansen R?',
+          hint: 'R = <span class="frac"><span>U</span><span>I</span></span>',
+          answer: 17.69,
+          unit: 'Ω',
+          tolerance: 0.05,
+          explanation: 'R = <span class="frac"><span>U</span><span>I</span></span> = <span class="frac"><span>230</span><span>13</span></span> ≈ 17,7 Ω'
+        },
+        {
+          type: 'numeric',
+          question: 'En glödlampa har R = 1 000 Ω och kopplas till U = 230 V. Hur stor effekt P utvecklar den?',
+          hint: 'P = <span class="frac"><span>U²</span><span>R</span></span>',
+          answer: 52.9,
+          unit: 'W',
+          tolerance: 0.05,
+          explanation: 'P = <span class="frac"><span>U²</span><span>R</span></span> = <span class="frac"><span>230²</span><span>1 000</span></span> = <span class="frac"><span>52 900</span><span>1 000</span></span> = 52,9 W'
+        },
+        {
+          type: 'numeric',
+          question: 'En elvärmare har P = 2 000 W och R = 26,45 Ω. Hur stor ström I flödar?',
+          hint: 'I = √(<span class="frac"><span>P</span><span>R</span></span>)',
+          answer: 8.7,
+          unit: 'A',
+          tolerance: 0.05,
+          explanation: 'I = √(<span class="frac"><span>P</span><span>R</span></span>) = √(<span class="frac"><span>2 000</span><span>26,45</span></span>) ≈ 8,7 A. (Eller: I = <span class="frac"><span>P</span><span>U</span></span> = <span class="frac"><span>2 000</span><span>230</span></span> ≈ 8,7 A)'
+        },
+        {
+          type: 'mc',
+          question: 'Vilket uttryck för effekt P är korrekt när du känner till U och R?',
+          options: ['P = U · R', 'P = <span class="frac"><span>U²</span><span>R</span></span>', 'P = <span class="frac"><span>R</span><span>U²</span></span>', 'P = <span class="frac"><span>U</span><span>R²</span></span>'],
+          answer: 1,
+          explanation: 'P = <span class="frac"><span>U²</span><span>R</span></span>. Härleds ur P = U · I och Ohms lag I = <span class="frac"><span>U</span><span>R</span></span>: P = U · <span class="frac"><span>U</span><span>R</span></span> = <span class="frac"><span>U²</span><span>R</span></span>.'
         }
       ]
     },
@@ -847,10 +943,10 @@ function format(n) {
         {
           type: 'numeric',
           question: 'Två resistorer kopplas i parallell: R₁ = 6 Ω, R₂ = 12 Ω. Vad är R_tot?',
-          hint: '1/R_tot = 1/R₁ + 1/R₂',
+          hint: '<span class="frac"><span>1</span><span>R_tot</span></span> = <span class="frac"><span>1</span><span>R₁</span></span> + <span class="frac"><span>1</span><span>R₂</span></span>',
           answer: 4,
           unit: 'Ω',
-          explanation: '1/R_tot = 1/6 + 1/12 = 2/12 + 1/12 = 3/12 → R_tot = 12/3 = 4 Ω. Parallellt ger alltid lägre resistans än den minsta.'
+          explanation: '<span class="frac"><span>1</span><span>R_tot</span></span> = <span class="frac"><span>1</span><span>6</span></span> + <span class="frac"><span>1</span><span>12</span></span> = <span class="frac"><span>2</span><span>12</span></span> + <span class="frac"><span>1</span><span>12</span></span> = <span class="frac"><span>3</span><span>12</span></span> → R_tot = <span class="frac"><span>12</span><span>3</span></span> = 4 Ω. Parallellt ger alltid lägre resistans än den minsta.'
         },
         {
           type: 'mc',
@@ -865,6 +961,42 @@ function format(n) {
           options: ['Inget – voltmetern fungerar ändå', 'Strömmen stoppas – kretsen slutar fungera', 'Spänningen dubbleras'],
           answer: 1,
           explanation: 'Voltmetern har mycket högt internmotstånd (≈ ∞). I serie blockerar den all ström och kretsen slutar fungera.'
+        },
+        {
+          type: 'numeric',
+          question: 'Tre resistorer R₁ = 15 Ω, R₂ = 20 Ω, R₃ = 30 Ω kopplas parallellt till U = 120 V. Vad är strömmen I_R2?',
+          hint: 'I_R2 = <span class="frac"><span>U</span><span>R₂</span></span> (samma spänning över alla grenar)',
+          answer: 6,
+          unit: 'A',
+          explanation: 'I parallellkrets gäller samma spänning: I_R2 = <span class="frac"><span>U</span><span>R₂</span></span> = <span class="frac"><span>120</span><span>20</span></span> = 6 A'
+        },
+        {
+          type: 'numeric',
+          question: 'En seriekrets har U_tot = 24 V, R₁ = 4 Ω, R₂ = 8 Ω. Vad är spänningen U_R1 över R₁?',
+          hint: 'I = <span class="frac"><span>U_tot</span><span>R_tot</span></span>, sedan U_R1 = R₁ · I',
+          answer: 8,
+          unit: 'V',
+          explanation: 'R_tot = 4 + 8 = 12 Ω. I = <span class="frac"><span>24</span><span>12</span></span> = 2 A. U_R1 = R₁ · I = 4 · 2 = 8 V. (Kontroll: U_R2 = 8 · 2 = 16 V. 8 + 16 = 24 V ✓)'
+        },
+        {
+          type: 'numeric',
+          question: 'Tre resistorer R₁ = 15 Ω, R₂ = 20 Ω, R₃ = 30 Ω kopplas parallellt. Vad är R_tot?',
+          hint: '<span class="frac"><span>1</span><span>R_tot</span></span> = <span class="frac"><span>1</span><span>15</span></span> + <span class="frac"><span>1</span><span>20</span></span> + <span class="frac"><span>1</span><span>30</span></span>. Hitta gemensam nämnare (60).',
+          answer: 6.67,
+          unit: 'Ω',
+          tolerance: 0.05,
+          explanation: '<span class="frac"><span>1</span><span>R_tot</span></span> = <span class="frac"><span>4</span><span>60</span></span> + <span class="frac"><span>3</span><span>60</span></span> + <span class="frac"><span>2</span><span>60</span></span> = <span class="frac"><span>9</span><span>60</span></span> = <span class="frac"><span>3</span><span>20</span></span>. R_tot = <span class="frac"><span>20</span><span>3</span></span> ≈ 6,67 Ω'
+        },
+        {
+          type: 'mc',
+          question: 'Vad gäller för strömmar i en parallellkrets (Kirchhoffs strömlag)?',
+          options: [
+            'Strömmen är lika stor i alla grenar',
+            'Summan av inkommande strömmar = summan av utgående strömmar i varje nod',
+            'Strömmen halveras för varje gren man lägger till'
+          ],
+          answer: 1,
+          explanation: 'KCL: I en nod är summan av inflödande ström = summan av utflödande. I_tot = I₁ + I₂ + I₃. Ingen ström "försvinner".'
         }
       ]
     },
@@ -874,11 +1006,11 @@ function format(n) {
         {
           type: 'numeric',
           question: 'Beräkna resistansen i en kopparledare: L = 25 m, A = 1,5 mm². (ρ_Cu = 0,018 Ω·mm²/m)',
-          hint: 'R = ρ · L / A',
+          hint: 'R = <span class="frac"><span>ρ · L</span><span>A</span></span>',
           answer: 0.30,
           unit: 'Ω',
           tolerance: 0.03,
-          explanation: 'R = 0,018 · 25 / 1,5 = 0,45 / 1,5 = 0,30 Ω'
+          explanation: 'R = <span class="frac"><span>0,018·25</span><span>1,5</span></span> = <span class="frac"><span>0,45</span><span>1,5</span></span> = 0,30 Ω'
         },
         {
           type: 'mc',
@@ -890,11 +1022,11 @@ function format(n) {
         {
           type: 'numeric',
           question: 'Beräkna spänningsfallet i %: I = 16 A, L = 30 m, A = 2,5 mm², koppar (ρ = 0,018), U_nom = 230 V.',
-          hint: 'U_fall = 2·ρ·L·I / A  →  % = U_fall/U_nom · 100',
+          hint: 'U_fall = <span class="frac"><span>2·ρ·L·I</span><span>A</span></span> → % = <span class="frac"><span>U_fall</span><span>U_nom</span></span> · 100',
           answer: 3.01,
           unit: '%',
           tolerance: 0.1,
-          explanation: 'U_fall = 2 · 0,018 · 30 · 16 / 2,5 = 6,912 V  →  6,912 / 230 · 100 ≈ 3,0 %  (OK – under 4 %)'
+          explanation: 'U_fall = <span class="frac"><span>2·0,018·30·16</span><span>2,5</span></span> = 6,912 V → <span class="frac"><span>6,912</span><span>230</span></span> · 100 ≈ 3,0 % (OK – under 4 %)'
         },
         {
           type: 'mc',
@@ -902,6 +1034,166 @@ function format(n) {
           options: ['2 %', '3 %', '4 %', '5 %'],
           answer: 2,
           explanation: '4 % är gränsen enligt svensk standard. Vid 230 V = max 9,2 V spänningsfall. Överskrids det är installationen inte godkänd.'
+        },
+        {
+          type: 'numeric',
+          question: 'En aluminiumledare: L = 40 m, A = 4 mm². (ρ_Al = 0,029 Ω·mm²/m). Beräkna R.',
+          hint: 'R = <span class="frac"><span>ρ · L</span><span>A</span></span>',
+          answer: 0.29,
+          unit: 'Ω',
+          tolerance: 0.02,
+          explanation: 'R = <span class="frac"><span>0,029·40</span><span>4</span></span> = <span class="frac"><span>1,16</span><span>4</span></span> = 0,29 Ω. Aluminium leder sämre än koppar — används mest i starkström och kablar utomhus.'
+        },
+        {
+          type: 'numeric',
+          question: 'Beräkna spänningsfallet (V): I = 10 A, L = 20 m, A = 1,5 mm², koppar (ρ = 0,018).',
+          hint: 'U_fall = <span class="frac"><span>2·ρ·L·I</span><span>A</span></span>',
+          answer: 4.8,
+          unit: 'V',
+          tolerance: 0.1,
+          explanation: 'U_fall = <span class="frac"><span>2·0,018·20·10</span><span>1,5</span></span> = <span class="frac"><span>7,2</span><span>1,5</span></span> = 4,8 V. Vid 230 V: <span class="frac"><span>4,8</span><span>230</span></span>·100 ≈ 2,1 % (OK).'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken minsta ledararea (mm²) krävs för en 20 A säkring?',
+          options: ['1,5 mm²', '2,5 mm²', '4,0 mm²', '6,0 mm²'],
+          answer: 2,
+          explanation: '20 A → 4,0 mm² (gul). 2,5 mm² klarar 16 A. Använder du för liten area överhettas kabeln.'
+        },
+        {
+          type: 'mc',
+          question: 'Varför gångrar man med 2 i spänningsfallsformeln (U_fall = 2·ρ·L·I/A)?',
+          options: [
+            'För att säkerhetsmarginalen alltid ska vara dubbel',
+            'För att strömmen flödar både fram och tillbaka (retur)',
+            'För att AC-spänning är √2 gånger toppvärdet'
+          ],
+          answer: 1,
+          explanation: 'Strömmen flödar ut till lasten OCH tillbaka. Totala ledarlängden är 2 × L. Därav faktorn 2.'
+        }
+      ]
+    },
+    {
+      name: '🔄 Trefas',
+      exercises: [
+        {
+          type: 'numeric',
+          question: 'Fasspänningen i ett trefasnät är U_f = 230 V. Vad är linjespänningen U_L?',
+          hint: 'U_L = √3 · U_f ≈ 1,732 · U_f',
+          answer: 400,
+          unit: 'V',
+          tolerance: 0.02,
+          explanation: 'U_L = √3 · 230 ≈ 1,732 · 230 ≈ 400 V. Det är därför vi säger "400/230 V" för trefasnätet.'
+        },
+        {
+          type: 'numeric',
+          question: 'Linjespänningen är U_L = 400 V. Vad är fasspänningen U_f?',
+          hint: 'U_f = <span class="frac"><span>U_L</span><span>√3</span></span> ≈ <span class="frac"><span>U_L</span><span>1,732</span></span>',
+          answer: 231,
+          unit: 'V',
+          tolerance: 0.02,
+          explanation: 'U_f = <span class="frac"><span>400</span><span>1,732</span></span> ≈ 231 V ≈ 230 V. Det är spänningen i vanliga hushållsuttag.'
+        },
+        {
+          type: 'mc',
+          question: 'Hur stor är fasförskjutningen mellan faserna i ett trefassystem?',
+          options: ['90°', '120°', '180°', '60°'],
+          answer: 1,
+          explanation: '360° / 3 faser = 120° mellan varje fas. Faserna kallas L1, L2, L3 och är sinusvågor 120° förskjutna.'
+        },
+        {
+          type: 'numeric',
+          question: 'En trefasmotor: U_L = 400 V, I = 10 A, cosφ = 0,8. Beräkna aktiv effekt P.',
+          hint: 'P = √3 · U_L · I · cosφ',
+          answer: 5543,
+          unit: 'W',
+          tolerance: 0.02,
+          explanation: 'P = √3 · 400 · 10 · 0,8 = 1,732 · 400 · 10 · 0,8 ≈ 5 543 W ≈ 5,5 kW'
+        },
+        {
+          type: 'mc',
+          question: 'Vad innebär cosφ = 1 (effektfaktor = 1)?',
+          options: [
+            'Lasten är rent resistiv — all effekt är aktiv',
+            'Lasten är rent induktiv — all effekt är reaktiv',
+            'Lasten drar dubbel ström'
+          ],
+          answer: 0,
+          explanation: 'cosφ = 1 (φ = 0°) → ström och spänning är i fas. All tillförd effekt används som aktiv effekt. Typiskt för glödlampor och elradiatorer.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken fördel har trefas jämfört med enfas för kraftöverföring?',
+          options: [
+            'Lägre frekvens ger mindre förluster',
+            'Tre gånger mer effekt med samma ledartjocklek och spänning',
+            'Trefas har alltid lägre spänning'
+          ],
+          answer: 1,
+          explanation: 'Med tre faser kan man överföra tre gånger mer effekt med samma kabelarea och spänning — eller samma effekt med tunnare kablar. Dessutom ger trefas en konstant totaleffekt.'
+        }
+      ]
+    },
+    {
+      name: '🛡️ Skydd & Säkerhet',
+      exercises: [
+        {
+          type: 'mc',
+          question: 'Vad skyddar en säkring primärt mot?',
+          options: ['Jordfel (läckström till jord)', 'Överström som kan överhetta kabeln', 'Spänningsfall i ledaren'],
+          answer: 1,
+          explanation: 'Säkringen bryter vid för hög ström för att skydda kabeln från överhettning och brand. Den skyddar INTE mot jordfel — det gör jordfelsbrytaren.'
+        },
+        {
+          type: 'mc',
+          question: 'Vid vilken utlösningsström bryter en jordfelsbrytare (RCD) för personskydd?',
+          options: ['30 mA', '100 mA', '300 mA', '500 mA'],
+          answer: 0,
+          explanation: '30 mA (0,03 A) är gränsen för personskydd. Redan 25–50 mA kan orsaka kammarflimmer. 100 mA eller 300 mA används för egendomsskydd (t.ex. brandskydd).'
+        },
+        {
+          type: 'mc',
+          question: 'Vad är skillnaden mellan en jordfelsbrytare och ett överspänningsskydd?',
+          options: [
+            'Jordfelsbrytaren skyddar mot läckström; överspänningsskyddet mot spännigtoppar',
+            'De skyddar mot samma sak men med olika känslighet',
+            'Jordfelsbrytaren skyddar mot blixtnedslag'
+          ],
+          answer: 0,
+          explanation: 'Jordfelsbrytare (RCD) känner av skillnad i ström (ut vs in). Överspänningsskydd (SPD) begränsar spännigtoppar från t.ex. blixtnedslag eller nätfel.'
+        },
+        {
+          type: 'mc',
+          question: 'En B16-automatsäkring löser ut. Vad betyder "B"?',
+          options: [
+            'Säkringen är av typ B (medelhög utlösningskänslighet)',
+            'Säkringen är blå',
+            'Säkringen klarar max 16 kW'
+          ],
+          answer: 0,
+          explanation: 'B-kurvan anger utlösningskarakteristiken. B = utlöser vid 3–5 × märkström. C = 5–10 × (för motorer). D = 10–20 × (stora startströmmar).'
+        },
+        {
+          type: 'mc',
+          question: 'Vad menas med skyddsjord (PE)?',
+          options: [
+            'En ledare som ansluter metalldelar till jord för att förhindra farlig beröringsspänning',
+            'En extra neutralledare för att balansera trefassystemet',
+            'En isoleringstejp som täcker skarvar'
+          ],
+          answer: 0,
+          explanation: 'PE (Protective Earth) kopplar alla exponerade metalldelar (hus på apparater) till jord. Vid isolationsfel flödar strömmen via PE och löser ut säkringen — inte via personen.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilket av dessa påståenden om en automatsäkring är korrekt?',
+          options: [
+            'Den kan återställas manuellt efter utlösning',
+            'Den måste bytas ut varje gång den löser ut',
+            'Den skyddar enbart mot kortslutning, inte mot överbelastning'
+          ],
+          answer: 0,
+          explanation: 'Automatsäkringen har en återställningsknapp — tryck in och den är klar igen. En smältsäkring däremot måste bytas. Automaten skyddar mot BÅDE kortslutning och överbelastning.'
         }
       ]
     }
@@ -960,14 +1252,14 @@ function format(n) {
     /* question */
     const q = document.createElement('div');
     q.className = 'ex-question';
-    q.textContent = ex.question;
+    q.innerHTML = ex.question;
     card.appendChild(q);
 
     /* hint */
     if (ex.hint) {
       const hint = document.createElement('div');
       hint.className = 'ex-hint';
-      hint.textContent = '💡 ' + ex.hint;
+      hint.innerHTML = '💡 ' + ex.hint;
       card.appendChild(hint);
     }
 

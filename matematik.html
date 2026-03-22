@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matematik – Ellära</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Bråk-visualisering ── */
+    .frac-bar-wrap { display:flex; align-items:center; gap:0.5rem; margin:0.75rem 0; flex-wrap:wrap; }
+    .frac-bar { height:28px; border-radius:4px; display:flex; overflow:hidden; border:2px solid rgba(255,255,255,0.15); min-width:120px; }
+    .frac-bar-fill { background:var(--primary); transition:width 0.4s; }
+    .frac-bar-empty { background:var(--bg-light); flex:1; }
+    .frac-label { font-family:monospace; font-size:1.1rem; color:var(--white); min-width:50px; }
+
+    /* ── Steg-för-steg-kort ── */
+    .steps { display:flex; flex-direction:column; gap:0.5rem; margin:0.75rem 0; }
+    .step { display:flex; gap:0.75rem; align-items:flex-start; }
+    .step-num { background:var(--primary); color:#000; border-radius:50%; width:24px; height:24px; min-width:24px;
+                display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:800; margin-top:1px; }
+    .step-body { font-size:0.9rem; color:var(--muted); line-height:1.6; }
+    .step-body strong { color:var(--white); }
+
+    /* ── Exempelruta ── */
+    .ex-box { background:var(--bg-light); border-left:4px solid var(--primary); border-radius:0 8px 8px 0;
+              padding:0.75rem 1rem; margin:0.75rem 0; font-size:0.9rem; }
+    .ex-box .ex-title { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:0.4rem; }
+    .ex-line { margin:0.25rem 0; color:var(--muted); }
+    .ex-line strong { color:var(--white); }
+    .ex-result { margin-top:0.5rem; background:rgba(78,205,196,0.1); border:1px solid rgba(78,205,196,0.3);
+                 border-radius:6px; padding:0.4rem 0.75rem; color:var(--teal); font-weight:700; font-family:monospace; font-size:1rem; }
+
+    /* ── Formel stor ── */
+    .big-formula { text-align:center; font-size:1.6rem; font-weight:900; font-family:monospace;
+                   color:var(--yellow); margin:1rem 0; letter-spacing:0.05em; }
+    .big-formula .frac { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 4px; }
+    .big-formula .frac span:first-child { border-bottom:2px solid var(--yellow); padding-bottom:2px; font-size:1.1rem; }
+    .big-formula .frac span:last-child { padding-top:2px; font-size:1.1rem; }
+
+    /* ── Kalkylator ── */
+    .math-calc { background:var(--bg-card); border:1px solid var(--outline); border-radius:12px; padding:1.25rem; margin:1rem 0; }
+    .math-calc h4 { font-size:0.9rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:0.75rem; }
+    .calc-inputs { display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap; margin-bottom:0.75rem; justify-content:center; }
+    .calc-inputs .calc-btn { width:auto; padding:0.45rem 1.4rem; }
+    .calc-inputs input { width:80px; padding:0.4rem 0.6rem; background:var(--bg-light); border:1px solid var(--outline);
+                         border-radius:6px; color:var(--white); font-size:1rem; text-align:center; }
+    .calc-inputs select { padding:0.4rem 0.6rem; background:var(--bg-light); border:1px solid var(--outline);
+                          border-radius:6px; color:var(--white); font-size:0.9rem; }
+    .calc-inputs .op { color:var(--muted); font-size:1.3rem; font-weight:700; padding:0 4px; }
+    .frac-input { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; }
+    .frac-input input { width:70px !important; text-align:center; margin:0 !important; padding:0.35rem 0.4rem !important; }
+    .frac-input .frac-input-line { width:90%; border-top:2px solid var(--muted); margin:3px 0; }
+    .math-result { background:var(--bg-light); border-radius:8px; padding:0.6rem 1rem;
+                   font-size:1rem; color:var(--teal); min-height:36px; margin-top:0.5rem; line-height:2.4; text-align:center; }
+
+    /* ── Triangel – Pythagoras ── */
+    .pyth-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin:1rem 0; }
+    @media(max-width:600px){ .pyth-grid { grid-template-columns:1fr; } }
+
+    /* ── Prefix-tabell ── */
+    .prefix-table { width:100%; border-collapse:separate; border-spacing:0 4px; font-size:0.9rem; }
+    .prefix-table th { color:var(--muted); font-size:0.77rem; text-transform:uppercase; letter-spacing:0.04em; padding:0.4rem 0.75rem; text-align:left; }
+    .prefix-table td { padding:0.5rem 0.75rem; }
+    .prefix-table tr:nth-child(odd) td { background:var(--bg-light); }
+    .prefix-table tr:nth-child(odd) td:first-child { border-radius:6px 0 0 6px; }
+    .prefix-table tr:nth-child(odd) td:last-child  { border-radius:0 6px 6px 0; }
+    .prefix-highlight { color:var(--primary); font-weight:800; }
+
+    /* ── Balance visually ── */
+    .balance { display:flex; align-items:center; justify-content:center; gap:1rem; margin:1rem 0; flex-wrap:wrap; }
+    .balance-side { background:var(--bg-light); border-radius:8px; padding:0.6rem 1.2rem;
+                    font-family:monospace; font-size:1.1rem; color:var(--white); text-align:center; }
+    .balance-eq { font-size:1.5rem; color:var(--muted); }
+
+    /* ── Divider ── */
+    .del-divider { border:none; border-top:2px solid var(--outline); margin:2.5rem 0; }
+
+    /* ── Highlight inline ── */
+    .hl-y { color:var(--yellow); font-weight:700; }
+    .hl-t { color:var(--teal); font-weight:700; }
+    .hl-r { color:#FF4C4C; font-weight:700; }
+    .hl-g { color:var(--lime); font-weight:700; }
+
+    /* ── "Tänk på det så här" box ── */
+    .tip-box { background:rgba(78,205,196,0.07); border:1px solid rgba(78,205,196,0.25); border-radius:10px;
+               padding:0.85rem 1.1rem; margin:0.75rem 0; font-size:0.9rem; color:var(--muted); }
+    .tip-box strong { color:var(--teal); }
+
+    /* ── Varning-box ── */
+    .warn-box { background:rgba(255,76,76,0.07); border:1px solid rgba(255,76,76,0.25); border-radius:10px;
+                padding:0.85rem 1.1rem; margin:0.75rem 0; font-size:0.9rem; color:var(--muted); }
+    .warn-box strong { color:#FF4C4C; }
+
+    .frac { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; }
+    .frac span:first-child { border-bottom:1.5px solid currentColor; padding-bottom:1px; line-height:1.3; }
+    .frac span:last-child  { padding-top:1px; line-height:1.3; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+</nav>
+
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html"       class="sidebar-link"><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html"   class="sidebar-link"><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html"    class="sidebar-link"><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html"    class="sidebar-link"><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html"  class="sidebar-link"><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kabeldim.html"    class="sidebar-link"><span class="sidebar-icon">📏</span> Kabeldim.</a>
+      <a href="kretsar.html"     class="sidebar-link"><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="trefas.html"      class="sidebar-link"><span class="sidebar-icon">🔄</span> Trefas</a>
+      <a href="skydd.html"       class="sidebar-link"><span class="sidebar-icon">🛡️</span> Skydd</a>
+      <a href="installation.html" class="sidebar-link"><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html"      class="sidebar-link"><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="matematik.html"   class="sidebar-link active"><span class="sidebar-icon">🔢</span> Matematik</a>
+      <a href="ovningar.html"    class="sidebar-link"><span class="sidebar-icon">✏️</span> Övningar</a>
+    </nav>
+  </aside>
+
+  <div class="main-content">
+
+    <div class="search-bar-wrap" id="search-wrap">
+      <div class="search-inner">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" class="search-input"
+          placeholder="Sök — t.ex. bråk, pythagoras, prefix, formel…"
+          autocomplete="off" spellcheck="false"/>
+        <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+    </div>
+
+<!-- ══════════════════════════════════════════════════════════
+     INTRO
+══════════════════════════════════════════════════════════ -->
+<section class="section" id="intro">
+  <div class="section-header">
+    <div class="section-icon">🔢</div>
+    <div>
+      <h4>Matematik</h4>
+      <h2>Räknegrunder för ellära</h2>
+    </div>
+  </div>
+  <div class="card">
+    <p>Alla formler i ellära bygger på ett fåtal räknetekniker. Den här sidan går igenom <strong style="color:var(--white)">allt från grunden</strong> — du behöver inga förkunskaper. Varje del har genomräknade exempel och en kalkylator att öva med.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.6rem;margin-top:1rem;font-size:0.88rem">
+      <a href="#brak" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">➗ Del 1 – Bråkräkning</a>
+      <a href="#brak-ellara" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⚡ Del 2 – Bråk i ellära</a>
+      <a href="#formler" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔄 Del 3 – Omvandla formler</a>
+      <a href="#prefix" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">📏 Del 4 – Prefix & enheter</a>
+      <a href="#pythagoras" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">📐 Del 5 – Pythagoras</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     DEL 1 – BRÅKRÄKNING
+══════════════════════════════════════════════════════════ -->
+<section class="section" id="brak">
+  <div class="section-header">
+    <div class="section-icon">➗</div>
+    <div>
+      <h4>Del 1</h4>
+      <h2>Bråkräkning från grunden</h2>
+    </div>
+  </div>
+
+  <!-- 1.1 Vad är ett bråk? -->
+  <div class="card" style="margin-bottom:1.5rem" id="brak-vad">
+    <h3>1.1 &nbsp; Vad är ett bråk?</h3>
+    <p>Ett bråk är ett sätt att skriva en <strong style="color:var(--white)">del av något helt</strong>. Det består av två tal:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;font-size:0.9rem">
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;text-align:center">
+        <div style="font-size:2rem;font-weight:900;color:var(--yellow)">3</div>
+        <div style="border-top:2px solid var(--outline);padding-top:0.3rem;font-size:2rem;font-weight:900;color:var(--teal)">4</div>
+        <div style="margin-top:0.5rem;font-size:0.82rem;color:var(--muted)"><span style="color:var(--yellow)">Täljare</span> — hur många delar du har<br><span style="color:var(--teal)">Nämnare</span> — hur många delar det är totalt</div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;display:flex;flex-direction:column;justify-content:center">
+        <p style="font-size:0.88rem;color:var(--muted)">Bråket <strong style="color:var(--white)">3/4</strong> betyder: dela upp något i <strong style="color:var(--teal)">4</strong> lika stora delar, och ta <strong style="color:var(--yellow)">3</strong> av dem.</p>
+        <p style="font-size:0.88rem;color:var(--muted);margin-top:0.5rem">Tänk på en pizza med 4 bitar — du äter 3 av dem. Då har du ätit <strong style="color:var(--white)">3/4</strong> av pizzan.</p>
+      </div>
+    </div>
+
+    <p style="font-size:0.9rem;color:var(--muted)">Visualisering — den gula delen är täljaren, grå är vad som är kvar:</p>
+    <div class="frac-bar-wrap">
+      <div class="frac-label"><span class="frac-t"><span>1</span><span>2</span></span> =</div>
+      <div class="frac-bar" style="width:200px"><div class="frac-bar-fill" style="width:50%"></div><div class="frac-bar-empty"></div></div>
+    </div>
+    <div class="frac-bar-wrap">
+      <div class="frac-label"><span class="frac-t"><span>3</span><span>4</span></span> =</div>
+      <div class="frac-bar" style="width:200px"><div class="frac-bar-fill" style="width:75%"></div><div class="frac-bar-empty"></div></div>
+    </div>
+    <div class="frac-bar-wrap">
+      <div class="frac-label"><span class="frac-t"><span>1</span><span>4</span></span> =</div>
+      <div class="frac-bar" style="width:200px"><div class="frac-bar-fill" style="width:25%"></div><div class="frac-bar-empty"></div></div>
+    </div>
+    <div class="frac-bar-wrap">
+      <div class="frac-label"><span class="frac-t"><span>2</span><span>3</span></span> =</div>
+      <div class="frac-bar" style="width:200px"><div class="frac-bar-fill" style="width:66.6%"></div><div class="frac-bar-empty"></div></div>
+    </div>
+
+    <div class="tip-box" style="margin-top:1rem">
+      <strong>Bråk = division!</strong> &nbsp; 3/4 och 3 ÷ 4 betyder exakt samma sak. I miniräknaren skriver du 3 ÷ 4 = 0,75.
+      Det är därför bråkstrecket och divisionstecknet (÷) är samma sak.
+    </div>
+  </div>
+
+  <!-- 1.2 Förkorta -->
+  <div class="card" style="margin-bottom:1.5rem" id="brak-forkorta">
+    <h3>1.2 &nbsp; Förkorta bråk</h3>
+    <p>Att <strong style="color:var(--white)">förkorta</strong> ett bråk innebär att skriva det enklare utan att ändra värdet. Man delar täljare och nämnare med samma tal — det talet kallas <em>störste gemensamma faktorn (SGF)</em>.</p>
+
+    <div class="tip-box">
+      <strong>Regeln:</strong> Du kan dela täljare och nämnare med vilket tal som helst, så länge du delar <em>båda</em> med <em>samma</em> tal.
+      Bråkets värde förändras inte — du skriver det bara enklare.
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body">Hitta ett tal som <strong>går jämnt in i både täljaren och nämnaren.</strong></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Dela båda</strong> med det talet.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body">Fortsätt tills du inte kan förkorta mer. Då är bråket i <strong>kortaste form</strong>.</div></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 1 — Förkorta <span class="frac-t"><span>6</span><span>8</span></span></div>
+      <div class="ex-line">Vad går in i både 6 och 8? → <strong>2</strong></div>
+      <div class="ex-line">6 ÷ 2 = 3 &nbsp;|&nbsp; 8 ÷ 2 = 4</div>
+      <div class="ex-result"><span class="frac-t"><span>6</span><span>8</span></span> = <span class="frac-t"><span>3</span><span>4</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 2 — Förkorta <span class="frac-t"><span>12</span><span>18</span></span></div>
+      <div class="ex-line">Vad går in i både 12 och 18? → <strong>6</strong> (12 = 6×2, 18 = 6×3)</div>
+      <div class="ex-line">12 ÷ 6 = 2 &nbsp;|&nbsp; 18 ÷ 6 = 3</div>
+      <div class="ex-result"><span class="frac-t"><span>12</span><span>18</span></span> = <span class="frac-t"><span>2</span><span>3</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 3 — Förkorta <span class="frac-t"><span>15</span><span>25</span></span> (steg för steg med 5)</div>
+      <div class="ex-line">15 ÷ 5 = 3 &nbsp;|&nbsp; 25 ÷ 5 = 5</div>
+      <div class="ex-result"><span class="frac-t"><span>15</span><span>25</span></span> = <span class="frac-t"><span>3</span><span>5</span></span></div>
+    </div>
+
+    <div class="warn-box">
+      <strong>Vanligt misstag:</strong> Du kan bara dela med <em>heltal</em> som går jämnt in i båda. Du kan INTE subtrahera ett tal från täljare och nämnare — det ändrar värdet!
+    </div>
+
+    <!-- Kalkylator förkorta -->
+    <div class="math-calc">
+      <h4>🧮 Kalkylator – Förkorta bråk</h4>
+      <div class="calc-inputs">
+        <div class="frac-input">
+          <input type="number" id="simp-n" placeholder="Täljare" value="6">
+          <div class="frac-input-line"></div>
+          <input type="number" id="simp-d" placeholder="Nämnare" value="8">
+        </div>
+        <button class="calc-btn" onclick="simplifyFrac()">Förkorta</button>
+      </div>
+      <div class="math-result" id="simp-result">—</div>
+    </div>
+  </div>
+
+  <!-- 1.3 Förlänga -->
+  <div class="card" style="margin-bottom:1.5rem" id="brak-forlanga">
+    <h3>1.3 &nbsp; Förlänga bråk</h3>
+    <p>Att <strong style="color:var(--white)">förlänga</strong> är motsatsen till förkorta — man <em>multiplicerar</em> täljare och nämnare med samma tal. Värdet förändras inte, men nämnaren blir större. Det behövs t.ex. när man ska addera bråk med olika nämnare.</p>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 1 — Förläng <span class="frac-t"><span>1</span><span>3</span></span> så att nämnaren blir 9</div>
+      <div class="ex-line">Vad behöver vi multiplicera 3 med för att få 9? → <strong>3</strong></div>
+      <div class="ex-line">1 × 3 = 3 &nbsp;|&nbsp; 3 × 3 = 9</div>
+      <div class="ex-result"><span class="frac-t"><span>1</span><span>3</span></span> = <span class="frac-t"><span>3</span><span>9</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 2 — Förläng <span class="frac-t"><span>2</span><span>5</span></span> så att nämnaren blir 20</div>
+      <div class="ex-line">5 × 4 = 20, så vi multiplicerar med 4</div>
+      <div class="ex-line">2 × 4 = 8 &nbsp;|&nbsp; 5 × 4 = 20</div>
+      <div class="ex-result"><span class="frac-t"><span>2</span><span>5</span></span> = <span class="frac-t"><span>8</span><span>20</span></span></div>
+    </div>
+
+    <div class="tip-box">
+      <strong>Tänk på det så här:</strong> Förlänga är som att skära pizzan i fler bitar — du äter fortfarande lika mycket, men bitarna är mindre och det finns fler av dem.
+    </div>
+  </div>
+
+  <!-- 1.4 Addition – samma nämnare -->
+  <div class="card" style="margin-bottom:1.5rem" id="brak-add-samma">
+    <h3>1.4 &nbsp; Addera bråk med samma nämnare</h3>
+    <p>När täljarna har <strong style="color:var(--white)">samma nämnare</strong> är det enkelt — addera bara täljarna och behåll nämnaren.</p>
+
+    <div class="big-formula">
+      <span class="frac"><span>a</span><span>c</span></span>
+      +
+      <span class="frac"><span>b</span><span>c</span></span>
+      =
+      <span class="frac"><span>a+b</span><span>c</span></span>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 1</div>
+      <div class="ex-line"><span class="frac-t"><span>1</span><span>5</span></span> + <span class="frac-t"><span>2</span><span>5</span></span> → Nämnarna är redan lika (5)</div>
+      <div class="ex-line">Addera täljarna: 1 + 2 = 3</div>
+      <div class="ex-result"><span class="frac-t"><span>1</span><span>5</span></span> + <span class="frac-t"><span>2</span><span>5</span></span> = <span class="frac-t"><span>3</span><span>5</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 2</div>
+      <div class="ex-line"><span class="frac-t"><span>3</span><span>8</span></span> + <span class="frac-t"><span>2</span><span>8</span></span> = ?</div>
+      <div class="ex-line">3 + 2 = 5, nämnaren är 8</div>
+      <div class="ex-result"><span class="frac-t"><span>3</span><span>8</span></span> + <span class="frac-t"><span>2</span><span>8</span></span> = <span class="frac-t"><span>5</span><span>8</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 3 – med förkortning</div>
+      <div class="ex-line"><span class="frac-t"><span>2</span><span>6</span></span> + <span class="frac-t"><span>4</span><span>6</span></span> = <span class="frac-t"><span>6</span><span>6</span></span> → <span class="frac-t"><span>6</span><span>6</span></span> = 1</div>
+      <div class="ex-result"><span class="frac-t"><span>2</span><span>6</span></span> + <span class="frac-t"><span>4</span><span>6</span></span> = 1</div>
+    </div>
+  </div>
+
+  <!-- 1.5 Addition – olika nämnare -->
+  <div class="card" style="margin-bottom:1.5rem" id="brak-add-olika">
+    <h3>1.5 &nbsp; Addera bråk med olika nämnare</h3>
+    <p>När nämnarna är <strong style="color:var(--white)">olika</strong> måste du först <em>förlänga</em> bråken så att de får <strong style="color:var(--yellow)">gemensam nämnare</strong>. Det enklaste är att multiplicera de båda nämnarna med varandra.</p>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Hitta gemensam nämnare</strong> — multiplicera de båda nämnarna med varandra (eller hitta minsta gemensamma multipeln).</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Förläng varje bråk</strong> så att de får den gemensamma nämnaren.</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Addera täljarna</strong> — nämnaren är redan klar.</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Förkorta</strong> resultatet om möjligt.</div></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 1 — <span class="frac-t"><span>1</span><span>2</span></span> + <span class="frac-t"><span>1</span><span>3</span></span></div>
+      <div class="ex-line"><strong>Steg 1:</strong> Gemensam nämnare = 2 × 3 = <strong>6</strong></div>
+      <div class="ex-line"><strong>Steg 2:</strong> <span class="frac-t"><span>1</span><span>2</span></span> → 1×3 / 2×3 = <span class="frac-t"><span>3</span><span>6</span></span> &nbsp;|&nbsp; <span class="frac-t"><span>1</span><span>3</span></span> → 1×2 / 3×2 = <span class="frac-t"><span>2</span><span>6</span></span></div>
+      <div class="ex-line"><strong>Steg 3:</strong> <span class="frac-t"><span>3</span><span>6</span></span> + <span class="frac-t"><span>2</span><span>6</span></span> = <span class="frac-t"><span>5</span><span>6</span></span></div>
+      <div class="ex-result"><span class="frac-t"><span>1</span><span>2</span></span> + <span class="frac-t"><span>1</span><span>3</span></span> = <span class="frac-t"><span>5</span><span>6</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 2 — <span class="frac-t"><span>2</span><span>3</span></span> + <span class="frac-t"><span>1</span><span>4</span></span></div>
+      <div class="ex-line"><strong>Steg 1:</strong> 3 × 4 = <strong>12</strong></div>
+      <div class="ex-line"><strong>Steg 2:</strong> <span class="frac-t"><span>2</span><span>3</span></span> = <span class="frac-t"><span>8</span><span>12</span></span> &nbsp;|&nbsp; <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>3</span><span>12</span></span></div>
+      <div class="ex-line"><strong>Steg 3:</strong> <span class="frac-t"><span>8</span><span>12</span></span> + <span class="frac-t"><span>3</span><span>12</span></span> = <span class="frac-t"><span>11</span><span>12</span></span></div>
+      <div class="ex-result"><span class="frac-t"><span>2</span><span>3</span></span> + <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>11</span><span>12</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 3 — <span class="frac-t"><span>1</span><span>6</span></span> + <span class="frac-t"><span>1</span><span>4</span></span></div>
+      <div class="ex-line">Gemensam nämnare: 6 × 4 = 24 &nbsp;(eller 12, som är minsta)</div>
+      <div class="ex-line">Använder 12: <span class="frac-t"><span>1</span><span>6</span></span> = <span class="frac-t"><span>2</span><span>12</span></span> &nbsp;|&nbsp; <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>3</span><span>12</span></span></div>
+      <div class="ex-line"><span class="frac-t"><span>2</span><span>12</span></span> + <span class="frac-t"><span>3</span><span>12</span></span> = <span class="frac-t"><span>5</span><span>12</span></span></div>
+      <div class="ex-result"><span class="frac-t"><span>1</span><span>6</span></span> + <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>5</span><span>12</span></span></div>
+    </div>
+
+    <!-- Kalkylator addition -->
+    <div class="math-calc">
+      <h4>🧮 Kalkylator – Addera bråk</h4>
+      <div class="calc-inputs">
+        <div class="frac-input">
+          <input type="number" id="add-n1" placeholder="Täljare" value="1">
+          <div class="frac-input-line"></div>
+          <input type="number" id="add-d1" placeholder="Nämnare" value="2">
+        </div>
+        <span class="op">+</span>
+        <div class="frac-input">
+          <input type="number" id="add-n2" placeholder="Täljare" value="1">
+          <div class="frac-input-line"></div>
+          <input type="number" id="add-d2" placeholder="Nämnare" value="3">
+        </div>
+        <button class="calc-btn" onclick="addFrac()">Beräkna</button>
+      </div>
+      <div class="math-result" id="add-result">—</div>
+    </div>
+  </div>
+
+  <!-- 1.6 Subtraktion -->
+  <div class="card" style="margin-bottom:1.5rem" id="brak-sub">
+    <h3>1.6 &nbsp; Subtrahera bråk</h3>
+    <p>Exakt samma regler som addition — <strong style="color:var(--white)">gemensam nämnare</strong> och sedan subtraherar man täljarna.</p>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 1 — <span class="frac-t"><span>3</span><span>4</span></span> − <span class="frac-t"><span>1</span><span>4</span></span> (samma nämnare)</div>
+      <div class="ex-line">3 − 1 = 2, nämnare 4</div>
+      <div class="ex-result"><span class="frac-t"><span>3</span><span>4</span></span> − <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>2</span><span>4</span></span> = <span class="frac-t"><span>1</span><span>2</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 2 — <span class="frac-t"><span>5</span><span>6</span></span> − <span class="frac-t"><span>1</span><span>4</span></span> (olika nämnare)</div>
+      <div class="ex-line">Gemensam nämnare: 6 × 4 = 24 &nbsp;(eller 12)</div>
+      <div class="ex-line">Använder 12: <span class="frac-t"><span>5</span><span>6</span></span> = <span class="frac-t"><span>10</span><span>12</span></span> &nbsp;|&nbsp; <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>3</span><span>12</span></span></div>
+      <div class="ex-line"><span class="frac-t"><span>10</span><span>12</span></span> − <span class="frac-t"><span>3</span><span>12</span></span> = <span class="frac-t"><span>7</span><span>12</span></span></div>
+      <div class="ex-result"><span class="frac-t"><span>5</span><span>6</span></span> − <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>7</span><span>12</span></span></div>
+    </div>
+
+    <!-- Kalkylator subtraktion -->
+    <div class="math-calc">
+      <h4>🧮 Kalkylator – Subtrahera bråk</h4>
+      <div class="calc-inputs">
+        <div class="frac-input">
+          <input type="number" id="sub-n1" placeholder="Täljare" value="3">
+          <div class="frac-input-line"></div>
+          <input type="number" id="sub-d1" placeholder="Nämnare" value="4">
+        </div>
+        <span class="op">−</span>
+        <div class="frac-input">
+          <input type="number" id="sub-n2" placeholder="Täljare" value="1">
+          <div class="frac-input-line"></div>
+          <input type="number" id="sub-d2" placeholder="Nämnare" value="4">
+        </div>
+        <button class="calc-btn" onclick="subFrac()">Beräkna</button>
+      </div>
+      <div class="math-result" id="sub-result">—</div>
+    </div>
+  </div>
+
+  <!-- 1.7 Multiplikation -->
+  <div class="card" style="margin-bottom:1.5rem" id="brak-mult">
+    <h3>1.7 &nbsp; Multiplicera bråk</h3>
+    <p>Multiplikation av bråk är faktiskt <strong style="color:var(--white)">enklast</strong> av allt — du behöver ingen gemensam nämnare. Multiplicera täljare med täljare och nämnare med nämnare.</p>
+
+    <div class="big-formula">
+      <span class="frac"><span>a</span><span>b</span></span>
+      ×
+      <span class="frac"><span>c</span><span>d</span></span>
+      =
+      <span class="frac"><span>a×c</span><span>b×d</span></span>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 1 — <span class="frac-t"><span>2</span><span>3</span></span> × <span class="frac-t"><span>3</span><span>4</span></span></div>
+      <div class="ex-line">Täljare: 2 × 3 = 6 &nbsp;|&nbsp; Nämnare: 3 × 4 = 12</div>
+      <div class="ex-line"><span class="frac-t"><span>6</span><span>12</span></span> → förkorta med 6 → <span class="frac-t"><span>1</span><span>2</span></span></div>
+      <div class="ex-result"><span class="frac-t"><span>2</span><span>3</span></span> × <span class="frac-t"><span>3</span><span>4</span></span> = <span class="frac-t"><span>1</span><span>2</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 2 — <span class="frac-t"><span>1</span><span>2</span></span> × <span class="frac-t"><span>1</span><span>2</span></span></div>
+      <div class="ex-line">1 × 1 = 1 &nbsp;|&nbsp; 2 × 2 = 4</div>
+      <div class="ex-result"><span class="frac-t"><span>1</span><span>2</span></span> × <span class="frac-t"><span>1</span><span>2</span></span> = <span class="frac-t"><span>1</span><span>4</span></span></div>
+    </div>
+
+    <div class="tip-box">
+      <strong>Tänk på det så här:</strong> "1/2 av 1/2" — halva av en halv är en fjärdedel. Multiplikation med bråk gör talet <em>mindre</em>.
+    </div>
+
+    <!-- Kalkylator mult -->
+    <div class="math-calc">
+      <h4>🧮 Kalkylator – Multiplicera bråk</h4>
+      <div class="calc-inputs">
+        <div class="frac-input">
+          <input type="number" id="mul-n1" placeholder="Täljare" value="2">
+          <div class="frac-input-line"></div>
+          <input type="number" id="mul-d1" placeholder="Nämnare" value="3">
+        </div>
+        <span class="op">×</span>
+        <div class="frac-input">
+          <input type="number" id="mul-n2" placeholder="Täljare" value="3">
+          <div class="frac-input-line"></div>
+          <input type="number" id="mul-d2" placeholder="Nämnare" value="4">
+        </div>
+        <button class="calc-btn" onclick="mulFrac()">Beräkna</button>
+      </div>
+      <div class="math-result" id="mul-result">—</div>
+    </div>
+  </div>
+
+  <!-- 1.8 Division -->
+  <div class="card" style="margin-bottom:1.5rem" id="brak-div">
+    <h3>1.8 &nbsp; Dividera bråk</h3>
+    <p>Division av bråk: <strong style="color:var(--white)">vänd på det andra bråket och multiplicera.</strong> Det andra bråket kallas det inverterade bråket eller reciproken.</p>
+
+    <div class="big-formula">
+      <span class="frac"><span>a</span><span>b</span></span>
+      ÷
+      <span class="frac"><span>c</span><span>d</span></span>
+      =
+      <span class="frac"><span>a</span><span>b</span></span>
+      ×
+      <span class="frac"><span>d</span><span>c</span></span>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 1 — <span class="frac-t"><span>2</span><span>3</span></span> ÷ <span class="frac-t"><span>1</span><span>2</span></span></div>
+      <div class="ex-line">Vänd <span class="frac-t"><span>1</span><span>2</span></span> → <span class="frac-t"><span>2</span><span>1</span></span></div>
+      <div class="ex-line"><span class="frac-t"><span>2</span><span>3</span></span> × <span class="frac-t"><span>2</span><span>1</span></span> = <span class="frac-t"><span>4</span><span>3</span></span></div>
+      <div class="ex-result"><span class="frac-t"><span>2</span><span>3</span></span> ÷ <span class="frac-t"><span>1</span><span>2</span></span> = <span class="frac-t"><span>4</span><span>3</span></span> ≈ 1,33</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 2 — <span class="frac-t"><span>3</span><span>4</span></span> ÷ <span class="frac-t"><span>3</span><span>8</span></span></div>
+      <div class="ex-line">Vänd <span class="frac-t"><span>3</span><span>8</span></span> → <span class="frac-t"><span>8</span><span>3</span></span></div>
+      <div class="ex-line"><span class="frac-t"><span>3</span><span>4</span></span> × <span class="frac-t"><span>8</span><span>3</span></span> = <span class="frac-t"><span>24</span><span>12</span></span> = 2</div>
+      <div class="ex-result"><span class="frac-t"><span>3</span><span>4</span></span> ÷ <span class="frac-t"><span>3</span><span>8</span></span> = 2</div>
+    </div>
+
+    <div class="tip-box">
+      <strong>Varför vänder man?</strong> Division är multiplikation med det inverterade. 6 ÷ 2 = 6 × (1/2) = 3. Samma princip gäller för bråk.
+    </div>
+  </div>
+
+  <!-- 1.9 Blandade tal -->
+  <div class="card" style="margin-bottom:1.5rem" id="brak-blandade">
+    <h3>1.9 &nbsp; Blandade tal och oäkta bråk</h3>
+    <p>Ett <strong style="color:var(--white)">oäkta bråk</strong> har täljare som är större än nämnaren (t.ex. 7/4). Det kan skrivas som ett <strong style="color:var(--white)">blandat tal</strong> (t.ex. 1¾).</p>
+
+    <div class="ex-box">
+      <div class="ex-title">Oäkta bråk → blandat tal &nbsp;(<span class="frac-t"><span>7</span><span>4</span></span>)</div>
+      <div class="ex-line">Dela: 7 ÷ 4 = 1 rest 3 &nbsp;→ heltalsdelen är 1, resten är <span class="frac-t"><span>3</span><span>4</span></span></div>
+      <div class="ex-result"><span class="frac-t"><span>7</span><span>4</span></span> = 1¾ = 1,75</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Blandat tal → oäkta bråk &nbsp;(2⅓)</div>
+      <div class="ex-line">Heltal × nämnare + täljare: 2 × 3 + 1 = 7</div>
+      <div class="ex-result">2⅓ = <span class="frac-t"><span>7</span><span>3</span></span></div>
+    </div>
+  </div>
+
+  <!-- Övningar del 1 -->
+  <div class="tryit">
+    <div class="tryit-header">✏️ Försök själv – Bråk</div>
+    <ol>
+      <li>Förkorta: 8/12 &nbsp;|&nbsp; 9/15 &nbsp;|&nbsp; 20/24</li>
+      <li>Addera: 1/4 + 2/4 &nbsp;|&nbsp; 1/3 + 1/2 &nbsp;|&nbsp; 2/5 + 1/3</li>
+      <li>Subtrahera: 3/4 − 1/2 &nbsp;|&nbsp; 5/6 − 2/9</li>
+      <li>Multiplicera: 2/3 × 3/5 &nbsp;|&nbsp; 1/4 × 8</li>
+      <li>Dividera: 1/2 ÷ 1/4 &nbsp;|&nbsp; 3/5 ÷ 6</li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     DEL 2 – BRÅK I ELLÄRA
+══════════════════════════════════════════════════════════ -->
+<hr class="del-divider">
+<section class="section" id="brak-ellara">
+  <div class="section-header">
+    <div class="section-icon">⚡</div>
+    <div>
+      <h4>Del 2</h4>
+      <h2>Bråk i ellära-formlerna</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">Nu kopplar vi bråkräkning direkt till formlerna du möter i kursen.</p>
+
+  <!-- R = ρL/A -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>2.1 &nbsp; R = ρ · L / A &nbsp; är ett bråk</h3>
+    <p>Formeln för en ledares resistans ser komplicerad ut, men det är bara ett bråk:</p>
+    <div class="big-formula">R = <span class="frac"><span>ρ · L</span><span>A</span></span></div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Täljaren är ρ × L (resistivitet gånger längd) och nämnaren är A (arean). Du delar alltså täljaren med nämnaren — precis som vanlig bråkräkning.</p>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel — Koppar, L = 50 m, A = 2,5 mm²</div>
+      <div class="ex-line">ρ(Cu) = 0,018 &nbsp;|&nbsp; L = 50 &nbsp;|&nbsp; A = 2,5</div>
+      <div class="ex-line">Täljare: 0,018 × 50 = <strong>0,9</strong></div>
+      <div class="ex-line">R = 0,9 / 2,5 = <strong>0,36 Ω</strong></div>
+      <div class="ex-result">R = 0,36 Ω</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 2 — Aluminium, L = 100 m, A = 4 mm²</div>
+      <div class="ex-line">ρ(Al) = 0,028 &nbsp;|&nbsp; Täljare: 0,028 × 100 = 2,8</div>
+      <div class="ex-line">R = 2,8 / 4 = <strong>0,7 Ω</strong></div>
+      <div class="ex-result">R = 0,7 Ω</div>
+    </div>
+  </div>
+
+  <!-- Spänningsfall -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>2.2 &nbsp; Spänningsfall = ett längre bråk</h3>
+    <div class="big-formula">U<sub style="font-size:0.6em">fall</sub> = <span class="frac"><span>2 · ρ · L · I</span><span>A</span></span></div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Täljaren är 2 × ρ × L × I — alla dessa tal multipliceras ihop. Sedan dividerar du med A. Räkna alltid ut täljaren <em>först</em>, sedan dividera.</p>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel — Cu, L=30m, I=10A, A=2,5mm²</div>
+      <div class="ex-line">Täljare: 2 × 0,018 × 30 × 10 = <strong>10,8</strong></div>
+      <div class="ex-line">U_fall = 10,8 / 2,5 = <strong>4,32 V</strong></div>
+      <div class="ex-line">4,32 V &lt; 9,2 V → OK ✓</div>
+      <div class="ex-result">Spänningsfall = 4,32 V (godkänt)</div>
+    </div>
+  </div>
+
+  <!-- Parallell -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>2.3 &nbsp; Parallellkoppling — bråkaddition i praktiken</h3>
+    <p>Formeln för parallellkopplade motstånd är ett av de bästa exemplen på bråkaddition:</p>
+    <div class="big-formula">
+      <span class="frac"><span>1</span><span>R<sub style="font-size:0.5em">tot</sub></span></span>
+      =
+      <span class="frac"><span>1</span><span>R₁</span></span>
+      +
+      <span class="frac"><span>1</span><span>R₂</span></span>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel — R₁ = 20 Ω, R₂ = 30 Ω parallellkopplade</div>
+      <div class="ex-line"><span class="frac-t"><span>1</span><span>20</span></span> + <span class="frac-t"><span>1</span><span>30</span></span> → gemensam nämnare: 60</div>
+      <div class="ex-line"><span class="frac-t"><span>1</span><span>20</span></span> = <span class="frac-t"><span>3</span><span>60</span></span> &nbsp;|&nbsp; <span class="frac-t"><span>1</span><span>30</span></span> = <span class="frac-t"><span>2</span><span>60</span></span></div>
+      <div class="ex-line"><span class="frac-t"><span>3</span><span>60</span></span> + <span class="frac-t"><span>2</span><span>60</span></span> = <span class="frac-t"><span>5</span><span>60</span></span> = <span class="frac-t"><span>1</span><span>12</span></span></div>
+      <div class="ex-line">Alltså: 1/R_tot = <span class="frac-t"><span>1</span><span>12</span></span> → R_tot = 12 Ω</div>
+      <div class="ex-result">R_tot = 12 Ω</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     DEL 3 – OMVANDLA FORMLER
+══════════════════════════════════════════════════════════ -->
+<hr class="del-divider">
+<section class="section" id="formler">
+  <div class="section-header">
+    <div class="section-icon">🔄</div>
+    <div>
+      <h4>Del 3</h4>
+      <h2>Omvandla formler – lösa ut variabler</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">En formel är som en vågskål — vad du gör på ena sidan <em>måste</em> du göra på den andra. Det kallas <strong style="color:var(--white)">balansprincipen</strong>.</p>
+
+  <!-- Balansprincipen -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>3.1 &nbsp; Balansprincipen</h3>
+    <div class="balance">
+      <div class="balance-side">Vänster<br>sida</div>
+      <div class="balance-eq">=</div>
+      <div class="balance-side">Höger<br>sida</div>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;text-align:center;margin-bottom:1rem">Om du lägger till, tar bort, multiplicerar eller dividerar — gör exakt samma sak på <strong style="color:var(--white)">båda</strong> sidor.</p>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">✓</div><div class="step-body">Dela båda sidor med samma tal</div></div>
+      <div class="step"><div class="step-num">✓</div><div class="step-body">Multiplicera båda sidor med samma tal</div></div>
+      <div class="step"><div class="step-num">✓</div><div class="step-body">Addera/subtrahera samma tal på båda sidor</div></div>
+      <div class="step"><div class="step-num">✗</div><div class="step-body"><strong style="color:#FF4C4C">Gör ALDRIG olika saker på de två sidorna</strong></div></div>
+    </div>
+  </div>
+
+  <!-- Ohms lag -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>3.2 &nbsp; Ohms lag — U = R · I — alla varianter</h3>
+
+    <div class="ex-box">
+      <div class="ex-title">Lösa ut R (vi vet U och I)</div>
+      <div class="ex-line">Start: &nbsp; U = R × I</div>
+      <div class="ex-line">Dela båda sidor med I: &nbsp; <span class="frac"><span>U</span><span>I</span></span> = R × <span class="frac"><span>I</span><span>I</span></span></div>
+      <div class="ex-line"><span class="frac"><span>I</span><span>I</span></span> = 1 (försvinner): &nbsp; <span class="frac"><span>U</span><span>I</span></span> = R</div>
+      <div class="ex-result">R = <span class="frac"><span>U</span><span>I</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Lösa ut I (vi vet U och R)</div>
+      <div class="ex-line">Start: &nbsp; U = R × I</div>
+      <div class="ex-line">Dela båda sidor med R: &nbsp; <span class="frac"><span>U</span><span>R</span></span> = I</div>
+      <div class="ex-result">I = <span class="frac"><span>U</span><span>R</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Räkneexempel — R = ?, U = 230 V, I = 5 A</div>
+      <div class="ex-line">R = <span class="frac"><span>U</span><span>I</span></span> = <span class="frac"><span>230</span><span>5</span></span> = <strong>46 Ω</strong></div>
+      <div class="ex-result">R = 46 Ω</div>
+    </div>
+  </div>
+
+  <!-- Effektlagen -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>3.3 &nbsp; Effektlagen — P = U · I — alla varianter</h3>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div class="ex-box" style="margin:0">
+        <div class="ex-title">Lösa ut U</div>
+        <div class="ex-line">P = U × I</div>
+        <div class="ex-line">Dela med I:</div>
+        <div class="ex-result">U = <span class="frac"><span>P</span><span>I</span></span></div>
+      </div>
+      <div class="ex-box" style="margin:0">
+        <div class="ex-title">Lösa ut I</div>
+        <div class="ex-line">P = U × I</div>
+        <div class="ex-line">Dela med U:</div>
+        <div class="ex-result">I = <span class="frac"><span>P</span><span>U</span></span></div>
+      </div>
+    </div>
+
+    <div class="ex-box" style="margin-top:0.75rem">
+      <div class="ex-title">Exempel — En spis på 7 000 W vid 230 V</div>
+      <div class="ex-line">I = <span class="frac"><span>P</span><span>U</span></span> = <span class="frac"><span>7 000</span><span>230</span></span> ≈ <strong>30,4 A</strong></div>
+      <div class="ex-result">Spisen drar ≈ 30 A — behöver minst 32 A säkring!</div>
+    </div>
+  </div>
+
+  <!-- Spänningsfall -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>3.4 &nbsp; Spänningsfallet — lösa ut L eller A</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Ibland vill man t.ex. veta <em>hur lång kabel man kan dra</em> innan spänningsfallet blir för stort.</p>
+
+    <div class="ex-box">
+      <div class="ex-title">Lösa ut L — hur lång kabel får man dra?</div>
+      <div class="ex-line">Start: &nbsp; U_fall = <span class="frac"><span>2 · ρ · L · I</span><span>A</span></span></div>
+      <div class="ex-line">Multiplicera båda sidor med A: &nbsp; U_fall × A = 2 · ρ · L · I</div>
+      <div class="ex-line">Dela båda sidor med (2 · ρ · I):</div>
+      <div class="ex-result">L = <span class="frac"><span>U_fall × A</span><span>2 · ρ · I</span></span></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel — Max hur lång Cu-kabel? A=2,5mm², I=16A, max U_fall=9,2V</div>
+      <div class="ex-line">L = <span class="frac"><span>9,2 × 2,5</span><span>2 × 0,018 × 16</span></span></div>
+      <div class="ex-line">L = <span class="frac"><span>23</span><span>0,576</span></span> ≈ <strong>40 m</strong></div>
+      <div class="ex-result">Max kabellängd ≈ 40 m</div>
+    </div>
+  </div>
+
+  <!-- Övningar del 3 -->
+  <div class="tryit">
+    <div class="tryit-header">✏️ Försök själv – Formler</div>
+    <ol>
+      <li>Ur P = U · I, lösa ut U. (Svar: U = <span class="frac"><span>P</span><span>I</span></span>)</li>
+      <li>En lampa drar P = 60 W vid U = 230 V. Beräkna I.</li>
+      <li>R = <span class="frac"><span>ρ · L</span><span>A</span></span> — lösa ut A. Vad är formeln?</li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     DEL 4 – PREFIX & ENHETER
+══════════════════════════════════════════════════════════ -->
+<hr class="del-divider">
+<section class="section" id="prefix">
+  <div class="section-header">
+    <div class="section-icon">📏</div>
+    <div>
+      <h4>Del 4</h4>
+      <h2>Prefix &amp; Enhetsomvandling</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">I ellära möter du ofta tal med prefix — t.ex. 30 mA (milliampere) eller 10 kV (kilovolt). Att omvandla rätt är avgörande för korrekta beräkningar.</p>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>4.1 &nbsp; Prefixtabell</h3>
+    <table class="prefix-table">
+      <thead>
+        <tr>
+          <th>Prefix</th>
+          <th>Symbol</th>
+          <th>Faktor</th>
+          <th>Exempel</th>
+          <th>= i grundenhet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mega</td><td class="prefix-highlight">M</td><td>× 1 000 000</td>
+          <td>1 MΩ</td><td>1 000 000 Ω</td>
+        </tr>
+        <tr>
+          <td>Kilo</td><td class="prefix-highlight">k</td><td>× 1 000</td>
+          <td>10 kV</td><td>10 000 V</td>
+        </tr>
+        <tr>
+          <td>(Ingen)</td><td>—</td><td>× 1</td>
+          <td>230 V</td><td>230 V</td>
+        </tr>
+        <tr>
+          <td>Milli</td><td class="prefix-highlight">m</td><td>÷ 1 000 &nbsp;(× 0,001)</td>
+          <td>30 mA</td><td>0,03 A</td>
+        </tr>
+        <tr>
+          <td>Mikro</td><td class="prefix-highlight">µ</td><td>÷ 1 000 000 &nbsp;(× 0,000001)</td>
+          <td>100 µF</td><td>0,0001 F</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>4.2 &nbsp; Genomräknade omvandlingsexempel</h3>
+
+    <div class="ex-box">
+      <div class="ex-title">30 mA → Ampere</div>
+      <div class="ex-line">milli = ÷ 1 000</div>
+      <div class="ex-line">30 ÷ 1 000 = 0,03</div>
+      <div class="ex-result">30 mA = 0,03 A</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">10 kV → Volt</div>
+      <div class="ex-line">kilo = × 1 000</div>
+      <div class="ex-line">10 × 1 000 = 10 000</div>
+      <div class="ex-result">10 kV = 10 000 V</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">400 kV → Volt (stamnätet)</div>
+      <div class="ex-line">400 × 1 000 = 400 000</div>
+      <div class="ex-result">400 kV = 400 000 V</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">2 300 W → kW</div>
+      <div class="ex-line">kilo = × 1 000, men vi ska till kW → dela med 1 000</div>
+      <div class="ex-line">2 300 ÷ 1 000 = 2,3</div>
+      <div class="ex-result">2 300 W = 2,3 kW</div>
+    </div>
+
+    <div class="tip-box" style="margin-top:0.75rem">
+      <strong>Tumregel:</strong> Ska du ta bort ett prefix (gå till grundenhet) → <strong>multiplicera</strong> med faktorns tal.
+      Ska du lägga till ett prefix → <strong>dividera</strong> med faktorns tal.
+    </div>
+  </div>
+
+  <!-- Kalkylator prefix -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>4.3 &nbsp; Omvandlare</h3>
+    <div class="math-calc">
+      <h4>🧮 Kalkylator – Enhetsomvandlare</h4>
+      <div class="calc-inputs">
+        <input type="number" id="pref-val" placeholder="Värde" value="30">
+        <select id="pref-from">
+          <option value="1000000">Mega (M)</option>
+          <option value="1000">Kilo (k)</option>
+          <option value="1" selected>Grundenhet</option>
+          <option value="0.001">Milli (m)</option>
+          <option value="0.000001">Mikro (µ)</option>
+        </select>
+        <span class="op">→</span>
+        <select id="pref-to">
+          <option value="1000000">Mega (M)</option>
+          <option value="1000">Kilo (k)</option>
+          <option value="1">Grundenhet</option>
+          <option value="0.001" selected>Milli (m)</option>
+          <option value="0.000001">Mikro (µ)</option>
+        </select>
+        <button class="calc-btn" onclick="convertPrefix()">Omvandla</button>
+      </div>
+      <div class="math-result" id="pref-result">—</div>
+    </div>
+  </div>
+
+  <!-- Övningar del 4 -->
+  <div class="tryit">
+    <div class="tryit-header">✏️ Försök själv – Prefix</div>
+    <ol>
+      <li>Omvandla: 5 kA till A &nbsp;|&nbsp; 500 mV till V &nbsp;|&nbsp; 1 MΩ till Ω</li>
+      <li>En jordfelsbrytare löser ut vid 30 mA. Hur många ampere är det?</li>
+      <li>Stamnätet har 400 kV. Hur många volt är det?</li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     DEL 5 – PYTHAGORAS
+══════════════════════════════════════════════════════════ -->
+<hr class="del-divider">
+<section class="section" id="pythagoras">
+  <div class="section-header">
+    <div class="section-icon">📐</div>
+    <div>
+      <h4>Del 5</h4>
+      <h2>Pythagoras sats</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">Pythagoras sats gäller alltid i <strong style="color:var(--white)">rätvinkliga trianglar</strong> — trianglar som har en vinkel på exakt 90°. Den används i ellära bl.a. för att beräkna spänningsvektorer i trefassystem.</p>
+
+  <!-- 5.1 Vad är en rätvinklig triangel -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>5.1 &nbsp; Rätvinkliga triangelns delar</h3>
+    <div class="pyth-grid">
+      <div>
+        <svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;height:auto">
+          <!-- Triangle -->
+          <polygon points="30,190 230,190 30,40" fill="rgba(78,205,196,0.08)" stroke="#4ECDC4" stroke-width="2.5" stroke-linejoin="round"/>
+          <!-- Right angle square -->
+          <rect x="30" y="170" width="20" height="20" fill="none" stroke="#4ECDC4" stroke-width="1.5"/>
+          <!-- Labels -->
+          <!-- a = left side (katet) -->
+          <text x="10" y="120" font-family="sans-serif" font-size="16" font-weight="800" fill="#FF9B4D" text-anchor="middle">a</text>
+          <text x="10" y="136" font-family="sans-serif" font-size="10" fill="#FF9B4D" text-anchor="middle">katet</text>
+          <!-- b = bottom side (katet) -->
+          <text x="130" y="210" font-family="sans-serif" font-size="16" font-weight="800" fill="#FFD700" text-anchor="middle">b</text>
+          <text x="130" y="222" font-family="sans-serif" font-size="10" fill="#FFD700" text-anchor="middle">katet</text>
+          <!-- c = hypotenuse -->
+          <text x="148" y="110" font-family="sans-serif" font-size="16" font-weight="800" fill="#4ECDC4" text-anchor="middle">c</text>
+          <text x="148" y="126" font-family="sans-serif" font-size="10" fill="#4ECDC4" text-anchor="middle">hypotenusan</text>
+          <!-- 90° label -->
+          <text x="56" y="188" font-family="sans-serif" font-size="10" fill="#4ECDC4">90°</text>
+        </svg>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;justify-content:center;font-size:0.9rem;color:var(--muted)">
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.9rem;border-left:3px solid #FF9B4D">
+          <strong style="color:#FF9B4D">a</strong> och <strong style="color:#FFD700">b</strong> = <strong style="color:var(--white)">Kateter</strong><br>
+          De två sidorna som bildar den räta vinkeln (90°).
+        </div>
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.9rem;border-left:3px solid #4ECDC4">
+          <strong style="color:#4ECDC4">c</strong> = <strong style="color:var(--white)">Hypotenusan</strong><br>
+          Sidan mitt emot 90°-vinkeln — alltid den <em>längsta</em> sidan.
+        </div>
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.9rem;border-left:3px solid var(--primary)">
+          <strong style="color:var(--primary)">Viktigt:</strong> Pythagoras fungerar <em>bara</em> i rätvinkliga trianglar!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.2 Satsen -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>5.2 &nbsp; Pythagoras sats</h3>
+    <div class="big-formula">a² + b² = c²</div>
+    <p style="color:var(--muted);text-align:center;font-size:0.9rem;margin-bottom:1rem">Summan av kateterna i kvadrat är lika med hypotenusan i kvadrat.</p>
+
+    <!-- Geometrisk förklaring med SVG -->
+    <svg viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;display:block;margin:0 auto">
+      <!-- Triangle in center -->
+      <polygon points="120,200 220,200 120,80" fill="rgba(78,205,196,0.1)" stroke="#4ECDC4" stroke-width="2"/>
+      <!-- Right angle -->
+      <rect x="120" y="180" width="16" height="16" fill="none" stroke="#4ECDC4" stroke-width="1.5"/>
+
+      <!-- Square on a (left, height=120) -->
+      <rect x="40" y="80" width="80" height="120" fill="rgba(255,155,77,0.15)" stroke="#FF9B4D" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="80" y="148" font-family="sans-serif" font-size="13" font-weight="700" fill="#FF9B4D" text-anchor="middle">a²</text>
+
+      <!-- Square on b (bottom, width=100) -->
+      <rect x="120" y="200" width="100" height="100" fill="rgba(255,215,0,0.15)" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="170" y="258" font-family="sans-serif" font-size="13" font-weight="700" fill="#FFD700" text-anchor="middle">b²</text>
+
+      <!-- Square on c (hypotenuse) – approximate -->
+      <polygon points="220,200 310,140 250,50 160,110" fill="rgba(78,205,196,0.15)" stroke="#4ECDC4" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="245" y="140" font-family="sans-serif" font-size="13" font-weight="700" fill="#4ECDC4" text-anchor="middle">c²</text>
+
+      <!-- Labels on triangle sides -->
+      <text x="107" y="148" font-family="sans-serif" font-size="14" font-weight="800" fill="#FF9B4D" text-anchor="middle">a</text>
+      <text x="170" y="196" font-family="sans-serif" font-size="14" font-weight="800" fill="#FFD700" text-anchor="middle">b</text>
+      <text x="182" y="132" font-family="sans-serif" font-size="14" font-weight="800" fill="#4ECDC4" text-anchor="middle">c</text>
+    </svg>
+    <p style="font-size:0.83rem;color:var(--muted);text-align:center;margin-top:0.5rem">Arean av kvadraten på a + arean av kvadraten på b = arean av kvadraten på c.</p>
+  </div>
+
+  <!-- 5.3 Beräkna hypotenusan -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>5.3 &nbsp; Beräkna hypotenusan (c)</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.75rem">Om du känner till båda kateterna (a och b) kan du räkna ut c.</p>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body">Kvadrera kateterna: räkna ut a² och b²</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body">Addera dem: a² + b²</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body">Ta kvadratroten: c = √(a² + b²)</div></div>
+    </div>
+
+    <div class="tip-box">
+      <strong>Kvadratrot på miniräknaren:</strong> Skriv √ eller <strong>√x</strong>-knappen. T.ex.: √25 = 5 &nbsp;|&nbsp; √2 ≈ 1,414
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 1 — Klassiska 3-4-5-triangeln</div>
+      <div class="ex-line">a = 3, b = 4</div>
+      <div class="ex-line">a² + b² = 3² + 4² = 9 + 16 = 25</div>
+      <div class="ex-line">c = √25 = <strong>5</strong></div>
+      <div class="ex-result">c = 5</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 2 — a = 6, b = 8</div>
+      <div class="ex-line">6² + 8² = 36 + 64 = 100</div>
+      <div class="ex-line">c = √100 = <strong>10</strong></div>
+      <div class="ex-result">c = 10</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 3 — a = 5, b = 7</div>
+      <div class="ex-line">5² + 7² = 25 + 49 = 74</div>
+      <div class="ex-line">c = √74 ≈ <strong>8,60</strong></div>
+      <div class="ex-result">c ≈ 8,60</div>
+    </div>
+  </div>
+
+  <!-- 5.4 Beräkna en katet -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>5.4 &nbsp; Beräkna en katet (a eller b)</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.75rem">Om du vet hypotenusan och en katet kan du räkna ut den saknade kateten — flytta bara om formeln.</p>
+
+    <div class="big-formula" style="font-size:1.2rem">
+      a = √(c² − b²) &nbsp;&nbsp; b = √(c² − a²)
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body">Kvadrera c och den kända kateten</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body">Subtrahera: c² − (känd katet)²</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body">Ta kvadratroten av resultatet</div></div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel — c = 10, b = 6 → hitta a</div>
+      <div class="ex-line">a² = c² − b² = 10² − 6² = 100 − 36 = 64</div>
+      <div class="ex-line">a = √64 = <strong>8</strong></div>
+      <div class="ex-result">a = 8</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Exempel 2 — c = 13, a = 5 → hitta b</div>
+      <div class="ex-line">b² = 13² − 5² = 169 − 25 = 144</div>
+      <div class="ex-line">b = √144 = <strong>12</strong></div>
+      <div class="ex-result">b = 12</div>
+    </div>
+  </div>
+
+  <!-- 5.5 Interaktiv kalkylator -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>5.5 &nbsp; Kalkylator – Pythagoras</h3>
+    <div class="math-calc">
+      <h4>🧮 Fyll i två kända sidor — lämna den okända tom</h4>
+      <div class="calc-inputs" style="gap:0.75rem;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <label style="font-size:0.8rem;color:var(--muted)">Katet a</label>
+          <input type="number" id="pyth-a" placeholder="?" style="width:90px">
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <label style="font-size:0.8rem;color:var(--muted)">Katet b</label>
+          <input type="number" id="pyth-b" placeholder="?" style="width:90px">
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <label style="font-size:0.8rem;color:var(--muted)">Hyp. c</label>
+          <input type="number" id="pyth-c" placeholder="?" style="width:90px">
+        </div>
+        <button class="calc-btn" onclick="calcPyth()">Beräkna</button>
+      </div>
+      <div class="math-result" id="pyth-result">—</div>
+    </div>
+  </div>
+
+  <!-- 5.6 Ellära-koppling -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>5.6 &nbsp; Pythagoras i trefas &amp; vektorer</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">I ett trefassystem är faserna förskjutna 120° mot varandra. När man ritar dem som vektorer (pilar) och vill hitta den resulterande spänningen, används Pythagoras.</p>
+
+    <div class="ex-box">
+      <div class="ex-title">Sambandet fas–fas och fas–neutral (Sverige)</div>
+      <div class="ex-line">U_fas = 230 V (fas till neutral)</div>
+      <div class="ex-line">U_linje = U_fas × √3 ≈ 230 × 1,732 ≈ <strong>400 V</strong></div>
+      <div class="ex-line">Faktorn √3 ≈ 1,732 kommer från vektormaten och är direkt kopplad till Pythagoras</div>
+      <div class="ex-result">Fas–Fas = 400 V &nbsp;|&nbsp; Fas–Neutral = 230 V</div>
+    </div>
+
+    <div class="tip-box">
+      <strong>Varför √3?</strong> När man ritar de tre faserna som vektorer 120° ifrån varandra och mäter avståndet mellan spetsarna med vektormaten, får man faktorn √3 ≈ 1,732. Det är ett resultat av Pythagoras i den geometrin.
+    </div>
+  </div>
+
+  <!-- Övningar del 5 -->
+  <div class="tryit">
+    <div class="tryit-header">✏️ Försök själv – Pythagoras</div>
+    <ol>
+      <li>a = 8, b = 15 → Beräkna c.</li>
+      <li>c = 17, a = 8 → Beräkna b.</li>
+      <li>a = 7, b = 7 → Beräkna c (avrunda till 2 decimaler).</li>
+      <li>Varför är hypotenusan alltid den längsta sidan?</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+  </div><!-- /main-content -->
+</div><!-- /layout-wrapper -->
+
+<!-- ══════════════════════════════════════════════════════════
+     JAVASCRIPT – Kalkylatorer
+══════════════════════════════════════════════════════════ -->
+<script>
+/* ── Hjälpfunktioner ── */
+function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { [a, b] = [b, a % b]; } return a; }
+function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
+
+function frac(n, d) {
+  return `<span class="frac" style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 3px"><span style="border-bottom:1.5px solid currentColor;padding:0 4px 1px">${n}</span><span style="padding:1px 4px 0">${d}</span></span>`;
+}
+
+function fmtFrac(n, d) {
+  if (d === 0) return 'Ogiltig (division med 0)';
+  const g = gcd(Math.abs(n), Math.abs(d));
+  const sn = n / g, sd = d / g;
+  const dec = (n / d).toFixed(4).replace(/\.?0+$/, '');
+  if (sd === 1) return `<strong>${sn}</strong> (= ${dec})`;
+  return `${frac(sn, sd)} <span style="color:var(--muted);font-size:0.85em">(= ${dec})</span>`;
+}
+
+/* ── Förkorta ── */
+function simplifyFrac() {
+  const n = parseInt(document.getElementById('simp-n').value);
+  const d = parseInt(document.getElementById('simp-d').value);
+  if (isNaN(n) || isNaN(d) || d === 0) { document.getElementById('simp-result').textContent = 'Fyll i giltiga tal (nämnare ≠ 0)'; return; }
+  const g = gcd(Math.abs(n), Math.abs(d));
+  const dec = (n/d).toFixed(6).replace(/0+$/, '').replace(/\.$/, '');
+  document.getElementById('simp-result').innerHTML =
+    `${frac(n,d)} = ${frac(n/g, d/g)} <span style="color:var(--muted);font-size:0.85em">(delat med ${g}) = ${dec}</span>`;
+}
+
+/* ── Addition ── */
+function addFrac() {
+  const n1 = parseInt(document.getElementById('add-n1').value);
+  const d1 = parseInt(document.getElementById('add-d1').value);
+  const n2 = parseInt(document.getElementById('add-n2').value);
+  const d2 = parseInt(document.getElementById('add-d2').value);
+  if ([n1,d1,n2,d2].some(isNaN) || d1===0 || d2===0) { document.getElementById('add-result').textContent='Ogiltiga värden'; return; }
+  const dCommon = lcm(d1, d2);
+  const nResult = n1 * (dCommon/d1) + n2 * (dCommon/d2);
+  document.getElementById('add-result').innerHTML =
+    `${frac(n1,d1)} + ${frac(n2,d2)} → ${frac(n1*(dCommon/d1), dCommon)} + ${frac(n2*(dCommon/d2), dCommon)} = ${fmtFrac(nResult, dCommon)}`;
+}
+
+/* ── Subtraktion ── */
+function subFrac() {
+  const n1 = parseInt(document.getElementById('sub-n1').value);
+  const d1 = parseInt(document.getElementById('sub-d1').value);
+  const n2 = parseInt(document.getElementById('sub-n2').value);
+  const d2 = parseInt(document.getElementById('sub-d2').value);
+  if ([n1,d1,n2,d2].some(isNaN) || d1===0 || d2===0) { document.getElementById('sub-result').textContent='Ogiltiga värden'; return; }
+  const dCommon = lcm(d1, d2);
+  const nResult = n1 * (dCommon/d1) - n2 * (dCommon/d2);
+  document.getElementById('sub-result').innerHTML =
+    `${frac(n1,d1)} − ${frac(n2,d2)} → ${frac(n1*(dCommon/d1), dCommon)} − ${frac(n2*(dCommon/d2), dCommon)} = ${fmtFrac(nResult, dCommon)}`;
+}
+
+/* ── Multiplikation ── */
+function mulFrac() {
+  const n1 = parseInt(document.getElementById('mul-n1').value);
+  const d1 = parseInt(document.getElementById('mul-d1').value);
+  const n2 = parseInt(document.getElementById('mul-n2').value);
+  const d2 = parseInt(document.getElementById('mul-d2').value);
+  if ([n1,d1,n2,d2].some(isNaN) || d1===0 || d2===0) { document.getElementById('mul-result').textContent='Ogiltiga värden'; return; }
+  document.getElementById('mul-result').innerHTML =
+    `${frac(n1,d1)} × ${frac(n2,d2)} = ${frac(n1*n2, d1*d2)} = ${fmtFrac(n1*n2, d1*d2)}`;
+}
+
+/* ── Prefix ── */
+function convertPrefix() {
+  const val = parseFloat(document.getElementById('pref-val').value);
+  const from = parseFloat(document.getElementById('pref-from').value);
+  const to = parseFloat(document.getElementById('pref-to').value);
+  if (isNaN(val)) { document.getElementById('pref-result').textContent = 'Ange ett värde'; return; }
+  const result = val * from / to;
+  const fmt = n => parseFloat(n.toPrecision(8)).toString();
+  document.getElementById('pref-result').textContent = `${val} × (${from}/${to}) = ${fmt(result)}`;
+}
+
+/* ── Pythagoras ── */
+function calcPyth() {
+  const a = parseFloat(document.getElementById('pyth-a').value);
+  const b = parseFloat(document.getElementById('pyth-b').value);
+  const c = parseFloat(document.getElementById('pyth-c').value);
+  const res = document.getElementById('pyth-result');
+  const aOk = !isNaN(a) && a > 0;
+  const bOk = !isNaN(b) && b > 0;
+  const cOk = !isNaN(c) && c > 0;
+  const filled = [aOk, bOk, cOk].filter(Boolean).length;
+  if (filled < 2) { res.textContent = 'Fyll i minst två sidor'; return; }
+  if (!cOk && aOk && bOk) {
+    const cv = Math.sqrt(a*a + b*b);
+    res.textContent = `c = √(${a}² + ${b}²) = √(${a*a} + ${b*b}) = √${a*a+b*b} ≈ ${cv.toFixed(4)}`;
+  } else if (!aOk && bOk && cOk) {
+    if (c <= b) { res.textContent = 'Hypotenusan måste vara längre än kateten'; return; }
+    const av = Math.sqrt(c*c - b*b);
+    res.textContent = `a = √(${c}² − ${b}²) = √(${c*c} − ${b*b}) = √${c*c-b*b} ≈ ${av.toFixed(4)}`;
+  } else if (!bOk && aOk && cOk) {
+    if (c <= a) { res.textContent = 'Hypotenusan måste vara längre än kateten'; return; }
+    const bv = Math.sqrt(c*c - a*a);
+    res.textContent = `b = √(${c}² − ${a}²) = √(${c*c} − ${a*a}) = √${c*c-a*a} ≈ ${bv.toFixed(4)}`;
+  } else {
+    res.textContent = 'Lämna exakt ett fält tomt (den okända sidan)';
+  }
+}
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>

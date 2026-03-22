@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prov – Ellära</title>
+  <style>
+    /* ===== GRUNDLÄGGANDE ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Times New Roman', Georgia, serif;
+      font-size: 11.5pt;
+      line-height: 1.5;
+      color: #111;
+      background: #fff;
+      padding: 0;
+    }
+
+    /* ===== SKÄRM: visa snygg knapp ===== */
+    .screen-only {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: #1a1a2e;
+    }
+
+    .print-btn {
+      background: #4ECDC4;
+      color: #000;
+      border: none;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+    }
+    .print-btn:hover { background: #38b2aa; }
+
+    /* ===== SIDA ===== */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 18mm 18mm 20mm 20mm;
+      background: #fff;
+    }
+
+    /* ===== RUBRIK ===== */
+    .prov-header {
+      text-align: center;
+      border-bottom: 2.5px solid #111;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .prov-header h1 {
+      font-size: 20pt;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .prov-header .subtitle {
+      font-size: 10pt;
+      color: #333;
+      margin-top: 2px;
+    }
+
+    /* Info-rad */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 14px;
+      font-size: 10pt;
+    }
+
+    .info-field {
+      border-bottom: 1px solid #666;
+      padding-bottom: 2px;
+    }
+
+    .info-label {
+      font-size: 8.5pt;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    /* ===== INSTRUKTIONER ===== */
+    .instructions {
+      background: #f5f5f5;
+      border-left: 4px solid #333;
+      padding: 8px 12px;
+      font-size: 9.5pt;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .instructions ul {
+      margin-left: 1.2rem;
+    }
+
+    /* ===== POÄNGTABELL ===== */
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin-bottom: 16px;
+    }
+
+    .score-table th, .score-table td {
+      border: 1px solid #aaa;
+      padding: 4px 8px;
+      text-align: center;
+    }
+
+    .score-table th {
+      background: #eee;
+      font-weight: 700;
+    }
+
+    /* ===== SEKTIONER ===== */
+    .section-title {
+      font-size: 13pt;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-top: 2px solid #111;
+      border-bottom: 1px solid #555;
+      padding: 5px 0 4px;
+      margin-top: 18px;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      font-size: 9.5pt;
+      font-weight: normal;
+      font-style: italic;
+      color: #444;
+      margin-top: 2px;
+      margin-bottom: 10px;
+    }
+
+    /* ===== FRÅGOR – KUNSKAPSDEL ===== */
+    .question-k {
+      margin-bottom: 14px;
+      page-break-inside: avoid;
+    }
+
+    .question-k .q-num {
+      font-weight: 700;
+      display: inline;
+    }
+
+    .answer-lines {
+      margin-top: 4px;
+    }
+
+    .line {
+      border-bottom: 1px solid #aaa;
+      height: 20px;
+      margin-top: 3px;
+    }
+
+    /* ===== FRÅGOR – BERÄKNINGSDEL ===== */
+    .question-calc {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+      display: grid;
+      grid-template-columns: 5fr 2fr;
+      gap: 8px;
+      min-height: 80px;
+    }
+
+    .question-calc .q-text { font-size: 10.5pt; }
+    .question-calc .q-num { font-weight: 700; }
+
+    .answer-box {
+      border: 1px solid #bbb;
+      border-radius: 3px;
+      background: #fafafa;
+      min-height: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 4px 6px;
+      font-size: 9pt;
+    }
+
+    .answer-box-label {
+      font-size: 8pt;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+
+    .answer-line-big {
+      border-bottom: 1.5px solid #555;
+      height: 24px;
+      margin-top: 4px;
+    }
+
+    .given {
+      font-size: 9pt;
+      color: #555;
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+
+    .given span {
+      display: inline-block;
+      background: #eef;
+      border: 1px solid #ccd;
+      border-radius: 3px;
+      padding: 0 5px;
+      font-family: monospace;
+      font-size: 9pt;
+      margin: 1px 2px;
+    }
+
+    /* ===== FORMELBLAD ===== */
+    .formula-sheet {
+      border: 2px solid #333;
+      border-radius: 4px;
+      padding: 10px 14px;
+      margin-top: 20px;
+      page-break-inside: avoid;
+    }
+
+    .formula-sheet h3 {
+      font-size: 11pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #777;
+      padding-bottom: 4px;
+    }
+
+    .formula-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      font-size: 9.5pt;
+    }
+
+    .formula-block {
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 5px 8px;
+    }
+
+    .formula-block strong {
+      display: block;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #555;
+      margin-bottom: 3px;
+    }
+
+    .formula-block code {
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+      display: block;
+      line-height: 1.7;
+    }
+
+    /* ===== SIDFOT ===== */
+    .page-footer {
+      border-top: 1px solid #aaa;
+      margin-top: 20px;
+      padding-top: 6px;
+      font-size: 8.5pt;
+      color: #666;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ===== SIDBRYTNING ===== */
+    .page-break { page-break-before: always; }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* ===== UTSKRIFT ===== */
+    @media print {
+      body { background: #fff; }
+      .screen-only { display: none !important; }
+      .page { width: 100%; margin: 0; padding: 12mm 14mm 15mm 16mm; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- KNAPP – visas ej vid utskrift -->
+<div class="screen-only">
+  <button class="print-btn" onclick="window.print()">🖨 Skriv ut / Spara som PDF</button>
+</div>
+
+<!-- ============================================================
+     SIDA 1
+     ============================================================ -->
+<div class="page">
+
+  <!-- RUBRIK -->
+  <div class="prov-header">
+    <h1>Prov – Ellära</h1>
+    <div class="subtitle">Atomfysik · Material · Kabeltyper · Kretsar · Installation · Trefas · Skydd</div>
+  </div>
+
+  <!-- INFO-RAD -->
+  <div class="info-grid">
+    <div>
+      <div class="info-label">Namn</div>
+      <div class="info-field">&nbsp;</div>
+    </div>
+    <div>
+      <div class="info-label">Datum</div>
+      <div class="info-field">&nbsp;</div>
+    </div>
+    <div>
+      <div class="info-label">Klass / Grupp</div>
+      <div class="info-field">&nbsp;</div>
+    </div>
+  </div>
+
+  <!-- POÄNGTABELL -->
+  <table class="score-table">
+    <tr>
+      <th>Del A – Kunskaps­frågor</th>
+      <th>Del B – Beräkningar</th>
+      <th>Totalt</th>
+      <th>Betyg</th>
+    </tr>
+    <tr>
+      <td>_____ / 20 p</td>
+      <td>_____ / 30 p</td>
+      <td>_____ / 50 p</td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    </tr>
+  </table>
+
+  <!-- INSTRUKTIONER -->
+  <div class="instructions">
+    <strong>Instruktioner:</strong>
+    <ul>
+      <li>Svara med penna – inga suddiga svar godkänns utan kommentar.</li>
+      <li><strong>Del A</strong> (fråga 1–20): Kunskapsfrågor – svara kort och tydligt på linjerna.</li>
+      <li><strong>Del B</strong> (fråga 21–50): Beräkningar – visa alltid dina uträkningar. Svar utan uträkning ger 0 poäng.</li>
+      <li>Formelblad finns på sista sidan. <strong>Miniräknare är tillåten.</strong></li>
+      <li>Enheter <strong>måste</strong> anges vid alla svar.</li>
+    </ul>
+  </div>
+
+  <!-- ===================== DEL A ===================== -->
+  <div class="section-title">Del A – Kunskapsfrågor &nbsp;<span style="font-size:9pt;font-weight:400;text-transform:none">(1 poäng per fråga)</span></div>
+  <div class="section-subtitle">Svara kortfattat men fullständigt. Strecket visar ungefär hur långt svaret ska vara.</div>
+
+  <!-- F1 -->
+  <div class="question-k">
+    <p><span class="q-num">1.</span> Vilka tre typer av partiklar bygger upp en atom? Ange namn, laddning och var de finns.</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F2 -->
+  <div class="question-k">
+    <p><span class="q-num">2.</span> Vad händer med laddningen hos en atom som förlorar 2 elektroner? Förklara.</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F3 -->
+  <div class="question-k">
+    <p><span class="q-num">3.</span> Vad är frekvensen på det svenska elnätet, och hur många gånger per sekund byter strömmen riktning?</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F4 -->
+  <div class="question-k">
+    <p><span class="q-num">4.</span> Förklara skillnaden mellan AC (växelström) och DC (likström).</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F5 -->
+  <div class="question-k">
+    <p><span class="q-num">5.</span> Ge tre exempel på vanliga DC-spänningar med tillhörande källa (t.ex. 1,5 V – AA-batteri).</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F6 -->
+  <div class="question-k">
+    <p><span class="q-num">6.</span> Vilket material leder el bäst av koppar, aluminium och silver? Ange i ordning med resistiviteter.</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F7 -->
+  <div class="question-k">
+    <p><span class="q-num">7.</span> Varför används koppar istället för silver i elkablar trots att silver leder bättre?</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F8 -->
+  <div class="question-k">
+    <p><span class="q-num">8.</span> Vad är en halvledare? Ge två exempel på halvledarmaterial och deras användning.</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F9 -->
+  <div class="question-k">
+    <p><span class="q-num">9.</span> Vad kan hända med en isolator om spänningen är tillräckligt hög? Vad kallas detta fenomen?</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F10 -->
+  <div class="question-k">
+    <p><span class="q-num">10.</span> Rangordna kabeltyper EK, FK, MK och RK från stelast till mest böjlig. Ange hur många trådar varje typ har.</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>Prov – Ellära</span>
+    <span>Del A, sida 1 av 4</span>
+    <span>Namn: ___________________________</span>
+  </div>
+</div><!-- /page 1 -->
+
+
+<!-- ============================================================
+     SIDA 2 – Del A fortsättning
+     ============================================================ -->
+<div class="page page-break">
+
+  <!-- F11 -->
+  <div class="question-k">
+    <p><span class="q-num">11.</span> Vilken kabeltyp väljer du till en svets­maskins kabel och varför?</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F12 -->
+  <div class="question-k">
+    <p><span class="q-num">12.</span> Vilken kabelarea krävs minst för en 16 A säkring? Vilken färg har säkringen?</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F13 -->
+  <div class="question-k">
+    <p><span class="q-num">13.</span> Nämn fyra faktorer som påverkar hur man dimensionerar en starkströmskabel.</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F14 -->
+  <div class="question-k">
+    <p><span class="q-num">14.</span> Vad är spänningen fas–fas respektive fas–neutral i det svenska trefassystemet?</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F15 -->
+  <div class="question-k">
+    <p><span class="q-num">15.</span> Vad är spänningsfall? Förklara med egna ord varför det uppstår och vilka konsekvenser det kan ha.</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F16 -->
+  <div class="question-k">
+    <p><span class="q-num">16.</span> Vad är det maximalt tillåtna spänningsfallet i procent och i volt vid 230 V?</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F17 -->
+  <div class="question-k">
+    <p><span class="q-num">17.</span> Beskriv elnätets uppbyggnad i nivåer – från kraftverk ner till ett hushåll. Ange spänningsnivåer.</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F18 -->
+  <div class="question-k">
+    <p><span class="q-num">18.</span> Vad är en jordfelsbrytare och vid vilken läckström bryter den (normalt personskydd)?</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F19 -->
+  <div class="question-k">
+    <p><span class="q-num">19.</span> Vad skiljer ett <em>nödstopp</em> från en vanlig <em>arbetsbrytare</em>? Beskriv utseende och funktion.</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <!-- F20 -->
+  <div class="question-k">
+    <p><span class="q-num">20.</span> Vad är en transient (smutsig el)? Ge ett vardagsexempel och beskriv hur det kan orsaka problem.</p>
+    <div class="answer-lines">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>Prov – Ellära</span>
+    <span>Del A, sida 2 av 4</span>
+    <span>Namn: ___________________________</span>
+  </div>
+</div><!-- /page 2 -->
+
+
+<!-- ============================================================
+     SIDA 3 – Del B Beräkningar (fråga 21–35)
+     ============================================================ -->
+<div class="page page-break">
+
+  <div class="section-title">Del B – Beräkningar &nbsp;<span style="font-size:9pt;font-weight:400;text-transform:none">(1 poäng per fråga · visa alltid uträkning)</span></div>
+  <div class="section-subtitle">Skriv din uträkning i den vänstra rutan och ditt svar tydligt i den högra rutan med enhet.</div>
+
+  <p style="font-size:9.5pt;font-weight:700;margin-bottom:8px;margin-top:4px">Ohms lag &nbsp; U = R · I &nbsp;|&nbsp; R = U / I &nbsp;|&nbsp; I = U / R</p>
+
+  <div class="calc-grid">
+
+    <!-- B1 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">21.</span> Beräkna <strong>spänningen U</strong>.
+        <div class="given">Givet: <span>R = 10 Ω</span> <span>I = 5 A</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B2 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">22.</span> Beräkna <strong>strömmen I</strong>.
+        <div class="given">Givet: <span>U = 230 V</span> <span>R = 46 Ω</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B3 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">23.</span> Beräkna <strong>motståndet R</strong>.
+        <div class="given">Givet: <span>U = 12 V</span> <span>I = 0,5 A</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B4 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">24.</span> Beräkna <strong>spänningen U</strong>.
+        <div class="given">Givet: <span>R = 47 Ω</span> <span>I = 2 A</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B5 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">25.</span> Beräkna <strong>strömmen I</strong>.
+        <div class="given">Givet: <span>U = 24 V</span> <span>R = 12 Ω</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B6 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">26.</span> Beräkna <strong>motståndet R</strong>.
+        <div class="given">Givet: <span>U = 230 V</span> <span>I = 8 A</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:9.5pt;font-weight:700;margin-bottom:8px;margin-top:14px">Effektlagen &nbsp; P = U · I &nbsp;|&nbsp; U = P / I &nbsp;|&nbsp; I = P / U</p>
+
+  <div class="calc-grid">
+
+    <!-- B7 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">27.</span> Beräkna <strong>effekten P</strong>.
+        <div class="given">Givet: <span>U = 230 V</span> <span>I = 10 A</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B8 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">28.</span> Beräkna <strong>strömmen I</strong>.
+        <div class="given">Givet: <span>P = 1 000 W</span> <span>U = 230 V</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B9 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">29.</span> Beräkna <strong>spänningen U</strong>.
+        <div class="given">Givet: <span>P = 500 W</span> <span>I = 2 A</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B10 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">30.</span> Beräkna <strong>effekten P</strong>.
+        <div class="given">Givet: <span>U = 12 V</span> <span>I = 3 A</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B11 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">31.</span> Beräkna <strong>strömmen I</strong>.
+        <div class="given">Givet: <span>P = 2 300 W</span> <span>U = 230 V</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B12 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">32.</span> Beräkna <strong>effekten P</strong>.
+        <div class="given">Givet: <span>U = 400 V</span> <span>I = 16 A</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:9.5pt;font-weight:700;margin-bottom:8px;margin-top:14px">Resistans i ledare &nbsp; R = ρ · L / A &nbsp;|&nbsp; ρ<sub>Cu</sub> = 0,018 Ω·mm²/m &nbsp;·&nbsp; ρ<sub>Al</sub> = 0,028 Ω·mm²/m</p>
+
+  <div class="calc-grid">
+
+    <!-- B13 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">33.</span> Beräkna <strong>resistansen R</strong> för en kopparkabel.
+        <div class="given">Givet: <span>L = 30 m</span> <span>A = 2,5 mm²</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B14 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">34.</span> Beräkna <strong>resistansen R</strong> för en aluminiumkabel.
+        <div class="given">Givet: <span>L = 50 m</span> <span>A = 4 mm²</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B15 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">35.</span> Beräkna <strong>resistansen R</strong> för en kopparkabel.
+        <div class="given">Givet: <span>L = 100 m</span> <span>A = 1,5 mm²</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Prov – Ellära</span>
+    <span>Del B, sida 3 av 4</span>
+    <span>Namn: ___________________________</span>
+  </div>
+</div><!-- /page 3 -->
+
+
+<!-- ============================================================
+     SIDA 4 – Del B fortsättning + Formelblad
+     ============================================================ -->
+<div class="page page-break">
+
+  <div class="section-title" style="margin-top:0">Del B – Beräkningar (forts.) &nbsp;<span style="font-size:9pt;font-weight:400;text-transform:none">fråga 36–50</span></div>
+
+  <p style="font-size:9.5pt;font-weight:700;margin-bottom:8px">Spänningsfall &nbsp; U<sub>fall</sub> = 2 · ρ · L · I / A &nbsp;|&nbsp; Max 4 % = 9,2 V vid 230 V</p>
+
+  <div class="calc-grid">
+
+    <!-- B16 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">36.</span> Beräkna spänningsfallet. Är det OK?
+        <div class="given"><span>Cu</span> <span>L = 30 m</span> <span>I = 10 A</span> <span>A = 2,5 mm²</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B17 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">37.</span> Beräkna spänningsfallet. Är det OK?
+        <div class="given"><span>Cu</span> <span>L = 50 m</span> <span>I = 16 A</span> <span>A = 6 mm²</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B18 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">38.</span> Beräkna spänningsfallet. Är det OK?
+        <div class="given"><span>Cu</span> <span>L = 40 m</span> <span>I = 8 A</span> <span>A = 1,5 mm²</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B19 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">39.</span> Beräkna spänningsfallet. Är det OK?
+        <div class="given"><span>Cu</span> <span>L = 25 m</span> <span>I = 20 A</span> <span>A = 4 mm²</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B20 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">40.</span> Beräkna spänningsfallet. Är det OK?
+        <div class="given"><span>Al</span> <span>L = 80 m</span> <span>I = 10 A</span> <span>A = 10 mm²</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B21 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">41.</span> Beräkna <strong>spänning vid belastningen</strong>.
+        <div class="given"><span>U<sub>källa</sub> = 230 V</span> <span>U<sub>fall</sub> = 7,2 V</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:9.5pt;font-weight:700;margin-bottom:8px;margin-top:14px">Serie- och parallellkoppling</p>
+
+  <div class="calc-grid">
+
+    <!-- B22 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">42.</span> Tre motstånd i <strong>serie</strong>. Beräkna R<sub>tot</sub> och I.
+        <div class="given"><span>R₁ = 10 Ω</span> <span>R₂ = 20 Ω</span> <span>R₃ = 30 Ω</span> <span>U = 230 V</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B23 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">43.</span> Två motstånd i <strong>parallell</strong>. Beräkna R<sub>tot</sub>.
+        <div class="given"><span>R₁ = 10 Ω</span> <span>R₂ = 10 Ω</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B24 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">44.</span> Två motstånd i <strong>parallell</strong>. Beräkna R<sub>tot</sub>.
+        <div class="given"><span>R₁ = 20 Ω</span> <span>R₂ = 30 Ω</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B25 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">45.</span> Parallellkoppling. Beräkna R<sub>tot</sub> och total­ström I<sub>tot</sub>.
+        <div class="given"><span>R₁ = 6 Ω</span> <span>R₂ = 12 Ω</span> <span>U = 12 V</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B26 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">46.</span> Serie. Beräkna I och spännings­fallet över R₁.
+        <div class="given"><span>R₁ = 100 Ω</span> <span>R₂ = 150 Ω</span> <span>U = 50 V</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B27 – Kombinerad -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">47.</span> En krets med U = 230 V och R<sub>tot</sub> = 23 Ω. Beräkna I och P.
+        <div class="given"><span>U = 230 V</span> <span>R<sub>tot</sub> = 23 Ω</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:9.5pt;font-weight:700;margin-bottom:8px;margin-top:14px">Trefas &amp; Kabeldimensionering</p>
+
+  <div class="calc-grid">
+
+    <!-- B28 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">48.</span> Symmetrisk trefaslast. Beräkna fasströmmen I och totaleffekten P<sub>tot</sub> (P<sub>tot</sub> = 3 · U · I).
+        <div class="given"><span>U<sub>fas</sub> = 230 V</span> <span>R = 23 Ω / fas</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+    <!-- B29 -->
+    <div class="question-calc">
+      <div class="q-text">
+        <span class="q-num">49.</span> En kopparkabel är 20 m lång och har arean 6 mm². Beräkna resistansen R och spänningsfallet vid 25 A last.
+        <div class="given"><span>Cu</span> <span>L = 20 m</span> <span>A = 6 mm²</span> <span>I = 25 A</span></div>
+      </div>
+      <div class="answer-box">
+        <div class="answer-box-label">Svar</div>
+        <div class="answer-line-big"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- B30 – Stor bonusfråga -->
+  <div class="question-calc" style="grid-template-columns:1fr;min-height:90px;margin-top:10px">
+    <div class="q-text">
+      <span class="q-num">50.</span> <strong>Kombinerad fråga:</strong> En diskmaskin (P = 2 000 W, 230 V) är ansluten via en kopparkabel på 15 m med area 2,5 mm².
+      a) Beräkna strömmen I.&nbsp; b) Beräkna spänningsfallet U<sub>fall</sub>.&nbsp; c) Är spänningsfallet godkänt? Motivera.
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px">
+      <div class="answer-box"><div class="answer-box-label">a) I =</div><div class="answer-line-big"></div></div>
+      <div class="answer-box"><div class="answer-box-label">b) U<sub>fall</sub> =</div><div class="answer-line-big"></div></div>
+      <div class="answer-box"><div class="answer-box-label">c) OK?</div><div class="answer-line-big"></div></div>
+    </div>
+  </div>
+
+  <!-- ===== FORMELBLAD ===== -->
+  <div class="formula-sheet">
+    <h3>Formelblad – Ellära &nbsp;·&nbsp; Tillåtna hjälpmedel: Formelblad + Miniräknare</h3>
+    <div class="formula-grid">
+      <div class="formula-block">
+        <strong>Ohms lag</strong>
+        <code>U = R · I</code>
+        <code>R = U / I</code>
+        <code>I = U / R</code>
+      </div>
+      <div class="formula-block">
+        <strong>Effektlagen</strong>
+        <code>P = U · I</code>
+        <code>U = P / I</code>
+        <code>I = P / U</code>
+      </div>
+      <div class="formula-block">
+        <strong>Resistans i ledare</strong>
+        <code>R = ρ · L / A</code>
+        <code>ρ(Cu) = 0,018 Ω·mm²/m</code>
+        <code>ρ(Al) = 0,028 Ω·mm²/m</code>
+      </div>
+      <div class="formula-block">
+        <strong>Spänningsfall</strong>
+        <code>U<sub>fall</sub> = 2·ρ·L·I / A</code>
+        <code>Max = 4% av U<sub>nom</sub></code>
+        <code>Max = 9,2 V vid 230 V</code>
+      </div>
+      <div class="formula-block">
+        <strong>Seriekoppling</strong>
+        <code>R<sub>tot</sub> = R₁ + R₂ + …</code>
+        <code>I är samma överallt</code>
+        <code>U<sub>tot</sub> = U₁ + U₂ + …</code>
+      </div>
+      <div class="formula-block">
+        <strong>Parallellkoppling</strong>
+        <code>1/R<sub>tot</sub> = 1/R₁ + 1/R₂</code>
+        <code>U är samma överallt</code>
+        <code>I<sub>tot</sub> = I₁ + I₂ + …</code>
+      </div>
+    </div>
+    <div style="margin-top:8px;font-size:8.5pt;color:#555;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div>
+        <strong>Säkring → kabelarea (Cu):</strong>
+        6 A = 1 mm² · 10 A = 1,5 mm² · 16 A = 2,5 mm² · 20 A = 4 mm² · 25 A = 6 mm²
+      </div>
+      <div>
+        <strong>Spänningar SE:</strong>
+        Fas–Neutral = 230 V · Fas–Fas = 400 V<br>
+        <strong>Trefas symmetrisk:</strong> I<sub>N</sub> = 0 A · P<sub>tot</sub> = 3 · U<sub>fas</sub> · I
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>Prov – Ellära</span>
+    <span>Del B + Formelblad, sida 4 av 4</span>
+    <span>Namn: ___________________________</span>
+  </div>
+
+</div><!-- /page 4 -->
+
+</body>
+</html>

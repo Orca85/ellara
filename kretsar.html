@@ -11,6 +11,7 @@
 <nav>
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
   <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
 </nav>
 <div class="layout-wrapper">
   <aside class="sidebar">
@@ -30,6 +31,7 @@
       <a href="skydd.html" class="sidebar-link "><span class="sidebar-icon">🛡️</span> Skydd</a>
       <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
       <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="matematik.html" class="sidebar-link "><span class="sidebar-icon">🔢</span> Matematik</a>
       <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
     </nav>
   </aside>
@@ -315,13 +317,13 @@
       <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #4ECDC4">
         <div style="color:var(--teal);font-weight:700;font-size:1rem;margin-bottom:0.4rem">I<sub>tot</sub></div>
         <div style="font-size:0.85rem;color:var(--muted)">Den totala strömmen från källan. I en seriekrets är den samma överallt. I parallell delas den upp.</div>
-        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">I<sub>tot</sub> = U<sub>tot</sub> ÷ R<sub>tot</sub></div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">I<sub>tot</sub> = <span class="frac"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span></div>
       </div>
 
       <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #4CFFA0">
         <div style="color:var(--lime);font-weight:700;font-size:1rem;margin-bottom:0.4rem">I<sub>1</sub>, I<sub>2</sub></div>
         <div style="font-size:0.85rem;color:var(--muted)">Strömmen genom en specifik gren i en parallellkrets. Grenar med lägre R får mer ström.</div>
-        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">I<sub>1</sub> = U<sub>tot</sub> ÷ R1 &nbsp; (samma U över alla grenar)</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">I<sub>1</sub> = <span class="frac"><span>U<sub>tot</sub></span><span>R1</span></span> &nbsp; (samma U över alla grenar)</div>
       </div>
 
       <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #C0A0FF">
@@ -333,9 +335,109 @@
       <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FF4C4C">
         <div style="color:#FF4C4C;font-weight:700;font-size:1rem;margin-bottom:0.4rem">R<sub>par</sub></div>
         <div style="font-size:0.85rem;color:var(--muted)">Den ekvivalenta resistansen för en parallellgrupp i en kombinerad krets — används som ett block i seriedelen.</div>
-        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">1/R<sub>par</sub> = 1/R2 + 1/R3</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem;line-height:2.2"><span class="frac"><span>1</span><span>R<sub>par</sub></span></span> = <span class="frac"><span>1</span><span>R2</span></span> + <span class="frac"><span>1</span><span>R3</span></span></div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Spänning & ström över resistanser -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>📏 Spänning och ström över varje resistor</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1.25rem">
+      Det finns två grundregler som gäller alltid — beroende på hur kretsen är kopplad:
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem">
+
+      <!-- Seriekrets -->
+      <div style="background:rgba(255,155,77,0.08);border:2px solid rgba(255,155,77,0.4);border-radius:10px;padding:1.1rem">
+        <div style="font-size:1rem;font-weight:800;color:#FF9B4D;margin-bottom:0.6rem">🔗 Seriekrets</div>
+        <div style="font-size:0.9rem;color:var(--muted);line-height:1.8">
+          <strong style="color:var(--white)">Strömmen är samma</strong> överallt i kretsen.<br>
+          <strong style="color:var(--white)">Spänningen delas upp</strong> — varje resistor tar sin del.
+        </div>
+        <div style="margin:0.75rem 0;padding:0.6rem 0.8rem;background:var(--bg-light);border-radius:6px;font-size:0.88rem;color:var(--muted)">
+          <strong style="color:#FF9B4D">Spänning över Rx:</strong><br>
+          <span style="font-size:1rem;color:var(--white);font-weight:700">U<sub>Rx</sub> = Rx × I</span>
+        </div>
+        <div style="font-size:0.82rem;color:var(--muted);line-height:1.7">
+          Kontroll: U<sub>R1</sub> + U<sub>R2</sub> + … = U<sub>tot</sub><br>
+          <em>Summan av alla spänningsfall = källspänningen</em>
+        </div>
+        <div style="margin-top:0.75rem;padding:0.6rem 0.8rem;background:var(--bg-light);border-radius:6px;font-size:0.82rem;color:var(--muted)">
+          <strong style="color:#FF9B4D">Exempel:</strong> R1 = 10 Ω, I = 2 A<br>
+          U<sub>R1</sub> = 10 × 2 = <strong style="color:var(--white)">20 V</strong>
+        </div>
+      </div>
+
+      <!-- Parallellkrets -->
+      <div style="background:rgba(78,205,196,0.08);border:2px solid rgba(78,205,196,0.4);border-radius:10px;padding:1.1rem">
+        <div style="font-size:1rem;font-weight:800;color:var(--teal);margin-bottom:0.6rem">⚡ Parallellkrets</div>
+        <div style="font-size:0.9rem;color:var(--muted);line-height:1.8">
+          <strong style="color:var(--white)">Spänningen är samma</strong> över alla grenar.<br>
+          <strong style="color:var(--white)">Strömmen delas upp</strong> — varje gren tar sin del.
+        </div>
+        <div style="margin:0.75rem 0;padding:0.6rem 0.8rem;background:var(--bg-light);border-radius:6px;font-size:0.88rem;color:var(--muted)">
+          <strong style="color:var(--teal)">Ström genom Rx:</strong><br>
+          <span style="font-size:1rem;color:var(--white);font-weight:700">I<sub>Rx</sub> = <span class="frac"><span>U</span><span>Rx</span></span></span>
+        </div>
+        <div style="font-size:0.82rem;color:var(--muted);line-height:1.7">
+          Kontroll: I<sub>R1</sub> + I<sub>R2</sub> + … = I<sub>tot</sub><br>
+          <em>Summan av alla grenströmmar = totalströmmen</em>
+        </div>
+        <div style="margin-top:0.75rem;padding:0.6rem 0.8rem;background:var(--bg-light);border-radius:6px;font-size:0.82rem;color:var(--muted)">
+          <strong style="color:var(--teal)">Exempel:</strong> U = 120 V, R2 = 20 Ω<br>
+          I<sub>R2</sub> = <span class="frac-t"><span>120</span><span>20</span></span> = <strong style="color:var(--white)">6 A</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Genomräkning parallell — samma typ som på bilden -->
+    <div style="background:var(--bg-light);border-radius:8px;padding:1rem;margin-bottom:0.5rem">
+      <div style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);margin-bottom:0.75rem">
+        Genomräkning — Parallellkrets med 3 grenar (IR1, IR2, IR3)
+      </div>
+      <div style="font-size:0.85rem;color:var(--muted);margin-bottom:0.6rem">
+        <strong style="color:var(--white)">Givet:</strong> U = 120 V &nbsp;|&nbsp; R1 = 15 Ω &nbsp;|&nbsp; R2 = 20 Ω &nbsp;|&nbsp; R3 = 30 Ω
+      </div>
+      <div class="ex-steps" style="margin-top:0.5rem">
+        <div class="ex-step">
+          <div class="ex-step-num">1</div>
+          <div>
+            <div class="ex-step-title">Ström genom R1</div>
+            <div class="ex-step-body">
+              I<sub>R1</sub> = <span class="frac-t"><span>U</span><span>R1</span></span> = <span class="frac-t"><span>120</span><span>15</span></span> = <strong>8 A</strong>
+            </div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">2</div>
+          <div>
+            <div class="ex-step-title">Ström genom R2</div>
+            <div class="ex-step-body">
+              I<sub>R2</sub> = <span class="frac-t"><span>U</span><span>R2</span></span> = <span class="frac-t"><span>120</span><span>20</span></span> = <strong>6 A</strong>
+            </div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">3</div>
+          <div>
+            <div class="ex-step-title">Ström genom R3</div>
+            <div class="ex-step-body">
+              I<sub>R3</sub> = <span class="frac-t"><span>U</span><span>R3</span></span> = <span class="frac-t"><span>120</span><span>30</span></span> = <strong>4 A</strong>
+            </div>
+          </div>
+        </div>
+        <div class="ex-check">
+          ✅ Kontroll: I<sub>R1</sub> + I<sub>R2</sub> + I<sub>R3</sub> = 8 + 6 + 4 = <strong>18 A = I<sub>tot</sub></strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box" style="margin-top:0.75rem">
+      <strong>Minnesregel:</strong> &nbsp;Serie = <em>samma ström, delad spänning</em> &nbsp;|&nbsp; Parallell = <em>samma spänning, delad ström</em>
     </div>
   </div>
 
@@ -394,7 +496,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>tot</sub></div>
             <div class="ex-step-body">Ohms lag — samma ström flödar genom hela kretsen:<br>
-            I<sub>tot</sub> = U<sub>tot</sub> ÷ R<sub>tot</sub> = 30 ÷ 30 = <strong>1 A</strong></div>
+            I<sub>tot</sub> = <span class="frac-t"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span> = <span class="frac-t"><span>30</span><span>30</span></span> = <strong>1 A</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -464,8 +566,8 @@
           <div>
             <div class="ex-step-title">Beräkna R<sub>tot</sub></div>
             <div class="ex-step-body">
-            1/R<sub>tot</sub> = 1/R1 + 1/R2 = 1/6 + 1/12 = 2/12 + 1/12 = 3/12<br>
-            R<sub>tot</sub> = 12 ÷ 3 = <strong>4 Ω</strong></div>
+            <span class="frac-t"><span>1</span><span>R<sub>tot</sub></span></span> = <span class="frac-t"><span>1</span><span>R1</span></span> + <span class="frac-t"><span>1</span><span>R2</span></span> = <span class="frac-t"><span>1</span><span>6</span></span> + <span class="frac-t"><span>1</span><span>12</span></span> = <span class="frac-t"><span>2</span><span>12</span></span> + <span class="frac-t"><span>1</span><span>12</span></span> = <span class="frac-t"><span>3</span><span>12</span></span><br>
+            R<sub>tot</sub> = <span class="frac-t"><span>12</span><span>3</span></span> = <strong>4 Ω</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -473,7 +575,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>tot</sub></div>
             <div class="ex-step-body">Total ström från källan:<br>
-            I<sub>tot</sub> = U<sub>tot</sub> ÷ R<sub>tot</sub> = 12 ÷ 4 = <strong>3 A</strong></div>
+            I<sub>tot</sub> = <span class="frac-t"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span> = <span class="frac-t"><span>12</span><span>4</span></span> = <strong>3 A</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -481,7 +583,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>1</sub> (gren med R1)</div>
             <div class="ex-step-body">Samma spänning (12 V) ligger över varje gren:<br>
-            I<sub>1</sub> = U<sub>tot</sub> ÷ R1 = 12 ÷ 6 = <strong>2 A</strong></div>
+            I<sub>1</sub> = <span class="frac-t"><span>U<sub>tot</sub></span><span>R1</span></span> = <span class="frac-t"><span>12</span><span>6</span></span> = <strong>2 A</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -489,7 +591,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>2</sub> (gren med R2)</div>
             <div class="ex-step-body">
-            I<sub>2</sub> = U<sub>tot</sub> ÷ R2 = 12 ÷ 12 = <strong>1 A</strong></div>
+            I<sub>2</sub> = <span class="frac-t"><span>U<sub>tot</sub></span><span>R2</span></span> = <span class="frac-t"><span>12</span><span>12</span></span> = <strong>1 A</strong></div>
           </div>
         </div>
         <div class="ex-check">
@@ -542,8 +644,8 @@
           <div>
             <div class="ex-step-title">Förenkla parallellgruppen (R2 ∥ R3)</div>
             <div class="ex-step-body">
-            1/R<sub>par</sub> = 1/10 + 1/10 = 2/10<br>
-            R<sub>par</sub> = 10 ÷ 2 = <strong>5 Ω</strong></div>
+            <span class="frac-t"><span>1</span><span>R<sub>par</sub></span></span> = <span class="frac-t"><span>1</span><span>10</span></span> + <span class="frac-t"><span>1</span><span>10</span></span> = <span class="frac-t"><span>2</span><span>10</span></span><br>
+            R<sub>par</sub> = <span class="frac-t"><span>10</span><span>2</span></span> = <strong>5 Ω</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -559,7 +661,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>tot</sub></div>
             <div class="ex-step-body">
-            I<sub>tot</sub> = U<sub>tot</sub> ÷ R<sub>tot</sub> = 20 ÷ 10 = <strong>2 A</strong></div>
+            I<sub>tot</sub> = <span class="frac-t"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span> = <span class="frac-t"><span>20</span><span>10</span></span> = <strong>2 A</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -584,7 +686,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>2</sub> och I<sub>3</sub></div>
             <div class="ex-step-body">Samma spänning (10 V) över varje gren:<br>
-            I<sub>2</sub> = 10 ÷ 10 = <strong>1 A</strong> &nbsp;|&nbsp; I<sub>3</sub> = 10 ÷ 10 = <strong>1 A</strong></div>
+            I<sub>2</sub> = <span class="frac-t"><span>10</span><span>10</span></span> = <strong>1 A</strong> &nbsp;|&nbsp; I<sub>3</sub> = <span class="frac-t"><span>10</span><span>10</span></span> = <strong>1 A</strong></div>
           </div>
         </div>
         <div class="ex-check">
@@ -699,7 +801,7 @@
         <div style="border-left:2px solid var(--yellow);padding-left:0.75rem;margin-top:0.5rem;line-height:2">
           <div>Steg 1 — beräkna strömmen:</div>
           <div style="padding-left:0.5rem">R<sub>tot</sub> = R₁ + R₂ = 2 + 3 = 5 Ω</div>
-          <div style="padding-left:0.5rem">I = U ÷ R<sub>tot</sub> = 12 ÷ 5 = <strong>2,4 A</strong></div>
+          <div style="padding-left:0.5rem">I = <span class="frac-t"><span>U</span><span>R<sub>tot</sub></span></span> = <span class="frac-t"><span>12</span><span>5</span></span> = <strong>2,4 A</strong></div>
           <div style="margin-top:0.4rem">Steg 2 — beräkna spänningsfallen (Ohms lag):</div>
           <div style="padding-left:0.5rem">U<sub>R1</sub> = I × R₁ = 2,4 × 2 = <strong style="color:var(--yellow)">4,8 V</strong></div>
           <div style="padding-left:0.5rem">U<sub>R2</sub> = I × R₂ = 2,4 × 3 = <strong style="color:var(--yellow)">7,2 V</strong></div>
@@ -898,7 +1000,7 @@
       <div class="ms-subqs">
         <div class="ms-subq" id="ms1-a">
           <div class="ms-subq-label">a) Beräkna ledningsresistansen R<sub>led</sub></div>
-          <div class="ms-subq-hint">R<sub>led</sub> = ρ × L ÷ A &nbsp;(L = total kabellängd)</div>
+          <div class="ms-subq-hint">R<sub>led</sub> = <span class="frac"><span>ρ × L</span><span>A</span></span> &nbsp;(L = total kabellängd)</div>
           <div class="ms-input-row">
             <input type="number" step="0.001" placeholder="Svar i Ω" id="ms1a-in" class="ms-input"/>
             <button class="ms-check-btn" onclick="msCheck(1,'a',0.36,'Ω',0.01)">Kontrollera</button>
@@ -916,7 +1018,7 @@
         </div>
         <div class="ms-subq locked" id="ms1-c">
           <div class="ms-subq-label">c) Hur stor är strömmen I?</div>
-          <div class="ms-subq-hint">Ohms lag: I = U ÷ R<sub>tot</sub></div>
+          <div class="ms-subq-hint">Ohms lag: I = <span class="frac"><span>U</span><span>R<sub>tot</sub></span></span></div>
           <div class="ms-input-row">
             <input type="number" step="0.01" placeholder="Svar i A" id="ms1c-in" class="ms-input" disabled/>
             <button class="ms-check-btn" onclick="msCheck(1,'c',7.16,'A',0.1)" disabled>Kontrollera</button>
@@ -990,7 +1092,7 @@
       <div class="ms-subqs">
         <div class="ms-subq" id="ms2-a">
           <div class="ms-subq-label">a) Beräkna ersättningsresistansen R<sub>ers</sub> för R₁ och R₂</div>
-          <div class="ms-subq-hint">R<sub>ers</sub> = (R₁ × R₂) ÷ (R₁ + R₂)</div>
+          <div class="ms-subq-hint">R<sub>ers</sub> = <span class="frac"><span>R₁ × R₂</span><span>R₁ + R₂</span></span></div>
           <div class="ms-input-row">
             <input type="number" step="0.01" placeholder="Svar i Ω" id="ms2a-in" class="ms-input"/>
             <button class="ms-check-btn" onclick="msCheck(2,'a',6,'Ω',0.05)">Kontrollera</button>
@@ -999,7 +1101,7 @@
         </div>
         <div class="ms-subq locked" id="ms2-b">
           <div class="ms-subq-label">b) Beräkna ledningsresistansen R<sub>led</sub></div>
-          <div class="ms-subq-hint">R<sub>led</sub> = ρ × L ÷ A &nbsp;(L = 24 m total)</div>
+          <div class="ms-subq-hint">R<sub>led</sub> = <span class="frac"><span>ρ × L</span><span>A</span></span> &nbsp;(L = 24 m total)</div>
           <div class="ms-input-row">
             <input type="number" step="0.001" placeholder="Svar i Ω" id="ms2b-in" class="ms-input" disabled/>
             <button class="ms-check-btn" onclick="msCheck(2,'b',0.216,'Ω',0.01)" disabled>Kontrollera</button>
@@ -1017,7 +1119,7 @@
         </div>
         <div class="ms-subq locked" id="ms2-d">
           <div class="ms-subq-label">d) Beräkna huvudströmmen I<sub>tot</sub></div>
-          <div class="ms-subq-hint">I<sub>tot</sub> = U ÷ R<sub>tot</sub></div>
+          <div class="ms-subq-hint">I<sub>tot</sub> = <span class="frac"><span>U</span><span>R<sub>tot</sub></span></span></div>
           <div class="ms-input-row">
             <input type="number" step="0.01" placeholder="Svar i A" id="ms2d-in" class="ms-input" disabled/>
             <button class="ms-check-btn" onclick="msCheck(2,'d',19.31,'A',0.15)" disabled>Kontrollera</button>
@@ -1044,7 +1146,7 @@
         </div>
         <div class="ms-subq locked" id="ms2-g">
           <div class="ms-subq-label">g) Beräkna grenströmmarna I₁ och I₂</div>
-          <div class="ms-subq-hint">I₁ = U<sub>last</sub> ÷ R₁ &nbsp;&nbsp; I₂ = U<sub>last</sub> ÷ R₂</div>
+          <div class="ms-subq-hint">I₁ = <span class="frac"><span>U<sub>last</sub></span><span>R₁</span></span> &nbsp;&nbsp; I₂ = <span class="frac"><span>U<sub>last</sub></span><span>R₂</span></span></div>
           <div class="ms-input-row">
             <input type="number" step="0.01" placeholder="I₁ i A" id="ms2g1-in" class="ms-input" style="width:130px" disabled/>
             <input type="number" step="0.01" placeholder="I₂ i A" id="ms2g2-in" class="ms-input" style="width:130px" disabled/>
@@ -1188,7 +1290,7 @@
       const pct  = (dU / U) * 100;
       const ok   = pct <= 4;
       stepsEl.innerHTML = buildSteps([
-        { n:1, title:'Ledarresistans', formula:'R<sub>led</sub> = ρ × L ÷ A', note:'L = total kabellängd (fram + retur ingår)', calc:`${rho} × ${L} ÷ ${A}`, result:`R<sub>led</sub> = <strong>${f(Rled)} Ω</strong>` },
+        { n:1, title:'Ledarresistans', formula:'R<sub>led</sub> = <span class="frac"><span>ρ × L</span><span>A</span></span>', note:'L = total kabellängd (fram + retur ingår)', calc:`${rho} × ${L} ÷ ${A}`, result:`R<sub>led</sub> = <strong>${f(Rled)} Ω</strong>` },
         { n:2, title:'Total resistans', formula:'R<sub>tot</sub> = R<sub>led</sub> + R<sub>last</sub>', calc:`${f(Rled)} + ${Rl}`, result:`R<sub>tot</sub> = <strong>${f(Rtot)} Ω</strong>` },
         { n:3, title:'Ström — Ohms lag', formula:'I = U ÷ R<sub>tot</sub>', calc:`${U} ÷ ${f(Rtot)}`, result:`I = <strong>${f(I)} A</strong>` },
         { n:4, title:'Spänningsfall i ledningen', formula:'U_fall = I × R<sub>led</sub>', calc:`${f(I)} × ${f(Rled)}`, result:`U_fall = <strong>${f(dU)} V</strong> &nbsp;(${f(pct,1)} % av ${U} V) ${ok ? '<span style="color:var(--lime)">✓ OK</span>' : '<span style="color:var(--red)">⚠️ Överstiger 4 %!</span>'}`, warn:!ok },
@@ -1211,7 +1313,7 @@
       const ok   = pct <= 4;
       stepsEl.innerHTML = buildSteps([
         { n:1, title:'Ersättningsresistans (parallell)', formula:'R<sub>ers</sub> = (R₁ × R₂) ÷ (R₁ + R₂)', calc:`(${R1} × ${R2}) ÷ (${R1} + ${R2})`, result:`R<sub>ers</sub> = <strong>${f(Rers)} Ω</strong>` },
-        { n:2, title:'Ledarresistans', formula:'R<sub>led</sub> = ρ × L ÷ A', note:'L = total kabellängd (fram + retur ingår)', calc:`${rho} × ${L} ÷ ${A}`, result:`R<sub>led</sub> = <strong>${f(Rled)} Ω</strong>` },
+        { n:2, title:'Ledarresistans', formula:'R<sub>led</sub> = <span class="frac"><span>ρ × L</span><span>A</span></span>', note:'L = total kabellängd (fram + retur ingår)', calc:`${rho} × ${L} ÷ ${A}`, result:`R<sub>led</sub> = <strong>${f(Rled)} Ω</strong>` },
         { n:3, title:'Total resistans', formula:'R<sub>tot</sub> = R<sub>led</sub> + R<sub>ers</sub>', calc:`${f(Rled)} + ${f(Rers)}`, result:`R<sub>tot</sub> = <strong>${f(Rtot)} Ω</strong>` },
         { n:4, title:'Huvudström', formula:'I<sub>tot</sub> = U ÷ R<sub>tot</sub>', calc:`${U} ÷ ${f(Rtot)}`, result:`I<sub>tot</sub> = <strong>${f(Itot)} A</strong>` },
         { n:5, title:'Spänningsfall i ledningarna', formula:'U_fall = I<sub>tot</sub> × R<sub>led</sub>', calc:`${f(Itot)} × ${f(Rled)}`, result:`U_fall = <strong>${f(dU)} V</strong> &nbsp;(${f(pct,1)} %) ${ok ? '<span style="color:var(--lime)">✓ OK</span>' : '<span style="color:var(--red)">⚠️ Överstiger 4 %!</span>'}`, warn:!ok },
