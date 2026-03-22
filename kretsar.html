@@ -295,6 +295,267 @@
     </div>
   </div>
 
+  <!-- Lika resistanser i parallell -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>⚡ Genväg — lika resistanser i parallell</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">
+      När <strong style="color:var(--white)">alla resistorer har samma värde</strong> behöver du inte räkna med bråkformeln. Dela bara R med antalet:
+    </p>
+
+    <div class="formula-display">R<sub>tot</sub> = <span class="frac"><span>R</span><span>n</span></span></div>
+    <p style="font-size:0.85rem;color:var(--muted);text-align:center;margin-bottom:1.25rem">där R = resistansen och n = antalet resistorer</p>
+
+    <!-- Varför fungerar det? -->
+    <div style="background:var(--bg-light);border-radius:8px;padding:0.9rem;margin-bottom:1.25rem;font-size:0.88rem;color:var(--muted);line-height:2.2">
+      <strong style="color:var(--white)">Varför fungerar det?</strong><br>
+      <span class="frac"><span>1</span><span>R<sub>tot</sub></span></span> = <span class="frac"><span>1</span><span>R</span></span> + <span class="frac"><span>1</span><span>R</span></span> + … (n gånger) = <span class="frac"><span>n</span><span>R</span></span>
+      &nbsp;→&nbsp; R<sub>tot</sub> = <span class="frac"><span>R</span><span>n</span></span>
+    </div>
+
+    <!-- Snabbtabell -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-bottom:1.25rem;text-align:center">
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.6rem;font-size:0.85rem">
+        <div style="color:var(--muted);font-size:0.75rem;margin-bottom:0.25rem">2 st</div>
+        <div style="color:var(--white);font-weight:700">R / 2</div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.6rem;font-size:0.85rem">
+        <div style="color:var(--muted);font-size:0.75rem;margin-bottom:0.25rem">3 st</div>
+        <div style="color:var(--white);font-weight:700">R / 3</div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.6rem;font-size:0.85rem">
+        <div style="color:var(--muted);font-size:0.75rem;margin-bottom:0.25rem">5 st</div>
+        <div style="color:var(--white);font-weight:700">R / 5</div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.6rem;font-size:0.85rem">
+        <div style="color:var(--muted);font-size:0.75rem;margin-bottom:0.25rem">n st</div>
+        <div style="color:var(--white);font-weight:700">R / n</div>
+      </div>
+    </div>
+
+    <!-- Genomräkning från bilden -->
+    <div style="background:var(--bg-light);border-radius:8px;padding:1rem">
+      <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);margin-bottom:0.75rem">
+        Genomräkning — 9 lika resistorer parallellt (alla 15 Ω)
+      </div>
+
+      <!-- SVG-kretsschema -->
+      <div style="text-align:center;margin-bottom:1rem">
+        <svg viewBox="0 0 400 132" width="100%" style="max-width:440px;display:block;margin:0 auto">
+          <!-- Top terminal -->
+          <circle cx="200" cy="7" r="5" fill="none" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="200" y1="12" x2="200" y2="26" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Top bus (spans connecting wires x=31..367) -->
+          <line x1="31" y1="26" x2="367" y2="26" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Interior posts between each cell (no outer posts) -->
+          <line x1="52" y1="26" x2="52" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="94" y1="26" x2="94" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="136" y1="26" x2="136" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="178" y1="26" x2="178" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="220" y1="26" x2="220" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="262" y1="26" x2="262" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="304" y1="26" x2="304" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="346" y1="26" x2="346" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Bottom bus -->
+          <line x1="31" y1="104" x2="367" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Bottom terminal -->
+          <line x1="200" y1="104" x2="200" y2="118" stroke="var(--white)" stroke-width="1.5"/>
+          <circle cx="200" cy="123" r="5" fill="none" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- 9 resistors, centers at x=31,73,115,157,199,241,283,325,367 (spacing 42) -->
+          <!-- Each: top wire, rect (center-15,42,30,42), bottom wire -->
+          <!-- R1 cx=31 -->
+          <line x1="31" y1="26" x2="31" y2="42" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="16" y="42" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="31" y="67" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="31" y1="84" x2="31" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- R2 cx=73 -->
+          <line x1="73" y1="26" x2="73" y2="42" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="58" y="42" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="73" y="67" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="73" y1="84" x2="73" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- R3 cx=115 -->
+          <line x1="115" y1="26" x2="115" y2="42" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="100" y="42" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="115" y="67" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="115" y1="84" x2="115" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- R4 cx=157 -->
+          <line x1="157" y1="26" x2="157" y2="42" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="142" y="42" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="157" y="67" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="157" y1="84" x2="157" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- R5 cx=199 -->
+          <line x1="199" y1="26" x2="199" y2="42" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="184" y="42" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="199" y="67" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="199" y1="84" x2="199" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- R6 cx=241 -->
+          <line x1="241" y1="26" x2="241" y2="42" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="226" y="42" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="241" y="67" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="241" y1="84" x2="241" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- R7 cx=283 -->
+          <line x1="283" y1="26" x2="283" y2="42" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="268" y="42" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="283" y="67" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="283" y1="84" x2="283" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- R8 cx=325 -->
+          <line x1="325" y1="26" x2="325" y2="42" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="310" y="42" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="325" y="67" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="325" y1="84" x2="325" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- R9 cx=367 -->
+          <line x1="367" y1="26" x2="367" y2="42" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="352" y="42" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="367" y="67" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="367" y1="84" x2="367" y2="104" stroke="var(--white)" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <div class="ex-steps">
+        <div class="ex-step">
+          <div class="ex-step-num">1</div>
+          <div>
+            <div class="ex-step-title">Räkna antalet resistorer</div>
+            <div class="ex-step-body">n = 9 st &nbsp;(alla med R = 15 Ω)</div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">2</div>
+          <div>
+            <div class="ex-step-title">Använd genvägsformeln</div>
+            <div class="ex-step-body">
+              R<sub>tot</sub> = <span class="frac-t"><span>R</span><span>n</span></span> = <span class="frac-t"><span>15</span><span>9</span></span> = <strong>1,67 Ω</strong>
+            </div>
+          </div>
+        </div>
+        <div class="ex-check">
+          ✅ Fler grenar = lägre R<sub>tot</sub>. Med 9 grenar är R<sub>tot</sub> bara <strong style="color:var(--teal)">1/9 av en enskild resistor.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kombinerad krets exempel -->
+    <div style="margin-top:1.5rem">
+      <h4 style="margin-bottom:0.75rem;color:var(--heading)">Kombinerad krets — parallellgrupper i serie</h4>
+      <p style="font-size:0.9rem;color:var(--muted);margin-bottom:0.75rem">Två grupper av parallellkopplade (lika) resistorer kopplade i serie med varandra. R = 15 Ω för alla.</p>
+
+      <div style="text-align:center;margin-bottom:0.75rem">
+        <svg viewBox="0 0 400 210" width="100%" style="max-width:380px;display:block;margin:0 auto">
+          <!-- === GROUP A: 3 parallel resistors (top) === -->
+          <!-- Top terminal -->
+          <circle cx="200" cy="7" r="5" fill="none" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="200" y1="12" x2="200" y2="26" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Group A top bus (connecting wires x=160 to x=240) -->
+          <line x1="160" y1="26" x2="240" y2="26" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Group A interior posts only -->
+          <line x1="180" y1="26" x2="180" y2="92" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="220" y1="26" x2="220" y2="92" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Group A bottom bus -->
+          <line x1="160" y1="92" x2="240" y2="92" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Group A resistors: centers x=160,200,240 -->
+          <!-- RA1 cx=160 -->
+          <line x1="160" y1="26" x2="160" y2="40" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="145" y="40" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="160" y="65" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="160" y1="82" x2="160" y2="92" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- RA2 cx=200 -->
+          <line x1="200" y1="26" x2="200" y2="40" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="185" y="40" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="200" y="65" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="200" y1="82" x2="200" y2="92" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- RA3 cx=240 -->
+          <line x1="240" y1="26" x2="240" y2="40" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="225" y="40" width="30" height="42" rx="2" fill="none" stroke="var(--teal)" stroke-width="1.5"/>
+          <text x="240" y="65" text-anchor="middle" fill="var(--teal)" font-size="8.5">15Ω</text>
+          <line x1="240" y1="82" x2="240" y2="92" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Label A -->
+          <text x="200" y="19" text-anchor="middle" fill="var(--teal)" font-size="9" font-weight="600">n = 3</text>
+
+          <!-- Series connecting wire between groups -->
+          <line x1="200" y1="92" x2="200" y2="118" stroke="var(--white)" stroke-width="1.5"/>
+
+          <!-- === GROUP B: 5 parallel resistors (bottom) === -->
+          <!-- Group B top bus (connecting wires x=120 to x=280) -->
+          <line x1="120" y1="118" x2="280" y2="118" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Group B interior posts only -->
+          <line x1="140" y1="118" x2="140" y2="184" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="180" y1="118" x2="180" y2="184" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="220" y1="118" x2="220" y2="184" stroke="var(--white)" stroke-width="1.5"/>
+          <line x1="260" y1="118" x2="260" y2="184" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Group B bottom bus -->
+          <line x1="120" y1="184" x2="280" y2="184" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Group B resistors: centers x=120,160,200,240,280 -->
+          <!-- RB1 cx=120 -->
+          <line x1="120" y1="118" x2="120" y2="132" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="105" y="132" width="30" height="42" rx="2" fill="none" stroke="#FF9B4D" stroke-width="1.5"/>
+          <text x="120" y="157" text-anchor="middle" fill="#FF9B4D" font-size="8.5">15Ω</text>
+          <line x1="120" y1="174" x2="120" y2="184" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- RB2 cx=160 -->
+          <line x1="160" y1="118" x2="160" y2="132" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="145" y="132" width="30" height="42" rx="2" fill="none" stroke="#FF9B4D" stroke-width="1.5"/>
+          <text x="160" y="157" text-anchor="middle" fill="#FF9B4D" font-size="8.5">15Ω</text>
+          <line x1="160" y1="174" x2="160" y2="184" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- RB3 cx=200 -->
+          <line x1="200" y1="118" x2="200" y2="132" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="185" y="132" width="30" height="42" rx="2" fill="none" stroke="#FF9B4D" stroke-width="1.5"/>
+          <text x="200" y="157" text-anchor="middle" fill="#FF9B4D" font-size="8.5">15Ω</text>
+          <line x1="200" y1="174" x2="200" y2="184" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- RB4 cx=240 -->
+          <line x1="240" y1="118" x2="240" y2="132" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="225" y="132" width="30" height="42" rx="2" fill="none" stroke="#FF9B4D" stroke-width="1.5"/>
+          <text x="240" y="157" text-anchor="middle" fill="#FF9B4D" font-size="8.5">15Ω</text>
+          <line x1="240" y1="174" x2="240" y2="184" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- RB5 cx=280 -->
+          <line x1="280" y1="118" x2="280" y2="132" stroke="var(--white)" stroke-width="1.5"/>
+          <rect x="265" y="132" width="30" height="42" rx="2" fill="none" stroke="#FF9B4D" stroke-width="1.5"/>
+          <text x="280" y="157" text-anchor="middle" fill="#FF9B4D" font-size="8.5">15Ω</text>
+          <line x1="280" y1="174" x2="280" y2="184" stroke="var(--white)" stroke-width="1.5"/>
+          <!-- Label B -->
+          <text x="200" y="111" text-anchor="middle" fill="#FF9B4D" font-size="9" font-weight="600">n = 5</text>
+          <!-- Bottom terminal -->
+          <line x1="200" y1="184" x2="200" y2="198" stroke="var(--white)" stroke-width="1.5"/>
+          <circle cx="200" cy="203" r="5" fill="none" stroke="var(--white)" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <div class="ex-steps">
+        <div class="ex-step">
+          <div class="ex-step-num">1</div>
+          <div>
+            <div class="ex-step-title">Räkna ut Grupp A (3 parallella)</div>
+            <div class="ex-step-body">
+              R<sub>A</sub> = <span class="frac-t"><span>R</span><span>n</span></span> = <span class="frac-t"><span>15</span><span>3</span></span> = <strong style="color:var(--teal)">5 Ω</strong>
+            </div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">2</div>
+          <div>
+            <div class="ex-step-title">Räkna ut Grupp B (5 parallella)</div>
+            <div class="ex-step-body">
+              R<sub>B</sub> = <span class="frac-t"><span>R</span><span>n</span></span> = <span class="frac-t"><span>15</span><span>5</span></span> = <strong style="color:#FF9B4D">3 Ω</strong>
+            </div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">3</div>
+          <div>
+            <div class="ex-step-title">Addera grupperna (de är serieanslutna)</div>
+            <div class="ex-step-body">
+              R<sub>tot</sub> = R<sub>A</sub> + R<sub>B</sub> = 5 + 3 = <strong style="color:var(--lime)">8 Ω</strong>
+            </div>
+          </div>
+        </div>
+        <div class="ex-check">
+          ✅ Varje parallellgrupp ersätts med sin genvägsresistans → sedan adderas de som en vanlig seriekrets.
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box" style="margin-top:0.75rem">
+      <strong>Minnesregel:</strong> Lika resistorer i parallell → dela R med antal. &nbsp;3 st × 12 Ω = 4 Ω. &nbsp;5 st × 10 Ω = 2 Ω.
+    </div>
+  </div>
+
   <!-- Beteckningar & Exempelräkningar -->
   <div class="card" style="margin-top:1.5rem">
     <h3>📖 Vad betyder beteckningarna?</h3>
