@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
@@ -10,8 +10,10 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
-  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-  <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+    <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  </div>
 </nav>
 <div class="layout-wrapper">
   <aside class="sidebar">
@@ -180,6 +182,16 @@
             </td>
             <td style="color:var(--muted);font-size:0.9rem">Spis, torktumlare</td>
           </tr>
+          <tr class="fuse-row">
+            <td><span class="fuse-amp">32 A</span></td>
+            <td>10 mm²</td>
+            <td>
+              <span class="color-swatch">
+                <span class="swatch" style="background:#222;border:1px solid #555"></span> Svart
+              </span>
+            </td>
+            <td style="color:var(--muted);font-size:0.9rem">Elpanna, laddbox</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -187,6 +199,9 @@
     <p style="margin-top:1rem;font-size:0.85rem;color:var(--muted)">
       <strong style="color:var(--yellow)">Kom ihåg:</strong> Vid parallellkoppling av uttag delar alla på samma säkring. Räkna alltid på worst-case-last.
     </p>
+    <div style="margin-top:0.75rem;background:rgba(119,90,25,0.08);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border-left:3px solid var(--primary)">
+      <strong style="color:var(--primary)">OBS: 13 A-säkring</strong> — finns men är <strong style="color:var(--white)">inte svensk standard</strong>. Används t.ex. i brittiska installationer (BS 1363). En 1,5 mm²-kabel klarar tekniskt upp till ~13 A men dimensioneras i Sverige alltid mot närmaste standard­säkring (10 A eller 16 A).
+    </div>
   </div>
 
   <!-- Ledarfärger -->
@@ -443,6 +458,126 @@
       <li>En krets är 40 m lång, 2,5 mm² koppar, 10 A last (230 V). Är spänningsfallet OK?</li>
       <li>Vad händer om du väljer 0,75 mm² kabel till ett 16 A uttag?</li>
     </ol>
+  </div>
+</section>
+
+<!-- NÄTFORMER -->
+<section class="section" id="natformer">
+  <div class="section-header">
+    <div class="section-icon">🔄</div>
+    <div>
+      <h4>Avsnitt</h4>
+      <h2>Nätformer – TN-C, TN-S och IT</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">Nätformen beskriver hur <strong style="color:var(--white)">skyddsjord (PE)</strong> och <strong style="color:var(--white)">nolledare (N)</strong> är dragna i installationen. Det påverkar säkerheten och var jordfelsbrytare måste sättas in.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:1.5rem">
+
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">TN-C</h3>
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.75rem">Terra–Neutral–Combined</div>
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.75rem">PE och N är <strong style="color:var(--white)">kombinerade i en PEN-ledare</strong> fram till elcentralen. I centralen splittas PEN till PE och N via en <strong style="color:var(--white)">PEN-skruv</strong> (t.ex. i DiAze-central). JFB installeras efter den splittningspunkten.</p>
+      <div style="font-size:0.82rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted)">
+        L1 · L2 · L3 · <strong style="color:var(--primary)">PEN</strong> → Central → <strong style="color:#2563eb">N</strong> + <strong style="color:#16a34a">PE</strong>
+      </div>
+      <div style="margin-top:0.6rem;font-size:0.8rem;color:#4caf50">✓ JFB installeras efter PEN-skruven</div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">TN-S</h3>
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.75rem">Terra–Neutral–Separated</div>
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.75rem">PE och N är <strong style="color:var(--white)">separata ledare hela vägen</strong> — från transformator till uttag. Modern standard, kräver femledarsystem i trefas.</p>
+      <div style="font-size:0.82rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted)">
+        L1 · L2 · L3 · <strong style="color:#2563eb">N</strong> · <strong style="color:#16a34a">PE</strong>
+      </div>
+      <div style="margin-top:0.6rem;font-size:0.8rem;color:#4caf50">✓ JFB kan installeras var som helst</div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">TN-C-S</h3>
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.75rem">Combined → Separated</div>
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.75rem">PEN-ledare från nätet fram till elcentralen, sedan separata PE och N ut till kretsarna. <strong style="color:var(--white)">Vanligast i svenska bostäder.</strong></p>
+      <div style="font-size:0.82rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted)">
+        <strong style="color:var(--primary)">PEN</strong> → PEN-skruv → <strong style="color:#2563eb">N</strong> + <strong style="color:#16a34a">PE</strong>
+      </div>
+      <div style="margin-top:0.6rem;font-size:0.8rem;color:#4caf50">✓ JFB efter splittningspunkten</div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">IT-system</h3>
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.75rem">Isolerat nät</div>
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.75rem">Nätet är <strong style="color:var(--white)">isolerat från jord</strong> — ingen direktanslutning från källan till jord. Ett enskilt jordfel ger ingen farlig ström. Används i sjukhus, gruvor och offshore.</p>
+      <div style="font-size:0.82rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted)">
+        L1 · L2 · L3 · <strong style="color:#16a34a">PE</strong> &nbsp;(ingen N till jord)
+      </div>
+      <div style="margin-top:0.6rem;font-size:0.8rem;color:var(--muted)">Isolationsövervakare larmar vid jordfel</div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.5rem">TT-system</h3>
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.75rem">Terra–Terra</div>
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.75rem">Transformatorns neutralpunkt är jordad vid källan. Installationens skyddsjord är kopplad till en <strong style="color:var(--white)">egen jordelektrod</strong> på platsen — oberoende av nätet. Vanligt i äldre lantbruksinstallationer.</p>
+      <div style="font-size:0.82rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted)">
+        L · <strong style="color:#2563eb">N</strong> (jordad vid källa) · <strong style="color:#16a34a">PE</strong> (egen elektrod)
+      </div>
+      <div style="margin-top:0.6rem;font-size:0.8rem;color:#4caf50">✓ JFB obligatorisk (hög felimpedans via mark)</div>
+    </div>
+
+  </div>
+
+  <div class="card">
+    <h3>PEN-ledaren & PEN-skruven</h3>
+    <p style="color:var(--muted);font-size:0.9rem">PEN (Protective Earth and Neutral) är en <strong style="color:var(--white)">kombinerad PE- och N-ledare</strong> som används i TN-C-system. Den har grön/gul färg med blå märkning i ändarna.</p>
+    <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:start;margin-top:0.6rem">
+      <p style="color:var(--muted);font-size:0.9rem">I elcentralen (t.ex. en <strong style="color:var(--white)">DiAze-central</strong>) ansluts PEN-ledaren till en <strong style="color:var(--white)">PEN-skruv</strong> — en märkt skruvplint som binder ihop PE-skenan och N-skenan. Därifrån dras separata PE- och N-ledare ut till kretsarna.</p>
+      <img src="images/DiaZeCentral.jpg" alt="DiAze elcentral med PEN-skruv" class="zoomable" style="width:160px;border-radius:8px;border:1px solid var(--outline)">
+    </div>
+
+    <div style="margin-top:1rem;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:0.85rem;border-left:3px solid #2a7a4b">
+        <div style="font-weight:700;color:#4caf50;margin-bottom:0.4rem">↙ Skruva IN</div>
+        <p style="font-size:0.85rem;color:var(--muted)">PEN-skruven <strong style="color:var(--white)">avaktiveras</strong> — PE-skenan och N-skenan separeras. JFB kan nu installeras.</p>
+      </div>
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.85rem;border-left:3px solid var(--outline)">
+        <div style="font-weight:700;color:var(--white);margin-bottom:0.4rem">↗ Skruva UT</div>
+        <p style="font-size:0.85rem;color:var(--muted)">PEN-skruven <strong style="color:var(--white)">aktiveras</strong> — PE och N kopplas ihop till PEN. TN-C-läge, ingen JFB.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:0.75rem;background:rgba(119,90,25,0.08);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border-left:3px solid var(--primary)">
+      <strong style="color:var(--primary)">Gängning:</strong> PEN-skruven är <strong style="color:var(--white)">högergängad</strong> — men funktionen är omvänd jämfört med vad man kanske förväntar sig. Skruva <em>in</em> för att separera, skruva <em>ut</em> för att koppla ihop.
+    </div>
+
+    <div style="margin-top:0.75rem;background:rgba(220,38,38,0.07);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border-left:3px solid var(--red)">
+      <strong style="color:var(--red)">Viktigt:</strong> PEN-skruven <strong style="color:var(--white)">måste tas bort</strong> (skruvas in) innan JFB installeras. Annars är PE och N fortfarande samankopplade och JFB fungerar inte.
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem">
+    <h3>Isolationsfel i anläggningen</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Om isoleringen på en fase-ledare skadas kan ström läcka ut till jordade delar. Vad som händer beror på om personen befinner sig i strömkretsen.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:1rem;border-left:3px solid #2a7a4b">
+        <div style="font-weight:700;color:#4caf50;margin-bottom:0.5rem">✓ Felfri anläggning</div>
+        <div style="font-size:0.83rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted);margin-bottom:0.6rem;line-height:1.8">
+          Trafo → L → Last → N → Trafo<br>
+          <span style="color:#4caf50">Ingen läckström · Ingen fara</span>
+        </div>
+        <p style="font-size:0.85rem;color:var(--muted)">All ström flödar via avsedd väg (L → Last → N). Jordfelsbrytaren mäter ingen obalans — ingen utlösning.</p>
+      </div>
+      <div style="background:rgba(186,26,26,0.07);border-radius:0.6rem;padding:1rem;border-left:3px solid var(--red)">
+        <div style="font-weight:700;color:var(--red);margin-bottom:0.5rem">⚠️ Isolationsfel</div>
+        <div style="font-size:0.83rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted);margin-bottom:0.6rem;line-height:1.8">
+          L → Isolationsfel → <span style="color:var(--red)">Person → Jord</span><br>
+          <span style="color:var(--red)">Läckström via kroppen!</span>
+        </div>
+        <p style="font-size:0.85rem;color:var(--muted)">Fas når ett jordat hölje. En person som rör höljet bildar krets mot jord. JFB (TN-S) eller säkring (TN-C via PE) ska bryta.</p>
+      </div>
+    </div>
+    <div style="margin-top:0.75rem;background:rgba(250,204,21,0.07);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border-left:3px solid var(--primary)">
+      <strong style="color:var(--primary)">TN-C vs TN-S:</strong> I TN-S leder PE felströmmen direkt till neutralpunkten → JFB detekterar obalansen och löser ut. I TN-C flödar felströmmen via PEN — JFB kan <em>inte</em> installeras utan att PEN delas (se ovan).
+    </div>
   </div>
 </section>
 

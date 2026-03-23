@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
@@ -10,8 +10,10 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
-  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-  <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+    <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  </div>
 </nav>
 <div class="layout-wrapper">
   <aside class="sidebar">
@@ -62,22 +64,52 @@
     </div>
   </div>
 
-  <!-- Score board -->
-  <div class="score-board" id="score-board">
-    <div class="score-numbers">
-      <span class="score-correct" id="score-correct">0</span>
-      <span class="score-sep">/</span>
-      <span class="score-total" id="score-total">0</span>
-      <span class="score-label">rätt</span>
+  <!-- SUB-SECTION: Övningar & Quiz -->
+  <div class="ovn-sub">
+    <div class="ovn-sub-header">
+      <span class="ovn-sub-icon">🃏</span>
+      <h3 class="ovn-sub-title">Övningar &amp; Quiz</h3>
     </div>
-    <div class="score-bar-wrap">
-      <div class="score-bar" id="score-bar" style="width:0%"></div>
+    <div class="score-board" id="score-board">
+      <div class="score-numbers">
+        <span class="score-correct" id="score-correct">0</span>
+        <span class="score-sep">/</span>
+        <span class="score-total" id="score-total">0</span>
+        <span class="score-label">rätt</span>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar" id="score-bar" style="width:0%"></div>
+      </div>
+      <button class="reset-btn" id="reset-all-btn">↺ Återställ alla</button>
     </div>
-    <button class="reset-btn" id="reset-all-btn">↺ Återställ alla</button>
+    <div id="exercises-root"></div>
   </div>
 
-  <!-- Exercises rendered by JS -->
-  <div id="exercises-root"></div>
+  <!-- SUB-SECTION: Ledarfärger & Kabeldimensionering -->
+  <div class="ovn-sub">
+    <div class="ovn-sub-header">
+      <span class="ovn-sub-icon">🎨</span>
+      <h3 class="ovn-sub-title">Ledarfärger &amp; Kabeldimensionering</h3>
+    </div>
+    <div id="ledarfarger-quiz-root"></div>
+  </div>
+
+  <!-- SUB-SECTION: Prov -->
+  <div class="ovn-sub">
+    <div class="ovn-sub-header">
+      <span class="ovn-sub-icon">📋</span>
+      <h3 class="ovn-sub-title">Prov</h3>
+    </div>
+    <div class="tq-wrap">
+      <h4 class="tq-subtitle">Ellära – Helhetstest</h4>
+      <p class="tq-desc">Ett skriftligt prov som täcker atomfysik, kretsar, trefas, skydd och installation. Skriv ut eller spara som PDF.</p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.25rem">
+        <a href="prov.html" target="_blank" style="background:var(--bg-light);color:var(--white);border:1px solid var(--outline);border-radius:0.6rem;padding:0.5rem 1.1rem;font-size:0.88rem;font-weight:600;text-decoration:none;font-family:inherit">📄 Öppna prov</a>
+        <button onclick="(function(){var w=window.open('prov.html','_blank');w.addEventListener('load',function(){w.print();})})()" style="background:var(--primary);color:#1a1409;border:none;border-radius:0.6rem;padding:0.5rem 1.1rem;font-size:0.88rem;font-weight:700;cursor:pointer;font-family:inherit">⬇ Ladda ner som PDF</button>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <footer>

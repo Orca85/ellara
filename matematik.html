@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
@@ -100,8 +100,10 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
-  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-  <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+    <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  </div>
 </nav>
 
 <div class="layout-wrapper">
@@ -153,12 +155,13 @@
   </div>
   <div class="card">
     <p>Alla formler i ellära bygger på ett fåtal räknetekniker. Den här sidan går igenom <strong style="color:var(--white)">allt från grunden</strong> — du behöver inga förkunskaper. Varje del har genomräknade exempel och en kalkylator att öva med.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.6rem;margin-top:1rem;font-size:0.88rem">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;margin-top:1rem;font-size:0.88rem">
       <a href="#brak" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">➗ Del 1 – Bråkräkning</a>
       <a href="#brak-ellara" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⚡ Del 2 – Bråk i ellära</a>
       <a href="#formler" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔄 Del 3 – Omvandla formler</a>
       <a href="#prefix" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">📏 Del 4 – Prefix & enheter</a>
       <a href="#pythagoras" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">📐 Del 5 – Pythagoras</a>
+      <a href="#procent" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">% Del 6 – Procenträkning</a>
     </div>
   </div>
 </section>
@@ -1072,6 +1075,102 @@
   </div>
 </section>
 
+<!-- ══════════════════════════════════════════════════════════
+     DEL 6 – PROCENTRÄKNING
+══════════════════════════════════════════════════════════ -->
+<hr class="del-divider">
+<section class="section" id="procent">
+  <div class="section-header">
+    <div class="section-icon">%</div>
+    <div>
+      <h4>Del 6</h4>
+      <h2>Procenträkning</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">Procent betyder <em>per hundra</em> — 1 % = <span class="frac"><span>1</span><span>100</span></span> = 0,01. Procenträkning dyker upp i ellära vid t.ex. spänningsfall, verkningsgrad och effektfaktor.</p>
+
+  <!-- 6.1 De tre grundformlerna -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>6.1 &nbsp; De tre grundformlerna</h3>
+    <p style="color:var(--muted);margin-bottom:1rem">Det finns alltid tre storheter: <strong style="color:var(--white)">Hela</strong>, <strong style="color:var(--white)">Del</strong> och <strong style="color:var(--white)">Procent (P)</strong>. Beroende på vad du söker väljer du rätt formel.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1rem">
+      <div class="ex-box">
+        <div class="ex-title">Beräkna Delen</div>
+        <div class="ex-line">Del = Hela × <span class="frac"><span>P</span><span>100</span></span></div>
+        <div class="ex-result" style="font-size:0.8rem;color:var(--muted)">"Hur stor del är X % av helheten?"</div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-title">Beräkna Procenten</div>
+        <div class="ex-line">P = <span class="frac"><span>Del</span><span>Hela</span></span> × 100</div>
+        <div class="ex-result" style="font-size:0.8rem;color:var(--muted)">"Hur många % är delen av helheten?"</div>
+      </div>
+      <div class="ex-box">
+        <div class="ex-title">Beräkna Helheten</div>
+        <div class="ex-line">Hela = <span class="frac"><span>Del × 100</span><span>P</span></span></div>
+        <div class="ex-result" style="font-size:0.8rem;color:var(--muted)">"Om delen är känd och procenten — vad är helheten?"</div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <strong>Minnestrick:</strong> Skriv upp triangeln &nbsp;<strong style="color:var(--white)">Del | Hela × P/100</strong>&nbsp; — täck det du söker så ser du formeln.
+    </div>
+  </div>
+
+  <!-- 6.2 Genomräknade exempel -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>6.2 &nbsp; Exempel från ellära</h3>
+
+    <div class="ex-box">
+      <div class="ex-title">Spänningsfall i procent</div>
+      <div class="ex-line">En kabel på 400 V har ett spänningsfall på 8 V. Hur många procent är det?</div>
+      <div class="ex-line">P = <span class="frac"><span>8</span><span>400</span></span> × 100</div>
+      <div class="ex-result">P = 2 %</div>
+      <div class="ex-line" style="color:var(--muted);font-size:0.82rem">Enligt SS 4364000 bör spänningsfallet inte överstiga 3–5 %.</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Verkningsgrad (η)</div>
+      <div class="ex-line">En motor tar in 2 000 W och avger 1 700 W nyttigt arbete. Vad är verkningsgraden?</div>
+      <div class="ex-line">η = <span class="frac"><span>1 700</span><span>2 000</span></span> × 100</div>
+      <div class="ex-result">η = 85 %</div>
+    </div>
+
+    <div class="ex-box">
+      <div class="ex-title">Beräkna delen</div>
+      <div class="ex-line">En säkring klarar 16 A. Vid 80 % last — hur stor ström flödar?</div>
+      <div class="ex-line">Del = 16 × <span class="frac"><span>80</span><span>100</span></span></div>
+      <div class="ex-result">Del = 12,8 A</div>
+    </div>
+  </div>
+
+  <!-- 6.3 Kalkylator -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>6.3 &nbsp; Kalkylator</h3>
+    <div class="math-calc">
+      <h4>🧮 Procentkalkylator — lämna det du söker tomt</h4>
+      <div class="calc-inputs">
+        <input type="number" id="pct-hela" placeholder="Hela" step="any">
+        <input type="number" id="pct-del" placeholder="Del" step="any">
+        <input type="number" id="pct-p" placeholder="Procent (%)" step="any">
+        <button class="calc-btn" onclick="calcProcent()">Beräkna</button>
+      </div>
+      <div class="math-result" id="pct-result">—</div>
+    </div>
+  </div>
+
+  <!-- Övningar del 6 -->
+  <div class="tryit">
+    <div class="tryit-header">✏️ Försök själv – Procent</div>
+    <ol>
+      <li>En 230 V-krets har ett spänningsfall på 6 V. Hur många procent är det?</li>
+      <li>En motor har verkningsgraden 92 %. Den tar in 5 000 W — hur mycket avger den nyttigt?</li>
+      <li>Du mäter 11,5 V av ett förväntat 12 V-batteri. Hur många procent av nominell spänning är det?</li>
+      <li>En kabel belastas till 75 % av sin märkström 25 A. Vilken ström flödar?</li>
+    </ol>
+  </div>
+</section>
+
 <footer>
   <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
   <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
@@ -1158,6 +1257,31 @@ function convertPrefix() {
   const result = val * from / to;
   const fmt = n => parseFloat(n.toPrecision(8)).toString();
   document.getElementById('pref-result').textContent = `${val} × (${from}/${to}) = ${fmt(result)}`;
+}
+
+/* ── Procent ── */
+function calcProcent() {
+  const hela = parseFloat(document.getElementById('pct-hela').value);
+  const del  = parseFloat(document.getElementById('pct-del').value);
+  const p    = parseFloat(document.getElementById('pct-p').value);
+  const res  = document.getElementById('pct-result');
+  const helaOk = !isNaN(hela) && hela !== 0;
+  const delOk  = !isNaN(del);
+  const pOk    = !isNaN(p);
+  const fmt = n => parseFloat(n.toPrecision(6)).toString().replace('.', ',');
+
+  if (!helaOk && delOk && pOk) {
+    const v = del * 100 / p;
+    res.textContent = `Hela = ${fmt(del)} × 100 ÷ ${fmt(p)} = ${fmt(v)}`;
+  } else if (!delOk && helaOk && pOk) {
+    const v = hela * p / 100;
+    res.textContent = `Del = ${fmt(hela)} × ${fmt(p)} ÷ 100 = ${fmt(v)}`;
+  } else if (!pOk && helaOk && delOk) {
+    const v = del / hela * 100;
+    res.textContent = `Procent = ${fmt(del)} ÷ ${fmt(hela)} × 100 = ${fmt(v)} %`;
+  } else {
+    res.textContent = 'Lämna exakt ett fält tomt (den okända storheten)';
+  }
 }
 
 /* ── Pythagoras ── */

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
@@ -10,8 +10,10 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
-  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-  <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+    <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  </div>
 </nav>
 <div class="layout-wrapper">
   <aside class="sidebar">
@@ -217,6 +219,61 @@
     <p style="font-size:0.8rem;color:var(--muted);margin-top:0.75rem">Industri-JFB:n skyddar inte primärt mot personskada — den skyddar mot <strong style="color:var(--white)">brand</strong> orsakad av läckströmmar som hettar upp material.</p>
   </div>
 
+  <!-- JFB Testprocedur -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>🧪 Testprocedur – 3 steg</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">En jordfelsbrytare måste verifieras vid installation och regelbundet därefter. Här är de tre standardstegen:</p>
+    <div style="display:flex;flex-direction:column;gap:0.75rem">
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:1rem;display:flex;gap:1rem;align-items:flex-start">
+        <span style="background:var(--primary);color:#1a1409;font-weight:800;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.85rem">1</span>
+        <div>
+          <div style="font-weight:700;color:var(--white);margin-bottom:0.25rem">Testknapp – inbyggd kontroll</div>
+          <p style="font-size:0.88rem;color:var(--muted)">Tryck på testknappen (T) på JFB:n. Den simulerar ett jordfel via en intern testkrets. JFB ska lösa ut omedelbart. Verifierar att mekanismen och reläet fungerar.</p>
+        </div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:1rem;display:flex;gap:1rem;align-items:flex-start">
+        <span style="background:var(--primary);color:#1a1409;font-weight:800;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.85rem">2</span>
+        <div>
+          <div style="font-weight:700;color:var(--white);margin-bottom:0.25rem">PE–N kortslutning – egenkontroll</div>
+          <p style="font-size:0.88rem;color:var(--muted)">Koppla en kortslutning mellan PE och N på utsidan av JFB:n (innan last). JFB ska lösa ut. Om den <em>inte</em> löser ut är installationen felaktig — PE och N är felväxlade eller samankopplade.</p>
+        </div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:1rem;display:flex;gap:1rem;align-items:flex-start">
+        <span style="background:var(--primary);color:#1a1409;font-weight:800;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-size:0.85rem">3</span>
+        <div>
+          <div style="font-weight:700;color:var(--white);margin-bottom:0.25rem">Jordfelsbrytarprovare – verifiering av utlösningsvärde</div>
+          <p style="font-size:0.88rem;color:var(--muted)">Anslut en <strong style="color:var(--white)">jordfelsbrytarprovare</strong> som injicerar exakt 30 mA läckström. JFB ska lösa ut. Provaren kontrollerar också utlösningstiden (ska vara &lt;40 ms). Används vid besiktning och egenkontroll.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brödrost-exemplet -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>🍞 Varför skyddsjord? – Brödrosten</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Ett praktiskt exempel som visar varför PE-ledaren finns.</p>
+    <img src="images/skyddsjord.png" alt="Skyddsjord – hur PE skyddar vid isolationsfel" class="zoomable" style="width:100%;max-width:480px;display:block;margin:0 auto 1rem;border-radius:10px;border:1px solid var(--outline)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div style="background:rgba(186,26,26,0.07);border-radius:0.6rem;padding:1rem;border-left:3px solid var(--red)">
+        <div style="font-weight:700;color:var(--red);margin-bottom:0.5rem">⚠️ Utan skyddsjord</div>
+        <p style="font-size:0.87rem;color:var(--muted)">Isolationen i brödrosten går sönder. Fasen når metallhöljet. En person som rör höljet bildar en krets <strong style="color:var(--white)">genom kroppen till jord</strong>. Strömmen väljer personen — livsfarligt.</p>
+        <div style="margin-top:0.75rem;font-size:0.82rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted)">
+          Fas → Hölje → Person → Jord
+        </div>
+      </div>
+      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:1rem;border-left:3px solid #2a7a4b">
+        <div style="font-weight:700;color:#4caf50;margin-bottom:0.5rem">✓ Med skyddsjord (PE)</div>
+        <p style="font-size:0.87rem;color:var(--muted)">PE-ledaren (grön/gul) kopplar metallhöljet direkt till jord. Vid isolationsfel flödar strömmen via PE — <strong style="color:var(--white)">inte via personen</strong>. Strömmen blir stor → säkringen löser ut.</p>
+        <div style="margin-top:0.75rem;font-size:0.82rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted)">
+          Fas → Hölje → PE → Jord → Säkring löser ut
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:0.75rem;background:var(--bg-light);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted)">
+      <strong style="color:var(--yellow)">Tumregel:</strong> PE ger felströmmen en <strong style="color:var(--white)">lågohmig väg</strong> förbi människan. Ju lägre PE-resistans, desto snabbare löser säkringen ut.
+    </div>
+  </div>
+
   <!-- Underspänningsskydd -->
   <div class="card" style="margin-top:1.5rem">
     <h3>Underspänningsskydd</h3>
@@ -328,6 +385,237 @@
       <li>Installera en <strong style="color:var(--white)">överspänningsskyddare</strong> (transientsuppressor) i elcentralen</li>
       <li>Separera känsliga kretsar från störande utrustning</li>
     </ul>
+  </div>
+</section>
+
+<!-- HÖG- OCH LÅGSPÄNNING -->
+<section class="section" id="spanningsniva">
+  <div class="section-header">
+    <div class="section-icon">⚡</div>
+    <div>
+      <h4>Avsnitt 6d</h4>
+      <h2>Hög- och lågspänning</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">Spänningsnivån avgör vilka säkerhetsregler som gäller och vem som får utföra arbetet.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.75rem;color:var(--primary)">⚡ Lågspänning (LV)</h3>
+      <div style="font-size:1.6rem;font-weight:900;color:var(--white);margin-bottom:0.5rem">≤ 1 000 V</div>
+      <p style="font-size:0.88rem;color:var(--muted)">Innefattar det svenska elnätet (230/400 V), industri och de flesta installationer. Elinstallatörer med behörighet AL/ANE får arbeta med lågspänning.</p>
+      <div style="margin-top:0.75rem;font-size:0.82rem;color:var(--muted)">
+        Exempel: <strong style="color:var(--white)">230 V</strong> enfas &nbsp;·&nbsp; <strong style="color:var(--white)">400 V</strong> trefas &nbsp;·&nbsp; <strong style="color:var(--white)">24 V</strong> SELV
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem;margin-bottom:0.75rem;color:var(--red)">⚡ Högspänning (HV)</h3>
+      <div style="font-size:1.6rem;font-weight:900;color:var(--white);margin-bottom:0.5rem">&gt; 1 000 V</div>
+      <p style="font-size:0.88rem;color:var(--muted)">Kraftledningar, transformatorstationer och industripannor. Kräver särskild behörighet och strängare säkerhetsavstånd. Livsfarligt även utan direkt kontakt (ljusbåge).</p>
+      <div style="margin-top:0.75rem;font-size:0.82rem;color:var(--muted)">
+        Exempel: <strong style="color:var(--white)">10 kV</strong> lokalnät &nbsp;·&nbsp; <strong style="color:var(--white)">130 kV</strong> regionnät &nbsp;·&nbsp; <strong style="color:var(--white)">400 kV</strong> stamnät
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Gränsdragning och konsekvenser</h3>
+    <div style="overflow-x:auto;margin-top:0.75rem">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+        <thead>
+          <tr style="border-bottom:2px solid var(--outline)">
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em">Kategori</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em">Spänningsgräns</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em">Typisk miljö</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em">Behörighet</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid var(--outline)">
+            <td style="padding:0.65rem 0.75rem;color:var(--white);font-weight:600">Klenspänning</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--primary)">≤ 50 V AC</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Ringklockor, SELV-system</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Lägre krav</td>
+          </tr>
+          <tr style="border-top:1px solid var(--outline)">
+            <td style="padding:0.65rem 0.75rem;color:var(--white);font-weight:600">Lågspänning</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--primary)">50 V – 1 000 V AC</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Bostäder, kontor, industri</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Elinstallationsbehörighet</td>
+          </tr>
+          <tr style="border-top:1px solid var(--outline)">
+            <td style="padding:0.65rem 0.75rem;color:var(--white);font-weight:600">Högspänning</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--red)">&gt; 1 000 V AC</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Kraftnät, transformatorer</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Högsänningsbehörighet (HB)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- STRÖMGENOMGÅNG -->
+<section class="section" id="stromgenomgang">
+  <div class="section-header">
+    <div class="section-icon">⚡</div>
+    <div>
+      <h4>Avsnitt 6e</h4>
+      <h2>Strömgenomgång – fysiologiska effekter</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">Kroppens reaktion på elektrisk ström beror på <strong style="color:var(--white)">strömstyrkan och exponeringstiden</strong>. Det är just därför jordfelsbrytaren (30 mA, &lt;40 ms) räddar liv — den bryter innan hjärtflimmer hinner uppstå.</p>
+
+  <div class="card">
+    <h3>Fysiologiska gränsvärden – AC 50 Hz</h3>
+    <div style="overflow-x:auto;margin-top:0.75rem">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+        <thead>
+          <tr style="border-bottom:2px solid var(--outline)">
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:.05em">Ström</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:.05em">Tid</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:.05em">Effekt på kroppen</th>
+            <th style="text-align:left;padding:0.6rem 0.75rem;color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:.05em">Risknivå</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid var(--outline)">
+            <td style="padding:0.65rem 0.75rem;font-weight:700;color:var(--white)">&lt; 0,5 mA</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">–</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Omärkbar</td>
+            <td style="padding:0.65rem 0.75rem"><span style="background:rgba(34,197,94,0.15);color:#4ade80;border-radius:4px;padding:0.2rem 0.5rem;font-size:0.78rem;font-weight:600">Ofarlig</span></td>
+          </tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)">
+            <td style="padding:0.65rem 0.75rem;font-weight:700;color:var(--white)">&lt; 10 mA</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">–</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Muskelkramp — kan ej släppa taget</td>
+            <td style="padding:0.65rem 0.75rem"><span style="background:rgba(234,179,8,0.15);color:#facc15;border-radius:4px;padding:0.2rem 0.5rem;font-size:0.78rem;font-weight:600">Varning</span></td>
+          </tr>
+          <tr style="border-top:1px solid var(--outline)">
+            <td style="padding:0.65rem 0.75rem;font-weight:700;color:var(--white)">10–40 mA</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">–</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Andningsförlamning</td>
+            <td style="padding:0.65rem 0.75rem"><span style="background:rgba(249,115,22,0.15);color:#fb923c;border-radius:4px;padding:0.2rem 0.5rem;font-size:0.78rem;font-weight:600">Farlig</span></td>
+          </tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)">
+            <td style="padding:0.65rem 0.75rem;font-weight:700;color:var(--white)">40–400 mA</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">&lt; 0,2 s</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Hjärtflimmer kan uppstå</td>
+            <td style="padding:0.65rem 0.75rem"><span style="background:rgba(220,38,38,0.15);color:#f87171;border-radius:4px;padding:0.2rem 0.5rem;font-size:0.78rem;font-weight:600">Livsfarlig</span></td>
+          </tr>
+          <tr style="border-top:1px solid var(--outline)">
+            <td style="padding:0.65rem 0.75rem;font-weight:700;color:var(--white)">40–400 mA</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">&gt; 0,2 s</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Hjärtflimmer uppstår</td>
+            <td style="padding:0.65rem 0.75rem"><span style="background:rgba(220,38,38,0.15);color:#f87171;border-radius:4px;padding:0.2rem 0.5rem;font-size:0.78rem;font-weight:600">Livsfarlig</span></td>
+          </tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)">
+            <td style="padding:0.65rem 0.75rem;font-weight:700;color:var(--white)">&gt; 400 mA</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">–</td>
+            <td style="padding:0.65rem 0.75rem;color:var(--muted)">Hjärtstillestånd · brännskador</td>
+            <td style="padding:0.65rem 0.75rem"><span style="background:rgba(127,29,29,0.4);color:#fca5a5;border-radius:4px;padding:0.2rem 0.5rem;font-size:0.78rem;font-weight:600">Dödlig</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:1rem;background:rgba(250,204,21,0.07);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border-left:3px solid var(--primary)">
+      <strong style="color:var(--primary)">Varför 30 mA JFB?</strong> Jordfelsbrytaren bryter vid 30 mA på &lt;40 ms — strömmen är i det farliga spannet (10–40 mA) men exponeringstiden är för kort för att orsaka andningsförlamning eller hjärtflimmer.
+    </div>
+  </div>
+</section>
+
+<!-- IP-KLASS -->
+<section class="section" id="ipklass">
+  <div class="section-header">
+    <div class="section-icon">🔒</div>
+    <div>
+      <h4>Avsnitt 6f</h4>
+      <h2>IP-klass – Kapslingsklass</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">IP (Ingress Protection) anger hur väl ett elektriskt apparathölje skyddar mot inträngning av fasta föremål, damm och vatten. Anges som <strong style="color:var(--primary)">IP XY</strong> där X är första siffran (damm) och Y är andra siffran (vatten).</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+    <div class="card">
+      <h3 style="margin-bottom:0.75rem">Första siffran – Damm &amp; fasta föremål</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem">
+        <thead>
+          <tr style="border-bottom:1px solid var(--outline)">
+            <th style="padding:0.35rem 0.5rem;color:var(--muted);text-align:center;font-size:0.75rem;width:2.5rem">Siffra</th>
+            <th style="padding:0.35rem 0.5rem;color:var(--muted);text-align:left;font-size:0.75rem">Skydd mot</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid var(--outline)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:var(--primary);text-align:center">0</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Inget skydd</td></tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:var(--primary);text-align:center">1</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Petskyddad mot föremål större än 50mm</td></tr>
+          <tr style="border-top:1px solid var(--outline)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:var(--primary);text-align:center">2</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Petskyddad mot föremål större än 12 mm</td></tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:var(--primary);text-align:center">3</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Petskyddad mot föremål större än 2,5 mm</td></tr>
+          <tr style="border-top:1px solid var(--outline)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:var(--primary);text-align:center">4</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Petskyddad mot föremål större än 1 mm</td></tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:var(--primary);text-align:center">5</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Dammskyddad</td></tr>
+          <tr style="border-top:1px solid var(--outline)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:var(--primary);text-align:center">6</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Dammtät</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:0.75rem">Andra siffran – Vatten</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem">
+        <thead>
+          <tr style="border-bottom:1px solid var(--outline)">
+            <th style="padding:0.35rem 0.5rem;color:var(--muted);text-align:center;font-size:0.75rem;width:2.5rem">Siffra</th>
+            <th style="padding:0.35rem 0.5rem;color:var(--muted);text-align:left;font-size:0.75rem">Skydd mot</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid var(--outline)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:#4ECDC4;text-align:center">0</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Inget skydd</td></tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:#4ECDC4;text-align:center">1</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Skydd mot droppande vatten (vertikalt)</td></tr>
+          <tr style="border-top:1px solid var(--outline)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:#4ECDC4;text-align:center">2</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Skydd mot droppande vatten. Apparaten får ej luta mer än max 15° lutning från normalvinkeln.)</td></tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:#4ECDC4;text-align:center">3</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Skyddad mot strilande vatten. Max vinkel 60°</td></tr>
+          <tr style="border-top:1px solid var(--outline)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:#4ECDC4;text-align:center">4</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Skyddad mot strilande vatten från alla vinklar</td></tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:#4ECDC4;text-align:center">5</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Skyddad mot spolande vatten från munstycke.</td></tr>
+          <tr style="border-top:1px solid var(--outline)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:#4ECDC4;text-align:center">6</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Skyddad mot kraftig överspolning av vatten</td></tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:#4ECDC4;text-align:center">7</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Kan nedsänkas tillfälligt i vatten utan att ta skada</td></tr>
+          <tr style="border-top:1px solid var(--outline)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:#4ECDC4;text-align:center">8</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Lämpad för långvarig nedsänkning i vatten utan att ta skada</td></tr>
+          <tr style="border-top:1px solid var(--outline);background:var(--bg-light)"><td style="padding:0.35rem 0.5rem;font-weight:800;color:#4ECDC4;text-align:center">9</td><td style="padding:0.35rem 0.5rem;color:var(--muted)">Högtrycks-/ångreningstvätt</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1rem">
+    <h3>Exempel: IP55</h3>
+    <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem">
+      <div style="font-size:2.5rem;font-weight:900;color:var(--primary);font-family:monospace">IP55</div>
+      <div style="display:flex;gap:0.75rem">
+        <div style="background:rgba(255,215,0,0.08);border-radius:0.6rem;padding:0.75rem 1rem;border-left:3px solid var(--primary)">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--primary)">5</div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem">Dammskyddad</div>
+        </div>
+        <div style="background:rgba(78,205,196,0.08);border-radius:0.6rem;padding:0.75rem 1rem;border-left:3px solid #4ECDC4">
+          <div style="font-size:1.4rem;font-weight:800;color:#4ECDC4">5</div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem">Vattenstråle</div>
+        </div>
+      </div>
+      <p style="font-size:0.88rem;color:var(--muted)">IP55 är ett vanligt krav för utomhusinstallationer och industrimiljöer.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🚿 Badrumszon</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.75rem">I bad- och duschrum gäller extra restriktioner. Zonerna definieras av avstånd och höjd från vattenkällan (Boverket):</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:0.75rem">
+      <div style="background:rgba(220,38,38,0.08);border-radius:0.6rem;padding:0.85rem;border-left:3px solid var(--red)">
+        <div style="font-weight:700;color:var(--red);margin-bottom:0.35rem">Zon 1</div>
+        <p style="font-size:0.83rem;color:var(--muted)">Inuti badkar/duschkabin. Endast fast monterad utrustning med <strong style="color:var(--white)">klenspänning (≤ 12 V AC)</strong>. Min. IPX7.</p>
+      </div>
+      <div style="background:rgba(249,115,22,0.08);border-radius:0.6rem;padding:0.85rem;border-left:3px solid #fb923c">
+        <div style="font-weight:700;color:#fb923c;margin-bottom:0.35rem">Zon 2</div>
+        <p style="font-size:0.83rem;color:var(--muted)">0–60 cm utanför zon 1, upp till 2,25 m höjd. <strong style="color:var(--white)">Min. IP44</strong>. Inga vanliga uttag.</p>
+      </div>
+      <div style="background:rgba(234,179,8,0.08);border-radius:0.6rem;padding:0.85rem;border-left:3px solid #facc15">
+        <div style="font-weight:700;color:#facc15;margin-bottom:0.35rem">Zon 3</div>
+        <p style="font-size:0.83rem;color:var(--muted)">60 cm–2,4 m utanför zon 2. <strong style="color:var(--white)">Min. IP24</strong>. Uttag tillåtet om JFB ≤ 30 mA.</p>
+      </div>
+    </div>
   </div>
 </section>
 

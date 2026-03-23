@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
@@ -10,8 +10,10 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
-  <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-  <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+    <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  </div>
 </nav>
 <div class="layout-wrapper">
   <aside class="sidebar">
@@ -291,6 +293,68 @@
       <li>Rangordna EK, FK, MK, RK från stelast till mest böjlig.</li>
       <li>Varför används RK-kablar till svetsutrustning?</li>
     </ol>
+  </div>
+
+  <!-- Halogenfri kabel -->
+  <div class="card" style="margin-top:1.5rem">
+    <h3>🔥 Halogenfri kabel (LSZH)</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">LSZH — <em>Low Smoke Zero Halogen</em> — är en kabeltyp med speciellt isolationsmaterial som inte sprider brand och inte avger giftig rök.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:1rem;border-left:3px solid #2a7a4b">
+        <div style="font-weight:700;color:#4caf50;margin-bottom:0.5rem">✓ Egenskaper</div>
+        <ul style="font-size:0.87rem;color:var(--muted);display:flex;flex-direction:column;gap:0.35rem">
+          <li>Brinner inte och sprider inte lågor</li>
+          <li>Avger minimal rök vid brand</li>
+          <li>Ingen giftig halogengas (klor, fluor, brom)</li>
+          <li>Kabeldiametern kan vara något smalare</li>
+        </ul>
+      </div>
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:1rem">
+        <div style="font-weight:700;color:var(--white);margin-bottom:0.5rem">📍 Används i</div>
+        <ul style="font-size:0.87rem;color:var(--muted);display:flex;flex-direction:column;gap:0.35rem">
+          <li>Offentliga byggnader (skolor, sjukhus)</li>
+          <li>Tunnlar och underjordsanläggningar</li>
+          <li>Tåg, fartyg och flyg</li>
+          <li>Överallt där folk befinner sig vid brand</li>
+        </ul>
+      </div>
+    </div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:0.87rem">
+        <thead>
+          <tr style="border-bottom:2px solid var(--outline)">
+            <th style="text-align:left;padding:0.55rem 0.75rem;color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em">Egenskap</th>
+            <th style="text-align:left;padding:0.55rem 0.75rem;color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em">Vanlig PVC-kabel</th>
+            <th style="text-align:left;padding:0.55rem 0.75rem;color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em">Halogenfri (LSZH)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:1px solid var(--outline)">
+            <td style="padding:0.55rem 0.75rem;color:var(--white);font-weight:600">Brandbeteende</td>
+            <td style="padding:0.55rem 0.75rem;color:var(--muted)">Sprider brand</td>
+            <td style="padding:0.55rem 0.75rem;color:#4caf50">Selvsläckande</td>
+          </tr>
+          <tr style="border-top:1px solid var(--outline)">
+            <td style="padding:0.55rem 0.75rem;color:var(--white);font-weight:600">Rökutveckling</td>
+            <td style="padding:0.55rem 0.75rem;color:var(--muted)">Tät svart rök</td>
+            <td style="padding:0.55rem 0.75rem;color:#4caf50">Minimal, ljus rök</td>
+          </tr>
+          <tr style="border-top:1px solid var(--outline)">
+            <td style="padding:0.55rem 0.75rem;color:var(--white);font-weight:600">Giftig gas</td>
+            <td style="padding:0.55rem 0.75rem;color:var(--red)">HCl, dioxin</td>
+            <td style="padding:0.55rem 0.75rem;color:#4caf50">Ingen halogengas</td>
+          </tr>
+          <tr style="border-top:1px solid var(--outline)">
+            <td style="padding:0.55rem 0.75rem;color:var(--white);font-weight:600">Kostnad</td>
+            <td style="padding:0.55rem 0.75rem;color:var(--muted)">Lägre</td>
+            <td style="padding:0.55rem 0.75rem;color:var(--muted)">Något högre</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:0.75rem;background:var(--bg-light);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted)">
+      <strong style="color:var(--yellow)">Märkning:</strong> Halogenfria kablar märks ofta med <strong style="color:var(--white)">FRHF</strong>, <strong style="color:var(--white)">LSZH</strong> eller <strong style="color:var(--white)">0H</strong> på kabelmantel. Kontrollera alltid datablad vid kravspecificering.
+    </div>
   </div>
 
   <!-- Ledarfärger -->

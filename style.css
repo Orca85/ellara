@@ -131,6 +131,81 @@ body.light strong { color: var(--white); }
 .theme-toggle:hover { border-color: var(--primary); opacity: 1; }
 body.light .theme-toggle { border-color: var(--outline); }
 
+#frac-toggle {
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+#frac-tooltip {
+  position: fixed;
+  background: var(--bg-high);
+  color: var(--white);
+  font-size: 0.8rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--outline);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 9999;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+#frac-tooltip.visible { opacity: 1; }
+#frac-tooltip .frac-tip-arrow {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+#frac-tooltip .frac {
+  font-size: 0.82rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.15;
+  gap: 1px;
+}
+#frac-tooltip .frac span:first-child {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+/* === BILD-LIGHTBOX === */
+#img-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  cursor: zoom-out;
+  padding: 2rem;
+}
+#img-lightbox.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+#img-lightbox-img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.6);
+  object-fit: contain;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 /* === TOPBAR (slim, sticky) === */
 nav {
   position: sticky;
@@ -2370,4 +2445,189 @@ body.light .legend-table tr:hover td { background: var(--bg-light); }
   .legend-formula-grid { grid-template-columns: 1fr; }
   .legend-sym-grid { grid-template-columns: repeat(2, 1fr); }
   .lt-sym { font-size: 1rem; }
+}
+
+/* =========================================================
+   ÖVNINGAR – UNDER-SEKTIONER
+   ========================================================= */
+.ovn-sub { margin-bottom: 3rem; }
+.ovn-sub + .ovn-sub {
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--outline);
+}
+.ovn-sub-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+.ovn-sub-icon { font-size: 1.3rem; }
+.ovn-sub-title { font-size: 1.15rem; font-weight: 700; color: var(--white); margin: 0; }
+
+.ovn-placeholder {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  box-shadow: var(--shadow);
+}
+
+/* =========================================================
+   TABELLQUIZ – LEDARFÄRGER & KABELDIMENSIONERING
+   ========================================================= */
+.tq-wrap {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow);
+}
+.tq-subtitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 0 0.3rem 0;
+}
+.tq-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 0 0 1rem 0;
+}
+.tq-mode-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.tq-mode-btn {
+  background: var(--bg-light);
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.4rem 0.9rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tq-mode-btn:hover { color: var(--white); background: var(--bg-high); }
+.tq-mode-btn.active { background: var(--primary-fixed); color: var(--primary); font-weight: 600; }
+
+.tq-count-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.tq-count-label {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-right: 0.2rem;
+}
+.tq-count-btn {
+  background: var(--bg-light);
+  border: none;
+  border-radius: 0.5rem;
+  width: 32px;
+  height: 32px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tq-count-btn:hover { color: var(--white); background: var(--bg-high); }
+.tq-count-btn.active { background: var(--primary-fixed); color: var(--primary); }
+
+.tq-table-scroll { overflow-x: auto; }
+.tq-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.tq-table th {
+  text-align: left;
+  padding: 0.45rem 0.75rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--outline);
+}
+.tq-table td {
+  padding: 0.45rem 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: middle;
+}
+body.light .tq-table td { border-bottom-color: rgba(0,0,0,0.05); }
+.tq-table tbody tr:last-child td { border-bottom: none; }
+.tq-label { font-weight: 600; color: var(--white); white-space: nowrap; }
+.tq-cell  { color: var(--white); }
+
+.tq-input {
+  background: var(--bg-light);
+  border: 1px solid var(--outline);
+  border-radius: 0.5rem;
+  padding: 0.32rem 0.6rem;
+  color: var(--white);
+  font-size: 0.9rem;
+  font-family: inherit;
+  width: 100%;
+  min-width: 80px;
+  max-width: 150px;
+  transition: border-color 0.15s;
+}
+.tq-input:focus { outline: none; border-color: var(--primary); }
+.tq-input:disabled { opacity: 0.75; cursor: default; }
+.tq-input.tq-correct { border-color: #2a7a4b; background: rgba(0,107,53,0.12); }
+.tq-input.tq-wrong   { border-color: #c0392b; background: rgba(186,26,26,0.09); }
+
+.tq-wrong-hint {
+  display: block;
+  font-size: 0.74rem;
+  color: #e08080;
+  margin-top: 0.2rem;
+}
+
+.tq-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.tq-check-btn {
+  background: var(--primary);
+  color: #1a1409;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.tq-check-btn:hover { opacity: 0.85; }
+.tq-reset-btn {
+  background: var(--bg-light);
+  color: var(--muted);
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.88rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tq-reset-btn:hover { color: var(--white); background: var(--bg-high); }
+.tq-score {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
 }

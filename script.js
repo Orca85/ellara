@@ -11,7 +11,7 @@
     const btn = document.getElementById('frac-toggle');
     if (!btn) return;
     btn.textContent = mode === 'slash' ? '½' : 'a/b';
-    btn.title = mode === 'slash' ? 'Visa staplade bråk' : 'Visa slash-bråk';
+    btn.title = '';
   }
 
   const saved = localStorage.getItem(KEY) || 'frac';
@@ -24,6 +24,35 @@
       const next = current === 'frac' ? 'slash' : 'frac';
       localStorage.setItem(KEY, next);
       applyFracMode(next);
+    });
+
+    /* HTML tooltip */
+    const tip = document.createElement('div');
+    tip.id = 'frac-tooltip';
+    document.body.appendChild(tip);
+
+    function updateTip() {
+      const mode = localStorage.getItem(KEY) || 'frac';
+      if (mode === 'frac') {
+        tip.innerHTML = 'Växla till snedstreck &nbsp;<span class="frac-tip-arrow">→</span>&nbsp; <span style="font-size:0.85rem">1/2</span>';
+      } else {
+        tip.innerHTML = 'Växla till staplat bråk &nbsp;<span class="frac-tip-arrow">→</span>&nbsp; <span class="frac"><span>1</span><span>2</span></span>';
+      }
+    }
+
+    btn.addEventListener('mouseenter', function () {
+      updateTip();
+      const r = btn.getBoundingClientRect();
+      tip.style.top   = (r.bottom + 8) + 'px';
+      tip.style.right = (window.innerWidth - r.right) + 'px';
+      tip.style.left  = 'auto';
+      tip.classList.add('visible');
+    });
+    btn.addEventListener('mouseleave', function () {
+      tip.classList.remove('visible');
+    });
+    btn.addEventListener('click', function () {
+      updateTip();
     });
   }
 })();
@@ -1194,6 +1223,314 @@ function format(n) {
           ],
           answer: 0,
           explanation: 'Automatsäkringen har en återställningsknapp — tryck in och den är klar igen. En smältsäkring däremot måste bytas. Automaten skyddar mot BÅDE kortslutning och överbelastning.'
+        },
+        {
+          type: 'mc',
+          question: 'Vad händer med PEN-skruven i en DiAze-central när man ska installera en jordfelsbrytare?',
+          options: [
+            'Den skruvas IN så att PE och N separeras',
+            'Den skruvas UT så att PE och N separeras',
+            'Den lämnas orörd — JFB kopplas direkt på PEN'
+          ],
+          answer: 0,
+          explanation: 'PEN-skruven är högergängad men med omvänd funktion: skruvas IN → PE och N separeras (JFB kan installeras). Skruvas UT → PE och N kopplas ihop till PEN igen.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken utlösningsnivå har en jordfelsbrytare för förhöjt personskydd (t.ex. i dagis eller vid badkar)?',
+          options: ['30 mA', '10 mA', '100 mA', '300 mA'],
+          answer: 1,
+          explanation: '10 mA används där extra skydd krävs — t.ex. i barns miljöer, vid badkar och dusch. Standard personskydd är 30 mA. 300 mA används för brand- och egendomsskydd i industri.'
+        },
+        {
+          type: 'mc',
+          question: 'Vad är gränsen mellan lågspänning och högspänning?',
+          options: ['500 V', '750 V', '1 000 V', '1 500 V'],
+          answer: 2,
+          explanation: 'Lågspänning = upp till 1 000 V AC. Högspänning = över 1 000 V AC. Det svenska elnätet (230/400 V) är lågspänning. Kraftledningar på 10 kV och uppåt är högspänning.'
+        }
+      ]
+    },
+    {
+      name: '🎨 Ledarfärger & Kabeldimensionering',
+      exercises: [
+        {
+          type: 'mc',
+          question: 'Vilken färg har L1 i ett trefassystem enligt svensk standard?',
+          options: ['Svart', 'Brun', 'Grå', 'Blå'],
+          answer: 1,
+          explanation: 'L1 = Brun. Ordning att komma ihåg: L1 Brun, L2 Svart, L3 Grå — enligt SS 4364000 / IEC 60446.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken färg har L2 i ett trefassystem enligt svensk standard?',
+          options: ['Brun', 'Grå', 'Svart', 'Vit'],
+          answer: 2,
+          explanation: 'L2 = Svart. Tänk: L1 Brun, L2 Svart, L3 Grå.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken färg har L3 i ett trefassystem enligt svensk standard?',
+          options: ['Brun', 'Svart', 'Blå', 'Grå'],
+          answer: 3,
+          explanation: 'L3 = Grå. Faserna: L1 Brun, L2 Svart, L3 Grå.'
+        },
+        {
+          type: 'mc',
+          question: 'En blå ledare i ett trefassystem representerar vad?',
+          options: ['L3 (fas)', 'Skyddsjord (PE)', 'Nolledaren (N)', 'Tändtråd'],
+          answer: 2,
+          explanation: 'Blå = Nolledare (N). Blå färg är reserverad för neutralledaren och ska aldrig användas som fas- eller skyddsjordsledare.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken färg har skyddsjordsledaren (PE)?',
+          options: ['Blå', 'Gul', 'Grön/Gul', 'Röd'],
+          answer: 2,
+          explanation: 'Skyddsjord (PE, Protective Earth) = Grön/Gul. Denna färg är reserverad enbart för skyddsjord och får absolut inte användas till något annat.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilka av följande är godkända färger för tändtråd (switched live)?',
+          options: [
+            'Brun, Svart, Grå',
+            'Svart, Vit, Orange, Rosa',
+            'Blå, Lila, Röd',
+            'Grön, Gul, Turkos'
+          ],
+          answer: 1,
+          explanation: 'Tändtråd (switched live) kan vara Svart, Vit, Orange eller Rosa. Dessa skiljer sig från fasledarna (L1–L3) och nolledaren (blå).'
+        },
+        {
+          type: 'mc',
+          question: 'Vad kallas den gröna/gula ledaren med förkortningen PE?',
+          options: ['Phase Earth', 'Protective Earth', 'Primary Electrode', 'Power Earth'],
+          answer: 1,
+          explanation: 'PE = Protective Earth (skyddsjord på svenska). Den kopplar metallhöljen på apparater till jord och löser ut säkringen vid isolationsfel.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken minsta kabelarea (koppar) krävs för en 6 A säkring?',
+          options: ['0,75 mm²', '1 mm²', '1,5 mm²', '2,5 mm²'],
+          answer: 1,
+          explanation: '6 A → 1 mm². Tumregel: 6 A = 1 mm², 10 A = 1,5 mm², 16 A = 2,5 mm², 20 A = 4 mm², 25 A = 6 mm², 32 A = 10 mm².'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken minsta kabelarea (koppar) krävs för en 10 A säkring?',
+          options: ['1 mm²', '1,5 mm²', '2,5 mm²', '4 mm²'],
+          answer: 1,
+          explanation: '10 A → 1,5 mm². Gäller normala installationer med kortare längder (60–80 m).'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken minsta kabelarea (koppar) krävs för en 16 A säkring?',
+          options: ['1,5 mm²', '2,5 mm²', '4 mm²', '6 mm²'],
+          answer: 1,
+          explanation: '16 A → 2,5 mm². Det vanligaste i vanliga vägguttag i svenska bostäder.'
+        },
+        {
+          type: 'mc',
+          question: 'Du ska installera en krets med 25 A säkring. Vilken minsta kabelarea i koppar krävs?',
+          options: ['4 mm²', '6 mm²', '10 mm²', '16 mm²'],
+          answer: 1,
+          explanation: '25 A → 6 mm². Dimensioneringsregel: 25 A = 6 mm², 32 A = 10 mm².'
+        },
+        {
+          type: 'mc',
+          question: 'En kabel med area 4 mm² (koppar) — vilken säkring dimensioneras den för?',
+          options: ['16 A', '20 A', '25 A', '32 A'],
+          answer: 1,
+          explanation: '4 mm² = 20 A. Kom ihåg tabellen: 1 mm²=6A, 1,5 mm²=10A, 2,5 mm²=16A, 4 mm²=20A, 6 mm²=25A, 10 mm²=32A.'
+        }
+      ]
+    },
+    {
+      name: '⚡ Strömgenomgång',
+      exercises: [
+        {
+          type: 'mc',
+          question: 'Vad är verkan av 10–40 mA under sekunder upp till någon minut?',
+          options: [
+            'Under känselreaktion – ingen märkbar effekt',
+            'Tendens till kramp, men det går att släppa taget',
+            'Smärtsam svår kramp i armar och skuldror, svårighet att andas vid tider över 2 s',
+            'Hjärtkammarflimmer och hjärtstillestånd'
+          ],
+          answer: 2,
+          explanation: '10–40 mA (sekunder upp till någon minut): Vanligtvis ingen organisk skada. Sannolikt uppstår smärtsam, svår kramp i armar och skuldror. Även svårighet att andas vid tider över 2 sekunder.'
+        },
+        {
+          type: 'mc',
+          question: 'Vad händer vid 40–400 mA under kortare tid än 0,2 sekunder?',
+          options: [
+            'Ingen påverkan – exponeringstiden är för kort',
+            'Kraftig chock med smärtsam svår kramp. Återgående störningar i hjärtfunktionen, risk för hjärtkammarflimmer',
+            'Direkt hjärtstillestånd och medvetslöshet',
+            'Enbart smärtsam kramp i armar, ingen hjärtpåverkan'
+          ],
+          answer: 1,
+          explanation: '40–400 mA, < 0,2 s: Kraftig chock med smärtsam svår kramp. Återgående störningar i hjärtfunktionen, men även risk för hjärtkammarflimmer som ökar med varaktighet och styrka.'
+        },
+        {
+          type: 'mc',
+          question: 'Vad händer vid 40–400 mA under längre tid än 0,2 sekunder?',
+          options: [
+            'Smärtsam kramp i armar och skuldror, ingen hjärtpåverkan',
+            'Kraftig chock med svår kramp och vanligen återgående störningar i hjärtfunktionen med risk för hjärtkammarflimmer',
+            'Ingen känsla om man är frisk',
+            'Bara brännskador utan hjärtpåverkan'
+          ],
+          answer: 1,
+          explanation: '40–400 mA, > 0,2 s: Kraftig chock med smärtsam svår kramp. Vanligen återgående störningar i hjärtfunktionen, men risk för hjärtkammarflimmer ökar med varaktighet och styrka.'
+        },
+        {
+          type: 'mc',
+          question: 'Vad är skillnaden i hjärtpåverkan mellan 40–400 mA vid < 0,2 s och > 0,2 s?',
+          options: [
+            'Ingen skillnad – effekten är identisk',
+            'Vid < 0,2 s finns RISK för hjärtkammarflimmer; vid > 0,2 s är störningarna VANLIGEN återgående men risken ökar ytterligare',
+            'Vid > 0,2 s är det helt ofarligt för hjärtat',
+            'Vid < 0,2 s stannar hjärtat direkt'
+          ],
+          answer: 1,
+          explanation: '< 0,2 s: Risk för hjärtkammarflimmer som ökar med tid och styrka. > 0,2 s: Vanligen återgående störningar men risken för flimmer är fortsatt reell och ökar med varaktighet och styrka.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken strömstyrka ger smärtsam svår kramp i armar och skuldror men vanligtvis ingen organisk skada?',
+          options: ['< 0,5 mA', '< 10 mA', '10–40 mA', '40–400 mA'],
+          answer: 2,
+          explanation: '10–40 mA (sekunder upp till någon minut): Vanligtvis ingen organisk skada, men smärtsam svår kramp i armar och skuldror. Svårighet att andas kan uppstå vid exponering över 2 sekunder.'
+        }
+      ]
+    },
+    {
+      name: '🔒 IP-klass',
+      exercises: [
+        {
+          type: 'mc',
+          question: 'Vad anger den FÖRSTA siffran i en IP-beteckning?',
+          options: [
+            'Skydd mot vatten',
+            'Skydd mot damm och fasta föremål',
+            'Kapslingens temperaturklass',
+            'Skydd mot elektrisk stöt'
+          ],
+          answer: 1,
+          explanation: 'Första siffran (0–6) anger skydd mot fasta föremål och damm. Andra siffran (0–9) anger skydd mot vatten.'
+        },
+        {
+          type: 'mc',
+          question: 'Vad innebär IP44?',
+          options: [
+            'Dammtät och tål nedsänkning',
+            'Skydd mot föremål > 1 mm och stänkvatten från alla håll',
+            'Skydd mot finger och droppvatten',
+            'Dammskyddad och tål vattenstråle'
+          ],
+          answer: 1,
+          explanation: 'IP44: Första 4 = föremål > 1 mm (tråd). Andra 4 = stänkvatten från alla riktningar. IP44 är minimikrav i badrumszon 2.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilken minsta IP-klass krävs i badrumszon 2?',
+          options: ['IP20', 'IP24', 'IP44', 'IP55'],
+          answer: 2,
+          explanation: 'Badrumszon 2 (0–60 cm utanför zon 1, upp till 2,25 m höjd): Minst IP44. Zon 1 kräver IPX7 och bara klenspänning ≤ 12 V AC.'
+        },
+        {
+          type: 'mc',
+          question: 'En utomhusarmatur är märkt IP65. Vad innebär den första siffran 6?',
+          options: ['Skydd mot föremål > 1 mm', 'Dammskyddad', 'Dammtät', 'Stänkskyddad'],
+          answer: 2,
+          explanation: 'Första siffran 6 = Dammtät. Inget damm kan tränga in alls. Andra siffran 5 = skyddad mot vattenstråle.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilka regler gäller i badrumszon 1?',
+          options: [
+            'IP24 och max 230 V',
+            'IP44 och max 230 V',
+            'IPX7 och bara klenspänning (≤ 12 V AC)',
+            'IP55 och fast installation tillåten'
+          ],
+          answer: 2,
+          explanation: 'Zon 1 (inuti badkar/duschkabin): Minst IPX7 (nedsänkningsskyddad), och endast klenspänning ≤ 12 V AC. Inga 230 V-apparater.'
+        },
+        {
+          type: 'mc',
+          question: 'Vad innebär den andra siffran 7 i en IP-beteckning?',
+          options: [
+            'Kraftig vattenstråle',
+            'Nedsänkning 0–1 m',
+            'Nedsänkning > 1 m',
+            'Högtrycksrengöring'
+          ],
+          answer: 1,
+          explanation: 'Andra siffran 7 = nedsänkning 0–1 m under begränsad tid. Siffran 8 = nedsänkning > 1 m (enl. tillverkarens spec). Siffran 9 = högtrycks-/ångreningstvätt.'
+        }
+      ]
+    },
+    {
+      name: '🔄 Eldistribution & Nätformer',
+      exercises: [
+        {
+          type: 'mc',
+          question: 'Vad kännetecknar TN-S-systemet?',
+          options: [
+            'PE och N kombineras i en PEN-ledare hela vägen',
+            'PE och N är separata ledare från transformatorn till uttaget',
+            'Nätet är isolerat från jord',
+            'PE kopplas till en egen jordelektrod på platsen'
+          ],
+          answer: 1,
+          explanation: 'TN-S (Terra–Neutral–Separated): Separata PE och N hela vägen. Modern standard, femledarsystem i trefas. JFB kan installeras var som helst.'
+        },
+        {
+          type: 'mc',
+          question: 'I vilken nätform kombineras PE och N till en gemensam PEN-ledare?',
+          options: ['TN-S', 'TN-C', 'IT', 'TT'],
+          answer: 1,
+          explanation: 'TN-C (Terra–Neutral–Combined): PE och N kombineras till PEN-ledaren. Fyra ledare i trefas (L1, L2, L3, PEN). PEN splittras i elcentralen.'
+        },
+        {
+          type: 'mc',
+          question: 'Varför kan man INTE installera en JFB direkt i ett TN-C-system utan åtgärd?',
+          options: [
+            'JFB kräver alltid ett 5-ledarsystem',
+            'PE och N är samankopplade via PEN – JFB kan inte mäta strömskillnaden',
+            'TN-C-systemet har för hög ström',
+            'JFB är inte godkänd i svenska bostäder'
+          ],
+          answer: 1,
+          explanation: 'JFB mäter skillnaden mellan ström ut (L) och ström in (N). I TN-C är PE och N samma ledare (PEN) — JFB ser ingen differens. Lösning: splitta PEN vid PEN-skruven och installera JFB efter den punkten.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilket nätssystem är vanligast i svenska bostäder?',
+          options: ['TN-C', 'TN-S', 'TN-C-S', 'IT'],
+          answer: 2,
+          explanation: 'TN-C-S är vanligast i Sverige: PEN-ledare inkommande från nätet, sedan separata PE och N ut till kretsarna i elcentralen.'
+        },
+        {
+          type: 'mc',
+          question: 'Vad händer vid ett isolationsfel i en TN-S-installation med JFB?',
+          options: [
+            'Ingenting – TN-S är immunt mot isolationsfel',
+            'Felströmmen flödar via PE, JFB detekterar obalansen och löser ut',
+            'Säkringen löser alltid ut innan JFB',
+            'PEN-skruven måste lossas manuellt'
+          ],
+          answer: 1,
+          explanation: 'I TN-S: Fas → isolationsfel → jordat hölje → PE → neutral. JFB mäter I_L ≠ I_N och löser ut på < 40 ms. PE ger en lågohmig väg som skapar tillräcklig differensström.'
+        },
+        {
+          type: 'mc',
+          question: 'Vilket system används på sjukhus och i gruvor där ett enskilt jordfel inte ska ge driftstopp?',
+          options: ['TN-C', 'TN-S', 'TN-C-S', 'IT'],
+          answer: 3,
+          explanation: 'IT-systemet: Nätet är isolerat från jord. Vid ett enskilt jordfel flödar ingen farlig ström och driften fortsätter. En isolationsövervakare larmar. Används där avbrott är oacceptabla.'
         }
       ]
     }
@@ -1452,6 +1789,216 @@ function format(n) {
 
 
 /* =========================================================
+   LEDARFÄRGER & KABELDIMENSIONERING – TABELLQUIZ
+   ========================================================= */
+(function () {
+  'use strict';
+
+  const WIRE_COLORS = [
+    { ledare: 'L1',              farg: 'Brun',     ok: ['brun'] },
+    { ledare: 'L2',              farg: 'Svart',    ok: ['svart'] },
+    { ledare: 'L3',              farg: 'Grå',      ok: ['grå', 'gra'] },
+    { ledare: 'Nolla (N)',       farg: 'Blå',      ok: ['blå', 'bla'] },
+    { ledare: 'Skyddsjord (PE)', farg: 'Grön/Gul', ok: ['grön/gul', 'gul/grön', 'grön-gul', 'gul-grön', 'grön gul', 'gul grön'] },
+  ];
+
+  const CABLE_DIM = [
+    { sakring: '6 A',  farg: 'Grön',  area: '1 mm²',   okS: ['6'],  okF: ['grön', 'gron'],  okA: ['1', '1 mm²', '1mm²'] },
+    { sakring: '10 A', farg: 'Röd',   area: '1,5 mm²', okS: ['10'], okF: ['röd', 'rod'],    okA: ['1,5', '1.5', '1,5 mm²'] },
+    { sakring: '16 A', farg: 'Grå',   area: '2,5 mm²', okS: ['16'], okF: ['grå', 'gra'],    okA: ['2,5', '2.5', '2,5 mm²'] },
+    { sakring: '20 A', farg: 'Blå',   area: '4 mm²',   okS: ['20'], okF: ['blå', 'bla'],    okA: ['4', '4 mm²'] },
+    { sakring: '25 A', farg: 'Gul',   area: '6 mm²',   okS: ['25'], okF: ['gul'],           okA: ['6', '6 mm²'] },
+    { sakring: '32 A', farg: 'Svart', area: '10 mm²',  okS: ['32'], okF: ['svart'],         okA: ['10', '10 mm²'] },
+  ];
+
+  const DIM_MODES = [
+    { key: 'farg',    label: 'Gissa färg' },
+    { key: 'sakring', label: 'Gissa säkring' },
+    { key: 'area',    label: 'Gissa kabelarea' },
+    { key: 'random',  label: '🎲 Slumpa' },
+  ];
+
+  let dimMode      = 'farg';
+  let randomCount  = 1;
+  let randomPattern = []; // per row: array of hidden col indices (0=säkring,1=färg,2=area)
+
+  function generateRandomPattern() {
+    randomPattern = CABLE_DIM.map(() => {
+      const cols = [0, 1, 2];
+      for (let i = cols.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cols[i], cols[j]] = [cols[j], cols[i]];
+      }
+      return cols.slice(0, randomCount);
+    });
+  }
+
+  function matches(input, accepted) {
+    const v = input.trim().toLowerCase();
+    return accepted.some(a => a.toLowerCase() === v);
+  }
+
+  const COL_PH   = ['A', 'färg', 'mm²'];
+  const COL_VALS = [r => r.sakring, r => r.farg, r => r.area];
+
+  function buildDimRows() {
+    return CABLE_DIM.map((row, i) => {
+      const hidden = dimMode === 'random'
+        ? randomPattern[i] || []
+        : dimMode === 'sakring' ? [0] : dimMode === 'farg' ? [1] : [2];
+
+      const cells = [row.sakring, row.farg, row.area].map((val, c) =>
+        hidden.includes(c)
+          ? `<td><input class="tq-input" data-idx="${i}" data-col="${c}" type="text" placeholder="${COL_PH[c]}" autocomplete="off" spellcheck="false"></td>`
+          : `<td class="tq-cell">${val}</td>`
+      );
+      return `<tr>${cells.join('')}</tr>`;
+    }).join('');
+  }
+
+  function renderDimTable() {
+    document.querySelectorAll('.tq-mode-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === dimMode);
+    });
+    const countBar = document.getElementById('dim-count-bar');
+    if (countBar) countBar.style.display = dimMode === 'random' ? 'flex' : 'none';
+    if (dimMode === 'random') generateRandomPattern();
+    const tbody = document.querySelector('#dim-table tbody');
+    if (tbody) tbody.innerHTML = buildDimRows();
+    const score = document.getElementById('dim-score');
+    if (score) score.textContent = '';
+  }
+
+  function checkWire() {
+    const inputs = document.querySelectorAll('#wire-table .tq-input');
+    let correct = 0;
+    inputs.forEach((inp, i) => {
+      const ok = matches(inp.value, WIRE_COLORS[i].ok);
+      inp.className = 'tq-input ' + (ok ? 'tq-correct' : 'tq-wrong');
+      inp.disabled = true;
+      if (ok) { correct++; }
+      else {
+        let hint = inp.parentNode.querySelector('.tq-wrong-hint');
+        if (!hint) { hint = document.createElement('span'); hint.className = 'tq-wrong-hint'; inp.parentNode.appendChild(hint); }
+        hint.textContent = '→ ' + WIRE_COLORS[i].farg;
+      }
+    });
+    document.getElementById('wire-score').textContent = correct + '/' + inputs.length + ' rätt';
+  }
+
+  const COL_OK   = [r => r.okS, r => r.okF, r => r.okA];
+
+  function checkDim() {
+    const inputs = document.querySelectorAll('#dim-table .tq-input');
+    let correct = 0;
+    inputs.forEach(inp => {
+      const rowIdx = parseInt(inp.dataset.idx);
+      const col    = parseInt(inp.dataset.col);
+      const row    = CABLE_DIM[rowIdx];
+      const accepted   = COL_OK[col](row);
+      const correctVal = COL_VALS[col](row);
+      const ok = matches(inp.value, accepted);
+      inp.className = 'tq-input ' + (ok ? 'tq-correct' : 'tq-wrong');
+      inp.disabled = true;
+      if (ok) { correct++; }
+      else {
+        let hint = inp.parentNode.querySelector('.tq-wrong-hint');
+        if (!hint) { hint = document.createElement('span'); hint.className = 'tq-wrong-hint'; inp.parentNode.appendChild(hint); }
+        hint.textContent = '→ ' + correctVal;
+      }
+    });
+    document.getElementById('dim-score').textContent = correct + '/' + inputs.length + ' rätt';
+  }
+
+  function resetWire() {
+    document.querySelectorAll('#wire-table .tq-input').forEach(inp => {
+      inp.value = ''; inp.className = 'tq-input'; inp.disabled = false;
+      const hint = inp.parentNode.querySelector('.tq-wrong-hint');
+      if (hint) hint.remove();
+    });
+    document.getElementById('wire-score').textContent = '';
+  }
+
+  function init() {
+    const root = document.getElementById('ledarfarger-quiz-root');
+    if (!root) return;
+
+    root.innerHTML = `
+      <div class="tq-wrap">
+        <h4 class="tq-subtitle">Trefas – Ledarfärger</h4>
+        <p class="tq-desc">Skriv in rätt färg för varje ledare. Skiftläge spelar ingen roll.</p>
+        <div class="tq-table-scroll">
+          <table class="tq-table" id="wire-table">
+            <thead><tr><th>Ledare</th><th>Färg</th></tr></thead>
+            <tbody>
+              ${WIRE_COLORS.map((row, i) => `
+                <tr>
+                  <td class="tq-cell tq-label">${row.ledare}</td>
+                  <td><input class="tq-input" type="text" placeholder="?" autocomplete="off" spellcheck="false"></td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+        <div class="tq-actions">
+          <button class="tq-check-btn" id="wire-check-btn">Kontrollera</button>
+          <button class="tq-reset-btn" id="wire-reset-btn">↺ Återställ</button>
+          <span class="tq-score" id="wire-score"></span>
+        </div>
+      </div>
+
+      <div class="tq-wrap">
+        <h4 class="tq-subtitle">Säkring → Färg → Min. kabelarea</h4>
+        <p class="tq-desc">Välj vilken kolumn du vill öva på, fyll i alla rader och kontrollera.</p>
+        <div class="tq-mode-bar">
+          ${DIM_MODES.map(m => `<button class="tq-mode-btn${m.key === dimMode ? ' active' : ''}" data-mode="${m.key}">${m.label}</button>`).join('')}
+        </div>
+        <div class="tq-count-bar" id="dim-count-bar" style="display:none">
+          <span class="tq-count-label">Ta bort:</span>
+          ${[1,2,3].map(n => `<button class="tq-count-btn${n===1?' active':''}" data-count="${n}">${n}</button>`).join('')}
+        </div>
+        <div class="tq-table-scroll">
+          <table class="tq-table" id="dim-table">
+            <thead><tr><th>Säkring</th><th>Färg</th><th>Min. kabelarea</th></tr></thead>
+            <tbody>${buildDimRows()}</tbody>
+          </table>
+        </div>
+        <div class="tq-actions">
+          <button class="tq-check-btn" id="dim-check-btn">Kontrollera</button>
+          <button class="tq-reset-btn" id="dim-reset-btn">↺ Återställ</button>
+          <span class="tq-score" id="dim-score"></span>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('wire-check-btn').addEventListener('click', checkWire);
+    document.getElementById('wire-reset-btn').addEventListener('click', resetWire);
+    document.getElementById('dim-check-btn').addEventListener('click', checkDim);
+    document.getElementById('dim-reset-btn').addEventListener('click', renderDimTable);
+
+    document.querySelectorAll('.tq-mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => { dimMode = btn.dataset.mode; renderDimTable(); });
+    });
+
+    document.querySelectorAll('.tq-count-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        randomCount = parseInt(btn.dataset.count);
+        document.querySelectorAll('.tq-count-btn').forEach(b => b.classList.toggle('active', b === btn));
+        renderDimTable();
+      });
+    });
+
+    root.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      if (e.target.closest('#wire-table')) document.getElementById('wire-check-btn').click();
+      else if (e.target.closest('#dim-table')) document.getElementById('dim-check-btn').click();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
+
+
+/* =========================================================
    MS-SUBQ ZOOM OVERLAY
    ========================================================= */
 (function () {
@@ -1603,5 +2150,30 @@ function format(n) {
       <div class="kk-zoom-result">${result}</div>`;
 
     overlay.classList.add('visible');
+  });
+})();
+
+/* =========================================================
+   BILD-LIGHTBOX  –  klickbara bilder med klassen .zoomable
+   ========================================================= */
+(function () {
+  const overlay = document.createElement('div');
+  overlay.id = 'img-lightbox';
+  overlay.innerHTML = '<img id="img-lightbox-img" src="" alt="">';
+  document.body.appendChild(overlay);
+
+  const lbImg = document.getElementById('img-lightbox-img');
+
+  overlay.addEventListener('click', () => overlay.classList.remove('visible'));
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('img.zoomable').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        overlay.classList.add('visible');
+      });
+    });
   });
 })();
