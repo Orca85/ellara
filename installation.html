@@ -55,6 +55,24 @@
   <ul class="search-results" id="search-results"></ul>
 </div>
 
+<section class="section" id="intro-installation">
+  <div class="section-header">
+    <div class="section-icon">🏗️</div>
+    <div>
+      <h4>Installation</h4>
+      <h2>Installation, Elcentral &amp; Nätformer</h2>
+    </div>
+  </div>
+  <div class="card">
+    <p>Det här kapitlet täcker installationsdimensionering, elcentralens uppbyggnad med skenor och automatsäkringar, samt de svenska nätformerna TN-C, TN-S och IT.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;margin-top:1rem;font-size:0.88rem">
+      <a href="#installation" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🏗️ Installation &amp; Dimensionering</a>
+      <a href="#elcentral" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⚡ Elcentral &amp; Skenor</a>
+      <a href="#natformer" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔄 Nätformer – TN-C, TN-S, IT</a>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="installation">
   <div class="section-header">
     <div class="section-icon">🏗️</div>
@@ -250,7 +268,7 @@
               <td style="padding:0.55rem 0.75rem">
                 <span style="display:inline-flex;align-items:center;gap:0.4rem">
                   <span style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#2e8b2e 50%,#d4b000 50%);flex-shrink:0;border:1px solid rgba(255,255,255,0.15)"></span>
-                  Grön/Gul
+                  GrönGul
                 </span>
               </td>
               <td style="padding:0.55rem 0.75rem;border-radius:0 6px 6px 0;color:var(--muted)">PE</td>
@@ -270,7 +288,7 @@
 
         <div style="background:rgba(255,155,77,0.08);border:1px solid rgba(255,155,77,0.3);border-radius:8px;padding:0.75rem;margin-top:1rem;font-size:0.85rem;color:var(--muted)">
           <strong style="color:#FF9B4D">Trefas — L1, L2, L3:</strong><br>
-          L1 = Brun &nbsp;|&nbsp; L2 = Svart &nbsp;|&nbsp; L3 = Grå &nbsp;|&nbsp; N = Blå &nbsp;|&nbsp; PE = Grön/Gul
+          L1 = Brun &nbsp;|&nbsp; L2 = Svart &nbsp;|&nbsp; L3 = Grå &nbsp;|&nbsp; N = Blå &nbsp;|&nbsp; PE = GrönGul
         </div>
 
         <div class="tip-box" style="margin-top:0.75rem">
@@ -461,6 +479,119 @@
   </div>
 </section>
 
+<!-- ELCENTRAL & SKENOR -->
+<section class="section" id="elcentral">
+  <div class="section-header">
+    <div class="section-icon">⚡</div>
+    <div>
+      <h4>Avsnitt</h4>
+      <h2>Elcentral &amp; Skenor</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">Elcentralen distribuerar ström till alla kretsar. Varje ledartyp har <strong style="color:var(--white)">sin egen skena</strong> — det är viktigt att veta var varje kabel börjar och slutar.</p>
+
+  <!-- Skenor -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>🔩 Skenor i elcentralen</h3>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-top:0.75rem">
+      <div style="background:rgba(0,107,53,0.1);border-radius:8px;padding:0.75rem;border-left:3px solid #4caf50">
+        <div style="font-weight:700;color:#4caf50;margin-bottom:0.3rem">PE-skena</div>
+        <div style="font-size:0.85rem;color:var(--muted)">GrönGul ledare kopplas hit. Alla skyddsjordsledare i anläggningen samlas på PE-skenan.</div>
+      </div>
+      <div style="background:rgba(37,99,235,0.1);border-radius:8px;padding:0.75rem;border-left:3px solid #2563eb">
+        <div style="font-weight:700;color:#60a5fa;margin-bottom:0.3rem">Neutral-skena (N)</div>
+        <div style="font-size:0.85rem;color:var(--muted)">Blå ledare kopplas hit. Nolledaren från varje krets samlas här.</div>
+      </div>
+      <div style="background:rgba(250,204,21,0.08);border-radius:8px;padding:0.75rem;border-left:3px solid var(--primary)">
+        <div style="font-weight:700;color:var(--primary);margin-bottom:0.3rem">DIN-skena</div>
+        <div style="font-size:0.85rem;color:var(--muted)">Metallskena (räls) som säkringar och automatsäkringar snäpps fast på.</div>
+      </div>
+      <div style="background:rgba(186,26,26,0.08);border-radius:8px;padding:0.75rem;border-left:3px solid var(--red)">
+        <div style="font-weight:700;color:var(--red);margin-bottom:0.3rem">Fas-skena (kamskena)</div>
+        <div style="font-size:0.85rem;color:var(--muted)">Bara fas kopplas hit — direkt till säkringarna. Matar underifrån i automatsäkringarna.</div>
+      </div>
+    </div>
+
+    <!-- Fas-skenans mönster -->
+    <div style="margin-top:1rem;background:var(--bg-light);border-radius:8px;padding:0.75rem">
+      <div style="font-weight:700;color:var(--white);margin-bottom:0.6rem;font-size:0.9rem">Fas-skenans koppningsmönster — 1,2,3,1,2,3…</div>
+      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.75rem">Kamskena delar ut faserna i roterande ordning så att lasten fördelas jämnt över L1, L2 och L3.</p>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:0.4rem;text-align:center;font-size:0.8rem;margin-bottom:0.5rem">
+        <div style="background:rgba(239,68,68,0.15);border-radius:6px;padding:0.4rem 0;border:1px solid rgba(239,68,68,0.3);color:#f87171;font-weight:700">L1</div>
+        <div style="background:rgba(250,204,21,0.12);border-radius:6px;padding:0.4rem 0;border:1px solid rgba(250,204,21,0.3);color:var(--primary);font-weight:700">L2</div>
+        <div style="background:rgba(37,99,235,0.12);border-radius:6px;padding:0.4rem 0;border:1px solid rgba(37,99,235,0.3);color:#60a5fa;font-weight:700">L3</div>
+        <div style="background:rgba(239,68,68,0.15);border-radius:6px;padding:0.4rem 0;border:1px solid rgba(239,68,68,0.3);color:#f87171;font-weight:700">L1</div>
+        <div style="background:rgba(250,204,21,0.12);border-radius:6px;padding:0.4rem 0;border:1px solid rgba(250,204,21,0.3);color:var(--primary);font-weight:700">L2</div>
+        <div style="background:rgba(37,99,235,0.12);border-radius:6px;padding:0.4rem 0;border:1px solid rgba(37,99,235,0.3);color:#60a5fa;font-weight:700">L3</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:0.4rem;text-align:center;font-size:0.75rem;color:var(--muted)">
+        <div>Plats 1</div><div>Plats 2</div><div>Plats 3</div><div>Plats 4</div><div>Plats 5</div><div>Plats 6</div>
+      </div>
+      <div style="margin-top:0.6rem;font-size:0.82rem;color:var(--muted)">
+        Varje fas matar <strong style="color:var(--white)">var tredje säkringsplats</strong> — L1→1,4,7… &nbsp; L2→2,5,8… &nbsp; L3→3,6,9…
+      </div>
+    </div>
+  </div>
+
+  <!-- Matningsväg -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>⚡ Matningsväg &amp; mätning</h3>
+    <div style="font-size:0.85rem;background:var(--bg-light);border-radius:8px;padding:0.75rem;font-family:monospace;margin-bottom:0.75rem;line-height:2;text-align:center">
+      Matning &nbsp;→&nbsp; Huvudbrytare &nbsp;→&nbsp; JFB-säkring &nbsp;→&nbsp; Kretsar
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem">
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;font-size:0.85rem;text-align:center">
+        <div style="font-size:1.3rem;margin-bottom:0.3rem">⬇️</div>
+        <strong style="color:var(--white)">Matning underifrån</strong><br>
+        <span style="color:var(--muted)">Fas-skenan matar in i automatsäkringens nedre terminal</span>
+      </div>
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;font-size:0.85rem;text-align:center">
+        <div style="font-size:1.3rem;margin-bottom:0.3rem">⬆️</div>
+        <strong style="color:var(--white)">Fas ut uppifrån</strong><br>
+        <span style="color:var(--muted)">Övre terminalen går ut till t.ex. uttag och belysning</span>
+      </div>
+    </div>
+    <div style="background:rgba(186,26,26,0.07);border-radius:8px;padding:0.75rem;border-left:3px solid var(--red);font-size:0.85rem">
+      <strong style="color:var(--red)">Viktigt:</strong> Vi måste veta var <strong style="color:var(--white)">alla kablar börjar och slutar</strong> i installationen.
+    </div>
+  </div>
+
+  <!-- 4 vs 5 ledare -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>🔢 4-ledare vs 5-ledare</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.75rem">
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;font-size:0.85rem">
+        <div style="font-weight:700;color:var(--muted);text-transform:uppercase;font-size:0.75rem;letter-spacing:.05em;margin-bottom:0.5rem">TN-C — 4 ledare</div>
+        <div style="font-family:monospace;line-height:2">L1 · L2 · L3 · <strong style="color:var(--primary)">PEN</strong></div>
+        <div style="color:var(--muted);margin-top:0.4rem;font-size:0.82rem">PE och N kombinerade i PEN-ledaren</div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;font-size:0.85rem">
+        <div style="font-weight:700;color:var(--muted);text-transform:uppercase;font-size:0.75rem;letter-spacing:.05em;margin-bottom:0.5rem">TN-S — 5 ledare</div>
+        <div style="font-family:monospace;line-height:2">L1 · L2 · L3 · <strong style="color:#60a5fa">N</strong> · <strong style="color:#4caf50">PE</strong></div>
+        <div style="color:var(--muted);margin-top:0.4rem;font-size:0.82rem">N och PE separata — JFB kan installeras</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JFB koppling -->
+  <div class="card">
+    <h3>⚠️ JFB-koppling — Parallellt, INTE serie</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.75rem">
+      <div style="background:rgba(0,107,53,0.08);border-radius:8px;padding:0.75rem;border-left:3px solid #2a7a4b">
+        <div style="font-weight:700;color:#4caf50;margin-bottom:0.4rem">✓ Parallellt (rätt)</div>
+        <div style="font-size:0.85rem;color:var(--muted)">Flera JFBs kopplas parallellt — en per grupp. Varje JFB skyddar sina egna kretsar.</div>
+      </div>
+      <div style="background:rgba(186,26,26,0.07);border-radius:8px;padding:0.75rem;border-left:3px solid var(--red)">
+        <div style="font-weight:700;color:var(--red);margin-bottom:0.4rem">✗ Serie (fel)</div>
+        <div style="font-size:0.85rem;color:var(--muted)">JFBs ska inte staplas i serie — skyddet fungerar inte korrekt och koordinationen störs.</div>
+      </div>
+    </div>
+    <div style="margin-top:0.75rem;font-size:0.85rem;color:var(--muted);background:var(--bg-light);border-radius:8px;padding:0.6rem">
+      <strong style="color:var(--white)">PEN-skruven:</strong> I TN-C delas PEN → N + PE i centralen. JFB installeras <em>efter</em> denna punkt, och ska till <strong style="color:var(--white)">PEN</strong>.
+    </div>
+  </div>
+</section>
+
 <!-- NÄTFORMER -->
 <section class="section" id="natformer">
   <div class="section-header">
@@ -528,7 +659,7 @@
 
   <div class="card">
     <h3>PEN-ledaren & PEN-skruven</h3>
-    <p style="color:var(--muted);font-size:0.9rem">PEN (Protective Earth and Neutral) är en <strong style="color:var(--white)">kombinerad PE- och N-ledare</strong> som används i TN-C-system. Den har grön/gul färg med blå märkning i ändarna.</p>
+    <p style="color:var(--muted);font-size:0.9rem">PEN (Protective Earth and Neutral) är en <strong style="color:var(--white)">kombinerad PE- och N-ledare</strong> som används i TN-C-system. Den har gröngul färg med blå märkning i ändarna.</p>
     <div style="display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:start;margin-top:0.6rem">
       <p style="color:var(--muted);font-size:0.9rem">I elcentralen (t.ex. en <strong style="color:var(--white)">DiAze-central</strong>) ansluts PEN-ledaren till en <strong style="color:var(--white)">PEN-skruv</strong> — en märkt skruvplint som binder ihop PE-skenan och N-skenan. Därifrån dras separata PE- och N-ledare ut till kretsarna.</p>
       <img src="images/DiaZeCentral.jpg" alt="DiAze elcentral med PEN-skruv" class="zoomable" style="width:160px;border-radius:8px;border:1px solid var(--outline)">

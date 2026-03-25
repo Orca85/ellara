@@ -94,6 +94,18 @@
     <div id="ledarfarger-quiz-root"></div>
   </div>
 
+  <!-- SUB-SECTION: Koppla elcentral -->
+  <!--
+  <div class="ovn-sub">
+    <div class="ovn-sub-header">
+      <span class="ovn-sub-icon">🔌</span>
+      <h3 class="ovn-sub-title">Koppla elcentral</h3>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.75rem">Välj kabelfärg, klicka på en terminal (○) och sedan en annan för att dra kabeln. Klicka på en befintlig kabel för att radera den.</p>
+    <div id="wiring-root"></div>
+  </div>
+  -->
+
   <!-- SUB-SECTION: Prov -->
   <div class="ovn-sub">
     <div class="ovn-sub-header">
@@ -118,6 +130,540 @@
 </footer>
 
 <script src="script.js"></script>
+<!-- <script>
+/* === KOPPLA ELCENTRAL (SVG) === */
+(function(){
+  'use strict';
+  const SNAP_R=22, LINE_W=5;
+
+  const COLORS=[
+    {id:'L1', label:'L1 – Brun',    hex:'#8B4513'},
+    {id:'L2', label:'L2 – Svart',   hex:'#1a1a1a'},
+    {id:'L3', label:'L3 – Grå',     hex:'#78909C'},
+    {id:'N',  label:'N – Blå',      hex:'#1565C0'},
+    {id:'PE', label:'PE – GrönGul', hex:'#2e7d32'},
+    {id:'PEN',label:'PEN',          hex:'#558B2F'},
+  ];
+
+  /* ─── SVG-BYGGARE ─── */
+  function normSVG(hasPE){
+    const W=500,H=700;
+    const cc={L1:'#8B4513',L2:'#1a1a1a',L3:'#78909C',N:'#1565C0',PE:'#2e7d32'};
+    const PEx=22,PEw=14,Nx=46,Nw=14,sY=58,sH=580;
+    const mX=85,mY=75,mW=38,mH=215,mG=3,nM=9;
+    const jX=85,jY=358,jW=170,jH=78;
+    const hvX=85,hvY=468,hvW=130,hvH=78;
+    const iX=465,iY0=hasPE?500:525,iStep=27;
+    const inLbls=hasPE?['L1','L2','L3','N','PE']:['L1','L2','L3','N'];
+    const skY=313; // sY+round(sH*0.44)
+    let mcb='';
+    for(let i=0;i<nM;i++){
+      const x=mX+i*(mW+mG),ph=cc[['L1','L2','L3'][i%3]];
+      mcb+=`<rect x="${x}" y="${mY}" width="${mW}" height="${mH}" fill="#e8e8e8" stroke="#aaa" stroke-width="1.5" rx="2"/>
+<rect x="${x+9}" y="${mY+69}" width="${mW-18}" height="78" fill="${ph}" rx="2"/>
+<circle cx="${x+19}" cy="${mY+9}" r="5" fill="#ddd" stroke="#777" stroke-width="1.5"/>
+<circle cx="${x+19}" cy="${mY+mH-9}" r="5" fill="#ddd" stroke="#777" stroke-width="1.5"/>
+<text x="${x+19}" y="${mY+mH-20}" text-anchor="middle" font-size="8" fill="#666" font-family="sans-serif">B16</text>`;
+    }
+    let terms='';
+    inLbls.forEach((l,i)=>{
+      const cy=iY0+i*iStep;
+      terms+=`<line x1="${iX-50}" y1="${cy}" x2="${iX-11}" y2="${cy}" stroke="#ccc" stroke-width="1.5"/>
+<text x="${iX-55}" y="${cy+4}" text-anchor="end" font-size="11" fill="${cc[l]}" font-weight="bold" font-family="sans-serif">${l}</text>
+<circle cx="${iX}" cy="${cy}" r="8" fill="#f5f5f5" stroke="${cc[l]}" stroke-width="2.5"/>`;
+    });
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+<rect width="${W}" height="${H}" fill="#f0f0f0" rx="8"/>
+<rect x="5" y="5" width="${W-10}" height="${H-10}" fill="none" stroke="#ccc" stroke-width="2" rx="6"/>
+<text x="${W/2}" y="34" text-anchor="middle" font-size="14" fill="#333" font-weight="bold" font-family="sans-serif">NORMCENTRAL — ${hasPE?'TN-S (5-ledare)':'TN-C (4-ledare)'}</text>
+<rect x="${PEx}" y="${sY}" width="${PEw}" height="${sH}" fill="#2e7d32" rx="3"/>
+<text x="${PEx+7}" y="${sY-5}" text-anchor="middle" font-size="10" fill="#2e7d32" font-weight="bold" font-family="sans-serif">PE</text>
+<circle cx="${PEx+7}" cy="${skY}" r="7" fill="#f5f5f5" stroke="#2e7d32" stroke-width="2.5"/>
+<rect x="${Nx}" y="${sY}" width="${Nw}" height="${sH}" fill="#1565C0" rx="3"/>
+<text x="${Nx+7}" y="${sY-5}" text-anchor="middle" font-size="10" fill="#1565C0" font-weight="bold" font-family="sans-serif">N</text>
+<circle cx="${Nx+7}" cy="${skY}" r="7" fill="#f5f5f5" stroke="#1565C0" stroke-width="2.5"/>
+<rect x="${mX-5}" y="${mY-5}" width="${nM*(mW+mG)+2}" height="10" fill="#999" rx="2"/>
+${mcb}
+<text x="${mX+Math.round(nM*(mW+mG)/2)}" y="${mY+mH+18}" text-anchor="middle" font-size="10" fill="#999" font-family="sans-serif">Trefasskena</text>
+<circle cx="${mX+Math.round(nM*(mW+mG)/2)}" cy="${mY+9}" r="8" fill="#fff" stroke="#888" stroke-width="2" opacity="0.85"/>
+<rect x="${jX-5}" y="${jY-5}" width="${jW+10}" height="10" fill="#999" rx="2"/>
+<rect x="${jX}" y="${jY}" width="${jW}" height="${jH}" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" rx="4"/>
+<text x="${jX+jW/2}" y="${jY+jH/2-4}" text-anchor="middle" font-size="13" fill="#2e7d32" font-weight="bold" font-family="sans-serif">JFB</text>
+<text x="${jX+jW/2}" y="${jY+jH/2+13}" text-anchor="middle" font-size="9" fill="#555" font-family="sans-serif">Jordfelsbrytare</text>
+<circle cx="${jX+jW/2}" cy="${jY+9}" r="5" fill="#ccc" stroke="#777" stroke-width="1.5"/>
+<circle cx="${jX+jW/2}" cy="${jY+jH-9}" r="5" fill="#ccc" stroke="#777" stroke-width="1.5"/>
+<rect x="${hvX-5}" y="${hvY-5}" width="${hvW+10}" height="10" fill="#999" rx="2"/>
+<rect x="${hvX}" y="${hvY}" width="${hvW}" height="${hvH}" fill="#e3f2fd" stroke="#1565C0" stroke-width="2" rx="4"/>
+<text x="${hvX+hvW/2}" y="${hvY+hvH/2-4}" text-anchor="middle" font-size="12" fill="#1565C0" font-weight="bold" font-family="sans-serif">Huvud-</text>
+<text x="${hvX+hvW/2}" y="${hvY+hvH/2+13}" text-anchor="middle" font-size="12" fill="#1565C0" font-weight="bold" font-family="sans-serif">brytare</text>
+<circle cx="${hvX+hvW/2}" cy="${hvY+9}" r="5" fill="#ccc" stroke="#777" stroke-width="1.5"/>
+<circle cx="${hvX+hvW/2}" cy="${hvY+hvH-9}" r="5" fill="#ccc" stroke="#777" stroke-width="1.5"/>
+<text x="${W-12}" y="${iY0-14}" text-anchor="end" font-size="10" fill="#888" font-family="sans-serif">Inkommande →</text>
+${terms}
+</svg>`;
+  }
+
+  function fullSVG(){
+    const W=700,H=520;
+    const cc={L1:'#8B4513',L2:'#1a1a1a',L3:'#78909C',N:'#1565C0',PE:'#2e7d32'};
+    const PEx=22,PEw=14,Nx=46,Nw=14,sY=55,sH=420,skY=239;
+    const jfbX=105,jfbY=247,jfbW=165,jfbH=78;
+    const hvX=105,hvY=355,hvW=130,hvH=78;
+    const trefX=335,trefY=145,trefW=12,trefH=250;
+    const m3X=355,m3Y=150,m3W=98,m3H=240,m3G=5;
+    const m1X=472,m1Y=150,m1W=18,m1H=240,m1G=3;
+    let mcb3='';
+    ['L1','L2','L3'].forEach((l,i)=>{
+      const x=m3X+i*(m3W+m3G);
+      mcb3+=`<rect x="${x}" y="${m3Y}" width="${m3W}" height="${m3H}" fill="#e8e8e8" stroke="#aaa" stroke-width="1.5" rx="3"/>
+<rect x="${x+15}" y="${m3Y+78}" width="${m3W-30}" height="84" fill="${cc[l]}" rx="2"/>
+<circle cx="${x+m3W/2}" cy="${m3Y+10}" r="6" fill="#ddd" stroke="#777" stroke-width="1.5"/>
+<text x="${x+m3W/2}" y="${m3Y+22}" text-anchor="middle" font-size="9" fill="#666" font-family="sans-serif">3-fas</text>`;
+    });
+    let mcb1='';
+    for(let i=0;i<9;i++){
+      const x=m1X+i*(m1W+m1G),ph=cc[['L1','L2','L3'][i%3]];
+      mcb1+=`<rect x="${x}" y="${m1Y}" width="${m1W}" height="${m1H}" fill="#e8e8e8" stroke="#aaa" stroke-width="1.5" rx="2"/>
+<rect x="${x+4}" y="${m1Y+78}" width="${m1W-8}" height="84" fill="${ph}" rx="1"/>
+<circle cx="${x+m1W/2}" cy="${m1Y+9}" r="4" fill="#ddd" stroke="#777" stroke-width="1.5"/>`;
+    }
+    const m1cx=m1X+Math.round(9*(m1W+m1G)/2); // ~589
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+<rect width="${W}" height="${H}" fill="#f0f0f0" rx="8"/>
+<rect x="5" y="5" width="${W-10}" height="${H-10}" fill="none" stroke="#ccc" stroke-width="2" rx="6"/>
+<text x="${W/2}" y="34" text-anchor="middle" font-size="14" fill="#333" font-weight="bold" font-family="sans-serif">FULLSTÄNDIG NORMCENTRAL</text>
+<rect x="${PEx}" y="${sY}" width="${PEw}" height="${sH}" fill="#2e7d32" rx="3"/>
+<text x="${PEx+7}" y="${sY-5}" text-anchor="middle" font-size="10" fill="#2e7d32" font-weight="bold" font-family="sans-serif">PE</text>
+<circle cx="${PEx+7}" cy="${skY}" r="7" fill="#f5f5f5" stroke="#2e7d32" stroke-width="2.5"/>
+<rect x="${Nx}" y="${sY}" width="${Nw}" height="${sH}" fill="#1565C0" rx="3"/>
+<text x="${Nx+7}" y="${sY-5}" text-anchor="middle" font-size="10" fill="#1565C0" font-weight="bold" font-family="sans-serif">N</text>
+<circle cx="${Nx+7}" cy="${skY}" r="7" fill="#f5f5f5" stroke="#1565C0" stroke-width="2.5"/>
+<circle cx="80" cy="455" r="9" fill="#f5f5f5" stroke="#555" stroke-width="2.5"/>
+<text x="80" y="459" text-anchor="middle" font-size="9" fill="#555" font-weight="bold" font-family="sans-serif">IN</text>
+<text x="80" y="475" text-anchor="middle" font-size="9" fill="#888" font-family="sans-serif">Inkommande</text>
+<rect x="${jfbX-5}" y="${jfbY-5}" width="${jfbW+10}" height="10" fill="#999" rx="2"/>
+<rect x="${jfbX}" y="${jfbY}" width="${jfbW}" height="${jfbH}" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" rx="4"/>
+<text x="${jfbX+jfbW/2}" y="${jfbY+jfbH/2-4}" text-anchor="middle" font-size="13" fill="#2e7d32" font-weight="bold" font-family="sans-serif">JFB</text>
+<text x="${jfbX+jfbW/2}" y="${jfbY+jfbH/2+13}" text-anchor="middle" font-size="9" fill="#555" font-family="sans-serif">Jordfelsbrytare</text>
+<circle cx="${jfbX+jfbW/2}" cy="${jfbY+9}" r="5" fill="#ccc" stroke="#777" stroke-width="1.5"/>
+<circle cx="${jfbX+jfbW/2}" cy="${jfbY+jfbH-9}" r="5" fill="#ccc" stroke="#777" stroke-width="1.5"/>
+<rect x="${hvX-5}" y="${hvY-5}" width="${hvW+10}" height="10" fill="#999" rx="2"/>
+<rect x="${hvX}" y="${hvY}" width="${hvW}" height="${hvH}" fill="#e3f2fd" stroke="#1565C0" stroke-width="2" rx="4"/>
+<text x="${hvX+hvW/2}" y="${hvY+hvH/2-4}" text-anchor="middle" font-size="12" fill="#1565C0" font-weight="bold" font-family="sans-serif">Huvud-</text>
+<text x="${hvX+hvW/2}" y="${hvY+hvH/2+13}" text-anchor="middle" font-size="12" fill="#1565C0" font-weight="bold" font-family="sans-serif">brytare</text>
+<circle cx="${hvX+hvW/2}" cy="${hvY+9}" r="5" fill="#ccc" stroke="#777" stroke-width="1.5"/>
+<circle cx="${hvX+hvW/2}" cy="${hvY+hvH-9}" r="5" fill="#ccc" stroke="#777" stroke-width="1.5"/>
+<rect x="${trefX}" y="${trefY}" width="${trefW}" height="${trefH}" fill="#c62828" rx="3"/>
+<text x="${trefX+trefW/2}" y="${trefY-6}" text-anchor="middle" font-size="9" fill="#c62828" font-weight="bold" font-family="sans-serif">Trefasskena</text>
+<circle cx="${trefX+trefW/2}" cy="${trefY+10}" r="7" fill="#f5f5f5" stroke="#c62828" stroke-width="2.5"/>
+<text x="${m3X+3*(m3W+m3G)/2}" y="${m3Y-8}" text-anchor="middle" font-size="10" fill="#666" font-family="sans-serif">3-fas automatsäkringar</text>
+<rect x="${m3X-5}" y="${m3Y-5}" width="${3*(m3W+m3G)+2}" height="10" fill="#999" rx="2"/>
+${mcb3}
+<text x="${m1X+9*(m1W+m1G)/2}" y="${m1Y-8}" text-anchor="middle" font-size="10" fill="#666" font-family="sans-serif">1-fas automatsäkringar</text>
+<rect x="${m1X-5}" y="${m1Y-5}" width="${9*(m1W+m1G)+2}" height="10" fill="#999" rx="2"/>
+${mcb1}
+<circle cx="${m1cx}" cy="${m1Y+9}" r="7" fill="#f5f5f5" stroke="#888" stroke-width="2.5"/>
+</svg>`;
+  }
+
+  function propSVG(){
+    const W=500,H=700;
+    const cc={L1:'#8B4513',L2:'#1a1a1a',L3:'#78909C',PEN:'#558B2F'};
+    const PEx=22,PEw=14,Nx=46,Nw=14,sY=58,sH=580,skY=400;
+    const bX=85,bY=60,bW=310,bH=230,colW=310/3;
+    const hvX=85,hvY=338,hvW=130,hvH=75;
+    const jfbX=85,jfbY=443,jfbW=165,jfbH=75;
+    const iX=32,iY0=530,iStep=28;
+    let proppor='';
+    ['L1','L2','L3'].forEach((l,i)=>{
+      const cx=bX+i*colW+colW/2;
+      for(let r=0;r<3;r++){
+        const cy=bY+50+r*60;
+        proppor+=`<circle cx="${cx}" cy="${cy}" r="22" fill="#e0e0e0" stroke="#aaa" stroke-width="2"/>
+<circle cx="${cx}" cy="${cy}" r="16" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
+<circle cx="${cx}" cy="${cy}" r="9" fill="${cc[l]}"/>
+<text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="8" fill="white" font-weight="bold" font-family="sans-serif">16A</text>`;
+      }
+      proppor+=`<text x="${cx}" y="${bY+bH-8}" text-anchor="middle" font-size="12" fill="${cc[l]}" font-weight="bold" font-family="sans-serif">${l}</text>
+<circle cx="${cx}" cy="${bY+10}" r="7" fill="#f5f5f5" stroke="#888" stroke-width="2.5"/>`;
+    });
+    let terms='';
+    ['L1','L2','L3','PEN'].forEach((l,i)=>{
+      const cy=iY0+i*iStep;
+      terms+=`<circle cx="${iX}" cy="${cy}" r="8" fill="#f5f5f5" stroke="${cc[l]}" stroke-width="2.5"/>
+<line x1="${iX+8}" y1="${cy}" x2="${iX+55}" y2="${cy}" stroke="#ccc" stroke-width="1.5"/>
+<text x="${iX+60}" y="${cy+4}" font-size="11" fill="${cc[l]}" font-weight="bold" font-family="sans-serif">${l}</text>`;
+    });
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+<rect width="${W}" height="${H}" fill="#f0f0f0" rx="8"/>
+<rect x="5" y="5" width="${W-10}" height="${H-10}" fill="none" stroke="#ccc" stroke-width="2" rx="6"/>
+<text x="${W/2}" y="34" text-anchor="middle" font-size="14" fill="#333" font-weight="bold" font-family="sans-serif">PROPCENTRAL</text>
+<rect x="${PEx}" y="${sY}" width="${PEw}" height="${sH}" fill="#2e7d32" rx="3"/>
+<text x="${PEx+7}" y="${sY-5}" text-anchor="middle" font-size="10" fill="#2e7d32" font-weight="bold" font-family="sans-serif">PE</text>
+<circle cx="${PEx+7}" cy="${skY}" r="7" fill="#f5f5f5" stroke="#2e7d32" stroke-width="2.5"/>
+<rect x="${Nx}" y="${sY}" width="${Nw}" height="${sH}" fill="#1565C0" rx="3"/>
+<text x="${Nx+7}" y="${sY-5}" text-anchor="middle" font-size="10" fill="#1565C0" font-weight="bold" font-family="sans-serif">N</text>
+<circle cx="${Nx+7}" cy="${skY}" r="7" fill="#f5f5f5" stroke="#1565C0" stroke-width="2.5"/>
+<rect x="${bX}" y="${bY}" width="${bW}" height="${bH}" fill="#f8f8f8" stroke="#aaa" stroke-width="2" rx="4"/>
+<text x="${bX+bW/2}" y="${bY+16}" text-anchor="middle" font-size="11" fill="#555" font-family="sans-serif">Propcentral</text>
+<line x1="${bX+colW}" y1="${bY}" x2="${bX+colW}" y2="${bY+bH}" stroke="#ccc" stroke-width="1.5"/>
+<line x1="${bX+colW*2}" y1="${bY}" x2="${bX+colW*2}" y2="${bY+bH}" stroke="#ccc" stroke-width="1.5"/>
+${proppor}
+<rect x="${hvX-5}" y="${hvY-5}" width="${hvW+10}" height="10" fill="#999" rx="2"/>
+<rect x="${hvX}" y="${hvY}" width="${hvW}" height="${hvH}" fill="#e3f2fd" stroke="#1565C0" stroke-width="2" rx="4"/>
+<text x="${hvX+hvW/2}" y="${hvY+hvH/2-4}" text-anchor="middle" font-size="12" fill="#1565C0" font-weight="bold" font-family="sans-serif">Huvud-</text>
+<text x="${hvX+hvW/2}" y="${hvY+hvH/2+13}" text-anchor="middle" font-size="12" fill="#1565C0" font-weight="bold" font-family="sans-serif">brytare</text>
+<circle cx="${hvX+hvW/2}" cy="${hvY+9}" r="5" fill="#ccc" stroke="#777" stroke-width="1.5"/>
+<rect x="${jfbX-5}" y="${jfbY-5}" width="${jfbW+10}" height="10" fill="#999" rx="2"/>
+<rect x="${jfbX}" y="${jfbY}" width="${jfbW}" height="${jfbH}" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" rx="4"/>
+<text x="${jfbX+jfbW/2}" y="${jfbY+jfbH/2-4}" text-anchor="middle" font-size="13" fill="#2e7d32" font-weight="bold" font-family="sans-serif">JFB</text>
+<text x="${jfbX+jfbW/2}" y="${jfbY+jfbH/2+13}" text-anchor="middle" font-size="9" fill="#555" font-family="sans-serif">Jordfelsbrytare</text>
+<text x="${iX+5}" y="${iY0-15}" font-size="10" fill="#888" font-family="sans-serif">Inkommande</text>
+${terms}
+</svg>`;
+  }
+
+  /* ─── UPPGIFTER ─── */
+  // Snap-% beräknade från SVG-koordinaterna ovan
+  // normSVG W=500 H=700: skY=313→44.7%, iX=465→93%
+  //   TN-C iY0=525: L1→75%, L2→78.9%, L3→82.7%, N→86.6%
+  //   TN-S iY0=500: L1→71.4%, L2→75.3%, L3→79.1%, N→83%, PE→86.9%
+  //   MCB top-center: x=269.5/500=53.9%, y=84/700=12%
+  //   JFB center: x=170/500=34%, y=397/700=56.7%
+  //   PE-sk: 29/500=5.8%, 313/700=44.7%
+  //   N-sk:  53/500=10.6%, 44.7%
+  // fullSVG W=700 H=520: skY=239→46%
+  //   IN:(80,455)→(11.4,87.5)  Huvud-center:(170,394)→(24.3,75.8)
+  //   JFB-center:(187,286)→(26.7,55)  Tref-top:(341,155)→(48.7,29.8)
+  //   1-fas-top:(589,159)→(84.1,30.6)  PE-sk:(29,239)→(4.1,46)  N-sk:(53,239)→(7.6,46)
+  // propSVG W=500 H=700: skY=400→57.1%
+  //   L1-top:(137,70)→(27.4,10)  L2-top:(240,70)→(48,10)  L3-top:(343,70)→(68.6,10)
+  //   IN: iX=32: L1→(6.4,75.7) L2→(6.4,79.7) L3→(6.4,83.7) PEN→(6.4,87.7)
+  //   PE-sk:(29,400)→(5.8,57.1)  N-sk:(53,400)→(10.6,57.1)
+
+  const TASKS=[
+    {
+      id:'t1', title:'1 — Normcentral TN-C',
+      svg:normSVG(false), svgW:500, svgH:700,
+      desc:'Koppla inkommande L1, L2, L3 och N till normcentralen med rätt kabelfärg.',
+      pts:[
+        {id:'iL1',label:'L1',  x:93,   y:75},
+        {id:'iL2',label:'L2',  x:93,   y:78.9},
+        {id:'iL3',label:'L3',  x:93,   y:82.7},
+        {id:'iN', label:'N',   x:93,   y:86.6},
+        {id:'top',label:'Fas', x:53.9, y:12},
+        {id:'nsk',label:'N-sk',x:10.6, y:44.7},
+      ],
+      ok:[
+        {a:'iL1',b:'top',c:'L1'},{a:'iL2',b:'top',c:'L2'},
+        {a:'iL3',b:'top',c:'L3'},{a:'iN', b:'nsk',c:'N'},
+      ]
+    },
+    {
+      id:'t2', title:'2 — Normcentral (variant)',
+      svg:normSVG(false), svgW:500, svgH:700,
+      desc:'Koppla igen — faserna matar underifrån i automatsäkringarna, fas ut uppifrån.',
+      pts:[
+        {id:'iL1',label:'L1',  x:93,   y:75},
+        {id:'iL2',label:'L2',  x:93,   y:78.9},
+        {id:'iL3',label:'L3',  x:93,   y:82.7},
+        {id:'iN', label:'N',   x:93,   y:86.6},
+        {id:'top',label:'Fas', x:53.9, y:12},
+        {id:'nsk',label:'N-sk',x:10.6, y:44.7},
+      ],
+      ok:[
+        {a:'iL1',b:'top',c:'L1'},{a:'iL2',b:'top',c:'L2'},
+        {a:'iL3',b:'top',c:'L3'},{a:'iN', b:'nsk',c:'N'},
+      ]
+    },
+    {
+      id:'t3', title:'3 — Med JFB (TN-S)',
+      svg:normSVG(true), svgW:500, svgH:700,
+      desc:'Koppla L1/L2/L3 till JFB, N till N-skenan och PE till PE-skenan.',
+      pts:[
+        {id:'iL1',label:'L1',   x:93,   y:71.4},
+        {id:'iL2',label:'L2',   x:93,   y:75.3},
+        {id:'iL3',label:'L3',   x:93,   y:79.1},
+        {id:'iN', label:'N',    x:93,   y:83},
+        {id:'iPE',label:'PE',   x:93,   y:86.9},
+        {id:'jfb',label:'JFB',  x:34,   y:56.7},
+        {id:'nsk',label:'N-sk', x:10.6, y:44.7},
+        {id:'psk',label:'PE-sk',x:5.8,  y:44.7},
+      ],
+      ok:[
+        {a:'iL1',b:'jfb',c:'L1'},{a:'iL2',b:'jfb',c:'L2'},
+        {a:'iL3',b:'jfb',c:'L3'},{a:'iN', b:'nsk',c:'N'},
+        {a:'iPE',b:'psk',c:'PE'},
+      ]
+    },
+    {
+      id:'t4', title:'4 — Fullständig central',
+      svg:fullSVG(), svgW:700, svgH:520,
+      desc:'Koppla: Inkommande → Huvud → JFB → Trefasskena → 1-fas säkringar. Koppla N och PE till skenorna.',
+      pts:[
+        {id:'inc', label:'In',    x:11.4, y:87.5},
+        {id:'hbr', label:'Huvud', x:24.3, y:75.8},
+        {id:'jfb', label:'JFB',   x:26.7, y:55},
+        {id:'tref',label:'Tref',  x:48.7, y:29.8},
+        {id:'auto',label:'1-fas', x:84.1, y:30.6},
+        {id:'nsk', label:'N-sk',  x:7.6,  y:46},
+        {id:'psk', label:'PE-sk', x:4.1,  y:46},
+      ],
+      ok:[
+        {a:'inc', b:'hbr', c:'L1'},{a:'hbr',b:'jfb', c:'L1'},
+        {a:'jfb', b:'tref',c:'L1'},{a:'tref',b:'auto',c:'L1'},
+        {a:'inc', b:'nsk', c:'N'}, {a:'inc', b:'psk', c:'PE'},
+      ]
+    },
+    {
+      id:'t5', title:'5 — Propcentral',
+      svg:propSVG(), svgW:500, svgH:700,
+      desc:'Koppla L1, L2, L3 till proppcentralen. PEN delas: N-skenan (N) och PE-skenan (PEN).',
+      pts:[
+        {id:'iL1', label:'L1',    x:6.4,  y:75.7},
+        {id:'iL2', label:'L2',    x:6.4,  y:79.7},
+        {id:'iL3', label:'L3',    x:6.4,  y:83.7},
+        {id:'iPEN',label:'PEN',   x:6.4,  y:87.7},
+        {id:'pL1', label:'L1-pr', x:27.4, y:10},
+        {id:'pL2', label:'L2-pr', x:48,   y:10},
+        {id:'pL3', label:'L3-pr', x:68.6, y:10},
+        {id:'nsk', label:'N-sk',  x:10.6, y:57.1},
+        {id:'psk', label:'PE-sk', x:5.8,  y:57.1},
+      ],
+      ok:[
+        {a:'iL1', b:'pL1',c:'L1'},{a:'iL2', b:'pL2',c:'L2'},
+        {a:'iL3', b:'pL3',c:'L3'},{a:'iPEN',b:'nsk',c:'N'},
+        {a:'iPEN',b:'psk',c:'PEN'},
+      ]
+    },
+  ];
+
+  let tIdx=0,cables=[],pending=null,selCol=COLORS[0],mousePos=null;
+  let canv,ctx,loadedImg,cw,ch;
+
+  function ptPx(pt){return{x:pt.x/100*cw,y:pt.y/100*ch};}
+
+  function snapAt(mx,my){
+    for(const pt of TASKS[tIdx].pts){
+      const p=ptPx(pt);
+      if(Math.hypot(mx-p.x,my-p.y)<=SNAP_R+6) return pt.id;
+    }
+    return null;
+  }
+
+  function cableAt(mx,my){
+    const pts=TASKS[tIdx].pts;
+    for(let i=cables.length-1;i>=0;i--){
+      const c=cables[i];
+      const ptA=pts.find(p=>p.id===c.a),ptB=pts.find(p=>p.id===c.b);
+      if(!ptA||!ptB) continue;
+      const pa=ptPx(ptA),pb=ptPx(ptB);
+      const dx=pb.x-pa.x,dy=pb.y-pa.y,l2=dx*dx+dy*dy;
+      if(!l2) continue;
+      const t=Math.max(0,Math.min(1,((mx-pa.x)*dx+(my-pa.y)*dy)/l2));
+      if(Math.hypot(mx-(pa.x+t*dx),my-(pa.y+t*dy))<9) return i;
+    }
+    return -1;
+  }
+
+  function redraw(){
+    if(!loadedImg||!ctx) return;
+    ctx.clearRect(0,0,cw,ch);
+    ctx.drawImage(loadedImg,0,0,cw,ch);
+    for(const c of cables){
+      const pts=TASKS[tIdx].pts;
+      const ptA=pts.find(p=>p.id===c.a),ptB=pts.find(p=>p.id===c.b);
+      if(!ptA||!ptB) continue;
+      const pa=ptPx(ptA),pb=ptPx(ptB);
+      ctx.beginPath();ctx.moveTo(pa.x,pa.y);ctx.lineTo(pb.x,pb.y);
+      ctx.strokeStyle=c.color;ctx.lineWidth=LINE_W;ctx.lineCap='round';
+      ctx.setLineDash([]);ctx.stroke();
+    }
+    if(pending&&mousePos){
+      const pt=TASKS[tIdx].pts.find(p=>p.id===pending);
+      if(pt){
+        const pa=ptPx(pt);
+        ctx.beginPath();ctx.moveTo(pa.x,pa.y);ctx.lineTo(mousePos.x,mousePos.y);
+        ctx.strokeStyle=selCol.hex;ctx.lineWidth=LINE_W;ctx.lineCap='round';
+        ctx.setLineDash([8,5]);ctx.stroke();ctx.setLineDash([]);
+      }
+    }
+    for(const pt of TASKS[tIdx].pts){
+      const p=ptPx(pt),active=pending===pt.id;
+      ctx.beginPath();ctx.arc(p.x,p.y,SNAP_R,0,Math.PI*2);
+      ctx.fillStyle=active?'rgba(255,215,0,0.88)':'rgba(0,0,0,0.55)';
+      ctx.fill();
+      ctx.strokeStyle=active?'#FFD700':'rgba(255,255,255,0.85)';
+      ctx.lineWidth=active?3:2;ctx.stroke();
+      ctx.fillStyle='#fff';ctx.font='bold 9px sans-serif';
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(pt.label,p.x,p.y);
+    }
+  }
+
+  function loadTask(){
+    const task=TASKS[tIdx];
+    const descEl=document.getElementById('wt-desc');
+    const fbEl=document.getElementById('wt-fb');
+    if(descEl) descEl.textContent=task.desc;
+    if(fbEl) fbEl.innerHTML='';
+    cables=[];pending=null;loadedImg=null;mousePos=null;
+    if(!canv) return;
+    const img=new Image();
+    img.onload=()=>{
+      const wrap=canv.parentElement;
+      const maxW=Math.min(wrap?wrap.clientWidth:700,700)||700;
+      cw=maxW;
+      ch=Math.round(maxW*(task.svgH/task.svgW));
+      canv.width=cw;canv.height=ch;
+      canv.style.width=cw+'px';canv.style.height=ch+'px';
+      loadedImg=img;redraw();
+    };
+    img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(task.svg);
+  }
+
+  function handleClick(mx,my){
+    const sid=snapAt(mx,my);
+    if(sid){
+      if(!pending){
+        pending=sid;
+      } else if(pending===sid){
+        pending=null;
+      } else {
+        const exists=cables.some(c=>(c.a===pending&&c.b===sid)||(c.a===sid&&c.b===pending));
+        if(!exists) cables.push({a:pending,b:sid,color:selCol.hex});
+        pending=null;
+        const fb=document.getElementById('wt-fb');
+        if(fb) fb.innerHTML='';
+      }
+    } else {
+      const ci=cableAt(mx,my);
+      if(ci>=0) cables.splice(ci,1);
+      pending=null;
+    }
+    redraw();
+  }
+
+  function check(){
+    const task=TASKS[tIdx];
+    let ok=0, wrong=0;
+    for(const cab of cables){
+      const cid=COLORS.find(c=>c.hex===cab.color)?.id;
+      const match=task.ok.find(cc=>
+        ((cc.a===cab.a&&cc.b===cab.b)||(cc.a===cab.b&&cc.b===cab.a))&&cc.c===cid
+      );
+      match?ok++:wrong++;
+    }
+    const miss=task.ok.length-ok;
+    const fb=document.getElementById('wt-fb');
+    if(!fb) return;
+    if(ok===task.ok.length&&wrong===0){
+      fb.innerHTML=`<div style="color:#4caf50;background:rgba(0,107,53,0.15);border-radius:8px;padding:0.75rem;margin-top:0.75rem">✓ Perfekt! Alla ${ok} kopplingar är rätt.</div>`;
+    } else {
+      fb.innerHTML=`<div style="color:#ef4444;background:rgba(186,26,26,0.1);border-radius:8px;padding:0.75rem;margin-top:0.75rem">
+        ${ok}/${task.ok.length} rätta${wrong?` · ${wrong} felaktig${wrong>1?'a':''}`:''}.
+        ${miss>0?`<br><span style="color:var(--muted);font-size:0.85rem">${miss} koppling${miss>1?'ar':''} saknas.</span>`:''}
+      </div>`;
+    }
+  }
+
+  function init(){
+    const root=document.getElementById('wiring-root');
+    if(!root) return;
+
+    const tabsHtml=TASKS.map((t,i)=>
+      `<button class="wt-tab" data-ti="${i}" style="
+        background:${i===0?'var(--primary)':'var(--bg-light)'};
+        color:${i===0?'#1a1409':'var(--muted)'};
+        border:1px solid ${i===0?'transparent':'var(--outline)'};
+        border-radius:8px;padding:0.4rem 0.75rem;font-size:0.82rem;
+        font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap">${t.title}</button>`
+    ).join('');
+
+    const paletteHtml=COLORS.map((c,i)=>
+      `<button class="wt-cb" data-ci="${c.id}" style="
+        background:${c.hex};color:#fff;
+        border:3px solid ${i===0?'white':'transparent'};
+        border-radius:8px;padding:0.3rem 0.6rem;
+        font-size:0.8rem;font-weight:700;cursor:pointer;font-family:inherit;
+        white-space:nowrap" title="${c.label}">${c.id}</button>`
+    ).join('');
+
+    root.innerHTML=`
+      <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.75rem">${tabsHtml}</div>
+      <div id="wt-desc" style="font-size:0.88rem;color:var(--muted);margin-bottom:0.75rem"></div>
+      <div style="display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.75rem">
+        <span style="font-size:0.8rem;color:var(--muted);font-weight:600">Kabel:</span>
+        ${paletteHtml}
+      </div>
+      <div style="position:relative;display:inline-block;max-width:100%;border-radius:10px;overflow:hidden;border:1px solid var(--outline)">
+        <canvas id="wt-canv" style="display:block;cursor:crosshair;max-width:100%"></canvas>
+      </div>
+      <div style="display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap">
+        <button id="wt-check" style="background:var(--primary);color:#1a1409;border:none;border-radius:8px;padding:0.45rem 1rem;font-weight:700;cursor:pointer;font-family:inherit;font-size:0.88rem">✓ Kontrollera</button>
+        <button id="wt-undo"  style="background:var(--bg-light);color:var(--white);border:1px solid var(--outline);border-radius:8px;padding:0.45rem 0.9rem;font-weight:600;cursor:pointer;font-family:inherit;font-size:0.88rem">↩ Ångra</button>
+        <button id="wt-clear" style="background:var(--bg-light);color:var(--white);border:1px solid var(--outline);border-radius:8px;padding:0.45rem 0.9rem;font-weight:600;cursor:pointer;font-family:inherit;font-size:0.88rem">✕ Rensa</button>
+      </div>
+      <div id="wt-fb"></div>
+    `;
+
+    canv=root.querySelector('#wt-canv');
+    ctx=canv.getContext('2d');
+
+    root.querySelectorAll('.wt-tab').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        tIdx=+btn.dataset.ti;
+        root.querySelectorAll('.wt-tab').forEach(b=>{
+          b.style.background='var(--bg-light)'; b.style.color='var(--muted)'; b.style.borderColor='var(--outline)';
+        });
+        btn.style.background='var(--primary)'; btn.style.color='#1a1409'; btn.style.borderColor='transparent';
+        loadTask();
+      });
+    });
+
+    root.querySelectorAll('.wt-cb').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        selCol=COLORS.find(c=>c.id===btn.dataset.ci);
+        root.querySelectorAll('.wt-cb').forEach(b=>b.style.borderColor='transparent');
+        btn.style.borderColor='white';
+        pending=null; redraw();
+      });
+    });
+
+    document.getElementById('wt-check').addEventListener('click', check);
+    document.getElementById('wt-undo').addEventListener('click',()=>{cables.pop();pending=null;redraw();});
+    document.getElementById('wt-clear').addEventListener('click',()=>{
+      cables=[]; pending=null;
+      document.getElementById('wt-fb').innerHTML='';
+      redraw();
+    });
+
+    canv.addEventListener('click',e=>{
+      const r=canv.getBoundingClientRect();
+      handleClick((e.clientX-r.left)*(cw/r.width),(e.clientY-r.top)*(ch/r.height));
+    });
+    canv.addEventListener('mousemove',e=>{
+      const r=canv.getBoundingClientRect();
+      mousePos={x:(e.clientX-r.left)*(cw/r.width),y:(e.clientY-r.top)*(ch/r.height)};
+      if(pending) redraw();
+    });
+    canv.addEventListener('mouseleave',()=>{mousePos=null; if(pending) redraw();});
+    canv.addEventListener('touchend',e=>{
+      e.preventDefault();
+      const t=e.changedTouches[0], r=canv.getBoundingClientRect();
+      handleClick((t.clientX-r.left)*(cw/r.width),(t.clientY-r.top)*(ch/r.height));
+    },{passive:false});
+
+    loadTask();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',init);
+  } else {
+    setTimeout(init,50);
+  }
+})();
+</script> -->
   </div><!-- /main-content -->
 </div><!-- /layout-wrapper -->
 </body>

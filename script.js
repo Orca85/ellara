@@ -1285,9 +1285,9 @@ function format(n) {
         {
           type: 'mc',
           question: 'Vilken färg har skyddsjordsledaren (PE)?',
-          options: ['Blå', 'Gul', 'Grön/Gul', 'Röd'],
+          options: ['Blå', 'Gul', 'GrönGul', 'Röd'],
           answer: 2,
-          explanation: 'Skyddsjord (PE, Protective Earth) = Grön/Gul. Denna färg är reserverad enbart för skyddsjord och får absolut inte användas till något annat.'
+          explanation: 'Skyddsjord (PE, Protective Earth) = GrönGul. Denna färg är reserverad enbart för skyddsjord och får absolut inte användas till något annat.'
         },
         {
           type: 'mc',
@@ -1799,7 +1799,7 @@ function format(n) {
     { ledare: 'L2',              farg: 'Svart',    ok: ['svart'] },
     { ledare: 'L3',              farg: 'Grå',      ok: ['grå', 'gra'] },
     { ledare: 'Nolla (N)',       farg: 'Blå',      ok: ['blå', 'bla'] },
-    { ledare: 'Skyddsjord (PE)', farg: 'Grön/Gul', ok: ['grön/gul', 'gul/grön', 'grön-gul', 'gul-grön', 'grön gul', 'gul grön'] },
+    { ledare: 'Skyddsjord (PE)', farg: 'GrönGul', ok: ['gröngul', 'gulgrön', 'grön-gul', 'gul-grön', 'grön gul', 'gul grön'] },
   ];
 
   const CABLE_DIM = [
