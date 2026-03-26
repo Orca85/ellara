@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Symboltest – Ellära</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .sym-quiz-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem 1rem;
+      background: var(--bg-light);
+      border-radius: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .sym-quiz-display svg {
+      width: 240px;
+      height: 150px;
+    }
+    .quiz-filter-wrap {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      border: 1px solid var(--outline);
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn.active {
+      background: var(--primary);
+      color: var(--bg);
+      border-color: transparent;
+      font-weight: 600;
+    }
+    .filter-btn:hover:not(.active) {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .quiz-q-display {
+      text-align: center;
+      padding: 1.75rem 1rem 1.5rem;
+      background: var(--bg-light);
+      border-radius: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-q-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .quiz-q-big {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--yellow);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .quiz-q-medium {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .quiz-next-row {
+      margin-top: 1rem;
+      text-align: right;
+    }
+    .quiz-next-btn {
+      background: var(--primary);
+      color: #1a1409;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .quiz-next-btn:hover { opacity: 0.85; }
+    .mc-opt.correct {
+      background: rgba(76, 255, 160, 0.12) !important;
+      border-color: #4CFFA0 !important;
+      color: #4CFFA0 !important;
+    }
+    .mc-opt.wrong {
+      background: rgba(255, 76, 76, 0.12) !important;
+      border-color: #FF4C4C !important;
+      color: #FF4C4C !important;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+    <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link"><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html" class="sidebar-link"><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html" class="sidebar-link"><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html" class="sidebar-link"><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html" class="sidebar-link"><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kabeldim.html" class="sidebar-link"><span class="sidebar-icon">📏</span> Kabeldim.</a>
+      <a href="kretsar.html" class="sidebar-link"><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="trefas.html" class="sidebar-link"><span class="sidebar-icon">🔄</span> Trefas</a>
+      <a href="skydd.html" class="sidebar-link"><span class="sidebar-icon">🛡️</span> Skydd</a>
+      <a href="installation.html" class="sidebar-link"><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html" class="sidebar-link"><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="matematik.html" class="sidebar-link"><span class="sidebar-icon">🔢</span> Matematik</a>
+      <a href="ovningar.html" class="sidebar-link"><span class="sidebar-icon">✏️</span> Övningar</a>
+    </nav>
+  </aside>
+  <div class="main-content">
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" class="search-input"
+      placeholder="Sök — t.ex. Ohms lag, Hz, seriekoppling, säkring…"
+      autocomplete="off" spellcheck="false" />
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<section class="section" id="symboltest">
+  <div class="section-header">
+    <div class="section-icon">🧪</div>
+    <div>
+      <h4>Test</h4>
+      <h2>Symboler &amp; Storheter</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">Testa dina kunskaper om elsymboler, elektriska storheter och enhetsprefix.</p>
+
+  <!-- ===== SYMBOL QUIZ ===== -->
+  <div class="ovn-sub">
+    <div class="ovn-sub-header">
+      <span class="ovn-sub-icon">📐</span>
+      <h3 class="ovn-sub-title">Symboligenkänning</h3>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Vilken symbol visas? Välj rätt namn.</p>
+
+    <div class="quiz-filter-wrap">
+      <button class="filter-btn active" data-sym-cat="båda">Båda kategorier</button>
+      <button class="filter-btn" data-sym-cat="krets">Kretsschema</button>
+      <button class="filter-btn" data-sym-cat="install">Installationssymboler</button>
+    </div>
+
+    <div class="score-board" id="sym-scoreboard">
+      <div class="score-numbers">
+        <span class="score-correct" id="sym-score-correct">0</span>
+        <span class="score-sep">/</span>
+        <span class="score-total" id="sym-score-total">0</span>
+        <span class="score-label">rätt</span>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar" id="sym-score-bar" style="width:0%"></div>
+      </div>
+      <button class="reset-btn" id="sym-reset-btn">↺ Återställ</button>
+    </div>
+
+    <div class="card" style="margin-top:1rem">
+      <div class="sym-quiz-display" id="sym-display"></div>
+      <div class="mc-options" id="sym-opts"></div>
+      <div class="ex-feedback" id="sym-fb" style="margin-top:0.75rem;min-height:2rem"></div>
+      <div class="quiz-next-row">
+        <button class="quiz-next-btn" id="sym-next-btn" style="display:none">Nästa →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== STORHETER QUIZ ===== -->
+  <div class="ovn-sub">
+    <div class="ovn-sub-header">
+      <span class="ovn-sub-icon">⚡</span>
+      <h3 class="ovn-sub-title">Elektriska storheter</h3>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Symbol, storhet och enhet — vad hör ihop?</p>
+
+    <div class="score-board">
+      <div class="score-numbers">
+        <span class="score-correct" id="st-score-correct">0</span>
+        <span class="score-sep">/</span>
+        <span class="score-total" id="st-score-total">0</span>
+        <span class="score-label">rätt</span>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar" id="st-score-bar" style="width:0%"></div>
+      </div>
+      <button class="reset-btn" id="st-reset-btn">↺ Återställ</button>
+    </div>
+
+    <div class="card" style="margin-top:1rem">
+      <div class="quiz-q-display" id="st-display"></div>
+      <div class="mc-options" id="st-opts"></div>
+      <div class="ex-feedback" id="st-fb" style="margin-top:0.75rem;min-height:2rem"></div>
+      <div class="quiz-next-row">
+        <button class="quiz-next-btn" id="st-next-btn" style="display:none">Nästa →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PREFIX QUIZ ===== -->
+  <div class="ovn-sub">
+    <div class="ovn-sub-header">
+      <span class="ovn-sub-icon">📏</span>
+      <h3 class="ovn-sub-title">Enhetsprefix</h3>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Mega, kilo, milli, mikro — vad betyder de?</p>
+
+    <div class="score-board">
+      <div class="score-numbers">
+        <span class="score-correct" id="px-score-correct">0</span>
+        <span class="score-sep">/</span>
+        <span class="score-total" id="px-score-total">0</span>
+        <span class="score-label">rätt</span>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar" id="px-score-bar" style="width:0%"></div>
+      </div>
+      <button class="reset-btn" id="px-reset-btn">↺ Återställ</button>
+    </div>
+
+    <div class="card" style="margin-top:1rem">
+      <div class="quiz-q-display" id="px-display"></div>
+      <div class="mc-options" id="px-opts"></div>
+      <div class="ex-feedback" id="px-fb" style="margin-top:0.75rem;min-height:2rem"></div>
+      <div class="quiz-next-row">
+        <button class="quiz-next-btn" id="px-next-btn" style="display:none">Nästa →</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="script.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ===================================================
+     SYMBOL DATA
+  =================================================== */
+
+  const KRETS = [
+    {
+      name: 'Batteri', sub: 'DC-spänningskälla',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="32" y2="25" stroke="#FFD700" stroke-width="2"/><line x1="32" y1="10" x2="32" y2="40" stroke="#FFD700" stroke-width="2"/><line x1="48" y1="17" x2="48" y2="33" stroke="#FFD700" stroke-width="5"/><line x1="48" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/><text x="28" y="8" font-size="9" font-weight="bold" fill="#4CFFA0">+</text><text x="44" y="8" font-size="9" font-weight="bold" fill="#FF4C4C">−</text></svg>'
+    },
+    {
+      name: 'AC-källa', sub: 'Växelströmskälla',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="19" y2="25" stroke="#FFD700" stroke-width="2"/><circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/><path d="M27,25 C30,25 31,17 34,17 C37,17 38,25 41,25 C44,25 45,33 48,33 C51,33 52,25 53,25" fill="none" stroke="#4ECDC4" stroke-width="1.5"/><line x1="56" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Resistor', sub: 'Motstånd (IEC)',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="17" y2="25" stroke="#FFD700" stroke-width="2"/><rect x="17" y="17" width="46" height="16" stroke="#FFD700" stroke-width="2" fill="none" rx="2"/><line x1="63" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Lampa', sub: 'Glödlampa / last',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="22" y2="25" stroke="#FFD700" stroke-width="2"/><circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/><line x1="29" y1="14" x2="51" y2="36" stroke="#FFD700" stroke-width="2"/><line x1="51" y1="14" x2="29" y2="36" stroke="#FFD700" stroke-width="2"/><line x1="56" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Kondensator', sub: 'Laddningslagring',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="33" y2="25" stroke="#FFD700" stroke-width="2"/><line x1="33" y1="12" x2="33" y2="38" stroke="#FFD700" stroke-width="3"/><line x1="42" y1="12" x2="42" y2="38" stroke="#FFD700" stroke-width="3"/><line x1="42" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Spole', sub: 'Induktor / lindning',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="14" y2="25" stroke="#FFD700" stroke-width="2"/><path d="M14,25 A7,7 0 0,1 28,25" fill="none" stroke="#FFD700" stroke-width="2"/><path d="M28,25 A7,7 0 0,1 42,25" fill="none" stroke="#FFD700" stroke-width="2"/><path d="M42,25 A7,7 0 0,1 56,25" fill="none" stroke="#FFD700" stroke-width="2"/><path d="M56,25 A7,7 0 0,1 66,25" fill="none" stroke="#FFD700" stroke-width="2"/><line x1="66" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Diod', sub: 'Likriktning (A→K)',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="22" y2="25" stroke="#FFD700" stroke-width="2"/><polygon points="22,13 22,37 52,25" stroke="#FFD700" stroke-width="2" fill="rgba(255,215,0,0.1)"/><line x1="52" y1="13" x2="52" y2="37" stroke="#FFD700" stroke-width="2.5"/><line x1="52" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/><text x="29" y="47" font-size="7" fill="#888">A</text><text x="49" y="47" font-size="7" fill="#888">K</text></svg>'
+    },
+    {
+      name: 'NO-brytare', sub: 'Normalöppen kontakt',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="33" x2="24" y2="33" stroke="#FFD700" stroke-width="2"/><circle cx="24" cy="33" r="3" fill="#FFD700"/><circle cx="56" cy="33" r="3" fill="#FFD700"/><line x1="56" y1="33" x2="75" y2="33" stroke="#FFD700" stroke-width="2"/><line x1="24" y1="33" x2="52" y2="14" stroke="#FFD700" stroke-width="2"/><text x="26" y="48" font-size="8" fill="#888">NO</text></svg>'
+    },
+    {
+      name: 'NC-brytare', sub: 'Normalt sluten kontakt',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="33" x2="24" y2="33" stroke="#FFD700" stroke-width="2"/><circle cx="24" cy="33" r="3" fill="#FFD700"/><circle cx="56" cy="33" r="3" fill="#FFD700"/><line x1="56" y1="33" x2="75" y2="33" stroke="#FFD700" stroke-width="2"/><line x1="24" y1="33" x2="56" y2="33" stroke="#FFD700" stroke-width="2"/><line x1="38" y1="40" x2="44" y2="17" stroke="#FFD700" stroke-width="2"/><text x="26" y="48" font-size="8" fill="#888">NC</text></svg>'
+    },
+    {
+      name: 'Säkring', sub: 'Kortslutningsskydd',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="18" y2="25" stroke="#FFD700" stroke-width="2"/><rect x="18" y="17" width="44" height="16" stroke="#FFD700" stroke-width="2" fill="none" rx="3"/><line x1="18" y1="25" x2="62" y2="25" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="4,3"/><line x1="62" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Jord', sub: 'Skydds- och funktionsjord',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="40" y1="5" x2="40" y2="20" stroke="#FFD700" stroke-width="2"/><line x1="20" y1="20" x2="60" y2="20" stroke="#FFD700" stroke-width="2.5"/><line x1="26" y1="28" x2="54" y2="28" stroke="#FFD700" stroke-width="2"/><line x1="32" y1="36" x2="48" y2="36" stroke="#FFD700" stroke-width="1.5"/><line x1="36" y1="43" x2="44" y2="43" stroke="#FFD700" stroke-width="1"/></svg>'
+    },
+    {
+      name: 'Skyddsjord (PE)', sub: 'IEC 60417-5019',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="40" y1="5" x2="40" y2="11" stroke="#FFD700" stroke-width="2"/><circle cx="40" cy="21" r="10" stroke="#FFD700" stroke-width="2" fill="none"/><line x1="40" y1="21" x2="40" y2="25" stroke="#FFD700" stroke-width="2"/><line x1="29" y1="25" x2="51" y2="25" stroke="#FFD700" stroke-width="2.5"/><line x1="32" y1="31" x2="48" y2="31" stroke="#FFD700" stroke-width="2"/><line x1="35" y1="37" x2="45" y2="37" stroke="#FFD700" stroke-width="1.5"/></svg>'
+    },
+    {
+      name: 'Chassijord', sub: 'DC-kretsar · referens mot chassi',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="40" y1="5" x2="40" y2="18" stroke="#FFD700" stroke-width="2"/><line x1="22" y1="18" x2="58" y2="18" stroke="#FFD700" stroke-width="2"/><line x1="25" y1="18" x2="16" y2="38" stroke="#FFD700" stroke-width="2"/><line x1="34" y1="18" x2="25" y2="38" stroke="#FFD700" stroke-width="2"/><line x1="43" y1="18" x2="34" y2="38" stroke="#FFD700" stroke-width="2"/><line x1="52" y1="18" x2="43" y2="38" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Signaljord', sub: 'Elektronik · signalreferenspotential',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="40" y1="5" x2="40" y2="17" stroke="#FFD700" stroke-width="2"/><polygon points="20,17 60,17 40,43" stroke="#FFD700" stroke-width="2" fill="rgba(255,215,0,0.12)"/></svg>'
+    },
+    {
+      name: 'Amperemeter', sub: 'Mäter ström (serie)',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="18" y2="25" stroke="#FFD700" stroke-width="2"/><circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/><text x="40" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#4CFFA0">A</text><line x1="56" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Voltmeter', sub: 'Mäter spänning (parallell)',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="18" y2="25" stroke="#FFD700" stroke-width="2"/><circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/><text x="40" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#FF9B4D">V</text><line x1="56" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Transformator', sub: 'Spänningsomvandling',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="14" y2="25" stroke="#FFD700" stroke-width="2"/><path d="M14,25 A6,6 0 0,1 26,25" fill="none" stroke="#FFD700" stroke-width="2"/><path d="M26,25 A6,6 0 0,1 38,25" fill="none" stroke="#FFD700" stroke-width="2"/><line x1="40" y1="10" x2="40" y2="40" stroke="#aaa" stroke-width="1.5"/><line x1="43" y1="10" x2="43" y2="40" stroke="#aaa" stroke-width="1.5"/><path d="M45,25 A6,6 0 0,0 57,25" fill="none" stroke="#FFD700" stroke-width="2"/><path d="M57,25 A6,6 0 0,0 69,25" fill="none" stroke="#FFD700" stroke-width="2"/><line x1="69" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'LED', sub: 'Lysdiod',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="22" y2="25" stroke="#FFD700" stroke-width="2"/><polygon points="22,13 22,37 50,25" stroke="#FFD700" stroke-width="2" fill="rgba(255,215,0,0.1)"/><line x1="50" y1="13" x2="50" y2="37" stroke="#FFD700" stroke-width="2.5"/><line x1="50" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/><line x1="54" y1="10" x2="62" y2="4" stroke="#4CFFA0" stroke-width="1.5"/><line x1="58" y1="15" x2="68" y2="11" stroke="#4CFFA0" stroke-width="1.5"/><line x1="60" y1="21" x2="71" y2="20" stroke="#4CFFA0" stroke-width="1.5"/></svg>'
+    },
+    {
+      name: 'Motor', sub: 'Elektrisk motor',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="18" y2="25" stroke="#FFD700" stroke-width="2"/><circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/><text x="40" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#77aaff">M</text><line x1="56" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/></svg>'
+    }
+  ];
+
+  const INSTALL = [
+    {
+      name: 'Neutralledare (N)', sub: 'Diagonal med ifylld cirkel i toppen',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="28" x2="72" y2="28" stroke="#6080e0" stroke-width="2.5"/><line x1="35" y1="42" x2="52" y2="10" stroke="#6080e0" stroke-width="2"/><circle cx="52" cy="10" r="5" fill="#e9c176"/></svg>'
+    },
+    {
+      name: 'Skyddsledare (PE)', sub: 'Diagonal med tvärstreck i toppen',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="28" x2="72" y2="28" stroke="#4ade80" stroke-width="2.5"/><line x1="35" y1="42" x2="52" y2="10" stroke="#4ade80" stroke-width="2"/><line x1="44" y1="10" x2="62" y2="10" stroke="#4ade80" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'PEN-ledare', sub: 'Kombinerad skyddsledare och neutralledare',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="28" x2="72" y2="28" stroke="#FFD700" stroke-width="2.5"/><line x1="35" y1="42" x2="53" y2="16" stroke="#FFD700" stroke-width="2"/><circle cx="53" cy="16" r="5" fill="#e9c176"/><line x1="45" y1="9" x2="63" y2="9" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Tre ledare + N + PE', sub: 'Tre fas-diagonaler, N och PE',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="27" x2="75" y2="27" stroke="#ccc" stroke-width="2.5"/><line x1="7" y1="44" x2="21" y2="8" stroke="#ccc" stroke-width="2"/><line x1="19" y1="44" x2="33" y2="8" stroke="#ccc" stroke-width="2"/><line x1="31" y1="44" x2="45" y2="8" stroke="#ccc" stroke-width="2"/><line x1="43" y1="44" x2="57" y2="8" stroke="#6080e0" stroke-width="2"/><circle cx="57" cy="8" r="4" fill="#e9c176"/><line x1="55" y1="44" x2="69" y2="8" stroke="#4ade80" stroke-width="2"/><line x1="62" y1="8" x2="76" y2="8" stroke="#4ade80" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Uppåtgående kabel', sub: 'Kabel till våningen ovan',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="34" x2="36" y2="34" stroke="#FFD700" stroke-width="2.5"/><circle cx="36" cy="34" r="3.5" fill="#e9c176"/><line x1="36" y1="34" x2="65" y2="11" stroke="#FFD700" stroke-width="2"/><polygon points="70,6 62,8 67,13" fill="#FFD700"/></svg>'
+    },
+    {
+      name: 'Nedåtgående kabel', sub: 'Kabel till våningen nedan',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="30" y1="14" x2="72" y2="14" stroke="#FFD700" stroke-width="2.5"/><circle cx="72" cy="14" r="3.5" fill="#e9c176"/><line x1="72" y1="14" x2="52" y2="38" stroke="#FFD700" stroke-width="2"/><polygon points="47,44 49,36 55,38" fill="#FFD700"/></svg>'
+    },
+    {
+      name: 'Kopplingsdosa', sub: 'Allmän symbol för kopplingsdosa',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="25" r="16" stroke="#FFD700" stroke-width="2" fill="none"/></svg>'
+    },
+    {
+      name: 'Lamputtag', sub: 'Armaturuttag',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="6" x2="52" y2="6" stroke="#FFD700" stroke-width="2"/><line x1="52" y1="6" x2="52" y2="16" stroke="#FFD700" stroke-width="2"/><line x1="43" y1="16" x2="61" y2="16" stroke="#FFD700" stroke-width="2"/><path d="M43,27 A9,9 0 0,1 61,27" stroke="#FFD700" stroke-width="2" fill="none"/><text x="52" y="40" text-anchor="middle" font-size="11" fill="#FFD700" font-family="sans-serif">L</text></svg>'
+    },
+    {
+      name: 'Strömst. + Vägguttag', sub: 'Kombination på samma platta',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="9" x2="44" y2="9" stroke="#FFD700" stroke-width="2"/><line x1="44" y1="9" x2="44" y2="19" stroke="#FFD700" stroke-width="2"/><circle cx="44" cy="26" r="8" stroke="#FFD700" stroke-width="2" fill="none"/><line x1="52" y1="26" x2="65" y2="26" stroke="#FFD700" stroke-width="2"/><line x1="65" y1="26" x2="65" y2="38" stroke="#FFD700" stroke-width="2"/><line x1="36" y1="34" x2="52" y2="34" stroke="#FFD700" stroke-width="2"/><path d="M37,42 A7,7 0 0,1 51,42" stroke="#FFD700" stroke-width="2" fill="none"/></svg>'
+    },
+    {
+      name: 'Uttag utan skyddsjord', sub: '2-poligt uttag, ingen PE',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="8" x2="58" y2="8" stroke="#FFD700" stroke-width="2"/><line x1="58" y1="8" x2="58" y2="24" stroke="#FFD700" stroke-width="2"/><path d="M49,32 A9,9 0 0,1 67,32" stroke="#FFD700" stroke-width="2" fill="none"/></svg>'
+    },
+    {
+      name: 'Uttag med skyddsjord', sub: 'Schuko 2P+PE',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="8" x2="58" y2="8" stroke="#FFD700" stroke-width="2"/><line x1="58" y1="8" x2="58" y2="24" stroke="#FFD700" stroke-width="2"/><line x1="49" y1="24" x2="67" y2="24" stroke="#FFD700" stroke-width="2"/><path d="M49,33 A9,9 0 0,1 67,33" stroke="#FFD700" stroke-width="2" fill="none"/></svg>'
+    },
+    {
+      name: 'Strömställare 1P', sub: 'Enpolig kopplare',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="25" r="13" stroke="#FFD700" stroke-width="2" fill="none"/><line x1="45" y1="25" x2="65" y2="25" stroke="#FFD700" stroke-width="2"/><line x1="65" y1="25" x2="65" y2="40" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Kronomkopplare', sub: 'Tidur / timerkoppling',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><circle cx="28" cy="25" r="13" stroke="#FFD700" stroke-width="2" fill="none"/><line x1="41" y1="22" x2="65" y2="22" stroke="#FFD700" stroke-width="2"/><line x1="41" y1="28" x2="65" y2="28" stroke="#FFD700" stroke-width="2"/><line x1="65" y1="15" x2="65" y2="22" stroke="#FFD700" stroke-width="2"/><line x1="65" y1="28" x2="65" y2="35" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Trappomkopplare', sub: '2-vägs kopplare',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="27" y2="25" stroke="#FFD700" stroke-width="2"/><line x1="5" y1="25" x2="5" y2="15" stroke="#FFD700" stroke-width="2"/><circle cx="40" cy="25" r="13" stroke="#FFD700" stroke-width="2" fill="none"/><line x1="53" y1="25" x2="75" y2="25" stroke="#FFD700" stroke-width="2"/><line x1="75" y1="25" x2="75" y2="35" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Korsomkopplare', sub: '4-vägs kopplare',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="25" r="11" stroke="#FFD700" stroke-width="2" fill="none"/><line x1="10" y1="20" x2="29" y2="20" stroke="#FFD700" stroke-width="2"/><line x1="51" y1="20" x2="70" y2="20" stroke="#FFD700" stroke-width="2"/><line x1="10" y1="30" x2="29" y2="30" stroke="#FFD700" stroke-width="2"/><line x1="51" y1="30" x2="70" y2="30" stroke="#FFD700" stroke-width="2"/><line x1="10" y1="13" x2="10" y2="20" stroke="#FFD700" stroke-width="2"/><line x1="10" y1="30" x2="10" y2="37" stroke="#FFD700" stroke-width="2"/><line x1="70" y1="13" x2="70" y2="20" stroke="#FFD700" stroke-width="2"/><line x1="70" y1="30" x2="70" y2="37" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Strömställare 3P', sub: 'Trepolig kopplare',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><circle cx="28" cy="25" r="13" stroke="#FFD700" stroke-width="2" fill="none"/><line x1="41" y1="25" x2="68" y2="25" stroke="#FFD700" stroke-width="2"/><line x1="52" y1="25" x2="52" y2="40" stroke="#FFD700" stroke-width="2"/><line x1="60" y1="25" x2="60" y2="40" stroke="#FFD700" stroke-width="2"/><line x1="68" y1="25" x2="68" y2="40" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Lysrör', sub: 'Fluorescerande armatur',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="25" x2="70" y2="25" stroke="#FFD700" stroke-width="2"/><line x1="10" y1="15" x2="10" y2="35" stroke="#FFD700" stroke-width="2"/><line x1="70" y1="15" x2="70" y2="35" stroke="#FFD700" stroke-width="2"/></svg>'
+    },
+    {
+      name: 'Ljuspunkt', sub: 'Glödlampa / spotlight i planritning',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="18" y1="10" x2="62" y2="40" stroke="#FFD700" stroke-width="2.5"/><line x1="62" y1="10" x2="18" y2="40" stroke="#FFD700" stroke-width="2.5"/></svg>'
+    },
+    {
+      name: 'Elektriskt lås', sub: 'Dörrlås med elektrisk funktion',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="10" width="50" height="30" stroke="#FFD700" stroke-width="2" fill="none"/><path d="M16,28 A7,7 0 0,1 30,28" stroke="#FFD700" stroke-width="2" fill="none"/><path d="M30,28 A7,7 0 0,1 44,28" stroke="#FFD700" stroke-width="2" fill="none"/><polygon points="55,11 75,40 55,40" stroke="#FFD700" stroke-width="2" fill="none"/></svg>'
+    },
+    {
+      name: 'Teleuttag', sub: 'Uttag för telekommunikation',
+      svg: '<svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="12" x2="55" y2="12" stroke="#FFD700" stroke-width="2"/><line x1="55" y1="12" x2="55" y2="28" stroke="#FFD700" stroke-width="2"/><line x1="42" y1="28" x2="68" y2="28" stroke="#FFD700" stroke-width="2"/><line x1="42" y1="28" x2="42" y2="40" stroke="#FFD700" stroke-width="2"/><line x1="68" y1="28" x2="68" y2="40" stroke="#FFD700" stroke-width="2"/></svg>'
+    }
+  ];
+
+  /* ===================================================
+     STORHETER DATA
+  =================================================== */
+  const STORHETER = [
+    { sym: 'U',  name: 'Spänning',        unit: 'Volt',           unitSym: 'V'         },
+    { sym: 'I',  name: 'Ström',           unit: 'Ampere',         unitSym: 'A'         },
+    { sym: 'R',  name: 'Resistans',       unit: 'Ohm',            unitSym: 'Ω'         },
+    { sym: 'P',  name: 'Effekt',          unit: 'Watt',           unitSym: 'W'         },
+    { sym: 'f',  name: 'Frekvens',        unit: 'Hertz',          unitSym: 'Hz'        },
+    { sym: 'Q',  name: 'Laddning',        unit: 'Coulomb',        unitSym: 'C'         },
+    { sym: 'ρ',  name: 'Resistivitet',    unit: 'Ohm·mm²/m',      unitSym: 'Ω·mm²/m'  },
+    { sym: 'L',  name: 'Längd',           unit: 'Meter',          unitSym: 'm'         },
+    { sym: 'A',  name: 'Tvärsnittsarea',  unit: 'Kvadratmillimeter', unitSym: 'mm²'   },
+  ];
+
+  /* ===================================================
+     ENHETSPREFIX DATA
+  =================================================== */
+  const PREFIXES = [
+    { name: 'Mega',  sym: 'M', factorText: '× 1 000 000 (10⁶)',  example: '1 MΩ = 1 000 000 Ω' },
+    { name: 'Kilo',  sym: 'k', factorText: '× 1 000 (10³)',       example: '1 kV = 1 000 V'      },
+    { name: 'Milli', sym: 'm', factorText: '× 0,001 (10⁻³)',      example: '1 mA = 0,001 A'      },
+    { name: 'Mikro', sym: 'μ', factorText: '× 0,000001 (10⁻⁶)',   example: '100 μF'              },
+  ];
+
+  /* ===================================================
+     HELPERS
+  =================================================== */
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function updateScore(correctId, totalId, barId, correct, total) {
+    document.getElementById(correctId).textContent = correct;
+    document.getElementById(totalId).textContent = total;
+    const pct = total > 0 ? (correct / total * 100) : 0;
+    document.getElementById(barId).style.width = pct + '%';
+  }
+
+  function renderMCOptions(optsEl, options, onAnswer) {
+    optsEl.innerHTML = '';
+    const letters = ['A', 'B', 'C', 'D'];
+    options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'mc-opt';
+      btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+      btn.addEventListener('click', () => onAnswer(i, btn));
+      optsEl.appendChild(btn);
+    });
+  }
+
+  function lockOptions(optsEl, correctIdx) {
+    Array.from(optsEl.children).forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === correctIdx) btn.classList.add('correct');
+    });
+  }
+
+  /* ===================================================
+     SYMBOL QUIZ
+  =================================================== */
+  let symCat = 'båda';
+  let symDeck = [];
+  let symCorrect = 0, symTotal = 0;
+  let symAnswered = false;
+  let symCurrent = null;
+
+  function symPool() {
+    if (symCat === 'krets')   return KRETS;
+    if (symCat === 'install') return INSTALL;
+    return [...KRETS, ...INSTALL];
+  }
+
+  function symNext() {
+    const pool = symPool();
+    if (symDeck.length === 0) symDeck = shuffle([...pool]);
+    const sym = symDeck.pop();
+
+    // pick 3 wrong options
+    const wrongs = shuffle(pool.filter(s => s.name !== sym.name)).slice(0, 3);
+    const opts = shuffle([sym, ...wrongs]);
+    const correctIdx = opts.indexOf(sym);
+    symCurrent = { sym, opts, correctIdx };
+    symAnswered = false;
+
+    // render display
+    document.getElementById('sym-display').innerHTML = sym.svg;
+
+    // render options
+    renderMCOptions(
+      document.getElementById('sym-opts'),
+      opts.map(o => o.name),
+      (i, btn) => {
+        if (symAnswered) return;
+        symAnswered = true;
+        symTotal++;
+        const correct = i === symCurrent.correctIdx;
+        if (correct) symCorrect++;
+        if (!correct) btn.classList.add('wrong');
+        lockOptions(document.getElementById('sym-opts'), symCurrent.correctIdx);
+        const fb = document.getElementById('sym-fb');
+        if (correct) {
+          fb.innerHTML = '<span style="color:#4CFFA0;font-weight:600">✓ Rätt!</span>  <span style="color:var(--muted)">' + symCurrent.sym.sub + '</span>';
+        } else {
+          fb.innerHTML = '<span style="color:#FF4C4C;font-weight:600">✗ Fel.</span>  Rätt svar: <strong>' + symCurrent.sym.name + '</strong> — <span style="color:var(--muted)">' + symCurrent.sym.sub + '</span>';
+        }
+        document.getElementById('sym-next-btn').style.display = 'inline-block';
+        updateScore('sym-score-correct', 'sym-score-total', 'sym-score-bar', symCorrect, symTotal);
+      }
+    );
+
+    document.getElementById('sym-fb').innerHTML = '';
+    document.getElementById('sym-next-btn').style.display = 'none';
+  }
+
+  /* ===================================================
+     STORHETER QUIZ
+  =================================================== */
+  let stCorrect = 0, stTotal = 0;
+  let stAnswered = false;
+  let stCurrent = null;
+
+  function stNext() {
+    const st = STORHETER[Math.floor(Math.random() * STORHETER.length)];
+    const qtype = Math.floor(Math.random() * 3);
+    let displayHtml, options, correctAnswer, feedbackHtml;
+
+    if (qtype === 0) {
+      // Symbol → name
+      displayHtml = '<span class="quiz-q-label">Vilken storhet betecknas med symbolen?</span><span class="quiz-q-big">' + st.sym + '</span>';
+      const wrongs = shuffle(STORHETER.filter(s => s.name !== st.name)).slice(0, 3).map(s => s.name);
+      options = shuffle([st.name, ...wrongs]);
+      correctAnswer = st.name;
+      feedbackHtml = '<strong>' + st.sym + '</strong> = ' + st.name + ' — enhet: ' + st.unit + ' (' + st.unitSym + ')';
+    } else if (qtype === 1) {
+      // Name → unit
+      displayHtml = '<span class="quiz-q-label">Vad är enheten för?</span><span class="quiz-q-medium">' + st.name + '</span>';
+      const others = STORHETER.filter(s => s.unit !== st.unit);
+      const wrongs = shuffle(others).slice(0, 3).map(s => s.unit);
+      options = shuffle([st.unit, ...wrongs]);
+      correctAnswer = st.unit;
+      feedbackHtml = st.name + ' mäts i <strong>' + st.unit + '</strong> (' + st.unitSym + '), symboliseras med ' + st.sym;
+    } else {
+      // Name → unit symbol
+      displayHtml = '<span class="quiz-q-label">Vilket enhetstecken används för?</span><span class="quiz-q-medium">' + st.name + '</span>';
+      const others = STORHETER.filter(s => s.unitSym !== st.unitSym);
+      const wrongs = shuffle(others).slice(0, 3).map(s => s.unitSym);
+      options = shuffle([st.unitSym, ...wrongs]);
+      correctAnswer = st.unitSym;
+      feedbackHtml = st.name + ' har enhetstecknet <strong>' + st.unitSym + '</strong> (' + st.unit + ')';
+    }
+
+    stCurrent = { correctAnswer, options, feedbackHtml };
+    stAnswered = false;
+
+    document.getElementById('st-display').innerHTML = displayHtml;
+    document.getElementById('st-fb').innerHTML = '';
+    document.getElementById('st-next-btn').style.display = 'none';
+
+    const correctIdx = options.indexOf(correctAnswer);
+    renderMCOptions(
+      document.getElementById('st-opts'),
+      options,
+      (i, btn) => {
+        if (stAnswered) return;
+        stAnswered = true;
+        stTotal++;
+        const correct = i === correctIdx;
+        if (correct) stCorrect++;
+        if (!correct) btn.classList.add('wrong');
+        lockOptions(document.getElementById('st-opts'), correctIdx);
+        const fb = document.getElementById('st-fb');
+        if (correct) {
+          fb.innerHTML = '<span style="color:#4CFFA0;font-weight:600">✓ Rätt!</span>  <span style="color:var(--muted)">' + stCurrent.feedbackHtml + '</span>';
+        } else {
+          fb.innerHTML = '<span style="color:#FF4C4C;font-weight:600">✗ Fel.</span>  ' + stCurrent.feedbackHtml;
+        }
+        document.getElementById('st-next-btn').style.display = 'inline-block';
+        updateScore('st-score-correct', 'st-score-total', 'st-score-bar', stCorrect, stTotal);
+      }
+    );
+  }
+
+  /* ===================================================
+     PREFIX QUIZ
+  =================================================== */
+  let pxCorrect = 0, pxTotal = 0;
+  let pxAnswered = false;
+  let pxCurrent = null;
+
+  function pxNext() {
+    const px = PREFIXES[Math.floor(Math.random() * PREFIXES.length)];
+    const others = PREFIXES.filter(p => p.name !== px.name);
+    const qtype = Math.floor(Math.random() * 3);
+    let displayHtml, options, correctAnswer, feedbackHtml;
+
+    if (qtype === 0) {
+      // Name → factor
+      displayHtml = '<span class="quiz-q-label">Vad är faktorn för prefixet?</span><span class="quiz-q-big">' + px.name + '</span>';
+      options = shuffle([px.factorText, ...others.map(p => p.factorText)]);
+      correctAnswer = px.factorText;
+      feedbackHtml = px.name + ' (' + px.sym + ') = ' + px.factorText + ' — ex: ' + px.example;
+    } else if (qtype === 1) {
+      // Symbol → name
+      displayHtml = '<span class="quiz-q-label">Vad heter prefixet?</span><span class="quiz-q-big">' + px.sym + '</span>';
+      options = shuffle([px.name, ...others.map(p => p.name)]);
+      correctAnswer = px.name;
+      feedbackHtml = '\'' + px.sym + '\' = ' + px.name + ', faktor: ' + px.factorText;
+    } else {
+      // Factor → name
+      displayHtml = '<span class="quiz-q-label">Vilket prefix har faktorn?</span><span class="quiz-q-medium" style="color:var(--yellow)">' + px.factorText + '</span>';
+      options = shuffle([px.name, ...others.map(p => p.name)]);
+      correctAnswer = px.name;
+      feedbackHtml = px.factorText + ' = prefixet <strong>' + px.name + '</strong> (' + px.sym + ') — ex: ' + px.example;
+    }
+
+    pxCurrent = { correctAnswer, options, feedbackHtml };
+    pxAnswered = false;
+
+    document.getElementById('px-display').innerHTML = displayHtml;
+    document.getElementById('px-fb').innerHTML = '';
+    document.getElementById('px-next-btn').style.display = 'none';
+
+    const correctIdx = options.indexOf(correctAnswer);
+    renderMCOptions(
+      document.getElementById('px-opts'),
+      options,
+      (i, btn) => {
+        if (pxAnswered) return;
+        pxAnswered = true;
+        pxTotal++;
+        const correct = i === correctIdx;
+        if (correct) pxCorrect++;
+        if (!correct) btn.classList.add('wrong');
+        lockOptions(document.getElementById('px-opts'), correctIdx);
+        const fb = document.getElementById('px-fb');
+        if (correct) {
+          fb.innerHTML = '<span style="color:#4CFFA0;font-weight:600">✓ Rätt!</span>  <span style="color:var(--muted)">' + pxCurrent.feedbackHtml + '</span>';
+        } else {
+          fb.innerHTML = '<span style="color:#FF4C4C;font-weight:600">✗ Fel.</span>  ' + pxCurrent.feedbackHtml;
+        }
+        document.getElementById('px-next-btn').style.display = 'inline-block';
+        updateScore('px-score-correct', 'px-score-total', 'px-score-bar', pxCorrect, pxTotal);
+      }
+    );
+  }
+
+  /* ===================================================
+     INIT
+  =================================================== */
+  document.addEventListener('DOMContentLoaded', function () {
+    // Category filter
+    document.querySelectorAll('[data-sym-cat]').forEach(btn => {
+      btn.addEventListener('click', function () {
+        symCat = this.dataset.symCat;
+        symDeck = [];
+        document.querySelectorAll('[data-sym-cat]').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        symNext();
+      });
+    });
+
+    // Next buttons
+    document.getElementById('sym-next-btn').addEventListener('click', symNext);
+    document.getElementById('st-next-btn').addEventListener('click', stNext);
+    document.getElementById('px-next-btn').addEventListener('click', pxNext);
+
+    // Reset buttons
+    document.getElementById('sym-reset-btn').addEventListener('click', function () {
+      symCorrect = 0; symTotal = 0; symDeck = [];
+      updateScore('sym-score-correct', 'sym-score-total', 'sym-score-bar', 0, 0);
+      symNext();
+    });
+    document.getElementById('st-reset-btn').addEventListener('click', function () {
+      stCorrect = 0; stTotal = 0;
+      updateScore('st-score-correct', 'st-score-total', 'st-score-bar', 0, 0);
+      stNext();
+    });
+    document.getElementById('px-reset-btn').addEventListener('click', function () {
+      pxCorrect = 0; pxTotal = 0;
+      updateScore('px-score-correct', 'px-score-total', 'px-score-bar', 0, 0);
+      pxNext();
+    });
+
+    // Start all quizzes
+    symNext();
+    stNext();
+    pxNext();
+  });
+
+})();
+</script>
+  </div><!-- /main-content -->
+</div><!-- /layout-wrapper -->
+</body>
+</html>

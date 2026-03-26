@@ -550,6 +550,27 @@ body.light .card { border-color: transparent; }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
+  align-items: stretch;
+}
+
+.card-grid > .card {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Center diagrams and SVGs with max-width inside cards */
+svg[style*="max-width"], img[style*="max-width"] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Inline grid-containers (new sections) */
+[style*="display:grid"] > .card {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 /* === ATOM ILLUSTRATION === */

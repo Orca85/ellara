@@ -86,6 +86,30 @@
     </div>
   </div>
 
+  <!-- 1b. AC-storheter -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>🌀 AC-storheter &amp; komponenter</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Storheter som används i växelströmskretsar med spolar och kondensatorer.</p>
+    <div class="legend-table-wrap">
+      <table class="legend-table">
+        <thead><tr><th>Tecken</th><th>Storhet</th><th>Enhet</th><th>Enhetstecken</th><th>Förklaring</th></tr></thead>
+        <tbody>
+          <tr><td class="lt-sym" style="color:var(--yellow)">E</td><td>EMK – Elektromotorisk kraft</td><td>Volt</td><td class="lt-unit">V</td><td>Spänning som induceras när ledare och magnetfält rör sig relativt varandra. Grunden till generatorer och motorer.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--teal)">Z</td><td>Impedans</td><td>Ohm</td><td class="lt-unit">Ω</td><td>Totalt motstånd i en AC-krets. Z = √(R² + X²). Inkluderar resistans och reaktans.</td></tr>
+          <tr><td class="lt-sym" style="color:#C0A0FF">X<sub>L</sub></td><td>Induktiv reaktans</td><td>Ohm</td><td class="lt-unit">Ω</td><td>Spolens motstånd mot växelström. X<sub>L</sub> = 2·π·f·L. Ökar med frekvensen.</td></tr>
+          <tr><td class="lt-sym" style="color:#C0A0FF">X<sub>C</sub></td><td>Kapacitiv reaktans</td><td>Ohm</td><td class="lt-unit">Ω</td><td>Kondensatorns motstånd mot växelström. X<sub>C</sub> = 1/(2·π·f·C). Minskar med frekvensen.</td></tr>
+          <tr><td class="lt-sym" style="color:#FF9B4D">ω</td><td>Vinkelfrekvens</td><td>Radians per sekund</td><td class="lt-unit">rad/s</td><td>ω = 2·π·f. Vid 50 Hz: ω ≈ 314 rad/s. Används som kortform i formler.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--teal)">L</td><td>Induktans (spole)</td><td>Henry</td><td class="lt-unit">H</td><td>Spolens förmåga att lagra energi i magnetfält. OBS: L används också för Längd i R = ρL/A.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--lime)">C</td><td>Kapacitans (kondensator)</td><td>Farad</td><td class="lt-unit">F / μF</td><td>Kondensatorns förmåga att lagra elektrisk laddning. Ofta i mikrofarad (μF).</td></tr>
+          <tr><td class="lt-sym" style="color:#4caf50">P</td><td>Aktiv effekt</td><td>Watt</td><td class="lt-unit">W</td><td>Effekt som utför verkligt arbete. P = U · I · cos φ.</td></tr>
+          <tr><td class="lt-sym" style="color:#d97706">Q</td><td>Reaktiv effekt</td><td>Voltampere reaktiv</td><td class="lt-unit">VAr</td><td>Effekt som pendlar i kretsen utan att göra arbete. Skapas av spolar och kondensatorer. OBS: Q används också för elektrisk laddning (Coulomb).</td></tr>
+          <tr><td class="lt-sym" style="color:var(--primary)">S</td><td>Skenbar effekt</td><td>Voltampere</td><td class="lt-unit">VA</td><td>Total effekt elnätet måste leverera. S = √(P² + Q²) = U · I. Dimensionerar kablar och transformatorer.</td></tr>
+          <tr><td class="lt-sym" style="color:var(--muted)">cos φ</td><td>Effektfaktor</td><td>—</td><td class="lt-unit">–</td><td>Andel av skenbar effekt som är aktiv. cos φ = P/S. Värde mellan 0 och 1. Perfekt = 1.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <!-- 2. Materialegenskaper -->
   <div class="card" style="margin-bottom:1.5rem">
     <h3>🔩 Materialegenskaper &amp; geometri</h3>

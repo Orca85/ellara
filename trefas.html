@@ -63,6 +63,11 @@
       <a href="#osymmetrisk" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⚠️ Osymmetriska trefastlaster</a>
       <a href="#neutralledaren" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">➖ Neutralledaren</a>
       <a href="#generator" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔁 Generatorn &amp; Sinusspänning</a>
+      <a href="#emk" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⚡ EMK &amp; Mot-EMK</a>
+      <a href="#spole" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🌀 Spole &amp; Induktiv reaktans</a>
+      <a href="#kondensator" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⊣⊢ Kondensator &amp; Kapacitiv reaktans</a>
+      <a href="#fasforskjutning" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">〰️ Fasförskjutning</a>
+      <a href="#effekttyper" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">📊 Effekttyper P, Q &amp; S</a>
     </div>
   </div>
 </section>
@@ -88,7 +93,7 @@
     </ul>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
     <div class="card">
       <h3 style="font-size:1rem;margin-bottom:0.5rem">🔁 Fasströmmar</h3>
       <p style="color:var(--muted);font-size:0.9rem">I<sub>L1</sub> = I<sub>L2</sub> = I<sub>L3</sub><br>Alla lika stora → summan = 0</p>
@@ -258,7 +263,7 @@
     </ul>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
     <div class="card">
       <h3 style="font-size:1rem;margin-bottom:0.5rem">⚡ Fasströmmar</h3>
       <p style="color:var(--muted);font-size:0.9rem">I<sub>L1</sub> ≠ I<sub>L2</sub> ≠ I<sub>L3</sub><br>Olika stora → summan ≠ 0</p>
@@ -362,7 +367,7 @@
     </ul>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
     <div class="card">
       <h3 style="font-size:1rem;margin-bottom:0.5rem">Y-koppling</h3>
       <p style="color:var(--muted);font-size:0.9rem">Har neutralpunkt — neutralledaren kan anslutas. Möjliggör både 230 V (fas–noll) och 400 V (fas–fas).</p>
@@ -505,7 +510,7 @@
   </div>
   <p style="color:var(--muted);margin-bottom:2rem">Växelström skapas av generatorer som snurrar i ett magnetfält. Resultatet är en sinusformad spänning med en frekvens av 50 Hz i Sverige.</p>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
     <div class="card">
       <h3 style="font-size:1rem;margin-bottom:0.5rem">🔩 Stator</h3>
       <p style="color:var(--muted);font-size:0.9rem">Den <strong style="color:var(--white)">stationära</strong> delen av generatorn — innehåller lindningarna för de tre faserna (L1, L2, L3). Magnettfältet inducerar spänning i lindningarna.</p>
@@ -522,7 +527,7 @@
 
   <div class="card" style="margin-bottom:1.5rem">
     <h3>Frekvens &amp; Period</h3>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-top:0.75rem">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:0.75rem">
       <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;text-align:center">
         <div style="font-size:1.5rem;font-weight:800;color:var(--primary)">50 Hz</div>
         <div style="font-size:0.85rem;color:var(--muted);margin-top:0.3rem">Frekvens — 50 gånger per sekund svänger spänningen</div>
@@ -541,7 +546,7 @@
   <div class="card" style="margin-bottom:1.5rem">
     <h3>Spänningsvärden – vad betyder 230 V?</h3>
     <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Sinusvågan varierar hela tiden — 230 V är det <em>effektiva värdet</em> (RMS), inte toppvärdet.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.75rem;margin-bottom:1rem">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;margin-bottom:1rem">
       <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem">
         <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.3rem">Effektivt värde (RMS)</div>
         <div style="font-weight:800;color:var(--primary);font-size:1.2rem">230 V</div>
@@ -572,7 +577,7 @@
   <div class="card">
     <h3>Sinusformad spänning</h3>
     <div style="overflow-x:auto;margin-top:0.75rem">
-      <svg viewBox="0 0 500 200" style="max-width:500px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sinusformad spänning – en period">
+      <svg viewBox="0 0 500 200" style="max-width:500px;width:100%;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sinusformad spänning – en period">
         <rect width="500" height="200" rx="8" fill="#ffffff"/>
         <!-- Grid lines -->
         <line x1="40" y1="100" x2="480" y2="100" stroke="#e5e7eb" stroke-width="1"/>
@@ -611,6 +616,361 @@
         <!-- Label 50Hz -->
         <text x="400" y="25" font-family="sans-serif" font-size="10" fill="#059669" font-weight="700">f = 50 Hz</text>
       </svg>
+    </div>
+  </div>
+</section>
+
+<!-- EMK & MOT-EMK -->
+<section class="section" id="emk">
+  <div class="section-header">
+    <div class="section-icon">⚡</div>
+    <div>
+      <h4>Avsnitt 5e</h4>
+      <h2>EMK &amp; Mot-EMK</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">EMK är spänningen som uppstår när en ledare och ett magnetfält rör sig i förhållande till varandra. Mot-EMK är det som skyddar en motor från att brinna upp.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem">
+    <div class="card">
+      <h3>⚡ EMK – Elektromotorisk kraft</h3>
+      <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem">Den spänning som <strong style="color:var(--white)">induceras</strong> när en ledare rör sig genom ett magnetfält, eller när ett magnetfält rör sig förbi en ledare.</p>
+      <p style="color:var(--muted);font-size:0.9rem;margin-top:0.75rem">Det är precis så en generator fungerar — rotorn snurrar, magnetfältet passerar lindningarna, och spänning uppstår.</p>
+    </div>
+    <div class="card">
+      <h3>🔄 Mot-EMK</h3>
+      <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem">När en motor snurrar skapar motorns egna lindningar en spänning som <strong style="color:var(--white)">går emot</strong> den spänning vi matar in. Det är ett elektriskt motstånd som hindrar strömmen från att bli oändligt stor.</p>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.85rem;margin-top:0.75rem;font-size:0.85rem;color:var(--muted)">
+        <strong style="color:var(--white)">Utan mot-EMK</strong> skulle motorn brinna upp direkt vid start — strömmen skulle bli enorm.
+      </div>
+    </div>
+  </div>
+
+  <!-- Fältbegrepp -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Fältbegrepp</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Magnetiskt fält</div>
+        <p style="color:var(--muted);font-size:0.88rem">Skapas av permanenta magneter eller av ström som flödar genom en ledare.</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Elektriskt fält</div>
+        <p style="color:var(--muted);font-size:0.88rem">Uppstår kring laddade föremål — dvs kring spänning.</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Elektromagnetiskt fält</div>
+        <p style="color:var(--muted);font-size:0.88rem">I en växelströmsmotor växlar fältet riktning <strong style="color:var(--white)">50 gånger per sekund</strong>. Det är detta växlande fält som gör att energi kan föras över utan att delarna rör vid varandra — <strong style="color:var(--primary)">induktion</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Varför måste vi minska fasförskjutning?</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem">Spolar (t.ex. i motorer) gör att strömmen <strong style="color:var(--white)">släpar efter</strong> spänningen. Det skapar mycket <strong style="color:var(--primary)">reaktiv effekt (Q)</strong> som belastar elnätet i onödan utan att göra nyttigt arbete.</p>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:0.75rem"><strong style="color:var(--white)">Lösning:</strong> En kondensator används för att motverka spolen. En spole får strömmen att sakta ner, medan en kondensator får den att skynda på — tillsammans tar de ut varandra, och vi får en bättre <strong style="color:var(--primary)">effektfaktor (cos φ)</strong>.</p>
+    <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.7rem 1rem;font-size:0.88rem">Spole → Ström <strong style="color:var(--white)">efter</strong> spänningen</div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.7rem 1rem;font-size:0.88rem">Kondensator → Ström <strong style="color:var(--white)">före</strong> spänningen</div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.7rem 1rem;font-size:0.88rem">Spole + Kondensator → <strong style="color:var(--primary)">balans</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPOLE -->
+<section class="section" id="spole">
+  <div class="section-header">
+    <div class="section-icon">🌀</div>
+    <div>
+      <h4>Avsnitt 5f</h4>
+      <h2>Spole &amp; Induktiv reaktans</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">En spole motverkar förändringar i ström. Ju högre frekvens eller induktans, desto större motstånd (reaktans) erbjuder spolen.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem">
+    <div class="card" style="text-align:center">
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.5rem">Symbol</div>
+      <svg viewBox="0 0 120 40" style="max-width:120px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="20" x2="15" y2="20" stroke="var(--primary)" stroke-width="2"/>
+        <path d="M15,20 Q22,4 30,20 Q37,36 45,20 Q52,4 60,20 Q67,36 75,20 Q82,4 90,20 Q97,36 105,20" fill="none" stroke="var(--primary)" stroke-width="2"/>
+        <line x1="105" y1="20" x2="120" y2="20" stroke="var(--primary)" stroke-width="2"/>
+      </svg>
+      <div style="margin-top:0.5rem;font-size:0.85rem;color:var(--muted)">Beteckning: <strong style="color:var(--white)">L</strong></div>
+      <div style="font-size:0.85rem;color:var(--muted)">Enhet: <strong style="color:var(--white)">Henry (H)</strong></div>
+    </div>
+    <div class="card">
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.5rem">Frekvens i Sverige/USA</div>
+      <div style="display:flex;gap:1rem;margin-top:0.3rem">
+        <div style="background:var(--bg-card);border-radius:0.5rem;padding:0.6rem 1rem;text-align:center;flex:1">
+          <div style="font-size:1.3rem;font-weight:800;color:var(--primary)">50 Hz</div>
+          <div style="font-size:0.8rem;color:var(--muted)">Sverige</div>
+        </div>
+        <div style="background:var(--bg-card);border-radius:0.5rem;padding:0.6rem 1rem;text-align:center;flex:1">
+          <div style="font-size:1.3rem;font-weight:800;color:var(--muted)">60 Hz</div>
+          <div style="font-size:0.8rem;color:var(--muted)">USA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Formler</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Induktiv reaktans</div>
+        <div style="font-size:1.2rem;font-weight:700;color:var(--primary)">X<sub>L</sub> = 2 · π · f · L</div>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">X<sub>L</sub> i Ohm (Ω), f i Hz, L i Henry (H)</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Vinkelfrekvens (ω)</div>
+        <div style="font-size:1.2rem;font-weight:700;color:var(--primary)">ω = 2 · π · f</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--primary);margin-top:0.3rem">X<sub>L</sub> = ω · L</div>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">ω i rad/s (vid 50 Hz: ω ≈ 314 rad/s)</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Impedans (total motstånd)</div>
+        <div style="font-size:1.2rem;font-weight:700;color:var(--primary)">Z = √(R² + X<sub>L</sub>²)</div>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">Kombinerar rent motstånd R och reaktans X<sub>L</sub></p>
+      </div>
+    </div>
+    <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.85rem;margin-top:1rem;font-size:0.88rem;color:var(--muted)">
+      <strong style="color:var(--white)">Kom ihåg:</strong> Ju högre frekvens (f) eller induktans (L), desto <strong style="color:var(--primary)">högre X<sub>L</sub></strong> — spolen motstår mer.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Räkneexempel</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">En krets har: U = 230 V, R = 55 Ω, L = 2 H, f = 50 Hz. Vad är strömmen?</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Steg 1 — X<sub>L</sub></div>
+        <div style="font-size:0.95rem;color:var(--white)">X<sub>L</sub> = 2 · π · 50 · 2</div>
+        <div style="font-size:0.95rem;color:var(--primary);font-weight:700;margin-top:0.3rem">X<sub>L</sub> ≈ 628 Ω</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Steg 2 — Z</div>
+        <div style="font-size:0.95rem;color:var(--white)">Z = √(55² + 628²)</div>
+        <div style="font-size:0.88rem;color:var(--muted)">= √(3 025 + 394 384)</div>
+        <div style="font-size:0.95rem;color:var(--primary);font-weight:700;margin-top:0.3rem">Z ≈ 630,4 Ω</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Steg 3 — I</div>
+        <div style="font-size:0.95rem;color:var(--white)">I = U / Z = 230 / 630,4</div>
+        <div style="font-size:0.95rem;color:var(--primary);font-weight:700;margin-top:0.3rem">I ≈ 0,365 A</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONDENSATOR -->
+<section class="section" id="kondensator">
+  <div class="section-header">
+    <div class="section-icon">⊣⊢</div>
+    <div>
+      <h4>Avsnitt 5g</h4>
+      <h2>Kondensator &amp; Kapacitiv reaktans</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">En kondensator lagrar elektrisk energi och motverkar förändringar i spänning. Till skillnad mot spolen — ju högre frekvens, desto <em>lägre</em> motstånd.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem">
+    <div class="card" style="text-align:center">
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.5rem">Symbol</div>
+      <svg viewBox="0 0 80 40" style="max-width:80px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="20" x2="32" y2="20" stroke="var(--primary)" stroke-width="2"/>
+        <line x1="32" y1="5" x2="32" y2="35" stroke="var(--primary)" stroke-width="3"/>
+        <line x1="48" y1="5" x2="48" y2="35" stroke="var(--primary)" stroke-width="3"/>
+        <line x1="48" y1="20" x2="80" y2="20" stroke="var(--primary)" stroke-width="2"/>
+      </svg>
+      <div style="margin-top:0.5rem;font-size:0.85rem;color:var(--muted)">Beteckning: <strong style="color:var(--white)">C</strong></div>
+      <div style="font-size:0.85rem;color:var(--muted)">Enhet: <strong style="color:var(--white)">Farad (F)</strong></div>
+      <div style="font-size:0.82rem;color:var(--muted);margin-top:0.3rem">Används ofta i <strong style="color:var(--white)">μF</strong> (mikrofarad)</div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem">Formel för kapacitiv reaktans</h3>
+      <div style="font-size:1.3rem;font-weight:700;color:var(--primary);margin-top:0.75rem;text-align:center">
+        X<sub>C</sub> = <span class="frac"><span>1</span><span>2 · π · f · C</span></span>
+      </div>
+      <p style="color:var(--muted);font-size:0.85rem;margin-top:0.75rem">X<sub>C</sub> i Ohm (Ω), f i Hz, C i Farad (F)</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Spole vs. Kondensator</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.85rem;font-weight:700;color:var(--white);margin-bottom:0.5rem">🌀 Spole (X<sub>L</sub>)</div>
+        <ul style="color:var(--muted);font-size:0.85rem;display:flex;flex-direction:column;gap:0.4rem">
+          <li>Högre f → <strong style="color:var(--primary)">högre</strong> X<sub>L</sub></li>
+          <li>Högre L → <strong style="color:var(--primary)">högre</strong> X<sub>L</sub></li>
+          <li>Ström <strong style="color:var(--white)">efter</strong> spänningen</li>
+        </ul>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.85rem;font-weight:700;color:var(--white);margin-bottom:0.5rem">⊣⊢ Kondensator (X<sub>C</sub>)</div>
+        <ul style="color:var(--muted);font-size:0.85rem;display:flex;flex-direction:column;gap:0.4rem">
+          <li>Högre f → <strong style="color:var(--primary)">lägre</strong> X<sub>C</sub></li>
+          <li>Högre C → <strong style="color:var(--primary)">lägre</strong> X<sub>C</sub></li>
+          <li>Ström <strong style="color:var(--white)">före</strong> spänningen</li>
+        </ul>
+      </div>
+    </div>
+    <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.85rem;margin-top:1rem;font-size:0.88rem;color:var(--muted)">
+      <strong style="color:var(--white)">Tumregel:</strong> Spole och kondensator är varandras motsatser — det som ökar motståndet i en, minskar det i den andra.
+    </div>
+  </div>
+</section>
+
+<!-- FASFÖRSKJUTNING -->
+<section class="section" id="fasforskjutning">
+  <div class="section-header">
+    <div class="section-icon">〰️</div>
+    <div>
+      <h4>Avsnitt 5h</h4>
+      <h2>Fasförskjutning</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">Fasförskjutning uppstår när ström och spänning inte svänger i takt. I rent resistiva kretsar finns ingen förskjutning — men spolar och kondensatorer ändrar på det.</p>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Sinusvåg — ström och spänning</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Diagrammet visar spänning (U) och ström (I) över tid (t).</p>
+    <div style="overflow-x:auto">
+      <svg viewBox="0 0 520 200" style="max-width:520px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fasförskjutning — ström och spänning">
+        <rect width="520" height="200" rx="8" fill="#ffffff"/>
+        <!-- Grid -->
+        <line x1="50" y1="100" x2="510" y2="100" stroke="#e5e7eb" stroke-width="1"/>
+        <line x1="50" y1="30" x2="510" y2="30" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="50" y1="170" x2="510" y2="170" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- Axes -->
+        <line x1="50" y1="15" x2="50" y2="185" stroke="#374151" stroke-width="1.5"/>
+        <line x1="50" y1="100" x2="515" y2="100" stroke="#374151" stroke-width="1.5"/>
+        <polygon points="515,100 505,96 505,104" fill="#374151"/>
+        <polygon points="50,15 46,25 54,25" fill="#374151"/>
+        <text x="10" y="104" font-family="sans-serif" font-size="10" fill="#374151">0</text>
+        <text x="10" y="15" font-family="sans-serif" font-size="9" fill="#374151">U,I</text>
+        <text x="508" y="98" font-family="sans-serif" font-size="9" fill="#374151">t</text>
+        <!-- Spänning U — röd, ingen förskjutning -->
+        <path d="M60,100 C90,100 110,30 160,30 C210,30 230,100 265,100 C300,100 320,170 370,170 C420,170 440,100 470,100" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Ström I — blå, fasförskjuten (släpar efter) -->
+        <path d="M100,100 C130,100 150,30 200,30 C250,30 270,100 305,100 C340,100 360,170 410,170 C460,170 480,100 510,100" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6,3"/>
+        <!-- Toppspänning label -->
+        <circle cx="160" cy="30" r="4" fill="#dc2626"/>
+        <text x="162" y="26" font-family="sans-serif" font-size="9" fill="#dc2626" font-weight="700">Toppspänning</text>
+        <!-- Nollgenomgång label -->
+        <circle cx="265" cy="100" r="4" fill="#374151"/>
+        <text x="268" y="96" font-family="sans-serif" font-size="9" fill="#374151">Nollgenomgång</text>
+        <!-- Legend -->
+        <line x1="60" y1="185" x2="85" y2="185" stroke="#dc2626" stroke-width="2.5"/>
+        <text x="88" y="189" font-family="sans-serif" font-size="9" fill="#dc2626" font-weight="700">U (spänning)</text>
+        <line x1="170" y1="185" x2="195" y2="185" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6,3"/>
+        <text x="198" y="189" font-family="sans-serif" font-size="9" fill="#2563eb" font-weight="700">I (ström, förskjuten)</text>
+      </svg>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:1.5rem">
+    <div class="card">
+      <h3 style="font-size:1rem">Ingen fasförskjutning</h3>
+      <p style="color:var(--muted);font-size:0.88rem;margin-top:0.5rem">Om strömmen och spänningen startar, vänder och går genom noll <strong style="color:var(--white)">samtidigt</strong> → ingen fasförskjutning.</p>
+      <p style="color:var(--muted);font-size:0.88rem;margin-top:0.5rem">Sker i <strong style="color:var(--white)">rent resistiva kretsar</strong>, som en glödlampa eller värmeelement.</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem">🌀 Spole → ström efter</h3>
+      <p style="color:var(--muted);font-size:0.88rem;margin-top:0.5rem">En spole gör att strömmen <strong style="color:var(--primary)">släpar efter</strong> spänningen. Strömkurvan förskjuts åt höger i tid.</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1rem">⊣⊢ Kondensator → ström före</h3>
+      <p style="color:var(--muted);font-size:0.88rem;margin-top:0.5rem">En kondensator gör att strömmen <strong style="color:var(--primary)">leder</strong> spänningen — kurvan förskjuts åt vänster i tid.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Nollgenomgång &amp; 1 fas</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem">När nollgenomgång och bottengenomgång är densamma för ström och spänning = de är <strong style="color:var(--primary)">i fas (0° förskjutning)</strong>. En fas = ett komplett svängningssystem.</p>
+  </div>
+</section>
+
+<!-- EFFEKTTYPER -->
+<section class="section" id="effekttyper">
+  <div class="section-header">
+    <div class="section-icon">📊</div>
+    <div>
+      <h4>Avsnitt 5i</h4>
+      <h2>Effekttyper — P, Q &amp; S</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:2rem">I växelströmskretsar med spolar och kondensatorer finns tre typer av effekt. Bara den aktiva effekten gör verkligt arbete.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem">
+    <div class="card" style="border-left:3px solid #059669">
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Aktiv effekt</div>
+      <div style="font-size:2rem;font-weight:800;color:#059669">P</div>
+      <div style="font-size:0.9rem;color:var(--muted);margin-top:0.3rem">Enhet: <strong style="color:var(--white)">Watt (W)</strong></div>
+      <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">Den effekt som faktiskt gör <strong style="color:var(--white)">nyttigt arbete</strong> — driver motorer, lyser lampor, värmer element.</p>
+    </div>
+    <div class="card" style="border-left:3px solid #d97706">
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Reaktiv effekt</div>
+      <div style="font-size:2rem;font-weight:800;color:#d97706">Q</div>
+      <div style="font-size:0.9rem;color:var(--muted);margin-top:0.3rem">Enhet: <strong style="color:var(--white)">VAr</strong> (Voltampere reaktiv)</div>
+      <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">Pendlar fram och tillbaka i kretsen — gör inget nyttigt arbete men <strong style="color:var(--white)">belastar elnätet</strong>. Skapas av spolar och kondensatorer.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--primary)">
+      <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Skenbar effekt</div>
+      <div style="font-size:2rem;font-weight:800;color:var(--primary)">S</div>
+      <div style="font-size:0.9rem;color:var(--muted);margin-top:0.3rem">Enhet: <strong style="color:var(--white)">VA</strong> (Voltampere)</div>
+      <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">Den totala effekt som elnätet måste leverera — kombinationen av P och Q. Det är S som dimensionerar kablar och transformatorer.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Formel — Skenbar effekt</h3>
+    <div style="font-size:1.5rem;font-weight:700;color:var(--primary);text-align:center;margin:1rem 0">
+      S = √(P² + Q²)
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;margin-top:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;text-align:center">
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.3rem">S (skenbar)</div>
+        <div style="font-size:1rem;font-weight:700;color:var(--primary)">S = U · I</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem">VA</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;text-align:center">
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.3rem">P (aktiv)</div>
+        <div style="font-size:1rem;font-weight:700;color:#059669">P = U · I · cos φ</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem">W</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;text-align:center">
+        <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.3rem">Q (reaktiv)</div>
+        <div style="font-size:1rem;font-weight:700;color:#d97706">Q = U · I · sin φ</div>
+        <div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem">VAr</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Effekttriangeln</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">P, Q och S bildar en rätvinklig triangel — precis som Pythagoras.</p>
+    <div style="display:flex;justify-content:center;margin:1rem 0">
+      <svg viewBox="0 0 260 180" style="max-width:260px;width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Effekttriangel P Q S">
+        <rect width="260" height="180" fill="#ffffff" rx="8"/>
+        <!-- Triangle -->
+        <line x1="30" y1="150" x2="210" y2="150" stroke="#059669" stroke-width="3" stroke-linecap="round"/>
+        <line x1="210" y1="150" x2="210" y2="50" stroke="#d97706" stroke-width="3" stroke-linecap="round"/>
+        <line x1="30" y1="150" x2="210" y2="50" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+        <!-- Right angle marker -->
+        <rect x="196" y="136" width="14" height="14" fill="none" stroke="#374151" stroke-width="1.5"/>
+        <!-- Labels -->
+        <text x="115" y="168" font-family="sans-serif" font-size="14" fill="#059669" font-weight="700" text-anchor="middle">P (W)</text>
+        <text x="228" y="105" font-family="sans-serif" font-size="14" fill="#d97706" font-weight="700" text-anchor="middle">Q (VAr)</text>
+        <text x="105" y="90" font-family="sans-serif" font-size="14" fill="#2563eb" font-weight="700" text-anchor="middle">S (VA)</text>
+        <!-- phi angle -->
+        <path d="M60,150 A30,30 0 0,1 47,122" fill="none" stroke="#374151" stroke-width="1.5"/>
+        <text x="68" y="135" font-family="sans-serif" font-size="11" fill="#374151">φ</text>
+      </svg>
+    </div>
+    <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.85rem;font-size:0.88rem;color:var(--muted)">
+      <strong style="color:var(--white)">cos φ = effektfaktor</strong> — anger hur stor del av den skenbara effekten som är aktiv. cos φ = 1 = perfekt (ingen reaktiv effekt). Används för att beräkna P ur S: <strong style="color:var(--primary)">P = S · cos φ</strong>
     </div>
   </div>
 </section>
