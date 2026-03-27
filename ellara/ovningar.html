@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Övningar – Ellära</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .ovn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .ovn-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      border: 1px solid transparent;
+    }
+
+    .ovn-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+      border-color: var(--outline);
+    }
+
+    .ovn-card-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .ovn-card-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .ovn-card-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .ovn-card-cta {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link"><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html" class="sidebar-link"><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html" class="sidebar-link"><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html" class="sidebar-link"><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html" class="sidebar-link"><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kabeldim.html" class="sidebar-link"><span class="sidebar-icon">📏</span> Kabeldim.</a>
+      <a href="kretsar.html" class="sidebar-link"><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="trefas.html" class="sidebar-link"><span class="sidebar-icon">🔄</span> Trefas</a>
+      <a href="skydd.html" class="sidebar-link"><span class="sidebar-icon">🛡️</span> Skydd</a>
+      <a href="installation.html" class="sidebar-link"><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html" class="sidebar-link"><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="matematik.html" class="sidebar-link"><span class="sidebar-icon">🔢</span> Matematik</a>
+      <a href="ovningar.html" class="sidebar-link active"><span class="sidebar-icon">✏️</span> Övningar</a>
+      <a href="formler.html" class="sidebar-link"><span class="sidebar-icon">📄</span> Formelblad</a>
+    </nav>
+  </aside>
+  <div class="main-content">
+
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="Sök — t.ex. Ohms lag, Hz, seriekoppling, säkring…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+<section class="section" id="ovningar">
+  <div class="section-header">
+    <div class="section-icon">✏️</div>
+    <div>
+      <h4>Avsnitt 4</h4>
+      <h2>Övningar &amp; Studieverktyg</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted)">Välj ett verktyg nedan för att träna och testa dina kunskaper.</p>
+
+  <div class="ovn-grid">
+
+    <a href="formler.html" class="ovn-card">
+      <div class="ovn-card-icon">📄</div>
+      <h3 class="ovn-card-title">Formelblad</h3>
+      <p class="ovn-card-desc">Alla formler samlat på ett ställe — Ohms lag, effekt, reaktans, trefas och mer. Optimerat för utskrift.</p>
+      <span class="ovn-card-cta">Öppna formelblad →</span>
+    </a>
+
+    <a href="flashcards.html" class="ovn-card">
+      <div class="ovn-card-icon">🃏</div>
+      <h3 class="ovn-card-title">Flashcards</h3>
+      <p class="ovn-card-desc">Öva formler och begrepp kapitelvis. Korten blandas slumpmässigt — fokusera på det du inte kan.</p>
+      <span class="ovn-card-cta">Öppna flashcards →</span>
+    </a>
+
+    <a href="rakne_quiz.html" class="ovn-card">
+      <div class="ovn-card-icon">🧮</div>
+      <h3 class="ovn-card-title">Räkneövningar</h3>
+      <p class="ovn-card-desc">Flervalsfrågor och beräkningsuppgifter inom atomfysik, kretsar, trefas och installation.</p>
+      <span class="ovn-card-cta">Starta övningar →</span>
+    </a>
+
+    <a href="ledarfarg_quiz.html" class="ovn-card">
+      <div class="ovn-card-icon">🎨</div>
+      <h3 class="ovn-card-title">Ledarfärger &amp; Kabeldim.</h3>
+      <p class="ovn-card-desc">Testa dina kunskaper om ledarfärger och kabeldimensionering i trefassystem.</p>
+      <span class="ovn-card-cta">Starta quiz →</span>
+    </a>
+
+    <a href="test_symboler.html" class="ovn-card">
+      <div class="ovn-card-icon">📐</div>
+      <h3 class="ovn-card-title">Symboler &amp; Storheter</h3>
+      <p class="ovn-card-desc">Interaktivt flervals-quiz om kretsschema- och installationssymboler, storheter och enhetsprefix.</p>
+      <span class="ovn-card-cta">Starta symboltest →</span>
+    </a>
+
+    <a href="prov_interaktiv.html" class="ovn-card">
+      <div class="ovn-card-icon">⏱️</div>
+      <h3 class="ovn-card-title">Interaktivt prov</h3>
+      <p class="ovn-card-desc">Tidsbegränsat prov med automatisk rättning av beräkningsdelen. Välj tid och starta direkt.</p>
+      <span class="ovn-card-cta">Starta interaktivt prov →</span>
+    </a>
+
+    <a href="prov.html" target="_blank" class="ovn-card">
+      <div class="ovn-card-icon">📋</div>
+      <h3 class="ovn-card-title">Prov – Skriv ut</h3>
+      <p class="ovn-card-desc">Skriftligt prov som täcker atomfysik, kretsar, trefas, skydd och installation. Skriv ut eller spara som PDF.</p>
+      <span class="ovn-card-cta">Öppna utskriftsversion →</span>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+</div>
+</div>
+
+<script src="../script.js"></script>
+</body>
+</html>

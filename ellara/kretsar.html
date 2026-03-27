@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kretsar – Ellära </title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
 
@@ -12,7 +12,6 @@
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
   <div class="nav-controls">
     <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-    <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
   </div>
 </nav>
 <div class="layout-wrapper">
@@ -35,6 +34,7 @@
       <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
       <a href="matematik.html" class="sidebar-link "><span class="sidebar-icon">🔢</span> Matematik</a>
       <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
+      <a href="formler.html" class="sidebar-link"><span class="sidebar-icon">📄</span> Formelblad</a>
     </nav>
   </aside>
   <div class="main-content">
@@ -447,7 +447,7 @@
           <div>
             <div class="ex-step-title">Använd genvägsformeln</div>
             <div class="ex-step-body">
-              R<sub>tot</sub> = <span class="frac-t"><span>R</span><span>n</span></span> = <span class="frac-t"><span>15</span><span>9</span></span> = <strong>1,67 Ω</strong>
+              R<sub>tot</sub> = <span class="frac"><span>R</span><span>n</span></span> = <span class="frac"><span>15</span><span>9</span></span> = <strong>1,67 Ω</strong>
             </div>
           </div>
         </div>
@@ -547,7 +547,7 @@
           <div>
             <div class="ex-step-title">Räkna ut Grupp A (3 parallella)</div>
             <div class="ex-step-body">
-              R<sub>A</sub> = <span class="frac-t"><span>R</span><span>n</span></span> = <span class="frac-t"><span>15</span><span>3</span></span> = <strong style="color:var(--teal)">5 Ω</strong>
+              R<sub>A</sub> = <span class="frac"><span>R</span><span>n</span></span> = <span class="frac"><span>15</span><span>3</span></span> = <strong style="color:var(--teal)">5 Ω</strong>
             </div>
           </div>
         </div>
@@ -556,7 +556,7 @@
           <div>
             <div class="ex-step-title">Räkna ut Grupp B (5 parallella)</div>
             <div class="ex-step-body">
-              R<sub>B</sub> = <span class="frac-t"><span>R</span><span>n</span></span> = <span class="frac-t"><span>15</span><span>5</span></span> = <strong style="color:#FF9B4D">3 Ω</strong>
+              R<sub>B</sub> = <span class="frac"><span>R</span><span>n</span></span> = <span class="frac"><span>15</span><span>5</span></span> = <strong style="color:#FF9B4D">3 Ω</strong>
             </div>
           </div>
         </div>
@@ -673,7 +673,7 @@
         </div>
         <div style="margin-top:0.75rem;padding:0.6rem 0.8rem;background:var(--bg-light);border-radius:6px;font-size:0.82rem;color:var(--muted)">
           <strong style="color:var(--teal)">Exempel:</strong> U = 120 V, R2 = 20 Ω<br>
-          I<sub>R2</sub> = <span class="frac-t"><span>120</span><span>20</span></span> = <strong style="color:var(--white)">6 A</strong>
+          I<sub>R2</sub> = <span class="frac"><span>120</span><span>20</span></span> = <strong style="color:var(--white)">6 A</strong>
         </div>
       </div>
 
@@ -693,7 +693,7 @@
           <div>
             <div class="ex-step-title">Ström genom R1</div>
             <div class="ex-step-body">
-              I<sub>R1</sub> = <span class="frac-t"><span>U</span><span>R1</span></span> = <span class="frac-t"><span>120</span><span>15</span></span> = <strong>8 A</strong>
+              I<sub>R1</sub> = <span class="frac"><span>U</span><span>R1</span></span> = <span class="frac"><span>120</span><span>15</span></span> = <strong>8 A</strong>
             </div>
           </div>
         </div>
@@ -702,7 +702,7 @@
           <div>
             <div class="ex-step-title">Ström genom R2</div>
             <div class="ex-step-body">
-              I<sub>R2</sub> = <span class="frac-t"><span>U</span><span>R2</span></span> = <span class="frac-t"><span>120</span><span>20</span></span> = <strong>6 A</strong>
+              I<sub>R2</sub> = <span class="frac"><span>U</span><span>R2</span></span> = <span class="frac"><span>120</span><span>20</span></span> = <strong>6 A</strong>
             </div>
           </div>
         </div>
@@ -711,7 +711,7 @@
           <div>
             <div class="ex-step-title">Ström genom R3</div>
             <div class="ex-step-body">
-              I<sub>R3</sub> = <span class="frac-t"><span>U</span><span>R3</span></span> = <span class="frac-t"><span>120</span><span>30</span></span> = <strong>4 A</strong>
+              I<sub>R3</sub> = <span class="frac"><span>U</span><span>R3</span></span> = <span class="frac"><span>120</span><span>30</span></span> = <strong>4 A</strong>
             </div>
           </div>
         </div>
@@ -781,7 +781,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>tot</sub></div>
             <div class="ex-step-body">Ohms lag — samma ström flödar genom hela kretsen:<br>
-            I<sub>tot</sub> = <span class="frac-t"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span> = <span class="frac-t"><span>30</span><span>30</span></span> = <strong>1 A</strong></div>
+            I<sub>tot</sub> = <span class="frac"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span> = <span class="frac"><span>30</span><span>30</span></span> = <strong>1 A</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -851,8 +851,8 @@
           <div>
             <div class="ex-step-title">Beräkna R<sub>tot</sub></div>
             <div class="ex-step-body">
-            <span class="frac-t"><span>1</span><span>R<sub>tot</sub></span></span> = <span class="frac-t"><span>1</span><span>R1</span></span> + <span class="frac-t"><span>1</span><span>R2</span></span> = <span class="frac-t"><span>1</span><span>6</span></span> + <span class="frac-t"><span>1</span><span>12</span></span> = <span class="frac-t"><span>2</span><span>12</span></span> + <span class="frac-t"><span>1</span><span>12</span></span> = <span class="frac-t"><span>3</span><span>12</span></span><br>
-            R<sub>tot</sub> = <span class="frac-t"><span>12</span><span>3</span></span> = <strong>4 Ω</strong></div>
+            <span class="frac"><span>1</span><span>R<sub>tot</sub></span></span> = <span class="frac"><span>1</span><span>R1</span></span> + <span class="frac"><span>1</span><span>R2</span></span> = <span class="frac"><span>1</span><span>6</span></span> + <span class="frac"><span>1</span><span>12</span></span> = <span class="frac"><span>2</span><span>12</span></span> + <span class="frac"><span>1</span><span>12</span></span> = <span class="frac"><span>3</span><span>12</span></span><br>
+            R<sub>tot</sub> = <span class="frac"><span>12</span><span>3</span></span> = <strong>4 Ω</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -860,7 +860,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>tot</sub></div>
             <div class="ex-step-body">Total ström från källan:<br>
-            I<sub>tot</sub> = <span class="frac-t"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span> = <span class="frac-t"><span>12</span><span>4</span></span> = <strong>3 A</strong></div>
+            I<sub>tot</sub> = <span class="frac"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span> = <span class="frac"><span>12</span><span>4</span></span> = <strong>3 A</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -868,7 +868,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>1</sub> (gren med R1)</div>
             <div class="ex-step-body">Samma spänning (12 V) ligger över varje gren:<br>
-            I<sub>1</sub> = <span class="frac-t"><span>U<sub>tot</sub></span><span>R1</span></span> = <span class="frac-t"><span>12</span><span>6</span></span> = <strong>2 A</strong></div>
+            I<sub>1</sub> = <span class="frac"><span>U<sub>tot</sub></span><span>R1</span></span> = <span class="frac"><span>12</span><span>6</span></span> = <strong>2 A</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -876,7 +876,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>2</sub> (gren med R2)</div>
             <div class="ex-step-body">
-            I<sub>2</sub> = <span class="frac-t"><span>U<sub>tot</sub></span><span>R2</span></span> = <span class="frac-t"><span>12</span><span>12</span></span> = <strong>1 A</strong></div>
+            I<sub>2</sub> = <span class="frac"><span>U<sub>tot</sub></span><span>R2</span></span> = <span class="frac"><span>12</span><span>12</span></span> = <strong>1 A</strong></div>
           </div>
         </div>
         <div class="ex-check">
@@ -929,8 +929,8 @@
           <div>
             <div class="ex-step-title">Förenkla parallellgruppen (R2 ∥ R3)</div>
             <div class="ex-step-body">
-            <span class="frac-t"><span>1</span><span>R<sub>par</sub></span></span> = <span class="frac-t"><span>1</span><span>10</span></span> + <span class="frac-t"><span>1</span><span>10</span></span> = <span class="frac-t"><span>2</span><span>10</span></span><br>
-            R<sub>par</sub> = <span class="frac-t"><span>10</span><span>2</span></span> = <strong>5 Ω</strong></div>
+            <span class="frac"><span>1</span><span>R<sub>par</sub></span></span> = <span class="frac"><span>1</span><span>10</span></span> + <span class="frac"><span>1</span><span>10</span></span> = <span class="frac"><span>2</span><span>10</span></span><br>
+            R<sub>par</sub> = <span class="frac"><span>10</span><span>2</span></span> = <strong>5 Ω</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -946,7 +946,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>tot</sub></div>
             <div class="ex-step-body">
-            I<sub>tot</sub> = <span class="frac-t"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span> = <span class="frac-t"><span>20</span><span>10</span></span> = <strong>2 A</strong></div>
+            I<sub>tot</sub> = <span class="frac"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span> = <span class="frac"><span>20</span><span>10</span></span> = <strong>2 A</strong></div>
           </div>
         </div>
         <div class="ex-step">
@@ -971,7 +971,7 @@
           <div>
             <div class="ex-step-title">Beräkna I<sub>2</sub> och I<sub>3</sub></div>
             <div class="ex-step-body">Samma spänning (10 V) över varje gren:<br>
-            I<sub>2</sub> = <span class="frac-t"><span>10</span><span>10</span></span> = <strong>1 A</strong> &nbsp;|&nbsp; I<sub>3</sub> = <span class="frac-t"><span>10</span><span>10</span></span> = <strong>1 A</strong></div>
+            I<sub>2</sub> = <span class="frac"><span>10</span><span>10</span></span> = <strong>1 A</strong> &nbsp;|&nbsp; I<sub>3</sub> = <span class="frac"><span>10</span><span>10</span></span> = <strong>1 A</strong></div>
           </div>
         </div>
         <div class="ex-check">
@@ -1086,7 +1086,7 @@
         <div style="border-left:2px solid var(--yellow);padding-left:0.75rem;margin-top:0.5rem;line-height:2">
           <div>Steg 1 — beräkna strömmen:</div>
           <div style="padding-left:0.5rem">R<sub>tot</sub> = R₁ + R₂ = 2 + 3 = 5 Ω</div>
-          <div style="padding-left:0.5rem">I = <span class="frac-t"><span>U</span><span>R<sub>tot</sub></span></span> = <span class="frac-t"><span>12</span><span>5</span></span> = <strong>2,4 A</strong></div>
+          <div style="padding-left:0.5rem">I = <span class="frac"><span>U</span><span>R<sub>tot</sub></span></span> = <span class="frac"><span>12</span><span>5</span></span> = <strong>2,4 A</strong></div>
           <div style="margin-top:0.4rem">Steg 2 — beräkna spänningsfallen (Ohms lag):</div>
           <div style="padding-left:0.5rem">U<sub>R1</sub> = I × R₁ = 2,4 × 2 = <strong style="color:var(--yellow)">4,8 V</strong></div>
           <div style="padding-left:0.5rem">U<sub>R2</sub> = I × R₂ = 2,4 × 3 = <strong style="color:var(--yellow)">7,2 V</strong></div>
@@ -1233,16 +1233,16 @@
     <p>Välj kretstyp, fyll i dina värden — sidan visar varje beräkningssteg med förklaring.</p>
 
     <div class="kk-type-row">
-      <button class="kk-type-btn active" data-type="serie" onclick="kkSelectType('serie')">📐 Serie + ledningsresistans</button>
-      <button class="kk-type-btn" data-type="parallell" onclick="kkSelectType('parallell')">🔀 Parallell + ledningsresistans</button>
+      <button class="kk-type-btn active" data-type="serie">📐 Serie + ledningsresistans</button>
+      <button class="kk-type-btn" data-type="parallell">🔀 Parallell + ledningsresistans</button>
     </div>
 
     <div id="kk-diagram" style="margin:1rem 0;text-align:center"></div>
     <div class="kk-inputs-grid" id="kk-inputs"></div>
 
     <div class="calc-row" style="margin-top:1rem">
-      <button class="calc-btn" onclick="kkSolve()">Lös steg för steg →</button>
-      <button class="clear-btn" onclick="kkClear()">Rensa</button>
+      <button class="calc-btn">Lös steg för steg →</button>
+      <button class="clear-btn">Rensa</button>
     </div>
 
     <div id="kk-steps" style="margin-top:1.25rem"></div>
@@ -1517,7 +1517,7 @@
   <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
 </footer>
 
-<script src="script.js"></script>
+<script src="../script.js"></script>
 <script>
 /* === GUIDAD KRETSLÖSARE === */
 (function () {
@@ -1795,6 +1795,12 @@
     };
   })();
 })();
+
+document.querySelectorAll('.kk-type-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() { kkSelectType(this.dataset.type); });
+});
+document.querySelector('.calc-btn').addEventListener('click', kkSolve);
+document.querySelector('.clear-btn').addEventListener('click', kkClear);
 </script>
   </div><!-- /main-content -->
 </div><!-- /layout-wrapper -->

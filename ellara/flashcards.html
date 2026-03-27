@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flashcards – Ellära</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .fc-chapter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .fc-tab {
+      background: var(--bg-light);
+      border: 1px solid var(--outline);
+      color: var(--muted);
+      border-radius: 0.6rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+
+    .fc-tab:hover { color: var(--white); border-color: var(--primary); }
+    .fc-tab.active { background: var(--primary); color: #1a1409; border-color: var(--primary); }
+
+    .fc-scene {
+      perspective: 1000px;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      height: 260px;
+    }
+
+    .fc-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.45s ease;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .fc-card-inner.flipped { transform: rotateY(180deg); }
+
+    .fc-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--shadow);
+      box-sizing: border-box;
+    }
+
+    .fc-front {
+      background: var(--bg-card);
+    }
+
+    .fc-back {
+      background: var(--bg-light);
+      transform: rotateY(180deg);
+    }
+
+    .fc-hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+
+    .fc-question {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    .fc-formula {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 0.5rem;
+    }
+
+    .fc-answer-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .fc-answer-body {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .fc-answer-body strong { color: var(--white); }
+
+    /* Proper fractions */
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      margin: 0 0.15em;
+      line-height: 1.2;
+    }
+    .frac .num {
+      border-bottom: 1.5px solid currentColor;
+      padding: 0 0.2em 0.1em;
+      text-align: center;
+    }
+    .frac .den {
+      padding: 0.1em 0.2em 0;
+      text-align: center;
+    }
+
+    .fc-controls {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .fc-btn {
+      flex: 1;
+      min-width: 120px;
+      padding: 0.65rem 1rem;
+      border-radius: 0.6rem;
+      border: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+
+    .fc-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .fc-btn-knew { background: #16a34a; color: #fff; }
+    .fc-btn-knew:hover:not(:disabled) { background: #15803d; }
+    .fc-btn-didnt { background: var(--bg-light); color: var(--white); border: 1px solid var(--outline); }
+    .fc-btn-didnt:hover:not(:disabled) { border-color: var(--red); color: var(--red); }
+    .fc-btn-flip { background: var(--primary); color: #1a1409; }
+    .fc-btn-flip:hover { opacity: 0.85; }
+
+    .fc-progress {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .fc-progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .fc-progress-bar-wrap {
+      background: var(--bg-light);
+      border-radius: 99px;
+      height: 6px;
+      overflow: hidden;
+    }
+
+    .fc-progress-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 99px;
+      transition: width 0.3s ease;
+    }
+
+    .fc-score-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .fc-score-pill {
+      background: var(--bg-card);
+      border-radius: 0.6rem;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .fc-score-pill.green { color: #4ade80; }
+    .fc-score-pill.red { color: #f87171; }
+    .fc-score-pill.muted { color: var(--muted); }
+
+    .fc-done {
+      text-align: center;
+      padding: 2rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .fc-done h3 { font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem; }
+    .fc-done p { color: var(--muted); margin-bottom: 1.5rem; }
+
+    .fc-restart-btn {
+      background: var(--primary);
+      color: #1a1409;
+      border: none;
+      border-radius: 0.6rem;
+      padding: 0.65rem 1.5rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link"><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html" class="sidebar-link"><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html" class="sidebar-link"><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html" class="sidebar-link"><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html" class="sidebar-link"><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kabeldim.html" class="sidebar-link"><span class="sidebar-icon">📏</span> Kabeldim.</a>
+      <a href="kretsar.html" class="sidebar-link"><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="trefas.html" class="sidebar-link"><span class="sidebar-icon">🔄</span> Trefas</a>
+      <a href="skydd.html" class="sidebar-link"><span class="sidebar-icon">🛡️</span> Skydd</a>
+      <a href="installation.html" class="sidebar-link"><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html" class="sidebar-link"><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="matematik.html" class="sidebar-link"><span class="sidebar-icon">🔢</span> Matematik</a>
+      <a href="ovningar.html" class="sidebar-link active"><span class="sidebar-icon">✏️</span> Övningar</a>
+      <a href="formler.html" class="sidebar-link"><span class="sidebar-icon">📄</span> Formelblad</a>
+    </nav>
+  </aside>
+
+  <div class="main-content">
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">🃏</div>
+        <div>
+          <h4>Övningar</h4>
+          <h2>Flashcards</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1.5rem">Klicka på kortet för att se svaret. Välj sedan om du kunde det eller inte — kort du missar blandas in igen.</p>
+
+      <!-- Chapter tabs -->
+      <div class="fc-chapter-tabs" id="fc-tabs"></div>
+
+      <!-- Score -->
+      <div class="fc-score-row" id="fc-score-row">
+        <span class="fc-score-pill green" id="fc-knew">✓ Kunde: 0</span>
+        <span class="fc-score-pill red" id="fc-didnt">✗ Kunde inte: 0</span>
+        <span class="fc-score-pill muted" id="fc-left">Kvar: 0</span>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="fc-progress">
+        <div class="fc-progress-info">
+          <span id="fc-progress-label">Kort 0 av 0</span>
+          <span id="fc-progress-pct">0%</span>
+        </div>
+        <div class="fc-progress-bar-wrap">
+          <div class="fc-progress-bar" id="fc-progress-bar" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div class="fc-scene" id="fc-scene">
+        <div class="fc-card-inner" id="fc-card-inner">
+          <div class="fc-face fc-front" id="fc-front">
+            <div class="fc-hint">Framsida — klicka för att vända</div>
+            <div class="fc-question" id="fc-q"></div>
+            <div class="fc-formula" id="fc-formula"></div>
+          </div>
+          <div class="fc-face fc-back" id="fc-back">
+            <div class="fc-hint">Baksida</div>
+            <div class="fc-answer-title" id="fc-ans-title"></div>
+            <div class="fc-answer-body" id="fc-ans-body"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Done screen (hidden) -->
+      <div class="fc-done" id="fc-done" style="display:none">
+        <h3 id="fc-done-title">Klart!</h3>
+        <p id="fc-done-body"></p>
+        <button class="fc-restart-btn" id="fc-restart-btn">↺ Kör igen</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="fc-controls" id="fc-controls">
+        <button class="fc-btn fc-btn-flip" id="fc-flip-btn">Visa svar</button>
+        <button class="fc-btn fc-btn-knew" id="fc-knew-btn" disabled>✓ Kunde det</button>
+        <button class="fc-btn fc-btn-didnt" id="fc-didnt-btn" disabled>✗ Kunde inte</button>
+      </div>
+
+    </section>
+
+    <footer>
+      <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
+    </footer>
+  </div>
+</div>
+
+<script src="../script.js"></script>
+<script>
+/* =====================================================
+   FLASHCARD DATA
+===================================================== */
+const CHAPTERS = [
+  {
+    id: 'kretsar',
+    title: '⚙️ Kretsar',
+    cards: [
+      {
+        q: 'Ohms lag',
+        formula: 'U = R · I',
+        title: 'Ohms lag',
+        body: '<strong>U</strong> = spänning (V)<br><strong>R</strong> = resistans (Ω)<br><strong>I</strong> = ström (A)<br><br>Kan skrivas om: R = <span class="frac"><span class="num">U</span><span class="den">I</span></span> &nbsp;|&nbsp; I = <span class="frac"><span class="num">U</span><span class="den">R</span></span>'
+      },
+      {
+        q: 'Effektlagen',
+        formula: 'P = U · I',
+        title: 'Effektlagen',
+        body: '<strong>P</strong> = effekt (W)<br><strong>U</strong> = spänning (V)<br><strong>I</strong> = ström (A)<br><br>Även: P = I²·R &nbsp;|&nbsp; P = <span class="frac"><span class="num">U²</span><span class="den">R</span></span>'
+      },
+      {
+        q: 'Seriekoppling — total resistans',
+        formula: 'R<sub>tot</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub>…',
+        title: 'Seriekoppling',
+        body: 'Resistanserna adderas direkt.<br><br>Samma ström genom alla: <strong>I</strong> är lika<br>Spänningarna fördelas: U<sub>tot</sub> = U<sub>1</sub> + U<sub>2</sub>…'
+      },
+      {
+        q: 'Parallellkoppling — total resistans',
+        formula: '<span class="frac"><span class="num">1</span><span class="den">R<sub>tot</sub></span></span> = <span class="frac"><span class="num">1</span><span class="den">R<sub>1</sub></span></span> + <span class="frac"><span class="num">1</span><span class="den">R<sub>2</sub></span></span>…',
+        title: 'Parallellkoppling',
+        body: 'R<sub>tot</sub> är alltid <strong>mindre</strong> än minsta R.<br><br>Samma spänning över alla: <strong>U</strong> är lika<br>Strömmarna fördelas: I<sub>tot</sub> = I<sub>1</sub> + I<sub>2</sub>…'
+      },
+      {
+        q: 'Resistivitet — ledarens resistans',
+        formula: 'R = ρ · <span class="frac"><span class="num">L</span><span class="den">A</span></span>',
+        title: 'Resistivitetsformeln',
+        body: '<strong>ρ</strong> = materialets resistivitet (Ω·mm²/m)<br><strong>L</strong> = längd (m)<br><strong>A</strong> = tvärsnittsarea (mm²)<br><br>Koppar: ρ ≈ 0,018 &nbsp;|&nbsp; Aluminium: ρ ≈ 0,028'
+      },
+      {
+        q: 'Spänningsfall — max tillåtet',
+        formula: 'ΔU = R · I',
+        title: 'Spänningsfall',
+        body: 'Spänning som "förbrukas" i kabeln.<br><br>Max <strong>4 %</strong> av nominell spänning tillåtet enligt standard.<br>Vid 230V: ΔU<sub>max</sub> = 230 × 0,04 = 9,2 V'
+      },
+      {
+        q: 'Kirchhoffs spänningslag',
+        formula: 'ΣU = 0',
+        title: 'KVL – Spänningslagen',
+        body: 'Summan av alla spänningar runt en <strong>sluten krets = 0</strong>.<br><br>Det vill säga: källspänningen = summan av alla spänningsfall.'
+      },
+      {
+        q: 'Kirchhoffs strömlag',
+        formula: 'ΣI<sub>in</sub> = ΣI<sub>ut</sub>',
+        title: 'KCL – Strömlagen',
+        body: 'Summan av strömmar <strong>in</strong> i en nod = summan av strömmar <strong>ut</strong>.<br><br>Ström kan inte "försvinna" — allt som flödar in måste ut.'
+      },
+      {
+        q: 'Transformatorn — varvsförhållande',
+        formula: '<span class="frac"><span class="num">U<sub>1</sub></span><span class="den">U<sub>2</sub></span></span> = <span class="frac"><span class="num">N<sub>1</sub></span><span class="den">N<sub>2</sub></span></span>',
+        title: 'Transformatorn',
+        body: '<strong>U<sub>1</sub></strong> = primärspänning &nbsp;|&nbsp; <strong>N<sub>1</sub></strong> = primärvarv<br><strong>U<sub>2</sub></strong> = sekundärspänning &nbsp;|&nbsp; <strong>N<sub>2</sub></strong> = sekundärvarv<br><br>Fler varv = högre spänning'
+      },
+      {
+        q: 'Transformatorn — effektbalans',
+        formula: 'U<sub>1</sub> · I<sub>1</sub> = U<sub>2</sub> · I<sub>2</sub>',
+        title: 'Effektbalans i transformator',
+        body: 'Effekten bevaras (P<sub>1</sub> = P<sub>2</sub>).<br><br>Växlar du <strong>upp</strong> spänningen → strömmen går <strong>ner</strong><br>Växlar du <strong>ner</strong> spänningen → strömmen går <strong>upp</strong>'
+      },
+    ]
+  },
+  {
+    id: 'trefas',
+    title: '🔄 Trefas & AC',
+    cards: [
+      {
+        q: 'EMK – Elektromotorisk kraft',
+        formula: '',
+        title: 'EMK',
+        body: 'Spänning som <strong>induceras</strong> när en ledare rör sig genom ett magnetfält, eller när ett magnetfält rör sig förbi en ledare.<br><br>Grunden till hur generatorer och motorer fungerar.'
+      },
+      {
+        q: 'Mot-EMK — vad är det?',
+        formula: '',
+        title: 'Mot-EMK',
+        body: 'När en motor snurrar skapar den en spänning som <strong>motverkar</strong> den inspänning vi matar in.<br><br>Utan mot-EMK → strömmen blir oändlig → motorn brinner upp direkt.'
+      },
+      {
+        q: 'Induktiv reaktans — spolen',
+        formula: 'X<sub>L</sub> = 2 · π · f · L',
+        title: 'Induktiv reaktans X_L',
+        body: '<strong>f</strong> = frekvens (Hz) &nbsp;|&nbsp; <strong>L</strong> = induktans (H)<br><br>Ju högre f eller L → desto <strong>högre</strong> X<sub>L</sub><br>Spolen gör att strömmen <strong>släpar efter</strong> spänningen.'
+      },
+      {
+        q: 'Kapacitiv reaktans — kondensatorn',
+        formula: 'X<sub>C</sub> = <span class="frac"><span class="num">1</span><span class="den">2 · π · f · C</span></span>',
+        title: 'Kapacitiv reaktans X_C',
+        body: '<strong>f</strong> = frekvens (Hz) &nbsp;|&nbsp; <strong>C</strong> = kapacitans (F)<br><br>Ju högre f eller C → desto <strong>lägre</strong> X<sub>C</sub><br>Kondensatorn gör att strömmen <strong>leder</strong> spänningen.'
+      },
+      {
+        q: 'Impedans — totalt motstånd i AC',
+        formula: 'Z = √(R² + X²)',
+        title: 'Impedans Z',
+        body: 'Kombinerar resistans (R) och reaktans (X) i en AC-krets.<br><br>Z mäts i Ohm (Ω) och används precis som R i Ohms lag: <strong>U = Z · I</strong>'
+      },
+      {
+        q: 'Vinkelfrekvens ω',
+        formula: 'ω = 2 · π · f',
+        title: 'Vinkelfrekvens',
+        body: 'Vid 50 Hz: ω = 2 · π · 50 ≈ <strong>314 rad/s</strong><br><br>Används som kortform: X<sub>L</sub> = ω · L &nbsp;|&nbsp; X<sub>C</sub> = <span class="frac"><span class="num">1</span><span class="den">ω · C</span></span>'
+      },
+      {
+        q: 'Effekttyper P, Q och S',
+        formula: 'S = √(P² + Q²)',
+        title: 'Effekttriangeln',
+        body: '<strong>P</strong> = aktiv effekt (W) — gör nyttigt arbete<br><strong>Q</strong> = reaktiv effekt (VAr) — pendlar, gör inget arbete<br><strong>S</strong> = skenbar effekt (VA) — vad elnätet levererar'
+      },
+      {
+        q: 'Effektfaktor cos φ',
+        formula: 'cos φ = <span class="frac"><span class="num">P</span><span class="den">S</span></span>',
+        title: 'Effektfaktor',
+        body: 'Hur stor del av skenbar effekt som är aktiv.<br><br>cos φ = 1 → perfekt, ingen reaktiv effekt<br>cos φ &lt; 1 → spolar/kondensatorer i kretsen<br><br>P = U · I · <strong>cos φ</strong>'
+      },
+      {
+        q: 'Fasspänning → Linjespänning',
+        formula: 'U<sub>linje</sub> = U<sub>fas</sub> · √3',
+        title: 'Trefas spänning',
+        body: '230V (fas-noll) × √3 ≈ <strong>400V</strong> (fas-fas)<br><br>√3 ≈ 1,732 &nbsp;|&nbsp; √2 ≈ 1,414<br><br>Toppspänning: 230 × √2 ≈ <strong>325V</strong>'
+      },
+      {
+        q: 'Frekvens och period',
+        formula: 'f = <span class="frac"><span class="num">1</span><span class="den">T</span></span> &nbsp;|&nbsp; T = <span class="frac"><span class="num">1</span><span class="den">f</span></span>',
+        title: 'Frekvens & Period',
+        body: 'Sverige: <strong>50 Hz</strong> (T = 20 ms)<br>USA: 60 Hz (T ≈ 16,7 ms)<br><br>En period = en hel svängningscykel för spänningen'
+      },
+    ]
+  },
+  {
+    id: 'installation',
+    title: '🏗️ Installation & Skydd',
+    cards: [
+      {
+        q: 'Ledarfärger — trefas',
+        formula: '',
+        title: 'Ledarfärger svensk standard',
+        body: '<strong style="color:#b45309">L1 = Brun</strong><br><strong>L2 = Svart</strong><br><strong style="color:#6b7280">L3 = Grå</strong><br><strong style="color:#2563eb">N = Blå</strong><br><strong style="color:#16a34a">PE = GrönGul</strong><br><br>Gamla bet: R=L1, S=L2, T=L3, Svart/Grå=Neutral'
+      },
+      {
+        q: 'Lita på ledningsfärger?',
+        formula: '',
+        title: 'Mät alltid!',
+        body: 'Lita <strong>aldrig</strong> på färger utan att mäta — gamla installationer kan ha fel färger eller inte följa nuvarande standard.<br><br>Mät alltid med instrument innan du kopplar.'
+      },
+      {
+        q: 'JFB — jordfelsbrytare',
+        formula: '',
+        title: 'Jordfelsbrytare (JFB)',
+        body: 'Utlösningsström:<br><strong>30 mA</strong> (0,03 A) — bostäder, personskydd<br><strong>300 mA</strong> (0,3 A) — industri, brandskydd<br><br>Löser ut vid: kortslutning N–PE eller L–PE'
+      },
+      {
+        q: 'Spänningsgränser',
+        formula: '',
+        title: 'Lågspänning och klenspänning',
+        body: '<strong>Klenspänning:</strong> ≤ 50V AC<br><strong>Lågspänning:</strong> 50–1000V AC<br><strong>Högspänning:</strong> &gt; 1000V AC<br><br>Ju högre spänning → strängare krav och behörighet'
+      },
+      {
+        q: 'Postbeteckning i elcentralen',
+        formula: '',
+        title: 'Postbeteckning',
+        body: 'Varje komponent i centralen måste vara märkt:<br><br><strong>F1, F2…</strong> = säkringar / automatsäkringar<br><strong>Q1, Q2…</strong> = effektbrytare<br><strong>K1, K2…</strong> = reläer<br><br>Vi måste veta var alla kablar börjar och slutar.'
+      },
+      {
+        q: 'Skenor i elcentralen',
+        formula: '',
+        title: 'Fyra skenor',
+        body: '<strong>DIN-skena</strong> — fäster alla komponenter<br><strong>PE-skena</strong> — gröngulagula skyddsjordar<br><strong>Neutral-skena</strong> — blå neutralledare<br><strong>Fas-skena</strong> — fördelar L1/L2/L3 till säkringar'
+      },
+      {
+        q: 'Matningsväg i centralen',
+        formula: '',
+        title: 'Ordning & matning',
+        body: 'Inkommande matning<br>→ <strong>Huvudbrytare</strong><br>→ <strong>JFB</strong><br>→ <strong>Säkringar</strong><br><br>Bara faser kopplas till säkringarna. JFB kopplas parallellt, INTE i serie.'
+      },
+      {
+        q: 'TN-C vs TN-S',
+        formula: '',
+        title: 'Nätformer',
+        body: '<strong>TN-C</strong> — Neutral och PE kombinerade till PEN-ledare (4 ledare)<br><br><strong>TN-S</strong> — Separata N och PE hela vägen (5 ledare). Säkrare, krävs efter JFB.<br><br>PEN-ledaren delas upp i elcentralen.'
+      },
+      {
+        q: 'Nätstationen',
+        formula: '10/20 kV → 400 V',
+        title: 'Sista transformatorn',
+        body: 'Transformerar ner distributionsnätets 10–20 kV till 400V (trefas).<br><br>En jordplatta (~30×30 cm järn) grävs ner — här skapas PEN-ledaren.'
+      },
+      {
+        q: '1,5 mm² ledare — vad klarar den?',
+        formula: '',
+        title: 'Kabeldimensionering',
+        body: '1,5 mm² klarar upp till <strong>14 A</strong> under normala förhållanden.<br><br>Skyddas i praktiken av <strong>10 A säkring</strong> för att hålla marginal.<br><br>Halogenfri kabel brinner inte och kväver — minskar giftig rök.'
+      },
+    ]
+  }
+];
+
+/* =====================================================
+   FLASHCARD LOGIC
+===================================================== */
+let currentChapter = 0;
+let deck = [];
+let current = null;
+let knewCount = 0;
+let didntCount = 0;
+let totalCards = 0;
+let flipped = false;
+
+const tabsEl = document.getElementById('fc-tabs');
+const cardInner = document.getElementById('fc-card-inner');
+const qEl = document.getElementById('fc-q');
+const formulaEl = document.getElementById('fc-formula');
+const ansTitleEl = document.getElementById('fc-ans-title');
+const ansBodyEl = document.getElementById('fc-ans-body');
+const flipBtn = document.getElementById('fc-flip-btn');
+const knewBtn = document.getElementById('fc-knew-btn');
+const didntBtn = document.getElementById('fc-didnt-btn');
+const knewEl = document.getElementById('fc-knew');
+const didntEl = document.getElementById('fc-didnt');
+const leftEl = document.getElementById('fc-left');
+const progressBar = document.getElementById('fc-progress-bar');
+const progressLabel = document.getElementById('fc-progress-label');
+const progressPct = document.getElementById('fc-progress-pct');
+const doneEl = document.getElementById('fc-done');
+const sceneEl = document.getElementById('fc-scene');
+const controlsEl = document.getElementById('fc-controls');
+const doneTitleEl = document.getElementById('fc-done-title');
+const doneBodyEl = document.getElementById('fc-done-body');
+const restartBtn = document.getElementById('fc-restart-btn');
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function loadChapter(idx) {
+  currentChapter = idx;
+  document.querySelectorAll('.fc-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  deck = shuffle([...CHAPTERS[idx].cards]);
+  totalCards = deck.length;
+  knewCount = 0;
+  didntCount = 0;
+  doneEl.style.display = 'none';
+  sceneEl.style.display = '';
+  controlsEl.style.display = '';
+  showNext();
+}
+
+function showNext() {
+  if (deck.length === 0) {
+    showDone();
+    return;
+  }
+  current = deck.pop();
+  flipped = false;
+  cardInner.classList.remove('flipped');
+  qEl.innerHTML = current.q;
+  formulaEl.innerHTML = current.formula || '';
+  ansTitleEl.innerHTML = current.title;
+  ansBodyEl.innerHTML = current.body;
+  knewBtn.disabled = true;
+  didntBtn.disabled = true;
+  flipBtn.disabled = false;
+  flipBtn.textContent = 'Visa svar';
+  updateProgress();
+}
+
+function updateProgress() {
+  const done = knewCount + didntCount;
+  const pct = totalCards > 0 ? Math.round((done / totalCards) * 100) : 0;
+  progressBar.style.width = pct + '%';
+  progressLabel.textContent = `Kort ${done} av ${totalCards}`;
+  progressPct.textContent = pct + '%';
+  knewEl.textContent = `✓ Kunde: ${knewCount}`;
+  didntEl.textContent = `✗ Kunde inte: ${didntCount}`;
+  leftEl.textContent = `Kvar: ${deck.length}`;
+}
+
+function showDone() {
+  sceneEl.style.display = 'none';
+  controlsEl.style.display = 'none';
+  doneEl.style.display = '';
+  const pct = totalCards > 0 ? Math.round((knewCount / totalCards) * 100) : 0;
+  if (pct === 100) {
+    doneTitleEl.textContent = 'Perfekt! 🎉';
+    doneBodyEl.textContent = `Du kunde alla ${totalCards} kort. Byt kapitel eller kör igen!`;
+  } else if (pct >= 70) {
+    doneTitleEl.textContent = 'Bra jobbat!';
+    doneBodyEl.textContent = `${knewCount} av ${totalCards} rätt (${pct}%). Lite mer repetition och du sitter inne med det!`;
+  } else {
+    doneTitleEl.textContent = 'Kör igen!';
+    doneBodyEl.textContent = `${knewCount} av ${totalCards} rätt (${pct}%). Öva mer och försök igen.`;
+  }
+  updateProgress();
+}
+
+// Flip
+flipBtn.addEventListener('click', () => {
+  flipped = !flipped;
+  cardInner.classList.toggle('flipped', flipped);
+  if (flipped) {
+    knewBtn.disabled = false;
+    didntBtn.disabled = false;
+    flipBtn.textContent = 'Vänd tillbaka';
+  } else {
+    knewBtn.disabled = true;
+    didntBtn.disabled = true;
+    flipBtn.textContent = 'Visa svar';
+  }
+});
+
+cardInner.addEventListener('click', () => flipBtn.click());
+
+knewBtn.addEventListener('click', () => {
+  knewCount++;
+  showNext();
+});
+
+didntBtn.addEventListener('click', () => {
+  didntCount++;
+  // Put the card back in a random position to repeat
+  const insertAt = Math.floor(Math.random() * Math.max(1, deck.length));
+  deck.splice(insertAt, 0, current);
+  showNext();
+});
+
+restartBtn.addEventListener('click', () => loadChapter(currentChapter));
+
+// Build tabs
+CHAPTERS.forEach((ch, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'fc-tab' + (i === 0 ? ' active' : '');
+  btn.textContent = ch.title;
+  btn.addEventListener('click', () => loadChapter(i));
+  tabsEl.appendChild(btn);
+});
+
+// Start
+loadChapter(0);
+</script>
+
+</body>
+</html>

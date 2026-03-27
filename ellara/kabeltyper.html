@@ -4,7 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kabeltyper – Ellära </title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .mat-list { margin-top: 0.5rem; }
+    .cmp-th { padding: 0.4rem 0.75rem; text-align: left; }
+    .cmp-td { padding: 0.5rem 0.75rem; }
+    .cmp-td-first { padding: 0.5rem 0.75rem; border-radius: 6px 0 0 6px; font-weight: 700; }
+    .cmp-td-last { padding: 0.5rem 0.75rem; border-radius: 0 6px 6px 0; color: var(--muted); }
+    .lszh-th { text-align: left; padding: 0.55rem 0.75rem; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: .05em; }
+    .lszh-td { padding: 0.55rem 0.75rem; }
+    .color-swatch-wrap { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .color-swatch { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.15); }
+    .lc-th { padding: 0 0.5rem; text-align: left; }
+    .lc-td { padding: 0.55rem 0.75rem; }
+    .lc-td-first { padding: 0.55rem 0.75rem; border-radius: 6px 0 0 6px; font-weight: 700; color: var(--white); }
+    .lc-td-last { padding: 0.55rem 0.75rem; border-radius: 0 6px 6px 0; color: var(--muted); }
+  </style>
 </head>
 <body>
 
@@ -12,7 +27,6 @@
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
   <div class="nav-controls">
     <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-    <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
   </div>
 </nav>
 <div class="layout-wrapper">
@@ -35,6 +49,7 @@
       <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
       <a href="matematik.html" class="sidebar-link "><span class="sidebar-icon">🔢</span> Matematik</a>
       <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
+      <a href="formler.html" class="sidebar-link"><span class="sidebar-icon">📄</span> Formelblad</a>
     </nav>
   </aside>
   <div class="main-content">
@@ -89,7 +104,7 @@
       </svg>
       <div style="text-align:center;font-size:1.2rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">En massiv tråd</div>
       <div class="koppling-use">Fast installation i rör · eldosor · apparatskåp · styvt, formbart</div>
-      <ul class="mat-list" style="margin-top:0.5rem">
+      <ul class="mat-list">
         <li>Stel – behåller formen vid bockning</li>
         <li>Enkel att skala och ansluta i plint</li>
         <li>Vanlig dimension: 1,5 mm² och 2,5 mm²</li>
@@ -122,7 +137,7 @@
       </svg>
       <div style="text-align:center;font-size:1.2rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">7 trådar</div>
       <div class="koppling-use">Allmän fast installation · något böjbarare än EK · apparatledningar</div>
-      <ul class="mat-list" style="margin-top:0.5rem">
+      <ul class="mat-list">
         <li>Vanligast: 7 trådar i hexagonalt mönster</li>
         <li>Lättare att dra i rör än EK tack vare viss flexibilitet</li>
         <li>Bättre vibrationsbeständighet än EK</li>
@@ -169,7 +184,7 @@
       </svg>
       <div style="text-align:center;font-size:1.2rem;color:#4ECDC4;margin:0.2rem 0 0.5rem">19 trådar (1+6+12)</div>
       <div class="koppling-use" style="border-color:rgba(78,205,196,0.3);color:var(--teal)">Flexibla sladdar · apparatkablar · maskiner · verktyg · rörliga delar</div>
-      <ul class="mat-list" style="margin-top:0.5rem">
+      <ul class="mat-list">
         <li>Vanligast: 19 trådar (1 + 6 + 12 ringar)</li>
         <li>Mjuk – tål fler böjningar utan att brytas</li>
         <li>Används i apparatsladdar, förlängningskablar</li>
@@ -231,7 +246,7 @@
       </svg>
       <div style="text-align:center;font-size:1.2rem;color:#FF9B4D;margin:0.2rem 0 0.5rem">49+ trådar – extremt flexibel</div>
       <div class="koppling-use" style="border-color:rgba(255,155,77,0.3);color:#FF9B4D">Svetskablar · gruvdrift · industrirobotar · kablar med konstant rörelse</div>
-      <ul class="mat-list" style="margin-top:0.5rem">
+      <ul class="mat-list">
         <li>49, 133 eller fler mycket tunna trådar</li>
         <li>Extremt böjlig – tål tusentals böjcykler</li>
         <li>Används i svetstänger, porttelefoner, hisslinor</li>
@@ -247,36 +262,36 @@
     <table style="width:100%;border-collapse:separate;border-spacing:0 5px;font-size:0.88rem;margin-top:0.75rem">
       <thead>
         <tr style="color:var(--muted);font-size:0.77rem;text-transform:uppercase;letter-spacing:0.04em">
-          <th style="padding:0.4rem 0.75rem;text-align:left">Typ</th>
-          <th style="padding:0.4rem 0.75rem;text-align:left">Antal trådar</th>
-          <th style="padding:0.4rem 0.75rem;text-align:left">Böjbarhet</th>
-          <th style="padding:0.4rem 0.75rem;text-align:left">Typisk användning</th>
+          <th class="cmp-th">Typ</th>
+          <th class="cmp-th">Antal trådar</th>
+          <th class="cmp-th">Böjbarhet</th>
+          <th class="cmp-th">Typisk användning</th>
         </tr>
       </thead>
       <tbody>
         <tr style="background:var(--bg-light)">
-          <td style="padding:0.5rem 0.75rem;border-radius:6px 0 0 6px;font-weight:700;color:var(--yellow)">EK – Enkardelig</td>
-          <td style="padding:0.5rem 0.75rem;font-family:monospace">1 (heltråd)</td>
-          <td style="padding:0.5rem 0.75rem">Stel ████░░░░</td>
-          <td style="padding:0.5rem 0.75rem;border-radius:0 6px 6px 0;color:var(--muted)">Fast installation i rör/dosor</td>
+          <td class="cmp-td-first" style="color:var(--yellow)">EK – Enkardelig</td>
+          <td class="cmp-td" style="font-family:monospace">1 (heltråd)</td>
+          <td class="cmp-td">Stel ████░░░░</td>
+          <td class="cmp-td-last">Fast installation i rör/dosor</td>
         </tr>
         <tr>
-          <td style="padding:0.5rem 0.75rem;font-weight:700;color:var(--yellow)">FK – Flerkardelig</td>
-          <td style="padding:0.5rem 0.75rem;font-family:monospace">~7</td>
-          <td style="padding:0.5rem 0.75rem">Halvt ███░░░░░</td>
-          <td style="padding:0.5rem 0.75rem;color:var(--muted)">Allmän installation, apparatledningar</td>
+          <td class="cmp-td" style="font-weight:700;color:var(--yellow)">FK – Flerkardelig</td>
+          <td class="cmp-td" style="font-family:monospace">~7</td>
+          <td class="cmp-td">Halvt ███░░░░░</td>
+          <td class="cmp-td" style="color:var(--muted)">Allmän installation, apparatledningar</td>
         </tr>
         <tr style="background:var(--bg-light)">
-          <td style="padding:0.5rem 0.75rem;border-radius:6px 0 0 6px;font-weight:700;color:var(--teal)">MK – Mångkardelig</td>
-          <td style="padding:0.5rem 0.75rem;font-family:monospace">~19</td>
-          <td style="padding:0.5rem 0.75rem">Mjuk ██████░░</td>
-          <td style="padding:0.5rem 0.75rem;border-radius:0 6px 6px 0;color:var(--muted)">Apparatsladdar, förlängningskablar</td>
+          <td class="cmp-td-first" style="color:var(--teal)">MK – Mångkardelig</td>
+          <td class="cmp-td" style="font-family:monospace">~19</td>
+          <td class="cmp-td">Mjuk ██████░░</td>
+          <td class="cmp-td-last">Apparatsladdar, förlängningskablar</td>
         </tr>
         <tr>
-          <td style="padding:0.5rem 0.75rem;font-weight:700;color:#FF9B4D">RK – Rikkardelig</td>
-          <td style="padding:0.5rem 0.75rem;font-family:monospace">49–133+</td>
-          <td style="padding:0.5rem 0.75rem">Extremt ████████</td>
-          <td style="padding:0.5rem 0.75rem;color:var(--muted)">Svetskablar, industri, robotar</td>
+          <td class="cmp-td" style="font-weight:700;color:#FF9B4D">RK – Rikkardelig</td>
+          <td class="cmp-td" style="font-family:monospace">49–133+</td>
+          <td class="cmp-td">Extremt ████████</td>
+          <td class="cmp-td" style="color:var(--muted)">Svetskablar, industri, robotar</td>
         </tr>
       </tbody>
     </table>
@@ -323,31 +338,31 @@
       <table style="width:100%;border-collapse:collapse;font-size:0.87rem">
         <thead>
           <tr style="border-bottom:2px solid var(--outline)">
-            <th style="text-align:left;padding:0.55rem 0.75rem;color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em">Egenskap</th>
-            <th style="text-align:left;padding:0.55rem 0.75rem;color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em">Vanlig PVC-kabel</th>
-            <th style="text-align:left;padding:0.55rem 0.75rem;color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em">Halogenfri (LSZH)</th>
+            <th class="lszh-th">Egenskap</th>
+            <th class="lszh-th">Vanlig PVC-kabel</th>
+            <th class="lszh-th">Halogenfri (LSZH)</th>
           </tr>
         </thead>
         <tbody>
           <tr style="border-top:1px solid var(--outline)">
-            <td style="padding:0.55rem 0.75rem;color:var(--white);font-weight:600">Brandbeteende</td>
-            <td style="padding:0.55rem 0.75rem;color:var(--muted)">Sprider brand</td>
-            <td style="padding:0.55rem 0.75rem;color:#4caf50">Selvsläckande</td>
+            <td class="lszh-td" style="color:var(--white);font-weight:600">Brandbeteende</td>
+            <td class="lszh-td" style="color:var(--muted)">Sprider brand</td>
+            <td class="lszh-td" style="color:#4caf50">Selvsläckande</td>
           </tr>
           <tr style="border-top:1px solid var(--outline)">
-            <td style="padding:0.55rem 0.75rem;color:var(--white);font-weight:600">Rökutveckling</td>
-            <td style="padding:0.55rem 0.75rem;color:var(--muted)">Tät svart rök</td>
-            <td style="padding:0.55rem 0.75rem;color:#4caf50">Minimal, ljus rök</td>
+            <td class="lszh-td" style="color:var(--white);font-weight:600">Rökutveckling</td>
+            <td class="lszh-td" style="color:var(--muted)">Tät svart rök</td>
+            <td class="lszh-td" style="color:#4caf50">Minimal, ljus rök</td>
           </tr>
           <tr style="border-top:1px solid var(--outline)">
-            <td style="padding:0.55rem 0.75rem;color:var(--white);font-weight:600">Giftig gas</td>
-            <td style="padding:0.55rem 0.75rem;color:var(--red)">HCl, dioxin</td>
-            <td style="padding:0.55rem 0.75rem;color:#4caf50">Ingen halogengas</td>
+            <td class="lszh-td" style="color:var(--white);font-weight:600">Giftig gas</td>
+            <td class="lszh-td" style="color:var(--red)">HCl, dioxin</td>
+            <td class="lszh-td" style="color:#4caf50">Ingen halogengas</td>
           </tr>
           <tr style="border-top:1px solid var(--outline)">
-            <td style="padding:0.55rem 0.75rem;color:var(--white);font-weight:600">Kostnad</td>
-            <td style="padding:0.55rem 0.75rem;color:var(--muted)">Lägre</td>
-            <td style="padding:0.55rem 0.75rem;color:var(--muted)">Något högre</td>
+            <td class="lszh-td" style="color:var(--white);font-weight:600">Kostnad</td>
+            <td class="lszh-td" style="color:var(--muted)">Lägre</td>
+            <td class="lszh-td" style="color:var(--muted)">Något högre</td>
           </tr>
         </tbody>
       </table>
@@ -372,51 +387,51 @@
         <table style="width:100%;border-collapse:separate;border-spacing:0 6px;font-size:0.9rem">
           <thead>
             <tr style="color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">
-              <th style="padding:0 0.5rem;text-align:left">Ledare</th>
-              <th style="padding:0 0.5rem;text-align:left">Färg</th>
-              <th style="padding:0 0.5rem;text-align:left">Beteckning</th>
+              <th class="lc-th">Ledare</th>
+              <th class="lc-th">Färg</th>
+              <th class="lc-th">Beteckning</th>
             </tr>
           </thead>
           <tbody>
             <tr style="background:var(--bg-light)">
-              <td style="padding:0.55rem 0.75rem;border-radius:6px 0 0 6px;font-weight:700;color:var(--white)">Fas</td>
-              <td style="padding:0.55rem 0.75rem">
-                <span style="display:inline-flex;align-items:center;gap:0.4rem">
-                  <span style="width:18px;height:18px;border-radius:50%;background:#7B3F00;flex-shrink:0;border:1px solid rgba(255,255,255,0.15)"></span>
+              <td class="lc-td-first">Fas</td>
+              <td class="lc-td">
+                <span class="color-swatch-wrap">
+                  <span class="color-swatch" style="background:#7B3F00"></span>
                   Brun
                 </span>
               </td>
-              <td style="padding:0.55rem 0.75rem;border-radius:0 6px 6px 0;color:var(--muted)">L &nbsp;/&nbsp; L1</td>
+              <td class="lc-td-last">L &nbsp;/&nbsp; L1</td>
             </tr>
             <tr>
-              <td style="padding:0.55rem 0.75rem;font-weight:700;color:var(--white)">Nolla</td>
-              <td style="padding:0.55rem 0.75rem">
-                <span style="display:inline-flex;align-items:center;gap:0.4rem">
-                  <span style="width:18px;height:18px;border-radius:50%;background:#1a6bb5;flex-shrink:0;border:1px solid rgba(255,255,255,0.15)"></span>
+              <td class="lc-td" style="font-weight:700;color:var(--white)">Nolla</td>
+              <td class="lc-td">
+                <span class="color-swatch-wrap">
+                  <span class="color-swatch" style="background:#1a6bb5"></span>
                   Blå
                 </span>
               </td>
-              <td style="padding:0.55rem 0.75rem;color:var(--muted)">N</td>
+              <td class="lc-td" style="color:var(--muted)">N</td>
             </tr>
             <tr style="background:var(--bg-light)">
-              <td style="padding:0.55rem 0.75rem;border-radius:6px 0 0 6px;font-weight:700;color:var(--white)">Skyddsjord</td>
-              <td style="padding:0.55rem 0.75rem">
-                <span style="display:inline-flex;align-items:center;gap:0.4rem">
-                  <span style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#2e8b2e 50%,#d4b000 50%);flex-shrink:0;border:1px solid rgba(255,255,255,0.15)"></span>
+              <td class="lc-td-first">Skyddsjord</td>
+              <td class="lc-td">
+                <span class="color-swatch-wrap">
+                  <span class="color-swatch" style="background:linear-gradient(135deg,#2e8b2e 50%,#d4b000 50%)"></span>
                   GrönGul
                 </span>
               </td>
-              <td style="padding:0.55rem 0.75rem;border-radius:0 6px 6px 0;color:var(--muted)">PE</td>
+              <td class="lc-td-last">PE</td>
             </tr>
             <tr>
-              <td style="padding:0.55rem 0.75rem;font-weight:700;color:var(--white)">Tändtråd</td>
-              <td style="padding:0.55rem 0.75rem">
-                <span style="display:inline-flex;align-items:center;gap:0.4rem">
-                  <span style="width:18px;height:18px;border-radius:50%;background:#888;flex-shrink:0;border:1px solid rgba(255,255,255,0.15)"></span>
+              <td class="lc-td" style="font-weight:700;color:var(--white)">Tändtråd</td>
+              <td class="lc-td">
+                <span class="color-swatch-wrap">
+                  <span class="color-swatch" style="background:#888"></span>
                   Grå
                 </span>
               </td>
-              <td style="padding:0.55rem 0.75rem;color:var(--muted)">Switched Live</td>
+              <td class="lc-td" style="color:var(--muted)">Switched Live</td>
             </tr>
           </tbody>
         </table>
@@ -440,7 +455,7 @@
   <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
 </footer>
 
-<script src="script.js"></script>
+<script src="../script.js"></script>
   </div><!-- /main-content -->
 </div><!-- /layout-wrapper -->
 </body>

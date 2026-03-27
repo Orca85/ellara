@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kablar &amp; Dimensionering – Ellära</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
   <style>
     .fuse-table { width:100%; border-collapse:collapse; margin-top:1rem; }
     .fuse-table th { font-size:0.78rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; padding:0.5rem 0.75rem; text-align:left; }
@@ -27,6 +27,10 @@
     .grid-node .desc { font-size:0.8rem; color:var(--muted); }
     .grid-arrow { display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:1.2rem; }
     .svg-illustration { display:block; width:100%; max-width:480px; height:auto; margin-top:0.75rem; border-radius:0.75rem; overflow:hidden; }
+    .intro-link { background:var(--bg-light); border-radius:8px; padding:0.6rem 0.85rem; color:var(--primary); text-decoration:none; border:1px solid var(--outline); }
+    .dim-card { background:var(--bg-light); border-radius:0.6rem; padding:0.75rem; }
+    .dim-card-title { font-weight:700; color:var(--primary); font-size:0.85rem; }
+    .dim-card-desc { font-size:0.82rem; color:var(--muted); margin-top:0.25rem; }
   </style>
 </head>
 <body>
@@ -35,7 +39,6 @@
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
   <div class="nav-controls">
     <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-    <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
   </div>
 </nav>
 <div class="layout-wrapper">
@@ -58,6 +61,7 @@
       <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
       <a href="matematik.html" class="sidebar-link "><span class="sidebar-icon">🔢</span> Matematik</a>
       <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
+      <a href="formler.html" class="sidebar-link"><span class="sidebar-icon">📄</span> Formelblad</a>
     </nav>
   </aside>
   <div class="main-content">
@@ -82,10 +86,10 @@
   <div class="card">
     <p>Det här kapitlet går igenom spänningar i kablar, hur man dimensionerar kablar och säkringar, elnätets uppbyggnad samt hur man väljer VP-rör.</p>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;margin-top:1rem;font-size:0.88rem">
-      <a href="#spanningar" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⚡ Spänningar i kablar</a>
-      <a href="#kabeldim" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">📏 Kabeldimensionering</a>
-      <a href="#elnat" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔋 Elnätets uppbyggnad</a>
-      <a href="#vpror" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔵 Storlek på VP-röret</a>
+      <a href="#spanningar" class="intro-link">⚡ Spänningar i kablar</a>
+      <a href="#kabeldim" class="intro-link">📏 Kabeldimensionering</a>
+      <a href="#elnat" class="intro-link">🔋 Elnätets uppbyggnad</a>
+      <a href="#vpror" class="intro-link">🔵 Storlek på VP-röret</a>
     </div>
   </div>
 </section>
@@ -198,25 +202,25 @@
   <div class="card" style="margin-bottom:1.5rem">
     <h3>Att dimensionera en starkströmskabel kräver kunskap om:</h3>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.75rem;margin-top:0.75rem">
-      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.75rem">
-        <div style="font-weight:700;color:var(--primary);font-size:0.85rem">Ledarmaterial</div>
-        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">Koppar eller aluminium — koppar leder bättre men är tyngre</div>
+      <div class="dim-card">
+        <div class="dim-card-title">Ledarmaterial</div>
+        <div class="dim-card-desc">Koppar eller aluminium — koppar leder bättre men är tyngre</div>
       </div>
-      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.75rem">
-        <div style="font-weight:700;color:var(--primary);font-size:0.85rem">Ström (A)</div>
-        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">Hur hög ström ska användas — bestämmer minsta area</div>
+      <div class="dim-card">
+        <div class="dim-card-title">Ström (A)</div>
+        <div class="dim-card-desc">Hur hög ström ska användas — bestämmer minsta area</div>
       </div>
-      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.75rem">
-        <div style="font-weight:700;color:var(--primary);font-size:0.85rem">Kabelns längd</div>
-        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">Längre kabel → högre resistans → mer spänningsfall</div>
+      <div class="dim-card">
+        <div class="dim-card-title">Kabelns längd</div>
+        <div class="dim-card-desc">Längre kabel → högre resistans → mer spänningsfall</div>
       </div>
-      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.75rem">
-        <div style="font-weight:700;color:var(--primary);font-size:0.85rem">Förläggningssätt</div>
-        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">I rör, fast, i luft — påverkar hur mycket värme kabeln kan avge</div>
+      <div class="dim-card">
+        <div class="dim-card-title">Förläggningssätt</div>
+        <div class="dim-card-desc">I rör, fast, i luft — påverkar hur mycket värme kabeln kan avge</div>
       </div>
-      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.75rem">
-        <div style="font-weight:700;color:var(--primary);font-size:0.85rem">Omgivningstemperatur</div>
-        <div style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem">Hög temperatur minskar kabelns strömkapacitet</div>
+      <div class="dim-card">
+        <div class="dim-card-title">Omgivningstemperatur</div>
+        <div class="dim-card-desc">Hög temperatur minskar kabelns strömkapacitet</div>
       </div>
     </div>
   </div>
@@ -333,7 +337,7 @@
   <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
 </footer>
 
-<script src="script.js"></script>
+<script src="../script.js"></script>
   </div><!-- /main-content -->
 </div><!-- /layout-wrapper -->
 </body>

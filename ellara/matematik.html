@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Matematik – Ellära</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
   <style>
     /* ── Bråk-visualisering ── */
     .frac-bar-wrap { display:flex; align-items:center; gap:0.5rem; margin:0.75rem 0; flex-wrap:wrap; }
@@ -102,7 +102,6 @@
   <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
   <div class="nav-controls">
     <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
-    <button class="theme-toggle" id="frac-toggle" title="Visa slash-bråk">a/b</button>
   </div>
 </nav>
 
@@ -197,19 +196,19 @@
 
     <p style="font-size:0.9rem;color:var(--muted)">Visualisering — den gula delen är täljaren, grå är vad som är kvar:</p>
     <div class="frac-bar-wrap">
-      <div class="frac-label"><span class="frac-t"><span>1</span><span>2</span></span> =</div>
+      <div class="frac-label"><span class="frac"><span>1</span><span>2</span></span> =</div>
       <div class="frac-bar" style="width:200px"><div class="frac-bar-fill" style="width:50%"></div><div class="frac-bar-empty"></div></div>
     </div>
     <div class="frac-bar-wrap">
-      <div class="frac-label"><span class="frac-t"><span>3</span><span>4</span></span> =</div>
+      <div class="frac-label"><span class="frac"><span>3</span><span>4</span></span> =</div>
       <div class="frac-bar" style="width:200px"><div class="frac-bar-fill" style="width:75%"></div><div class="frac-bar-empty"></div></div>
     </div>
     <div class="frac-bar-wrap">
-      <div class="frac-label"><span class="frac-t"><span>1</span><span>4</span></span> =</div>
+      <div class="frac-label"><span class="frac"><span>1</span><span>4</span></span> =</div>
       <div class="frac-bar" style="width:200px"><div class="frac-bar-fill" style="width:25%"></div><div class="frac-bar-empty"></div></div>
     </div>
     <div class="frac-bar-wrap">
-      <div class="frac-label"><span class="frac-t"><span>2</span><span>3</span></span> =</div>
+      <div class="frac-label"><span class="frac"><span>2</span><span>3</span></span> =</div>
       <div class="frac-bar" style="width:200px"><div class="frac-bar-fill" style="width:66.6%"></div><div class="frac-bar-empty"></div></div>
     </div>
 
@@ -236,23 +235,23 @@
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 1 — Förkorta <span class="frac-t"><span>6</span><span>8</span></span></div>
+      <div class="ex-title">Exempel 1 — Förkorta <span class="frac"><span>6</span><span>8</span></span></div>
       <div class="ex-line">Vad går in i både 6 och 8? → <strong>2</strong></div>
       <div class="ex-line">6 ÷ 2 = 3 &nbsp;|&nbsp; 8 ÷ 2 = 4</div>
-      <div class="ex-result"><span class="frac-t"><span>6</span><span>8</span></span> = <span class="frac-t"><span>3</span><span>4</span></span></div>
+      <div class="ex-result"><span class="frac"><span>6</span><span>8</span></span> = <span class="frac"><span>3</span><span>4</span></span></div>
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 2 — Förkorta <span class="frac-t"><span>12</span><span>18</span></span></div>
+      <div class="ex-title">Exempel 2 — Förkorta <span class="frac"><span>12</span><span>18</span></span></div>
       <div class="ex-line">Vad går in i både 12 och 18? → <strong>6</strong> (12 = 6×2, 18 = 6×3)</div>
       <div class="ex-line">12 ÷ 6 = 2 &nbsp;|&nbsp; 18 ÷ 6 = 3</div>
-      <div class="ex-result"><span class="frac-t"><span>12</span><span>18</span></span> = <span class="frac-t"><span>2</span><span>3</span></span></div>
+      <div class="ex-result"><span class="frac"><span>12</span><span>18</span></span> = <span class="frac"><span>2</span><span>3</span></span></div>
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 3 — Förkorta <span class="frac-t"><span>15</span><span>25</span></span> (steg för steg med 5)</div>
+      <div class="ex-title">Exempel 3 — Förkorta <span class="frac"><span>15</span><span>25</span></span> (steg för steg med 5)</div>
       <div class="ex-line">15 ÷ 5 = 3 &nbsp;|&nbsp; 25 ÷ 5 = 5</div>
-      <div class="ex-result"><span class="frac-t"><span>15</span><span>25</span></span> = <span class="frac-t"><span>3</span><span>5</span></span></div>
+      <div class="ex-result"><span class="frac"><span>15</span><span>25</span></span> = <span class="frac"><span>3</span><span>5</span></span></div>
     </div>
 
     <div class="warn-box">
@@ -268,7 +267,7 @@
           <div class="frac-input-line"></div>
           <input type="number" id="simp-d" placeholder="Nämnare" value="8">
         </div>
-        <button class="calc-btn" onclick="simplifyFrac()">Förkorta</button>
+        <button class="calc-btn" id="btn-simplifyFrac">Förkorta</button>
       </div>
       <div class="math-result" id="simp-result">—</div>
     </div>
@@ -280,17 +279,17 @@
     <p>Att <strong style="color:var(--white)">förlänga</strong> är motsatsen till förkorta — man <em>multiplicerar</em> täljare och nämnare med samma tal. Värdet förändras inte, men nämnaren blir större. Det behövs t.ex. när man ska addera bråk med olika nämnare.</p>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 1 — Förläng <span class="frac-t"><span>1</span><span>3</span></span> så att nämnaren blir 9</div>
+      <div class="ex-title">Exempel 1 — Förläng <span class="frac"><span>1</span><span>3</span></span> så att nämnaren blir 9</div>
       <div class="ex-line">Vad behöver vi multiplicera 3 med för att få 9? → <strong>3</strong></div>
       <div class="ex-line">1 × 3 = 3 &nbsp;|&nbsp; 3 × 3 = 9</div>
-      <div class="ex-result"><span class="frac-t"><span>1</span><span>3</span></span> = <span class="frac-t"><span>3</span><span>9</span></span></div>
+      <div class="ex-result"><span class="frac"><span>1</span><span>3</span></span> = <span class="frac"><span>3</span><span>9</span></span></div>
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 2 — Förläng <span class="frac-t"><span>2</span><span>5</span></span> så att nämnaren blir 20</div>
+      <div class="ex-title">Exempel 2 — Förläng <span class="frac"><span>2</span><span>5</span></span> så att nämnaren blir 20</div>
       <div class="ex-line">5 × 4 = 20, så vi multiplicerar med 4</div>
       <div class="ex-line">2 × 4 = 8 &nbsp;|&nbsp; 5 × 4 = 20</div>
-      <div class="ex-result"><span class="frac-t"><span>2</span><span>5</span></span> = <span class="frac-t"><span>8</span><span>20</span></span></div>
+      <div class="ex-result"><span class="frac"><span>2</span><span>5</span></span> = <span class="frac"><span>8</span><span>20</span></span></div>
     </div>
 
     <div class="tip-box">
@@ -313,22 +312,22 @@
 
     <div class="ex-box">
       <div class="ex-title">Exempel 1</div>
-      <div class="ex-line"><span class="frac-t"><span>1</span><span>5</span></span> + <span class="frac-t"><span>2</span><span>5</span></span> → Nämnarna är redan lika (5)</div>
+      <div class="ex-line"><span class="frac"><span>1</span><span>5</span></span> + <span class="frac"><span>2</span><span>5</span></span> → Nämnarna är redan lika (5)</div>
       <div class="ex-line">Addera täljarna: 1 + 2 = 3</div>
-      <div class="ex-result"><span class="frac-t"><span>1</span><span>5</span></span> + <span class="frac-t"><span>2</span><span>5</span></span> = <span class="frac-t"><span>3</span><span>5</span></span></div>
+      <div class="ex-result"><span class="frac"><span>1</span><span>5</span></span> + <span class="frac"><span>2</span><span>5</span></span> = <span class="frac"><span>3</span><span>5</span></span></div>
     </div>
 
     <div class="ex-box">
       <div class="ex-title">Exempel 2</div>
-      <div class="ex-line"><span class="frac-t"><span>3</span><span>8</span></span> + <span class="frac-t"><span>2</span><span>8</span></span> = ?</div>
+      <div class="ex-line"><span class="frac"><span>3</span><span>8</span></span> + <span class="frac"><span>2</span><span>8</span></span> = ?</div>
       <div class="ex-line">3 + 2 = 5, nämnaren är 8</div>
-      <div class="ex-result"><span class="frac-t"><span>3</span><span>8</span></span> + <span class="frac-t"><span>2</span><span>8</span></span> = <span class="frac-t"><span>5</span><span>8</span></span></div>
+      <div class="ex-result"><span class="frac"><span>3</span><span>8</span></span> + <span class="frac"><span>2</span><span>8</span></span> = <span class="frac"><span>5</span><span>8</span></span></div>
     </div>
 
     <div class="ex-box">
       <div class="ex-title">Exempel 3 – med förkortning</div>
-      <div class="ex-line"><span class="frac-t"><span>2</span><span>6</span></span> + <span class="frac-t"><span>4</span><span>6</span></span> = <span class="frac-t"><span>6</span><span>6</span></span> → <span class="frac-t"><span>6</span><span>6</span></span> = 1</div>
-      <div class="ex-result"><span class="frac-t"><span>2</span><span>6</span></span> + <span class="frac-t"><span>4</span><span>6</span></span> = 1</div>
+      <div class="ex-line"><span class="frac"><span>2</span><span>6</span></span> + <span class="frac"><span>4</span><span>6</span></span> = <span class="frac"><span>6</span><span>6</span></span> → <span class="frac"><span>6</span><span>6</span></span> = 1</div>
+      <div class="ex-result"><span class="frac"><span>2</span><span>6</span></span> + <span class="frac"><span>4</span><span>6</span></span> = 1</div>
     </div>
   </div>
 
@@ -345,27 +344,27 @@
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 1 — <span class="frac-t"><span>1</span><span>2</span></span> + <span class="frac-t"><span>1</span><span>3</span></span></div>
+      <div class="ex-title">Exempel 1 — <span class="frac"><span>1</span><span>2</span></span> + <span class="frac"><span>1</span><span>3</span></span></div>
       <div class="ex-line"><strong>Steg 1:</strong> Gemensam nämnare = 2 × 3 = <strong>6</strong></div>
-      <div class="ex-line"><strong>Steg 2:</strong> <span class="frac-t"><span>1</span><span>2</span></span> → 1×3 / 2×3 = <span class="frac-t"><span>3</span><span>6</span></span> &nbsp;|&nbsp; <span class="frac-t"><span>1</span><span>3</span></span> → 1×2 / 3×2 = <span class="frac-t"><span>2</span><span>6</span></span></div>
-      <div class="ex-line"><strong>Steg 3:</strong> <span class="frac-t"><span>3</span><span>6</span></span> + <span class="frac-t"><span>2</span><span>6</span></span> = <span class="frac-t"><span>5</span><span>6</span></span></div>
-      <div class="ex-result"><span class="frac-t"><span>1</span><span>2</span></span> + <span class="frac-t"><span>1</span><span>3</span></span> = <span class="frac-t"><span>5</span><span>6</span></span></div>
+      <div class="ex-line"><strong>Steg 2:</strong> <span class="frac"><span>1</span><span>2</span></span> → 1×3 / 2×3 = <span class="frac"><span>3</span><span>6</span></span> &nbsp;|&nbsp; <span class="frac"><span>1</span><span>3</span></span> → 1×2 / 3×2 = <span class="frac"><span>2</span><span>6</span></span></div>
+      <div class="ex-line"><strong>Steg 3:</strong> <span class="frac"><span>3</span><span>6</span></span> + <span class="frac"><span>2</span><span>6</span></span> = <span class="frac"><span>5</span><span>6</span></span></div>
+      <div class="ex-result"><span class="frac"><span>1</span><span>2</span></span> + <span class="frac"><span>1</span><span>3</span></span> = <span class="frac"><span>5</span><span>6</span></span></div>
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 2 — <span class="frac-t"><span>2</span><span>3</span></span> + <span class="frac-t"><span>1</span><span>4</span></span></div>
+      <div class="ex-title">Exempel 2 — <span class="frac"><span>2</span><span>3</span></span> + <span class="frac"><span>1</span><span>4</span></span></div>
       <div class="ex-line"><strong>Steg 1:</strong> 3 × 4 = <strong>12</strong></div>
-      <div class="ex-line"><strong>Steg 2:</strong> <span class="frac-t"><span>2</span><span>3</span></span> = <span class="frac-t"><span>8</span><span>12</span></span> &nbsp;|&nbsp; <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>3</span><span>12</span></span></div>
-      <div class="ex-line"><strong>Steg 3:</strong> <span class="frac-t"><span>8</span><span>12</span></span> + <span class="frac-t"><span>3</span><span>12</span></span> = <span class="frac-t"><span>11</span><span>12</span></span></div>
-      <div class="ex-result"><span class="frac-t"><span>2</span><span>3</span></span> + <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>11</span><span>12</span></span></div>
+      <div class="ex-line"><strong>Steg 2:</strong> <span class="frac"><span>2</span><span>3</span></span> = <span class="frac"><span>8</span><span>12</span></span> &nbsp;|&nbsp; <span class="frac"><span>1</span><span>4</span></span> = <span class="frac"><span>3</span><span>12</span></span></div>
+      <div class="ex-line"><strong>Steg 3:</strong> <span class="frac"><span>8</span><span>12</span></span> + <span class="frac"><span>3</span><span>12</span></span> = <span class="frac"><span>11</span><span>12</span></span></div>
+      <div class="ex-result"><span class="frac"><span>2</span><span>3</span></span> + <span class="frac"><span>1</span><span>4</span></span> = <span class="frac"><span>11</span><span>12</span></span></div>
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 3 — <span class="frac-t"><span>1</span><span>6</span></span> + <span class="frac-t"><span>1</span><span>4</span></span></div>
+      <div class="ex-title">Exempel 3 — <span class="frac"><span>1</span><span>6</span></span> + <span class="frac"><span>1</span><span>4</span></span></div>
       <div class="ex-line">Gemensam nämnare: 6 × 4 = 24 &nbsp;(eller 12, som är minsta)</div>
-      <div class="ex-line">Använder 12: <span class="frac-t"><span>1</span><span>6</span></span> = <span class="frac-t"><span>2</span><span>12</span></span> &nbsp;|&nbsp; <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>3</span><span>12</span></span></div>
-      <div class="ex-line"><span class="frac-t"><span>2</span><span>12</span></span> + <span class="frac-t"><span>3</span><span>12</span></span> = <span class="frac-t"><span>5</span><span>12</span></span></div>
-      <div class="ex-result"><span class="frac-t"><span>1</span><span>6</span></span> + <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>5</span><span>12</span></span></div>
+      <div class="ex-line">Använder 12: <span class="frac"><span>1</span><span>6</span></span> = <span class="frac"><span>2</span><span>12</span></span> &nbsp;|&nbsp; <span class="frac"><span>1</span><span>4</span></span> = <span class="frac"><span>3</span><span>12</span></span></div>
+      <div class="ex-line"><span class="frac"><span>2</span><span>12</span></span> + <span class="frac"><span>3</span><span>12</span></span> = <span class="frac"><span>5</span><span>12</span></span></div>
+      <div class="ex-result"><span class="frac"><span>1</span><span>6</span></span> + <span class="frac"><span>1</span><span>4</span></span> = <span class="frac"><span>5</span><span>12</span></span></div>
     </div>
 
     <!-- Kalkylator addition -->
@@ -383,7 +382,7 @@
           <div class="frac-input-line"></div>
           <input type="number" id="add-d2" placeholder="Nämnare" value="3">
         </div>
-        <button class="calc-btn" onclick="addFrac()">Beräkna</button>
+        <button class="calc-btn" id="btn-addFrac">Beräkna</button>
       </div>
       <div class="math-result" id="add-result">—</div>
     </div>
@@ -395,17 +394,17 @@
     <p>Exakt samma regler som addition — <strong style="color:var(--white)">gemensam nämnare</strong> och sedan subtraherar man täljarna.</p>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 1 — <span class="frac-t"><span>3</span><span>4</span></span> − <span class="frac-t"><span>1</span><span>4</span></span> (samma nämnare)</div>
+      <div class="ex-title">Exempel 1 — <span class="frac"><span>3</span><span>4</span></span> − <span class="frac"><span>1</span><span>4</span></span> (samma nämnare)</div>
       <div class="ex-line">3 − 1 = 2, nämnare 4</div>
-      <div class="ex-result"><span class="frac-t"><span>3</span><span>4</span></span> − <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>2</span><span>4</span></span> = <span class="frac-t"><span>1</span><span>2</span></span></div>
+      <div class="ex-result"><span class="frac"><span>3</span><span>4</span></span> − <span class="frac"><span>1</span><span>4</span></span> = <span class="frac"><span>2</span><span>4</span></span> = <span class="frac"><span>1</span><span>2</span></span></div>
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 2 — <span class="frac-t"><span>5</span><span>6</span></span> − <span class="frac-t"><span>1</span><span>4</span></span> (olika nämnare)</div>
+      <div class="ex-title">Exempel 2 — <span class="frac"><span>5</span><span>6</span></span> − <span class="frac"><span>1</span><span>4</span></span> (olika nämnare)</div>
       <div class="ex-line">Gemensam nämnare: 6 × 4 = 24 &nbsp;(eller 12)</div>
-      <div class="ex-line">Använder 12: <span class="frac-t"><span>5</span><span>6</span></span> = <span class="frac-t"><span>10</span><span>12</span></span> &nbsp;|&nbsp; <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>3</span><span>12</span></span></div>
-      <div class="ex-line"><span class="frac-t"><span>10</span><span>12</span></span> − <span class="frac-t"><span>3</span><span>12</span></span> = <span class="frac-t"><span>7</span><span>12</span></span></div>
-      <div class="ex-result"><span class="frac-t"><span>5</span><span>6</span></span> − <span class="frac-t"><span>1</span><span>4</span></span> = <span class="frac-t"><span>7</span><span>12</span></span></div>
+      <div class="ex-line">Använder 12: <span class="frac"><span>5</span><span>6</span></span> = <span class="frac"><span>10</span><span>12</span></span> &nbsp;|&nbsp; <span class="frac"><span>1</span><span>4</span></span> = <span class="frac"><span>3</span><span>12</span></span></div>
+      <div class="ex-line"><span class="frac"><span>10</span><span>12</span></span> − <span class="frac"><span>3</span><span>12</span></span> = <span class="frac"><span>7</span><span>12</span></span></div>
+      <div class="ex-result"><span class="frac"><span>5</span><span>6</span></span> − <span class="frac"><span>1</span><span>4</span></span> = <span class="frac"><span>7</span><span>12</span></span></div>
     </div>
 
     <!-- Kalkylator subtraktion -->
@@ -423,7 +422,7 @@
           <div class="frac-input-line"></div>
           <input type="number" id="sub-d2" placeholder="Nämnare" value="4">
         </div>
-        <button class="calc-btn" onclick="subFrac()">Beräkna</button>
+        <button class="calc-btn" id="btn-subFrac">Beräkna</button>
       </div>
       <div class="math-result" id="sub-result">—</div>
     </div>
@@ -443,16 +442,16 @@
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 1 — <span class="frac-t"><span>2</span><span>3</span></span> × <span class="frac-t"><span>3</span><span>4</span></span></div>
+      <div class="ex-title">Exempel 1 — <span class="frac"><span>2</span><span>3</span></span> × <span class="frac"><span>3</span><span>4</span></span></div>
       <div class="ex-line">Täljare: 2 × 3 = 6 &nbsp;|&nbsp; Nämnare: 3 × 4 = 12</div>
-      <div class="ex-line"><span class="frac-t"><span>6</span><span>12</span></span> → förkorta med 6 → <span class="frac-t"><span>1</span><span>2</span></span></div>
-      <div class="ex-result"><span class="frac-t"><span>2</span><span>3</span></span> × <span class="frac-t"><span>3</span><span>4</span></span> = <span class="frac-t"><span>1</span><span>2</span></span></div>
+      <div class="ex-line"><span class="frac"><span>6</span><span>12</span></span> → förkorta med 6 → <span class="frac"><span>1</span><span>2</span></span></div>
+      <div class="ex-result"><span class="frac"><span>2</span><span>3</span></span> × <span class="frac"><span>3</span><span>4</span></span> = <span class="frac"><span>1</span><span>2</span></span></div>
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 2 — <span class="frac-t"><span>1</span><span>2</span></span> × <span class="frac-t"><span>1</span><span>2</span></span></div>
+      <div class="ex-title">Exempel 2 — <span class="frac"><span>1</span><span>2</span></span> × <span class="frac"><span>1</span><span>2</span></span></div>
       <div class="ex-line">1 × 1 = 1 &nbsp;|&nbsp; 2 × 2 = 4</div>
-      <div class="ex-result"><span class="frac-t"><span>1</span><span>2</span></span> × <span class="frac-t"><span>1</span><span>2</span></span> = <span class="frac-t"><span>1</span><span>4</span></span></div>
+      <div class="ex-result"><span class="frac"><span>1</span><span>2</span></span> × <span class="frac"><span>1</span><span>2</span></span> = <span class="frac"><span>1</span><span>4</span></span></div>
     </div>
 
     <div class="tip-box">
@@ -474,7 +473,7 @@
           <div class="frac-input-line"></div>
           <input type="number" id="mul-d2" placeholder="Nämnare" value="4">
         </div>
-        <button class="calc-btn" onclick="mulFrac()">Beräkna</button>
+        <button class="calc-btn" id="btn-mulFrac">Beräkna</button>
       </div>
       <div class="math-result" id="mul-result">—</div>
     </div>
@@ -496,17 +495,17 @@
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 1 — <span class="frac-t"><span>2</span><span>3</span></span> ÷ <span class="frac-t"><span>1</span><span>2</span></span></div>
-      <div class="ex-line">Vänd <span class="frac-t"><span>1</span><span>2</span></span> → <span class="frac-t"><span>2</span><span>1</span></span></div>
-      <div class="ex-line"><span class="frac-t"><span>2</span><span>3</span></span> × <span class="frac-t"><span>2</span><span>1</span></span> = <span class="frac-t"><span>4</span><span>3</span></span></div>
-      <div class="ex-result"><span class="frac-t"><span>2</span><span>3</span></span> ÷ <span class="frac-t"><span>1</span><span>2</span></span> = <span class="frac-t"><span>4</span><span>3</span></span> ≈ 1,33</div>
+      <div class="ex-title">Exempel 1 — <span class="frac"><span>2</span><span>3</span></span> ÷ <span class="frac"><span>1</span><span>2</span></span></div>
+      <div class="ex-line">Vänd <span class="frac"><span>1</span><span>2</span></span> → <span class="frac"><span>2</span><span>1</span></span></div>
+      <div class="ex-line"><span class="frac"><span>2</span><span>3</span></span> × <span class="frac"><span>2</span><span>1</span></span> = <span class="frac"><span>4</span><span>3</span></span></div>
+      <div class="ex-result"><span class="frac"><span>2</span><span>3</span></span> ÷ <span class="frac"><span>1</span><span>2</span></span> = <span class="frac"><span>4</span><span>3</span></span> ≈ 1,33</div>
     </div>
 
     <div class="ex-box">
-      <div class="ex-title">Exempel 2 — <span class="frac-t"><span>3</span><span>4</span></span> ÷ <span class="frac-t"><span>3</span><span>8</span></span></div>
-      <div class="ex-line">Vänd <span class="frac-t"><span>3</span><span>8</span></span> → <span class="frac-t"><span>8</span><span>3</span></span></div>
-      <div class="ex-line"><span class="frac-t"><span>3</span><span>4</span></span> × <span class="frac-t"><span>8</span><span>3</span></span> = <span class="frac-t"><span>24</span><span>12</span></span> = 2</div>
-      <div class="ex-result"><span class="frac-t"><span>3</span><span>4</span></span> ÷ <span class="frac-t"><span>3</span><span>8</span></span> = 2</div>
+      <div class="ex-title">Exempel 2 — <span class="frac"><span>3</span><span>4</span></span> ÷ <span class="frac"><span>3</span><span>8</span></span></div>
+      <div class="ex-line">Vänd <span class="frac"><span>3</span><span>8</span></span> → <span class="frac"><span>8</span><span>3</span></span></div>
+      <div class="ex-line"><span class="frac"><span>3</span><span>4</span></span> × <span class="frac"><span>8</span><span>3</span></span> = <span class="frac"><span>24</span><span>12</span></span> = 2</div>
+      <div class="ex-result"><span class="frac"><span>3</span><span>4</span></span> ÷ <span class="frac"><span>3</span><span>8</span></span> = 2</div>
     </div>
 
     <div class="tip-box">
@@ -520,15 +519,15 @@
     <p>Ett <strong style="color:var(--white)">oäkta bråk</strong> har täljare som är större än nämnaren (t.ex. 7/4). Det kan skrivas som ett <strong style="color:var(--white)">blandat tal</strong> (t.ex. 1¾).</p>
 
     <div class="ex-box">
-      <div class="ex-title">Oäkta bråk → blandat tal &nbsp;(<span class="frac-t"><span>7</span><span>4</span></span>)</div>
-      <div class="ex-line">Dela: 7 ÷ 4 = 1 rest 3 &nbsp;→ heltalsdelen är 1, resten är <span class="frac-t"><span>3</span><span>4</span></span></div>
-      <div class="ex-result"><span class="frac-t"><span>7</span><span>4</span></span> = 1¾ = 1,75</div>
+      <div class="ex-title">Oäkta bråk → blandat tal &nbsp;(<span class="frac"><span>7</span><span>4</span></span>)</div>
+      <div class="ex-line">Dela: 7 ÷ 4 = 1 rest 3 &nbsp;→ heltalsdelen är 1, resten är <span class="frac"><span>3</span><span>4</span></span></div>
+      <div class="ex-result"><span class="frac"><span>7</span><span>4</span></span> = 1¾ = 1,75</div>
     </div>
 
     <div class="ex-box">
       <div class="ex-title">Blandat tal → oäkta bråk &nbsp;(2⅓)</div>
       <div class="ex-line">Heltal × nämnare + täljare: 2 × 3 + 1 = 7</div>
-      <div class="ex-result">2⅓ = <span class="frac-t"><span>7</span><span>3</span></span></div>
+      <div class="ex-result">2⅓ = <span class="frac"><span>7</span><span>3</span></span></div>
     </div>
   </div>
 
@@ -612,10 +611,10 @@
 
     <div class="ex-box">
       <div class="ex-title">Exempel — R₁ = 20 Ω, R₂ = 30 Ω parallellkopplade</div>
-      <div class="ex-line"><span class="frac-t"><span>1</span><span>20</span></span> + <span class="frac-t"><span>1</span><span>30</span></span> → gemensam nämnare: 60</div>
-      <div class="ex-line"><span class="frac-t"><span>1</span><span>20</span></span> = <span class="frac-t"><span>3</span><span>60</span></span> &nbsp;|&nbsp; <span class="frac-t"><span>1</span><span>30</span></span> = <span class="frac-t"><span>2</span><span>60</span></span></div>
-      <div class="ex-line"><span class="frac-t"><span>3</span><span>60</span></span> + <span class="frac-t"><span>2</span><span>60</span></span> = <span class="frac-t"><span>5</span><span>60</span></span> = <span class="frac-t"><span>1</span><span>12</span></span></div>
-      <div class="ex-line">Alltså: 1/R_tot = <span class="frac-t"><span>1</span><span>12</span></span> → R_tot = 12 Ω</div>
+      <div class="ex-line"><span class="frac"><span>1</span><span>20</span></span> + <span class="frac"><span>1</span><span>30</span></span> → gemensam nämnare: 60</div>
+      <div class="ex-line"><span class="frac"><span>1</span><span>20</span></span> = <span class="frac"><span>3</span><span>60</span></span> &nbsp;|&nbsp; <span class="frac"><span>1</span><span>30</span></span> = <span class="frac"><span>2</span><span>60</span></span></div>
+      <div class="ex-line"><span class="frac"><span>3</span><span>60</span></span> + <span class="frac"><span>2</span><span>60</span></span> = <span class="frac"><span>5</span><span>60</span></span> = <span class="frac"><span>1</span><span>12</span></span></div>
+      <div class="ex-line">Alltså: 1/R_tot = <span class="frac"><span>1</span><span>12</span></span> → R_tot = 12 Ω</div>
       <div class="ex-result">R_tot = 12 Ω</div>
     </div>
   </div>
@@ -848,7 +847,7 @@
           <option value="0.001" selected>Milli (m)</option>
           <option value="0.000001">Mikro (µ)</option>
         </select>
-        <button class="calc-btn" onclick="convertPrefix()">Omvandla</button>
+        <button class="calc-btn" id="btn-convertPrefix">Omvandla</button>
       </div>
       <div class="math-result" id="pref-result">—</div>
     </div>
@@ -1039,7 +1038,7 @@
           <label style="font-size:0.8rem;color:var(--muted)">Hyp. c</label>
           <input type="number" id="pyth-c" placeholder="?" style="width:90px">
         </div>
-        <button class="calc-btn" onclick="calcPyth()">Beräkna</button>
+        <button class="calc-btn" id="btn-calcPyth">Beräkna</button>
       </div>
       <div class="math-result" id="pyth-result">—</div>
     </div>
@@ -1153,7 +1152,7 @@
         <input type="number" id="pct-hela" placeholder="Hela" step="any">
         <input type="number" id="pct-del" placeholder="Del" step="any">
         <input type="number" id="pct-p" placeholder="Procent (%)" step="any">
-        <button class="calc-btn" onclick="calcProcent()">Beräkna</button>
+        <button class="calc-btn" id="btn-calcProcent">Beräkna</button>
       </div>
       <div class="math-result" id="pct-result">—</div>
     </div>
@@ -1310,8 +1309,16 @@ function calcPyth() {
     res.textContent = 'Lämna exakt ett fält tomt (den okända sidan)';
   }
 }
+
+document.getElementById('btn-simplifyFrac').addEventListener('click', simplifyFrac);
+document.getElementById('btn-addFrac').addEventListener('click', addFrac);
+document.getElementById('btn-subFrac').addEventListener('click', subFrac);
+document.getElementById('btn-mulFrac').addEventListener('click', mulFrac);
+document.getElementById('btn-convertPrefix').addEventListener('click', convertPrefix);
+document.getElementById('btn-calcPyth').addEventListener('click', calcPyth);
+document.getElementById('btn-calcProcent').addEventListener('click', calcProcent);
 </script>
-<script src="script.js"></script>
+<script src="../script.js"></script>
 
 </body>
 </html>

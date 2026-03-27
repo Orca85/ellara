@@ -1,63 +1,6 @@
 'use strict';
 
 /* =========================================================
-   BRÅK-TOGGLE  –  staplade bråk / slash-bråk
-   ========================================================= */
-(function () {
-  const KEY = 'fracMode';
-
-  function applyFracMode(mode) {
-    document.body.classList.toggle('slash-mode', mode === 'slash');
-    const btn = document.getElementById('frac-toggle');
-    if (!btn) return;
-    btn.textContent = mode === 'slash' ? '½' : 'a/b';
-    btn.title = '';
-  }
-
-  const saved = localStorage.getItem(KEY) || 'frac';
-  applyFracMode(saved);
-
-  const btn = document.getElementById('frac-toggle');
-  if (btn) {
-    btn.addEventListener('click', function () {
-      const current = localStorage.getItem(KEY) || 'frac';
-      const next = current === 'frac' ? 'slash' : 'frac';
-      localStorage.setItem(KEY, next);
-      applyFracMode(next);
-    });
-
-    /* HTML tooltip */
-    const tip = document.createElement('div');
-    tip.id = 'frac-tooltip';
-    document.body.appendChild(tip);
-
-    function updateTip() {
-      const mode = localStorage.getItem(KEY) || 'frac';
-      if (mode === 'frac') {
-        tip.innerHTML = 'Växla till snedstreck &nbsp;<span class="frac-tip-arrow">→</span>&nbsp; <span style="font-size:0.85rem">1/2</span>';
-      } else {
-        tip.innerHTML = 'Växla till staplat bråk &nbsp;<span class="frac-tip-arrow">→</span>&nbsp; <span class="frac"><span>1</span><span>2</span></span>';
-      }
-    }
-
-    btn.addEventListener('mouseenter', function () {
-      updateTip();
-      const r = btn.getBoundingClientRect();
-      tip.style.top   = (r.bottom + 8) + 'px';
-      tip.style.right = (window.innerWidth - r.right) + 'px';
-      tip.style.left  = 'auto';
-      tip.classList.add('visible');
-    });
-    btn.addEventListener('mouseleave', function () {
-      tip.classList.remove('visible');
-    });
-    btn.addEventListener('click', function () {
-      updateTip();
-    });
-  }
-})();
-
-/* =========================================================
    OHMS LAW WHEEL  –  U = R * I
    ========================================================= */
 (function () {
@@ -661,45 +604,70 @@
    ========================================================= */
 (function () {
   const INDEX = [
+    // ── Ellära ──────────────────────────────────────────────
     // Atomfysik
-    { title: 'Atomens uppbyggnad', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'atom proton neutron elektron kärna partikel' },
-    { title: 'Laddning & Statisk elektricitet', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'laddning statisk elektricitet överskott underskott plus minus' },
-    { title: 'AC vs DC – Likström & Växelström', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'ac dc likström växelström sinuskurva batteri vägguttag riktning' },
-    { title: 'Hz – Hertz & frekvens', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'hz hertz frekvens 50hz 60hz svängningar sekund europa usa' },
+    { course: 'Ellära', title: 'Atomens uppbyggnad', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'atom proton neutron elektron kärna partikel' },
+    { course: 'Ellära', title: 'Laddning & Statisk elektricitet', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'laddning statisk elektricitet överskott underskott plus minus' },
+    { course: 'Ellära', title: 'AC vs DC – Likström & Växelström', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'ac dc likström växelström sinuskurva batteri vägguttag riktning' },
+    { course: 'Ellära', title: 'Hz – Hertz & frekvens', section: 'Atomfysik', anchor: 'atomfysik.html', keywords: 'hz hertz frekvens 50hz 60hz svängningar sekund europa usa' },
     // Material
-    { title: 'Ledare, Halvledare & Isolatorer', section: 'Material', anchor: 'material.html', keywords: 'ledare halvledare isolator koppar aluminium resistivitet material' },
-    { title: 'Resistivitetstabell', section: 'Material', anchor: 'material.html', keywords: 'resistivitet rho tabell koppar aluminium silver guld järn' },
+    { course: 'Ellära', title: 'Ledare, Halvledare & Isolatorer', section: 'Material', anchor: 'material.html', keywords: 'ledare halvledare isolator koppar aluminium resistivitet material' },
+    { course: 'Ellära', title: 'Resistivitetstabell', section: 'Material', anchor: 'material.html', keywords: 'resistivitet rho tabell koppar aluminium silver guld järn' },
     // Symboler
-    { title: 'Elsymboler (IEC 60617)', section: 'Symboler', anchor: 'symboler.html', keywords: 'elsymboler iec kretschema batteri resistor kondensator spole lampa strömbrytare' },
-    { title: 'Vad är IEC?', section: 'Symboler', anchor: 'symboler.html', keywords: 'iec international electrotechnical commission standard organisation' },
-    { title: 'Minneslista – storheter & enheter', section: 'Symboler', anchor: 'symboler.html', keywords: 'storhet enhet volt ampere ohm watt hertz joule coulomb symbol' },
+    { course: 'Ellära', title: 'Elsymboler (IEC 60617)', section: 'Symboler', anchor: 'symboler.html', keywords: 'elsymboler iec kretschema batteri resistor kondensator spole lampa strömbrytare' },
+    { course: 'Ellära', title: 'Vad är IEC?', section: 'Symboler', anchor: 'symboler.html', keywords: 'iec international electrotechnical commission standard organisation' },
+    { course: 'Ellära', title: 'Minneslista – storheter & enheter', section: 'Symboler', anchor: 'symboler.html', keywords: 'storhet enhet volt ampere ohm watt hertz joule coulomb symbol' },
     // Kabeltyper
-    { title: 'Kabeltyper – EK, FK, MK, RK', section: 'Kabeltyper', anchor: 'kabeltyper.html', keywords: 'kabel ek fk mk rk enfasig trefasig installation kabeltyp' },
+    { course: 'Ellära', title: 'Kabeltyper – EK, FK, MK, RK', section: 'Kabeltyper', anchor: 'kabeltyper.html', keywords: 'kabel ek fk mk rk enfasig trefasig installation kabeltyp' },
+    // Kabeldimensionering
+    { course: 'Ellära', title: 'Kabeldimensionering – säkring & area', section: 'Kabeldim.', anchor: 'kabeldim.html', keywords: 'kabeldimensionering säkring area 6a 10a 16a 20a 25a 35a 50a kabel koppar area mm2' },
+    { course: 'Ellära', title: 'Spänningsfall – kalkylator', section: 'Kabeldim.', anchor: 'kabeldim.html', keywords: 'spänningsfall kalkylator deltau 4% 9.2v max tillåtet koppar aluminium' },
     // Kretsar
-    { title: 'Ohms lag – U = R · I', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'ohm ohms lag u r i spänning resistans ström beräkna formel' },
-    { title: 'Effektlagen – P = U · I', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'effekt p u i watt effektlagen formel beräkna' },
-    { title: 'R = ρ · L/A – alla varianter', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'rho resistivitet längd area resistans ledare formel varianter' },
-    { title: 'Seriekoppling', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'serie seriekrets seriekoppling rtot summera resistans ström itot ur1 ur2' },
-    { title: 'Parallellkoppling', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'parallell parallellkrets parallellkoppling rtot invers bråk spänning grenar i1 i2' },
-    { title: 'Kirchhoffs strömlag – KCL', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'kirchhoff kcl strömlag nod ström in ut summa förgrening kirchoffs lag' },
-    { title: 'Kirchhoffs spänningslag – KVL', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'kirchhoff kvl spänningslag slinga summa noll spänningsfall källspänning kirchoffs lag' },
-    { title: 'Mätteknik – Amperemeter & Voltmeter', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'amperemeter voltmeter mäta serie parallell koppla mätteknik' },
-    { title: 'Beteckningar – Utot, UR1, Itot m.fl.', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'beteckning utot ur1 ur2 itot i1 i2 rtot rpar index notation spänning ström resistans förklaring' },
-    { title: 'Exempelräkning – Seriekrets', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'exempel exempelräkning seriekrets serie rtot itot ur1 ur2 steg beräkning genomgång' },
-    { title: 'Exempelräkning – Parallellkrets', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'exempel exempelräkning parallellkrets parallell rtot itot i1 i2 steg beräkning genomgång' },
-    { title: 'Exempelräkning – Kombinerad krets', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'exempel exempelräkning kombinerad krets kombi blandad serie parallell rpar rtot steg beräkning' },
+    { course: 'Ellära', title: 'Ohms lag – U = R · I', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'ohm ohms lag u r i spänning resistans ström beräkna formel' },
+    { course: 'Ellära', title: 'Effektlagen – P = U · I', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'effekt p u i watt effektlagen formel beräkna' },
+    { course: 'Ellära', title: 'R = ρ · L/A – alla varianter', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'rho resistivitet längd area resistans ledare formel varianter' },
+    { course: 'Ellära', title: 'Seriekoppling', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'serie seriekrets seriekoppling rtot summera resistans ström itot ur1 ur2' },
+    { course: 'Ellära', title: 'Parallellkoppling', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'parallell parallellkrets parallellkoppling rtot invers bråk spänning grenar i1 i2' },
+    { course: 'Ellära', title: 'Kirchhoffs strömlag – KCL', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'kirchhoff kcl strömlag nod ström in ut summa förgrening kirchoffs lag' },
+    { course: 'Ellära', title: 'Kirchhoffs spänningslag – KVL', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'kirchhoff kvl spänningslag slinga summa noll spänningsfall källspänning kirchoffs lag' },
+    { course: 'Ellära', title: 'Mätteknik – Amperemeter & Voltmeter', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'amperemeter voltmeter mäta serie parallell koppla mätteknik' },
+    { course: 'Ellära', title: 'Transformatorn – varvsförhållande & effektbalans', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'transformator varv n1 n2 u1 u2 i1 i2 effektbalans spänning steg upp ner' },
+    { course: 'Ellära', title: 'Exempelräkning – Seriekrets', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'exempel exempelräkning seriekrets serie rtot itot ur1 ur2 steg beräkning genomgång' },
+    { course: 'Ellära', title: 'Exempelräkning – Parallellkrets', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'exempel exempelräkning parallellkrets parallell rtot itot i1 i2 steg beräkning genomgång' },
+    { course: 'Ellära', title: 'Exempelräkning – Kombinerad krets', section: 'Kretsar', anchor: 'kretsar.html', keywords: 'exempel exempelräkning kombinerad krets kombi blandad serie parallell rpar rtot steg beräkning' },
+    // Trefas
+    { course: 'Ellära', title: 'Trefas – fas- och linjespänning', section: 'Trefas', anchor: 'trefas.html', keywords: 'trefas fasspänning linjespänning 230v 400v rot3 sqrt3 1.732 fas neutral' },
+    { course: 'Ellära', title: 'Sinusformad spänning & toppvärde', section: 'Trefas', anchor: 'trefas.html', keywords: 'sinus sinusvåg toppvärde upeak urms effektivvärde 325v rot2 frekvens period' },
+    { course: 'Ellära', title: 'EMK & Mot-EMK', section: 'Trefas', anchor: 'trefas.html', keywords: 'emk elektromotorisk kraft mot-emk motor generator inducerad spänning magnetfält' },
+    { course: 'Ellära', title: 'Spole & Induktiv reaktans X_L', section: 'Trefas', anchor: 'trefas.html', keywords: 'spole induktans reaktans xl induktiv 2pifL henry släpar fasförskjutning' },
+    { course: 'Ellära', title: 'Kondensator & Kapacitiv reaktans X_C', section: 'Trefas', anchor: 'trefas.html', keywords: 'kondensator kapacitans reaktans xc kapacitiv farad leder fasförskjutning' },
+    { course: 'Ellära', title: 'Fasförskjutning & Impedans Z', section: 'Trefas', anchor: 'trefas.html', keywords: 'fasförskjutning impedans z resistans reaktans vinkel phi grader radianer' },
+    { course: 'Ellära', title: 'Effekttyper – P, Q och S', section: 'Trefas', anchor: 'trefas.html', keywords: 'effekttyper aktiv reaktiv skenbar p q s watt var voltampere effektfaktor cos phi trefas' },
+    // Skydd
+    { course: 'Ellära', title: 'Säkringar & automatsäkringar', section: 'Skydd', anchor: 'skydd.html', keywords: 'säkring automatsäkring b c d-klass utlösningsström kortslutning överström MCB' },
+    { course: 'Ellära', title: 'Jordfelsbrytare (JFB)', section: 'Skydd', anchor: 'skydd.html', keywords: 'jordfelsbrytare jfb 30ma 300ma läckström personskydd brandskydd RCD RCCB' },
+    { course: 'Ellära', title: 'Nödstopp & Arbetsbrytare', section: 'Skydd', anchor: 'skydd.html', keywords: 'nödstopp arbetsbrytare brytare röd svamp låsbar säkerhet maskinsäkerhet' },
+    { course: 'Ellära', title: 'Överspänningsskydd & Transient', section: 'Skydd', anchor: 'skydd.html', keywords: 'överspänning transient blixt åsknedslag smutsig el varistor spänningspik skydd' },
+    { course: 'Ellära', title: 'Kabeldimensionering & skydd', section: 'Skydd', anchor: 'skydd.html', keywords: 'kabeldim 1.5mm 2.5mm 10a 16a säkring halogenfri kabel' },
     // Installation
-    { title: 'Resistans i ledare – R = ρ·L/A', section: 'Installation', anchor: 'installation.html', keywords: 'resistans ledare koppar aluminium längd area kalkylator' },
-    { title: 'Säkringstabell & Ledarfärger', section: 'Installation', anchor: 'installation.html', keywords: 'säkring säkringstabell 6a 10a 16a 20a 25a ledarfärg area kabel grön röd grå blå gul' },
-    { title: 'Spänningsfall – förklaring & kalkylator', section: 'Installation', anchor: 'installation.html', keywords: 'spänningsfall spänningsfall deltau 4% olagligt kalkylator installation standard vad är hur uppstår resistans ledare' },
-    // Teckenförklaring
-    { title: 'Teckenförklaring – Elektriska variabler (U, I, R, P…)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring symbol variabel spänning u volt ström i ampere resistans r ohm effekt p watt frekvens hz laddning coulomb tid sekund' },
-    { title: 'Teckenförklaring – Materialegenskaper (ρ, L, A)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring rho ro resistivitet längd area material koppar aluminium ledare' },
-    { title: 'Teckenförklaring – Index och beteckningar (tot, par, Δ)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring index beteckning tot total par parallell delta förändring skillnad oändlighet ungefär notation' },
-    { title: 'Teckenförklaring – Enhetsprefix (M, k, m, μ)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring prefix mega kilo milli mikro enhet potens faktor storlek' },
-    { title: 'Teckenförklaring – Alla formler samlade', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring formel ohms lag effektlag ledarresistans spänningsfall seriekoppling parallellkoppling' },
-    { title: 'Teckenförklaring – Kretsschema-symboler', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring symbol batteri resistor lampa kondensator spole diod brytare säkring jord amperemeter voltmeter kretsschema' },
-    { title: 'Teckenförklaring – Kabeltyp-beteckningar (EK, FK, MK, RK)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring kabel ek fk mk rk kabeltyp beteckning installation' },
+    { course: 'Ellära', title: 'Ledarfärger & postbeteckning', section: 'Installation', anchor: 'installation.html', keywords: 'ledarfärg brun svart grå blå grön gul PE N L1 L2 L3 PEN postbeteckning F1 Q1 K1' },
+    { course: 'Ellära', title: 'Säkringstabell – area & säkring', section: 'Installation', anchor: 'installation.html', keywords: 'säkring säkringstabell 6a 10a 16a 20a 25a ledarfärg area kabel grön röd grå blå gul' },
+    { course: 'Ellära', title: 'Spänningsfall – förklaring & kalkylator', section: 'Installation', anchor: 'installation.html', keywords: 'spänningsfall deltau 4% kalkylator installation standard ledare resistans' },
+    { course: 'Ellära', title: 'Elcentralen – skenor & matning', section: 'Installation', anchor: 'installation.html', keywords: 'elcentral skena DIN PE neutral fas säkring JFB huvudbrytare matning TN-C TN-S' },
+    { course: 'Ellära', title: 'Nätstationen – 10/20 kV → 400 V', section: 'Installation', anchor: 'installation.html', keywords: 'nätstation transformator 10kv 20kv 400v distribution jordplatta PEN ledare' },
+    // Tecken
+    { course: 'Ellära', title: 'Elektriska storheter & enheter (U, I, R, P…)', section: 'Tecken', anchor: 'tecken.html', keywords: 'teckenförklaring symbol variabel spänning u volt ström i ampere resistans r ohm effekt p watt frekvens hz laddning coulomb' },
+    { course: 'Ellära', title: 'Materialegenskaper (ρ, L, A)', section: 'Tecken', anchor: 'tecken.html', keywords: 'rho resistivitet längd area material koppar aluminium ledare' },
+    { course: 'Ellära', title: 'Enhetsprefix (M, k, m, μ)', section: 'Tecken', anchor: 'tecken.html', keywords: 'prefix mega kilo milli mikro enhet potens faktor storlek' },
+    { course: 'Ellära', title: 'AC-storheter (Z, X_L, X_C, ω, S, cos φ)', section: 'Tecken', anchor: 'tecken.html', keywords: 'impedans reaktans vinkelfrekvens skenbar effekt effektfaktor z xl xc omega cos phi ac' },
+    { course: 'Ellära', title: 'Kretsschema-symboler', section: 'Tecken', anchor: 'tecken.html', keywords: 'symbol batteri resistor lampa kondensator spole diod brytare säkring jord amperemeter voltmeter kretsschema' },
+    // Matematik
+    { course: 'Ellära', title: 'Bråkräkning – förkorta, addera, subtrahera', section: 'Matematik', anchor: 'matematik.html', keywords: 'bråk täljare nämnare förkorta addera subtrahera LCD minsta gemensamma nämnare' },
+    { course: 'Ellära', title: 'Enhetsprefix – omvandlingar (k, m, μ, M)', section: 'Matematik', anchor: 'matematik.html', keywords: 'prefix kilo milli mikro mega omvandla 1000 0.001 potens tiopotens' },
+    { course: 'Ellära', title: 'Pythagoras sats – impedanstriangeln', section: 'Matematik', anchor: 'matematik.html', keywords: 'pythagoras sats a2 b2 c2 hypotenusa impedans effekttriangel vinkel' },
+    { course: 'Ellära', title: 'Procenträkning', section: 'Matematik', anchor: 'matematik.html', keywords: 'procent % beräkna andel spänningsfall 4% av 230v' },
+    // Formelblad
+    { course: 'Ellära', title: 'Formelblad – alla formler samlade', section: 'Formelblad', anchor: 'formler.html', keywords: 'formelblad alla formler ohms lag effekt reaktans impedans trefas spänningsfall serie parallell transformator' },
   ];
 
   let activeIdx = -1;
@@ -729,7 +697,7 @@
     }
     list.innerHTML = results.map((r, i) => `
       <li data-anchor="${r.anchor}" data-idx="${i}">
-        <span class="search-result-section">${r.section}</span>
+        <span class="search-result-section">${r.course ? `<span class="search-result-course">${r.course}</span> ` : ''}${r.section}</span>
         <span class="search-result-title">${highlight(r.title, query)}</span>
       </li>`).join('');
     list.classList.add('visible');

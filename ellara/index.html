@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ellära</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link active"><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html" class="sidebar-link "><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html" class="sidebar-link "><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html" class="sidebar-link "><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html" class="sidebar-link "><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kabeldim.html" class="sidebar-link "><span class="sidebar-icon">📏</span> Kabeldim.</a>
+      <a href="kretsar.html" class="sidebar-link "><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="trefas.html" class="sidebar-link "><span class="sidebar-icon">🔄</span> Trefas</a>
+      <a href="skydd.html" class="sidebar-link "><span class="sidebar-icon">🛡️</span> Skydd</a>
+      <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="matematik.html" class="sidebar-link "><span class="sidebar-icon">🔢</span> Matematik</a>
+      <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
+      <a href="formler.html" class="sidebar-link"><span class="sidebar-icon">📄</span> Formelblad</a>
+    </nav>
+  </aside>
+  <div class="main-content">
+
+<!-- ======================================================
+     SÖK
+     ====================================================== -->
+<div class="search-bar-wrap" id="search-wrap">
+  <div class="search-inner">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="search-input"
+      class="search-input"
+      placeholder="Sök — t.ex. Ohms lag, Hz, seriekoppling, säkring…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+  </div>
+  <ul class="search-results" id="search-results"></ul>
+</div>
+
+
+<!-- ======================================================
+     HERO
+     ====================================================== -->
+<header class="hero">
+  <h1 class="hero-title">⚡ Ellära</h1>
+  <p class="hero-sub">Interaktiv studieguide med kalkylatorer och visualiseringar – perfekt att använda på praktiken.</p>
+  <div class="hero-badges">
+    <span class="badge">Ohms lag</span>
+    <span class="badge">Effektlagen</span>
+    <span class="badge">Serie &amp; Parallell</span>
+    <span class="badge">Spänningsfall</span>
+    <span class="badge">Säkringstabell</span>
+  </div>
+</header>
+
+
+<!-- ======================================================
+     KAPITELÖVERSIKT
+     ====================================================== -->
+<section class="section" id="kapitel">
+  <div class="section-header">
+    <div class="section-icon">📚</div>
+    <div>
+      <h4>Välkommen</h4>
+      <h2>Välj ett kapitel</h2>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem">
+
+    <!-- 1. Atomfysik -->
+    <a href="atomfysik.html" class="chapter-card">
+      <div class="chapter-card-icon">⚛️</div>
+      <div class="chapter-card-num">Kapitel 1</div>
+      <div class="chapter-card-title">Grunder &amp; Atomfysik</div>
+      <div class="chapter-card-desc">Atomens uppbyggnad, laddning, statisk elektricitet, AC/DC och frekvens.</div>
+      <div class="chapter-card-cta">Öppna kapitel →</div>
+    </a>
+
+    <!-- 2. Material -->
+    <a href="material.html" class="chapter-card">
+      <div class="chapter-card-icon">🧱</div>
+      <div class="chapter-card-num">Kapitel 2</div>
+      <div class="chapter-card-title">Material &amp; Resistivitet</div>
+      <div class="chapter-card-desc">Ledare, halvledare och isolatorer. Resistivitetstabell för vanliga material.</div>
+      <div class="chapter-card-cta">Öppna kapitel →</div>
+    </a>
+
+    <!-- 3. Kretsar -->
+    <a href="kretsar.html" class="chapter-card">
+      <div class="chapter-card-icon">⚙️</div>
+      <div class="chapter-card-num">Kapitel 3</div>
+      <div class="chapter-card-title">Kretsar &amp; Lagar</div>
+      <div class="chapter-card-desc">Ohms lag, effektlagen, serie- och parallellkoppling, Kirchhoffs lagar och mätteknik.</div>
+      <div class="chapter-card-cta">Öppna kapitel →</div>
+    </a>
+
+    <!-- 4. Trefas -->
+    <a href="trefas.html" class="chapter-card">
+      <div class="chapter-card-icon">🔄</div>
+      <div class="chapter-card-num">Kapitel 4</div>
+      <div class="chapter-card-title">Trefassystem</div>
+      <div class="chapter-card-desc">Trefas kontra enfas, fas- och linjesspänning, stjärn- och deltainkoppling.</div>
+      <div class="chapter-card-cta">Öppna kapitel →</div>
+    </a>
+
+    <!-- 5. Kabeltyper -->
+    <a href="kabeltyper.html" class="chapter-card">
+      <div class="chapter-card-icon">🔌</div>
+      <div class="chapter-card-num">Kapitel 5</div>
+      <div class="chapter-card-title">Kabeltyper</div>
+      <div class="chapter-card-desc">EK, FK, MK, RK – kabelkonstruktion, flexibilitet och typisk användning.</div>
+      <div class="chapter-card-cta">Öppna kapitel →</div>
+    </a>
+
+    <!-- 6. Kabeldimensionering -->
+    <a href="kabeldim.html" class="chapter-card">
+      <div class="chapter-card-icon">📏</div>
+      <div class="chapter-card-num">Kapitel 6</div>
+      <div class="chapter-card-title">Kabeldimensionering</div>
+      <div class="chapter-card-desc">Spänningsnivåer, enfas/trefas, säkringstabeller och kabeldimensionering.</div>
+      <div class="chapter-card-cta">Öppna kapitel →</div>
+    </a>
+
+    <!-- 7. Skydd -->
+    <a href="skydd.html" class="chapter-card">
+      <div class="chapter-card-icon">🛡️</div>
+      <div class="chapter-card-num">Kapitel 7</div>
+      <div class="chapter-card-title">Skydd &amp; Säkerhet</div>
+      <div class="chapter-card-desc">Jordfelsbrytare, nödstopp, arbetsbrytare och transienter/överspänningsskydd.</div>
+      <div class="chapter-card-cta">Öppna kapitel →</div>
+    </a>
+
+    <!-- 8. Installation -->
+    <a href="installation.html" class="chapter-card">
+      <div class="chapter-card-icon">🏗️</div>
+      <div class="chapter-card-num">Kapitel 8</div>
+      <div class="chapter-card-title">Installation</div>
+      <div class="chapter-card-desc">Ledarresistans, spänningsfall, säkringstabell och ledarfärger med kalkylatorer.</div>
+      <div class="chapter-card-cta">Öppna kapitel →</div>
+    </a>
+
+    <!-- 9. Symboler -->
+    <a href="symboler.html" class="chapter-card">
+      <div class="chapter-card-icon">📐</div>
+      <div class="chapter-card-num">Referens</div>
+      <div class="chapter-card-title">Elsymboler (IEC)</div>
+      <div class="chapter-card-desc">IEC 60617-symboler för kretsscheman samt storheter och enheter.</div>
+      <div class="chapter-card-cta">Öppna kapitel →</div>
+    </a>
+
+    <!-- 10. Tecken -->
+    <a href="tecken.html" class="chapter-card">
+      <div class="chapter-card-icon">🔤</div>
+      <div class="chapter-card-num">Referens</div>
+      <div class="chapter-card-title">Teckenförklaring</div>
+      <div class="chapter-card-desc">Formler, beteckningar, enhetsprefix och kretsschema-symboler samlade.</div>
+      <div class="chapter-card-cta">Öppna kapitel →</div>
+    </a>
+
+    <!-- 11. Övningar -->
+    <a href="ovningar.html" class="chapter-card chapter-card--accent">
+      <div class="chapter-card-icon">✏️</div>
+      <div class="chapter-card-num">Övningar</div>
+      <div class="chapter-card-title">Quiz &amp; Räkneuppgifter</div>
+      <div class="chapter-card-desc">Testa dina kunskaper med interaktiva flervalsfrågor och beräkningsuppgifter.</div>
+      <div class="chapter-card-cta">Starta övningar →</div>
+    </a>
+
+  </div>
+</section>
+
+
+<!-- ======================================================
+     FOOTER
+     ====================================================== -->
+<footer>
+  <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
+  <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
+</footer>
+
+<script src="../script.js"></script>
+  </div><!-- /main-content -->
+</div><!-- /layout-wrapper -->
+</body>
+</html>

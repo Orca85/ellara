@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interaktivt prov – Ellära</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* ── Screen visibility ── */
+    .pi-screen { display: none; }
+    .pi-screen.active { display: block; }
+
+    /* ── Start screen ── */
+    .pi-start-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2.5rem 2rem;
+      max-width: 560px;
+      margin: 2rem auto;
+    }
+
+    .pi-start-card h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .pi-start-card .pi-lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
+      line-height: 1.6;
+    }
+
+    .pi-time-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .pi-time-btns {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .pi-time-btn {
+      flex: 1;
+      min-width: 90px;
+      padding: 0.75rem 1rem;
+      border-radius: calc(var(--radius) * 0.6);
+      border: 2px solid var(--outline);
+      background: var(--bg-light);
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+    }
+
+    .pi-time-btn:hover {
+      border-color: var(--primary);
+      background: var(--bg-high, #312f2c);
+    }
+
+    .pi-time-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: var(--on-primary, #261900);
+    }
+
+    .pi-start-btn {
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background: var(--primary);
+      color: var(--on-primary, #261900);
+      border: none;
+      border-radius: calc(var(--radius) * 0.6);
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .pi-start-btn:hover {
+      background: var(--primary-container);
+      transform: translateY(-1px);
+    }
+
+    .pi-note {
+      margin-top: 1.5rem;
+      padding: 0.9rem 1rem;
+      background: var(--bg-light);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 calc(var(--radius) * 0.4) calc(var(--radius) * 0.4) 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Timer bar ── */
+    .pi-timer-bar {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--outline);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+
+    .pi-timer-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .pi-timer-display {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    .pi-timer-bar.pi-timer-urgent .pi-timer-display {
+      color: var(--red);
+      animation: pi-pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes pi-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .pi-submit-btn {
+      padding: 0.55rem 1.25rem;
+      background: var(--primary);
+      color: var(--on-primary, #261900);
+      border: none;
+      border-radius: calc(var(--radius) * 0.5);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .pi-submit-btn:hover { background: var(--primary-container); }
+
+    /* ── Exam content ── */
+    .pi-exam-body {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem;
+    }
+
+    /* ── Section headers ── */
+    .pi-section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin: 2.5rem 0 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--outline);
+    }
+
+    .pi-section-header h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .pi-section-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--on-primary, #261900);
+      background: var(--primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    .pi-section-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Question cards ── */
+    .pi-question {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .pi-question:focus-within {
+      border-color: var(--outline);
+    }
+
+    .pi-q-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .pi-q-num {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--bg-light);
+      border: 1px solid var(--outline);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    .pi-q-body { flex: 1; }
+
+    .pi-q-text {
+      font-size: 0.97rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      line-height: 1.5;
+    }
+
+    .pi-q-given {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-family: 'Courier New', Courier, monospace;
+      background: var(--bg-light);
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── Inputs ── */
+    .pi-textarea {
+      width: 100%;
+      background: var(--bg-light);
+      border: 1px solid var(--outline);
+      border-radius: calc(var(--radius) * 0.5);
+      color: var(--white);
+      font-size: 0.9rem;
+      font-family: 'Inter', system-ui, sans-serif;
+      padding: 0.65rem 0.85rem;
+      resize: vertical;
+      line-height: 1.6;
+      transition: border-color 0.15s;
+    }
+
+    .pi-textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .pi-parts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .pi-part {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pi-part-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .pi-input {
+      width: 110px;
+      background: var(--bg-light);
+      border: 1px solid var(--outline);
+      border-radius: calc(var(--radius) * 0.4);
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 0.45rem 0.7rem;
+      text-align: right;
+      transition: border-color 0.15s;
+    }
+
+    .pi-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .pi-unit {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Bottom submit */
+    .pi-bottom-submit {
+      max-width: 820px;
+      margin: 0 auto 3rem;
+      padding: 0 1rem;
+    }
+
+    .pi-bottom-btn {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: var(--on-primary, #261900);
+      border: none;
+      border-radius: calc(var(--radius) * 0.6);
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .pi-bottom-btn:hover {
+      background: var(--primary-container);
+      transform: translateY(-1px);
+    }
+
+    /* ── Results screen ── */
+    .pi-results-body {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .pi-results-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+
+    .pi-results-subtitle {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Score display */
+    .pi-score-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .pi-score-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .pi-score-big {
+      font-size: 3rem;
+      font-weight: 800;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .pi-score-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: var(--bg-light);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 0.4rem;
+    }
+
+    .pi-score-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--primary);
+      transition: width 0.8s ease;
+    }
+
+    .pi-score-pct {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Del A results */
+    .pi-dela-result {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .pi-dela-result-q {
+      font-size: 0.9rem;
+      color: var(--white);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .pi-dela-result-a {
+      width: 100%;
+      background: var(--bg-light);
+      border: 1px solid var(--outline);
+      border-radius: calc(var(--radius) * 0.4);
+      color: var(--white);
+      font-size: 0.88rem;
+      font-family: 'Inter', system-ui, sans-serif;
+      padding: 0.6rem 0.8rem;
+      resize: none;
+      line-height: 1.6;
+    }
+
+    .pi-dela-compare-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      font-style: italic;
+    }
+
+    /* Del B result items */
+    .pi-result-item {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.75rem;
+      border-left: 4px solid transparent;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+
+    .pi-result-item.correct { border-left-color: var(--green); }
+    .pi-result-item.wrong { border-left-color: var(--red); }
+
+    .pi-result-icon {
+      font-size: 1.2rem;
+      margin-top: 0.1rem;
+    }
+
+    .pi-result-q-text {
+      font-size: 0.9rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .pi-result-given-small {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .pi-result-answers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .pi-result-answer-chip {
+      font-size: 0.8rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-family: 'Courier New', Courier, monospace;
+      background: var(--bg-light);
+      color: var(--muted);
+    }
+
+    .pi-result-answer-chip.chip-correct {
+      background: rgba(121,221,154,0.15);
+      color: var(--green);
+    }
+
+    .pi-result-answer-chip.chip-wrong {
+      background: rgba(255,180,171,0.12);
+      color: var(--red);
+    }
+
+    .pi-correct-val {
+      font-size: 0.8rem;
+      color: var(--green);
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Redo button */
+    .pi-redo-btn {
+      display: block;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: var(--bg-card);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: calc(var(--radius) * 0.6);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 2rem;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .pi-redo-btn:hover {
+      background: var(--primary);
+      color: var(--on-primary, #261900);
+    }
+
+    /* Section separator in results */
+    .pi-results-section-header {
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--outline);
+    }
+
+    .pi-results-section-header h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .pi-results-section-header p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 600px) {
+      .pi-start-card { padding: 1.5rem 1rem; }
+      .pi-time-btns { gap: 0.5rem; }
+      .pi-timer-display { font-size: 1.5rem; }
+      .pi-score-big { font-size: 2.25rem; }
+      .pi-question { padding: 1rem; }
+      .pi-result-item { grid-template-columns: auto 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="sidebar-link"><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html" class="sidebar-link"><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html" class="sidebar-link"><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html" class="sidebar-link"><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html" class="sidebar-link"><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kabeldim.html" class="sidebar-link"><span class="sidebar-icon">📏</span> Kabeldim.</a>
+      <a href="kretsar.html" class="sidebar-link"><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="trefas.html" class="sidebar-link"><span class="sidebar-icon">🔄</span> Trefas</a>
+      <a href="skydd.html" class="sidebar-link"><span class="sidebar-icon">🛡️</span> Skydd</a>
+      <a href="installation.html" class="sidebar-link"><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html" class="sidebar-link"><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="matematik.html" class="sidebar-link"><span class="sidebar-icon">🔢</span> Matematik</a>
+      <a href="ovningar.html" class="sidebar-link active"><span class="sidebar-icon">✏️</span> Övningar</a>
+      <a href="formler.html" class="sidebar-link"><span class="sidebar-icon">📄</span> Formelblad</a>
+    </nav>
+  </aside>
+
+  <div class="main-content">
+
+    <!-- ══════════════════════════════════
+         SCREEN 1: START
+    ══════════════════════════════════ -->
+    <div id="screen-start" class="pi-screen active">
+      <div class="pi-start-card">
+        <h1>Interaktivt prov – Ellära</h1>
+        <p class="pi-lead">
+          Öva på hela provet under tidspress. Del A innehåller kunskapsfrågor med fritext —
+          jämför dina svar med facit efteråt. Del B rättas automatiskt direkt vid inlämning.
+        </p>
+
+        <div class="pi-time-label">Välj provtid</div>
+        <div class="pi-time-btns">
+          <button class="pi-time-btn" data-minutes="30">30 min</button>
+          <button class="pi-time-btn selected" data-minutes="45">45 min</button>
+          <button class="pi-time-btn" data-minutes="60">60 min</button>
+        </div>
+
+        <button class="pi-start-btn" id="start-btn">Starta prov</button>
+
+        <div class="pi-note">
+          <strong>Obs!</strong> Del A (kunskapsfrågor) rättas ej automatiskt — skriv för att öva.
+          Del B (beräkningar) rättas automatiskt.
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         SCREEN 2: EXAM
+    ══════════════════════════════════ -->
+    <div id="screen-exam" class="pi-screen">
+
+      <!-- Sticky timer bar -->
+      <div class="pi-timer-bar" id="timer-bar">
+        <span class="pi-timer-label">Tid kvar</span>
+        <span class="pi-timer-display" id="timer-display">45:00</span>
+        <button class="pi-submit-btn" id="submit-btn-top">Lämna in</button>
+      </div>
+
+      <div class="pi-exam-body">
+
+        <!-- DEL A -->
+        <div class="pi-section-header">
+          <h2>Del A – Kunskapsfrågor</h2>
+          <span class="pi-section-badge">20 frågor</span>
+        </div>
+        <p class="pi-section-note">Skrivövning – rättas ej automatiskt</p>
+
+        <div id="del-a-questions"></div>
+
+        <!-- DEL B -->
+        <div class="pi-section-header" style="margin-top: 3rem;">
+          <h2>Del B – Beräkningar</h2>
+          <span class="pi-section-badge">30 frågor</span>
+        </div>
+        <p class="pi-section-note">Auto-rättas vid inlämning</p>
+
+        <div id="del-b-questions"></div>
+      </div>
+
+      <!-- Bottom submit button -->
+      <div class="pi-bottom-submit">
+        <button class="pi-bottom-btn" id="submit-btn-bottom">Lämna in prov</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         SCREEN 3: RESULTS
+    ══════════════════════════════════ -->
+    <div id="screen-results" class="pi-screen">
+      <div class="pi-results-body">
+        <h2 class="pi-results-title">Provresultat</h2>
+        <p class="pi-results-subtitle" id="results-time-used"></p>
+
+        <!-- Del B score summary -->
+        <div class="pi-score-card">
+          <div class="pi-score-label">Del B – Beräkningar</div>
+          <div class="pi-score-big" id="score-display">0 / 30</div>
+          <div class="pi-score-bar-bg">
+            <div class="pi-score-bar-fill" id="score-bar" style="width: 0%"></div>
+          </div>
+          <div class="pi-score-pct" id="score-pct">0 %</div>
+        </div>
+
+        <!-- Del A results -->
+        <div class="pi-results-section-header">
+          <h3>Del A – Dina svar</h3>
+          <p>Del A rättas av lärare. Jämför med facit hos läraren.</p>
+        </div>
+        <div id="results-del-a"></div>
+
+        <!-- Del B results -->
+        <div class="pi-results-section-header">
+          <h3>Del B – Rättning</h3>
+          <p>Grönt = rätt, rött = fel. Korrekt svar visas vid fel.</p>
+        </div>
+        <div id="results-del-b"></div>
+
+        <button class="pi-redo-btn" id="redo-btn">Gör om provet</button>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /layout-wrapper -->
+
+<script src="../script.js"></script>
+<script>
+'use strict';
+
+/* ─────────────────────────────────────
+   DATA
+───────────────────────────────────── */
+const DEL_A = [
+  'Vilka tre typer av partiklar bygger upp en atom? Ange namn, laddning och var de finns.',
+  'Vad händer med laddningen hos en atom som förlorar 2 elektroner? Förklara.',
+  'Vad är frekvensen på det svenska elnätet, och hur många gånger per sekund byter strömmen riktning?',
+  'Förklara skillnaden mellan AC (växelström) och DC (likström).',
+  'Ge tre exempel på vanliga DC-spänningar med tillhörande källa (t.ex. 1,5 V – AA-batteri).',
+  'Vilket material leder el bäst av koppar, aluminium och silver? Ange i ordning med resistiviteter.',
+  'Varför används koppar istället för silver i elkablar trots att silver leder bättre?',
+  'Vad är en halvledare? Ge två exempel på halvledarmaterial och deras användning.',
+  'Vad kan hända med en isolator om spänningen är tillräckligt hög? Vad kallas detta fenomen?',
+  'Rangordna kabeltyper EK, FK, MK och RK från stelast till mest böjlig. Ange hur många trådar varje typ har.',
+  'Vilken kabeltyp väljer du till en svetsmaskinkabel och varför?',
+  'Vilken kabelarea krävs minst för en 16 A säkring? Vilken färg har säkringen?',
+  'Nämn fyra faktorer som påverkar hur man dimensionerar en starkströmskabel.',
+  'Vad är spänningen fas–fas respektive fas–neutral i det svenska trefassystemet?',
+  'Vad är spänningsfall? Förklara med egna ord varför det uppstår och vilka konsekvenser det kan ha.',
+  'Vad är det maximalt tillåtna spänningsfallet i procent och i volt vid 230 V?',
+  'Beskriv elnätets uppbyggnad i nivåer – från kraftverk ner till ett hushåll. Ange spänningsnivåer.',
+  'Vad är en jordfelsbrytare och vid vilken läckström bryter den (normalt personskydd)?',
+  'Vad skiljer ett nödstopp från en vanlig arbetsbrytare? Beskriv utseende och funktion.',
+  'Vad är en transient (smutsig el)? Ge ett vardagsexempel och beskriv hur det kan orsaka problem.',
+];
+
+const DEL_B = [
+  // Ohms lag
+  { num: 21, text: 'Beräkna <strong>spänningen U</strong>.', given: 'R = 10 Ω, I = 5 A', parts: [{label:'U', ans:50, unit:'V'}] },
+  { num: 22, text: 'Beräkna <strong>strömmen I</strong>.', given: 'U = 230 V, R = 46 Ω', parts: [{label:'I', ans:5, unit:'A'}] },
+  { num: 23, text: 'Beräkna <strong>motståndet R</strong>.', given: 'U = 12 V, I = 0,5 A', parts: [{label:'R', ans:24, unit:'Ω'}] },
+  { num: 24, text: 'Beräkna <strong>spänningen U</strong>.', given: 'R = 47 Ω, I = 2 A', parts: [{label:'U', ans:94, unit:'V'}] },
+  { num: 25, text: 'Beräkna <strong>strömmen I</strong>.', given: 'U = 24 V, R = 12 Ω', parts: [{label:'I', ans:2, unit:'A'}] },
+  { num: 26, text: 'Beräkna <strong>motståndet R</strong>.', given: 'U = 230 V, I = 8 A', parts: [{label:'R', ans:28.75, unit:'Ω'}] },
+  // Effektlagen
+  { num: 27, text: 'Beräkna <strong>effekten P</strong>.', given: 'U = 230 V, I = 10 A', parts: [{label:'P', ans:2300, unit:'W'}] },
+  { num: 28, text: 'Beräkna <strong>strömmen I</strong>.', given: 'P = 1 000 W, U = 230 V', parts: [{label:'I', ans:4.35, unit:'A'}] },
+  { num: 29, text: 'Beräkna <strong>spänningen U</strong>.', given: 'P = 500 W, I = 2 A', parts: [{label:'U', ans:250, unit:'V'}] },
+  { num: 30, text: 'Beräkna <strong>effekten P</strong>.', given: 'U = 12 V, I = 3 A', parts: [{label:'P', ans:36, unit:'W'}] },
+  { num: 31, text: 'Beräkna <strong>strömmen I</strong>.', given: 'P = 2 300 W, U = 230 V', parts: [{label:'I', ans:10, unit:'A'}] },
+  { num: 32, text: 'Beräkna <strong>effekten P</strong>.', given: 'U = 400 V, I = 16 A', parts: [{label:'P', ans:6400, unit:'W'}] },
+  // Resistans i ledare
+  { num: 33, text: 'Beräkna <strong>resistansen R</strong> för en kopparkabel.', given: 'L = 30 m, A = 2,5 mm²', parts: [{label:'R', ans:0.216, unit:'Ω'}] },
+  { num: 34, text: 'Beräkna <strong>resistansen R</strong> för en aluminiumkabel.', given: 'L = 50 m, A = 4 mm²', parts: [{label:'R', ans:0.35, unit:'Ω'}] },
+  { num: 35, text: 'Beräkna <strong>resistansen R</strong> för en kopparkabel.', given: 'L = 100 m, A = 1,5 mm²', parts: [{label:'R', ans:1.2, unit:'Ω'}] },
+  // Spänningsfall
+  { num: 36, text: 'Beräkna spänningsfallet (Cu).', given: 'L = 30 m, I = 10 A, A = 2,5 mm²', parts: [{label:'U_fall', ans:4.32, unit:'V'}] },
+  { num: 37, text: 'Beräkna spänningsfallet (Cu).', given: 'L = 50 m, I = 16 A, A = 6 mm²', parts: [{label:'U_fall', ans:4.8, unit:'V'}] },
+  { num: 38, text: 'Beräkna spänningsfallet (Cu).', given: 'L = 40 m, I = 8 A, A = 1,5 mm²', parts: [{label:'U_fall', ans:7.68, unit:'V'}] },
+  { num: 39, text: 'Beräkna spänningsfallet (Cu).', given: 'L = 25 m, I = 20 A, A = 4 mm²', parts: [{label:'U_fall', ans:4.5, unit:'V'}] },
+  { num: 40, text: 'Beräkna spänningsfallet (Al).', given: 'L = 80 m, I = 10 A, A = 10 mm²', parts: [{label:'U_fall', ans:4.48, unit:'V'}] },
+  { num: 41, text: 'Beräkna <strong>spänning vid belastningen</strong>.', given: 'U_källa = 230 V, U_fall = 7,2 V', parts: [{label:'U', ans:222.8, unit:'V'}] },
+  // Serie & Parallell
+  { num: 42, text: 'Tre motstånd i <strong>serie</strong>. Beräkna R<sub>tot</sub> och I.', given: 'R₁ = 10 Ω, R₂ = 20 Ω, R₃ = 30 Ω, U = 230 V', parts: [{label:'R_tot', ans:60, unit:'Ω'}, {label:'I', ans:3.83, unit:'A'}] },
+  { num: 43, text: 'Två motstånd i <strong>parallell</strong>. Beräkna R<sub>tot</sub>.', given: 'R₁ = 10 Ω, R₂ = 10 Ω', parts: [{label:'R_tot', ans:5, unit:'Ω'}] },
+  { num: 44, text: 'Två motstånd i <strong>parallell</strong>. Beräkna R<sub>tot</sub>.', given: 'R₁ = 20 Ω, R₂ = 30 Ω', parts: [{label:'R_tot', ans:12, unit:'Ω'}] },
+  { num: 45, text: 'Parallellkoppling. Beräkna R<sub>tot</sub> och totalström I<sub>tot</sub>.', given: 'R₁ = 6 Ω, R₂ = 12 Ω, U = 12 V', parts: [{label:'R_tot', ans:4, unit:'Ω'}, {label:'I_tot', ans:3, unit:'A'}] },
+  { num: 46, text: 'Serie. Beräkna I och spänningsfallet över R₁.', given: 'R₁ = 100 Ω, R₂ = 150 Ω, U = 50 V', parts: [{label:'I', ans:0.2, unit:'A'}, {label:'U_R1', ans:20, unit:'V'}] },
+  { num: 47, text: 'Beräkna I och P.', given: 'U = 230 V, R_tot = 23 Ω', parts: [{label:'I', ans:10, unit:'A'}, {label:'P', ans:2300, unit:'W'}] },
+  // Trefas
+  { num: 48, text: 'Symmetrisk trefaslast. Beräkna fasströmmen I och totaleffekten P<sub>tot</sub>.', given: 'U_fas = 230 V, R = 23 Ω/fas', parts: [{label:'I', ans:10, unit:'A'}, {label:'P_tot', ans:6900, unit:'W'}] },
+  { num: 49, text: 'Beräkna resistansen R och spänningsfallet vid 25 A last (Cu).', given: 'L = 20 m, A = 6 mm², I = 25 A', parts: [{label:'R', ans:0.06, unit:'Ω'}, {label:'U_fall', ans:3, unit:'V'}] },
+  // Kombinerad
+  { num: 50, text: '<strong>Kombinerad:</strong> Diskmaskin P = 2 000 W, 230 V, kopparkabel 15 m, A = 2,5 mm². Beräkna a) strömmen I, b) spänningsfallet U_fall.', given: 'P = 2 000 W, U = 230 V, Cu, L = 15 m, A = 2,5 mm²', parts: [{label:'a) I', ans:8.70, unit:'A'}, {label:'b) U_fall', ans:1.88, unit:'V'}] },
+];
+
+/* ─────────────────────────────────────
+   STATE
+───────────────────────────────────── */
+let selectedMinutes = 45;
+let timerInterval = null;
+let secondsRemaining = 0;
+let startTimestamp = null;
+
+/* ─────────────────────────────────────
+   HELPERS
+───────────────────────────────────── */
+function showScreen(id) {
+  document.querySelectorAll('.pi-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+}
+
+function isCorrect(userVal, ans) {
+  if (ans === 0) return Math.abs(userVal) <= 0.1;
+  return Math.abs(userVal - ans) / Math.abs(ans) <= 0.03;
+}
+
+/* ─────────────────────────────────────
+   BUILD EXAM QUESTIONS
+───────────────────────────────────── */
+function buildExam() {
+  // Del A
+  const delAContainer = document.getElementById('del-a-questions');
+  delAContainer.innerHTML = '';
+  DEL_A.forEach((q, i) => {
+    const num = i + 1;
+    const card = document.createElement('div');
+    card.className = 'pi-question';
+    card.innerHTML = `
+      <div class="pi-q-header">
+        <div class="pi-q-num">${num}</div>
+        <div class="pi-q-body">
+          <div class="pi-q-text">${q}</div>
+        </div>
+      </div>
+      <textarea
+        class="pi-textarea"
+        rows="3"
+        id="a-${num}"
+        placeholder="Skriv ditt svar här…"
+        aria-label="Fråga ${num}"
+      ></textarea>
+    `;
+    delAContainer.appendChild(card);
+  });
+
+  // Del B
+  const delBContainer = document.getElementById('del-b-questions');
+  delBContainer.innerHTML = '';
+  DEL_B.forEach(q => {
+    const card = document.createElement('div');
+    card.className = 'pi-question';
+
+    const partsHtml = q.parts.map((p, pi) => `
+      <div class="pi-part">
+        <span class="pi-part-label">${p.label} =</span>
+        <input
+          class="pi-input"
+          type="number"
+          step="any"
+          id="b-${q.num}-${pi}"
+          placeholder="0"
+          aria-label="${p.label} för fråga ${q.num}"
+        />
+        <span class="pi-unit">${p.unit}</span>
+      </div>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="pi-q-header">
+        <div class="pi-q-num">${q.num}</div>
+        <div class="pi-q-body">
+          <div class="pi-q-text">${q.text}</div>
+          <div class="pi-q-given">${q.given}</div>
+        </div>
+      </div>
+      <div class="pi-parts">${partsHtml}</div>
+    `;
+    delBContainer.appendChild(card);
+  });
+}
+
+/* ─────────────────────────────────────
+   TIMER
+───────────────────────────────────── */
+function startTimer(minutes) {
+  secondsRemaining = minutes * 60;
+  startTimestamp = Date.now();
+  updateTimerDisplay();
+
+  timerInterval = setInterval(() => {
+    secondsRemaining--;
+    updateTimerDisplay();
+    if (secondsRemaining <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      submitExam(true);
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const display = document.getElementById('timer-display');
+  const bar = document.getElementById('timer-bar');
+  display.textContent = formatTime(Math.max(0, secondsRemaining));
+  if (secondsRemaining <= 300) {
+    bar.classList.add('pi-timer-urgent');
+  } else {
+    bar.classList.remove('pi-timer-urgent');
+  }
+}
+
+function stopTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+}
+
+/* ─────────────────────────────────────
+   SUBMIT & GRADE
+───────────────────────────────────── */
+function submitExam(autoSubmit) {
+  stopTimer();
+
+  // Calculate time used
+  const totalSeconds = selectedMinutes * 60;
+  const usedSeconds = totalSeconds - Math.max(0, secondsRemaining);
+  const usedMin = Math.floor(usedSeconds / 60);
+  const usedSec = usedSeconds % 60;
+  const timeStr = autoSubmit
+    ? 'Tiden tog slut – provet lämnades in automatiskt.'
+    : `Tid använd: ${String(usedMin).padStart(2,'0')}:${String(usedSec).padStart(2,'0')}`;
+
+  document.getElementById('results-time-used').textContent = timeStr;
+
+  // Collect Del A answers
+  const delAAnswers = DEL_A.map((q, i) => ({
+    question: q,
+    answer: document.getElementById(`a-${i+1}`).value.trim(),
+  }));
+
+  // Collect & grade Del B answers
+  let correctCount = 0;
+  const delBResults = DEL_B.map(q => {
+    const partResults = q.parts.map((p, pi) => {
+      const input = document.getElementById(`b-${q.num}-${pi}`);
+      const rawVal = input ? input.value.replace(',', '.') : '';
+      const userVal = parseFloat(rawVal);
+      const ok = !isNaN(userVal) && isCorrect(userVal, p.ans);
+      return { label: p.label, userVal: isNaN(userVal) ? null : userVal, ans: p.ans, unit: p.unit, correct: ok };
+    });
+    const allCorrect = partResults.every(r => r.correct);
+    if (allCorrect) correctCount++;
+    return { q, partResults, allCorrect };
+  });
+
+  renderResults(delAAnswers, delBResults, correctCount);
+  showScreen('screen-results');
+}
+
+/* ─────────────────────────────────────
+   RENDER RESULTS
+───────────────────────────────────── */
+function renderResults(delAAnswers, delBResults, correctCount) {
+  const total = DEL_B.length;
+  const pct = Math.round((correctCount / total) * 100);
+
+  // Score summary
+  document.getElementById('score-display').textContent = `${correctCount} / ${total}`;
+  document.getElementById('score-pct').textContent = `${pct} %`;
+  // Animate bar after a tick so transition fires
+  setTimeout(() => {
+    document.getElementById('score-bar').style.width = pct + '%';
+  }, 50);
+
+  // Color bar based on score
+  const bar = document.getElementById('score-bar');
+  if (pct >= 70) {
+    bar.style.background = 'var(--green)';
+  } else if (pct >= 50) {
+    bar.style.background = 'var(--primary)';
+  } else {
+    bar.style.background = 'var(--red)';
+  }
+
+  // Del A
+  const delAContainer = document.getElementById('results-del-a');
+  delAContainer.innerHTML = '';
+  delAAnswers.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'pi-dela-result';
+    div.innerHTML = `
+      <div class="pi-dela-result-q"><strong>${i+1}.</strong> ${item.question}</div>
+      <textarea class="pi-dela-result-a" rows="3" readonly>${item.answer || '(inget svar)'}</textarea>
+      <div class="pi-dela-compare-note">Jämför med facit hos läraren</div>
+    `;
+    delAContainer.appendChild(div);
+  });
+
+  // Del B
+  const delBContainer = document.getElementById('results-del-b');
+  delBContainer.innerHTML = '';
+  delBResults.forEach(({ q, partResults, allCorrect }) => {
+    const item = document.createElement('div');
+    item.className = `pi-result-item ${allCorrect ? 'correct' : 'wrong'}`;
+
+    const icon = allCorrect ? '✓' : '✗';
+    const iconStyle = allCorrect ? 'color: var(--green)' : 'color: var(--red)';
+
+    const answersHtml = partResults.map(r => {
+      const userDisplay = r.userVal !== null ? `${r.userVal} ${r.unit}` : '–';
+      const chipClass = r.correct ? 'chip-correct' : 'chip-wrong';
+      let html = `<span class="pi-result-answer-chip ${chipClass}">${r.label} = ${userDisplay}</span>`;
+      if (!r.correct) {
+        html += `<span class="pi-correct-val">→ rätt: ${r.ans} ${r.unit}</span>`;
+      }
+      return html;
+    }).join('');
+
+    item.innerHTML = `
+      <div class="pi-result-icon" style="${iconStyle}">${icon}</div>
+      <div>
+        <div class="pi-result-q-text">${q.num}. ${q.text}</div>
+        <div class="pi-result-given-small">${q.given}</div>
+        <div class="pi-result-answers">${answersHtml}</div>
+      </div>
+    `;
+    delBContainer.appendChild(item);
+  });
+}
+
+/* ─────────────────────────────────────
+   RESET
+───────────────────────────────────── */
+function resetExam() {
+  stopTimer();
+  selectedMinutes = 45;
+
+  // Reset time button selection
+  document.querySelectorAll('.pi-time-btn').forEach(btn => {
+    btn.classList.toggle('selected', parseInt(btn.dataset.minutes) === 45);
+  });
+
+  // Clear inputs
+  document.querySelectorAll('.pi-textarea, .pi-input').forEach(el => { el.value = ''; });
+
+  showScreen('screen-start');
+}
+
+/* ─────────────────────────────────────
+   EVENT LISTENERS
+───────────────────────────────────── */
+// Time selection
+document.querySelectorAll('.pi-time-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pi-time-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedMinutes = parseInt(btn.dataset.minutes);
+  });
+});
+
+// Start button
+document.getElementById('start-btn').addEventListener('click', () => {
+  buildExam();
+  showScreen('screen-exam');
+  startTimer(selectedMinutes);
+});
+
+// Submit buttons
+document.getElementById('submit-btn-top').addEventListener('click', () => submitExam(false));
+document.getElementById('submit-btn-bottom').addEventListener('click', () => submitExam(false));
+
+// Redo button
+document.getElementById('redo-btn').addEventListener('click', resetExam);
+</script>
+</body>
+</html>

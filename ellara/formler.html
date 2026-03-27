@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formelblad – Ellära</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* ── Frac (inline fractions) ── */
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      margin: 0 3px;
+      line-height: 1.2;
+    }
+    .frac span:first-child {
+      border-bottom: 1.5px solid currentColor;
+      padding-bottom: 2px;
+      line-height: 1.3;
+    }
+    .frac span:last-child {
+      padding-top: 2px;
+      line-height: 1.3;
+    }
+
+    /* ── Screen-only top bar ── */
+    .screen-only {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .screen-only h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--white);
+      margin: 0;
+    }
+    .screen-only p {
+      margin: 0.25rem 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.55rem 1.3rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .print-btn:hover { opacity: 0.85; }
+
+    /* ── Formula grid ── */
+    .formula-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 780px) {
+      .formula-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Formula card ── */
+    .f-card {
+      background: var(--bg-card);
+      border: 1px solid var(--outline);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.1rem 1.25rem 1rem;
+      break-inside: avoid;
+    }
+    .f-card h2 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 0.9rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--outline);
+    }
+
+    /* Sub-section labels inside a card */
+    .f-sub {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin: 0.9rem 0 0.35rem;
+    }
+    .f-sub:first-of-type { margin-top: 0; }
+
+    /* Individual formula rows */
+    .f-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0;
+      font-size: 1.05rem;
+      font-family: monospace;
+      color: var(--primary);
+      line-height: 2;
+    }
+    .f-row .f-label {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-family: inherit;
+      margin-left: 0.4rem;
+      font-style: italic;
+    }
+
+    /* Bullet-style info lines (not a formula) */
+    .f-info {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin: 0.2rem 0;
+      padding-left: 0.4rem;
+    }
+    .f-info strong { color: var(--white); }
+
+    /* Note at bottom of card */
+    .f-note {
+      margin-top: 0.8rem;
+      padding: 0.45rem 0.75rem;
+      background: var(--bg-light);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Wide card spanning both columns */
+    .f-card-wide {
+      grid-column: 1 / -1;
+    }
+
+    /* ── Reference tables section ── */
+    .ref-tables {
+      margin-bottom: 2rem;
+    }
+    .ref-tables h2 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin: 0 0 1rem;
+    }
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 900px) {
+      .ref-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .ref-grid { grid-template-columns: 1fr; }
+    }
+
+    .ref-table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .ref-table-wrap h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      padding: 0.7rem 1rem 0.5rem;
+      margin: 0;
+      border-bottom: 1px solid var(--outline);
+    }
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .ref-table th {
+      background: var(--bg-light);
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.45rem 0.9rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    .ref-table td {
+      padding: 0.45rem 0.9rem;
+      color: var(--white);
+      border-top: 1px solid var(--outline);
+    }
+    .ref-table tr:nth-child(even) td {
+      background: var(--bg-light);
+    }
+    .ref-table .td-accent {
+      color: var(--primary);
+      font-weight: 700;
+      font-family: monospace;
+    }
+
+    /* ── Print styles ── */
+    @media print {
+      @page {
+        size: A4;
+        margin: 15mm 18mm;
+      }
+
+      /* Hide navigation and screen-only elements */
+      nav,
+      .sidebar,
+      .screen-only,
+      .theme-toggle,
+      .print-btn {
+        display: none !important;
+      }
+
+      /* Reset layout for print */
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        font-family: Georgia, serif;
+        font-size: 10.5pt;
+      }
+
+      .layout-wrapper {
+        display: block !important;
+      }
+
+      .main-content {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+
+      /* Print header */
+      .print-header {
+        display: block !important;
+        text-align: center;
+        border-bottom: 2pt solid #000;
+        padding-bottom: 6pt;
+        margin-bottom: 14pt;
+      }
+      .print-header h1 {
+        font-size: 16pt;
+        font-weight: bold;
+        margin: 0 0 3pt;
+      }
+      .print-header p {
+        font-size: 9pt;
+        color: #555;
+        margin: 0;
+      }
+
+      /* Formula grid: single column for print */
+      .formula-grid {
+        display: block !important;
+        margin-bottom: 0 !important;
+      }
+
+      .f-card {
+        background: #fff !important;
+        border: 1pt solid #999 !important;
+        border-left: 3pt solid #000 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 7pt 9pt 6pt !important;
+        margin-bottom: 8pt !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .f-card-wide {
+        width: 100% !important;
+      }
+
+      .f-card h2 {
+        font-size: 10pt !important;
+        color: #000 !important;
+        border-bottom-color: #bbb !important;
+        margin-bottom: 5pt !important;
+        padding-bottom: 3pt !important;
+      }
+
+      .f-row {
+        color: #000 !important;
+        font-family: "Courier New", monospace;
+        font-size: 10pt !important;
+        line-height: 1.8 !important;
+      }
+
+      .f-label {
+        color: #555 !important;
+      }
+
+      .f-sub {
+        color: #555 !important;
+      }
+
+      .f-info {
+        color: #333 !important;
+      }
+      .f-info strong {
+        color: #000 !important;
+      }
+
+      .f-note {
+        background: #f5f5f5 !important;
+        border: 1pt solid #ccc !important;
+        color: #555 !important;
+        font-size: 8.5pt !important;
+        padding: 3pt 6pt !important;
+        border-radius: 0 !important;
+      }
+
+      /* Fractions in print */
+      .frac {
+        display: inline-flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        vertical-align: middle !important;
+      }
+      .frac span:first-child {
+        border-bottom: 1pt solid #000 !important;
+        padding-bottom: 1pt !important;
+      }
+
+      /* Reference tables */
+      .ref-tables h2 {
+        font-size: 11pt !important;
+        color: #000 !important;
+        margin-top: 12pt !important;
+      }
+
+      .ref-grid {
+        display: table !important;
+        width: 100% !important;
+        table-layout: fixed !important;
+        border-collapse: separate !important;
+        border-spacing: 8pt !important;
+      }
+
+      .ref-table-wrap {
+        display: table-cell !important;
+        width: 33% !important;
+        background: #fff !important;
+        border: 1pt solid #999 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        vertical-align: top;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .ref-table-wrap h3 {
+        color: #333 !important;
+        font-size: 8pt !important;
+        border-bottom-color: #bbb !important;
+        padding: 4pt 6pt 3pt !important;
+      }
+
+      .ref-table th {
+        background: #eee !important;
+        color: #333 !important;
+        font-size: 7.5pt !important;
+        padding: 3pt 6pt !important;
+      }
+
+      .ref-table td {
+        color: #000 !important;
+        font-size: 8.5pt !important;
+        padding: 3pt 6pt !important;
+        border-top-color: #ddd !important;
+      }
+
+      .ref-table tr:nth-child(even) td {
+        background: #f8f8f8 !important;
+      }
+
+      .ref-table .td-accent {
+        color: #000 !important;
+        font-weight: bold !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+
+<div class="layout-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-section-label">
+      <span class="sidebar-label-text">Ellära</span>
+      <span class="sidebar-label-sub">Kapitelöversikt</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html"        class="sidebar-link"><span class="sidebar-icon">🏠</span> Hem</a>
+      <a href="atomfysik.html"    class="sidebar-link"><span class="sidebar-icon">⚛️</span> Atomfysik</a>
+      <a href="material.html"     class="sidebar-link"><span class="sidebar-icon">🧱</span> Material</a>
+      <a href="symboler.html"     class="sidebar-link"><span class="sidebar-icon">📐</span> Symboler</a>
+      <a href="kabeltyper.html"   class="sidebar-link"><span class="sidebar-icon">🔌</span> Kabeltyper</a>
+      <a href="kabeldim.html"     class="sidebar-link"><span class="sidebar-icon">📏</span> Kabeldim.</a>
+      <a href="kretsar.html"      class="sidebar-link"><span class="sidebar-icon">⚙️</span> Kretsar</a>
+      <a href="trefas.html"       class="sidebar-link"><span class="sidebar-icon">🔄</span> Trefas</a>
+      <a href="skydd.html"        class="sidebar-link"><span class="sidebar-icon">🛡️</span> Skydd</a>
+      <a href="installation.html" class="sidebar-link"><span class="sidebar-icon">🏗️</span> Installation</a>
+      <a href="tecken.html"       class="sidebar-link"><span class="sidebar-icon">🔤</span> Tecken</a>
+      <a href="matematik.html"    class="sidebar-link"><span class="sidebar-icon">🔢</span> Matematik</a>
+      <a href="ovningar.html"     class="sidebar-link"><span class="sidebar-icon">✏️</span> Övningar</a>
+      <a href="formler.html"      class="sidebar-link active"><span class="sidebar-icon">📄</span> Formelblad</a>
+    </nav>
+  </aside>
+
+  <div class="main-content">
+
+    <!-- Print-only page header (hidden on screen) -->
+    <div class="print-header" style="display:none;">
+      <h1>Ellära – Formelblad</h1>
+      <p>Komplett formelöversikt &nbsp;|&nbsp; Datum: <span id="print-date"></span></p>
+    </div>
+
+    <!-- Screen-only top bar -->
+    <div class="screen-only">
+      <div>
+        <h1>Formelblad – Ellära</h1>
+        <p>Alla formler på ett ställe</p>
+      </div>
+      <button class="print-btn">🖨 Skriv ut</button>
+    </div>
+
+    <!-- ══ Formula grid ══ -->
+    <div class="formula-grid">
+
+      <!-- 1. Ohms lag -->
+      <div class="f-card">
+        <h2>1. Ohms lag</h2>
+        <div class="f-row">U = R · I</div>
+        <div class="f-row">R = <span class="frac"><span>U</span><span>I</span></span></div>
+        <div class="f-row">I = <span class="frac"><span>U</span><span>R</span></span></div>
+        <div class="f-note">Gäller för DC och resistiva AC-kretsar</div>
+      </div>
+
+      <!-- 2. Effektlagen -->
+      <div class="f-card">
+        <h2>2. Effektlagen</h2>
+        <div class="f-row">P = U · I</div>
+        <div class="f-row">P = I² · R</div>
+        <div class="f-row">P = <span class="frac"><span>U²</span><span>R</span></span></div>
+        <div class="f-note">P i Watt (W)</div>
+      </div>
+
+      <!-- 3. Resistans i ledare -->
+      <div class="f-card">
+        <h2>3. Resistans i ledare</h2>
+        <div class="f-row">R = ρ · <span class="frac"><span>L</span><span>A</span></span></div>
+        <div class="f-info">ρ<sub>Cu</sub> = 0,018 Ω·mm²/m</div>
+        <div class="f-info">ρ<sub>Al</sub> = 0,028 Ω·mm²/m</div>
+        <div class="f-note">L i meter, A i mm²</div>
+      </div>
+
+      <!-- 4. Spänningsfall -->
+      <div class="f-card">
+        <h2>4. Spänningsfall</h2>
+        <div class="f-row">U<sub>fall</sub> = <span class="frac"><span>2 · ρ · L · I</span><span>A</span></span></div>
+        <div class="f-info">Max tillåtet: <strong>4 %</strong> av U<sub>nom</sub></div>
+        <div class="f-info">Vid 230 V: max <strong>9,2 V</strong></div>
+        <div class="f-note">Faktorn 2 = fram- och återledare</div>
+      </div>
+
+      <!-- 5. Kopplingslagar (wide) -->
+      <div class="f-card f-card-wide">
+        <h2>5. Kopplingslagar</h2>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem 2rem;">
+
+          <div>
+            <p class="f-sub">Seriekoppling</p>
+            <div class="f-row">R<sub>tot</sub> = R₁ + R₂ + R₃ + …</div>
+            <div class="f-info">I är lika överallt</div>
+            <div class="f-info">U<sub>tot</sub> = U₁ + U₂ + …</div>
+          </div>
+
+          <div>
+            <p class="f-sub">Parallellkoppling</p>
+            <div class="f-row">
+              <span class="frac"><span>1</span><span>R<sub>tot</sub></span></span>
+              =
+              <span class="frac"><span>1</span><span>R₁</span></span>
+              +
+              <span class="frac"><span>1</span><span>R₂</span></span>
+              + …
+            </div>
+            <div class="f-info">U är lika överallt</div>
+            <div class="f-info">I<sub>tot</sub> = I₁ + I₂ + …</div>
+          </div>
+
+          <div>
+            <p class="f-sub">Kirchhoffs spänningslag</p>
+            <div class="f-row">ΣU = 0</div>
+          </div>
+
+          <div>
+            <p class="f-sub">Kirchhoffs strömlag</p>
+            <div class="f-row">ΣI<sub>in</sub> = ΣI<sub>ut</sub></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 6. Transformatorn -->
+      <div class="f-card">
+        <h2>6. Transformatorn</h2>
+        <div class="f-row">
+          <span class="frac"><span>U₁</span><span>U₂</span></span>
+          =
+          <span class="frac"><span>N₁</span><span>N₂</span></span>
+        </div>
+        <div class="f-row">U₁ · I₁ = U₂ · I₂</div>
+        <div class="f-note">Fler varv → högre spänning. Effekten bevaras.</div>
+      </div>
+
+      <!-- 7. Trefas & AC -->
+      <div class="f-card">
+        <h2>7. Trefas &amp; AC</h2>
+
+        <p class="f-sub">Spänning</p>
+        <div class="f-row">U<sub>linje</sub> = U<sub>fas</sub> · √3 ≈ 230 · 1,732 ≈ 400 V</div>
+
+        <p class="f-sub">Frekvens</p>
+        <div class="f-row">
+          f = <span class="frac"><span>1</span><span>T</span></span>
+          &nbsp;&nbsp;
+          T = <span class="frac"><span>1</span><span>f</span></span>
+          &nbsp;&nbsp;
+          ω = 2 · π · f
+        </div>
+
+        <p class="f-sub">Reaktans</p>
+        <div class="f-row">X<sub>L</sub> = 2·π·f·L = ω·L</div>
+        <div class="f-row">
+          X<sub>C</sub> =
+          <span class="frac"><span>1</span><span>2·π·f·C</span></span>
+          =
+          <span class="frac"><span>1</span><span>ω·C</span></span>
+        </div>
+
+        <p class="f-sub">Impedans</p>
+        <div class="f-row">Z = √(R² + X²) &nbsp;&nbsp; U = Z · I</div>
+
+        <p class="f-sub">Trefaseffekt</p>
+        <div class="f-row">P<sub>tot</sub> = 3 · U<sub>fas</sub> · I = √3 · U<sub>linje</sub> · I</div>
+      </div>
+
+      <!-- 8. Effekttyper (wide) -->
+      <div class="f-card f-card-wide">
+        <h2>8. Effekttyper (P, Q, S)</h2>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem 2rem;">
+
+          <div>
+            <div class="f-row">S = √(P² + Q²)</div>
+            <div class="f-row">
+              cos φ =
+              <span class="frac"><span>P</span><span>S</span></span>
+            </div>
+            <div class="f-row">P = U · I · cos φ</div>
+          </div>
+
+          <div style="padding-top:0.3rem;">
+            <div class="f-info"><strong>P</strong> = aktiv effekt (W) — nyttigt arbete</div>
+            <div class="f-info"><strong>Q</strong> = reaktiv effekt (VAr) — pendlar i spolar/kondensatorer</div>
+            <div class="f-info"><strong>S</strong> = skenbar effekt (VA) — vad elnätet levererar</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /formula-grid -->
+
+    <!-- ══ Reference tables ══ -->
+    <div class="ref-tables">
+      <h2>Referenstabeller</h2>
+
+      <div class="ref-grid">
+
+        <!-- Säkring → kabelarea -->
+        <div class="ref-table-wrap">
+          <h3>Säkring → kabelarea (koppar)</h3>
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Säkring</th>
+                <th>Min. area</th>
+                <th>Färg</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-accent">6 A</td><td>1 mm²</td><td>Svart</td></tr>
+              <tr><td class="td-accent">10 A</td><td>1,5 mm²</td><td>Röd</td></tr>
+              <tr><td class="td-accent">16 A</td><td>2,5 mm²</td><td>Grå</td></tr>
+              <tr><td class="td-accent">20 A</td><td>4 mm²</td><td>Blå</td></tr>
+              <tr><td class="td-accent">25 A</td><td>6 mm²</td><td>Gul</td></tr>
+              <tr><td class="td-accent">35 A</td><td>10 mm²</td><td>Svart</td></tr>
+              <tr><td class="td-accent">50 A</td><td>16 mm²</td><td>Röd</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Ledarfärger trefas -->
+        <div class="ref-table-wrap">
+          <h3>Ledarfärger trefas (svensk standard)</h3>
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Ledare</th>
+                <th>Färg</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-accent">L1</td><td>Brun</td></tr>
+              <tr><td class="td-accent">L2</td><td>Svart</td></tr>
+              <tr><td class="td-accent">L3</td><td>Grå</td></tr>
+              <tr><td class="td-accent">N</td><td>Blå</td></tr>
+              <tr><td class="td-accent">PE</td><td>Grön-Gul</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Vanliga spänningsnivåer -->
+        <div class="ref-table-wrap">
+          <h3>Vanliga spänningsnivåer</h3>
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Nivå</th>
+                <th>Spänning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Klenspänning</td><td class="td-accent">≤ 50 V AC</td></tr>
+              <tr><td>Lågspänning</td><td class="td-accent">50–1000 V AC</td></tr>
+              <tr><td>Fas–noll (SE)</td><td class="td-accent">230 V</td></tr>
+              <tr><td>Fas–fas (SE)</td><td class="td-accent">400 V</td></tr>
+              <tr><td>Nätfrekvens (SE)</td><td class="td-accent">50 Hz</td></tr>
+              <tr><td>Toppspänning</td><td class="td-accent">230 · √2 ≈ 325 V</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /ref-grid -->
+    </div><!-- /ref-tables -->
+
+  </div><!-- /main-content -->
+</div><!-- /layout-wrapper -->
+
+<script src="../script.js"></script>
+<script>
+document.querySelector('.print-btn').addEventListener('click', function() { window.print(); });
+</script>
+<script>
+  // Set print date
+  var d = new Date();
+  var dateStr = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  var el = document.getElementById('print-date');
+  if (el) el.textContent = dateStr;
+</script>
+</body>
+</html>

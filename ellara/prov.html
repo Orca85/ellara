@@ -307,7 +307,7 @@
 
 <!-- KNAPP – visas ej vid utskrift -->
 <div class="screen-only">
-  <button class="print-btn" onclick="window.print()">🖨 Skriv ut / Spara som PDF</button>
+  <button class="print-btn">🖨 Skriv ut / Spara som PDF</button>
 </div>
 
 <!-- ============================================================
@@ -1058,5 +1058,8 @@
 
 </div><!-- /page 4 -->
 
+<script>
+document.querySelector('.print-btn').addEventListener('click', function() { window.print(); });
+</script>
 </body>
 </html>
