@@ -2134,8 +2134,9 @@ function format(n) {
 
   overlay.addEventListener('click', () => overlay.classList.remove('visible'));
 
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('img.zoomable').forEach(img => {
+  function initZoomable() {
+    document.querySelectorAll('main img, .content img, article img, section img, img.zoomable').forEach(img => {
+      if (img.closest('#img-lightbox')) return;
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => {
         lbImg.src = img.src;
@@ -2143,5 +2144,327 @@ function format(n) {
         overlay.classList.add('visible');
       });
     });
-  });
+  }
+
+  document.addEventListener('DOMContentLoaded', initZoomable);
+})();
+
+/* =========================================================
+   FORMELBYGGAREN  –  Floating formula calculator widget
+   ========================================================= */
+(function () {
+  'use strict';
+
+  /* ---------- Variable metadata ---------- */
+  const VARS = {
+    U:     { sym: 'U',      label: 'Spänning',           unit: 'V',        group: 'dc'  },
+    R:     { sym: 'R',      label: 'Resistans',           unit: 'Ω',        group: 'dc'  },
+    I:     { sym: 'I',      label: 'Ström',               unit: 'A',        group: 'dc'  },
+    P:     { sym: 'P',      label: 'Aktiv effekt',        unit: 'W',        group: 'dc'  },
+    rho:   { sym: 'ρ',      label: 'Resistivitet',        unit: 'Ω·mm²/m',  group: 'mat' },
+    Llen:  { sym: 'L',      label: 'Längd (kabel)',       unit: 'm',        group: 'mat' },
+    A:     { sym: 'A',      label: 'Ledararea',           unit: 'mm²',      group: 'mat' },
+    Ufall: { sym: 'U_fall', label: 'Spänningsfall',       unit: 'V',        group: 'mat' },
+    f:     { sym: 'f',      label: 'Frekvens',            unit: 'Hz',       group: 'ac'  },
+    T:     { sym: 'T',      label: 'Period',              unit: 's',        group: 'ac'  },
+    omega: { sym: 'ω',      label: 'Vinkelfrekvens',      unit: 'rad/s',    group: 'ac'  },
+    XL:    { sym: 'X_L',    label: 'Induktiv reaktans',   unit: 'Ω',        group: 'rea' },
+    XC:    { sym: 'X_C',    label: 'Kapacitiv reaktans',  unit: 'Ω',        group: 'rea' },
+    X:     { sym: 'X',      label: 'Reaktans',            unit: 'Ω',        group: 'rea' },
+    Z:     { sym: 'Z',      label: 'Impedans',            unit: 'Ω',        group: 'rea' },
+    Lind:  { sym: 'L',      label: 'Induktans',           unit: 'H',        group: 'rea' },
+    C:     { sym: 'C',      label: 'Kapacitans',          unit: 'F',        group: 'rea' },
+    Ufas:  { sym: 'U_fas',  label: 'Fasspänning',         unit: 'V',        group: '3f'  },
+    Uled:  { sym: 'U_led',  label: 'Linjespänning',       unit: 'V',        group: '3f'  },
+    cosfi: { sym: 'cos φ',  label: 'Effektfaktor',        unit: '',         group: '3f'  },
+    S:     { sym: 'S',      label: 'Skenbar effekt',      unit: 'VA',       group: 'pwr' },
+    Q:     { sym: 'Q',      label: 'Reaktiv effekt',      unit: 'VAr',      group: 'pwr' },
+    U1:    { sym: 'U₁',     label: 'Primärspänning',      unit: 'V',        group: 'tra' },
+    U2:    { sym: 'U₂',     label: 'Sekundärspänning',    unit: 'V',        group: 'tra' },
+    N1:    { sym: 'N₁',     label: 'Primärlindning',      unit: 'varv',     group: 'tra' },
+    N2:    { sym: 'N₂',     label: 'Sekundärlindning',    unit: 'varv',     group: 'tra' },
+  };
+
+  const GROUPS = {
+    dc:  'DC – Grunder',
+    mat: 'Material & kablar',
+    ac:  'AC – Frekvens',
+    rea: 'Reaktans & impedans',
+    '3f': 'Trefas',
+    pwr: 'Effekttyper',
+    tra: 'Transformator',
+  };
+
+  /* ---------- Formula database (~50 varianter) ---------- */
+  const FORMULAS = [
+    // Ohms lag
+    { name: 'Ohms lag',           expr: 'U = R × I',              sf: 'U',     req: ['R','I'],              unit: 'V',        calc: v => v.R * v.I },
+    { name: 'Ohms lag',           expr: 'R = U / I',              sf: 'R',     req: ['U','I'],              unit: 'Ω',        calc: v => v.U / v.I },
+    { name: 'Ohms lag',           expr: 'I = U / R',              sf: 'I',     req: ['U','R'],              unit: 'A',        calc: v => v.U / v.R },
+    // Effektlagen
+    { name: 'Effektlagen',        expr: 'P = U × I',              sf: 'P',     req: ['U','I'],              unit: 'W',        calc: v => v.U * v.I },
+    { name: 'Effektlagen',        expr: 'U = P / I',              sf: 'U',     req: ['P','I'],              unit: 'V',        calc: v => v.P / v.I },
+    { name: 'Effektlagen',        expr: 'I = P / U',              sf: 'I',     req: ['P','U'],              unit: 'A',        calc: v => v.P / v.U },
+    // Effekt via R
+    { name: 'Effekt (via R)',     expr: 'P = I² × R',             sf: 'P',     req: ['I','R'],              unit: 'W',        calc: v => v.I**2 * v.R },
+    { name: 'Effekt (via R)',     expr: 'I = √(P / R)',           sf: 'I',     req: ['P','R'],              unit: 'A',        calc: v => Math.sqrt(v.P / v.R) },
+    { name: 'Effekt (via R)',     expr: 'R = P / I²',             sf: 'R',     req: ['P','I'],              unit: 'Ω',        calc: v => v.P / v.I**2 },
+    // Effekt via U
+    { name: 'Effekt (via U)',     expr: 'P = U² / R',             sf: 'P',     req: ['U','R'],              unit: 'W',        calc: v => v.U**2 / v.R },
+    { name: 'Effekt (via U)',     expr: 'U = √(P × R)',           sf: 'U',     req: ['P','R'],              unit: 'V',        calc: v => Math.sqrt(v.P * v.R) },
+    { name: 'Effekt (via U)',     expr: 'R = U² / P',             sf: 'R',     req: ['U','P'],              unit: 'Ω',        calc: v => v.U**2 / v.P },
+    // Materialresistans
+    { name: 'Materialresistans',  expr: 'R = ρ × L / A',          sf: 'R',     req: ['rho','Llen','A'],     unit: 'Ω',        calc: v => v.rho * v.Llen / v.A },
+    { name: 'Materialresistans',  expr: 'ρ = R × A / L',          sf: 'rho',   req: ['R','A','Llen'],       unit: 'Ω·mm²/m',  calc: v => v.R * v.A / v.Llen },
+    { name: 'Materialresistans',  expr: 'L = R × A / ρ',          sf: 'Llen',  req: ['R','A','rho'],        unit: 'm',        calc: v => v.R * v.A / v.rho },
+    { name: 'Materialresistans',  expr: 'A = ρ × L / R',          sf: 'A',     req: ['rho','Llen','R'],     unit: 'mm²',      calc: v => v.rho * v.Llen / v.R },
+    // Spänningsfall
+    { name: 'Spänningsfall',      expr: 'U_fall = 2ρLI / A',      sf: 'Ufall', req: ['rho','Llen','I','A'], unit: 'V',        calc: v => 2*v.rho*v.Llen*v.I/v.A },
+    { name: 'Spänningsfall',      expr: 'L = U_fall×A / (2ρI)',   sf: 'Llen',  req: ['Ufall','A','rho','I'],unit: 'm',        calc: v => v.Ufall*v.A/(2*v.rho*v.I) },
+    { name: 'Spänningsfall',      expr: 'I = U_fall×A / (2ρL)',   sf: 'I',     req: ['Ufall','A','rho','Llen'],unit: 'A',     calc: v => v.Ufall*v.A/(2*v.rho*v.Llen) },
+    { name: 'Spänningsfall',      expr: 'A = 2ρLI / U_fall',      sf: 'A',     req: ['rho','Llen','I','Ufall'],unit: 'mm²',  calc: v => 2*v.rho*v.Llen*v.I/v.Ufall },
+    // Frekvens / Period
+    { name: 'Frekvens',           expr: 'f = 1 / T',              sf: 'f',     req: ['T'],                  unit: 'Hz',       calc: v => 1/v.T },
+    { name: 'Frekvens',           expr: 'T = 1 / f',              sf: 'T',     req: ['f'],                  unit: 's',        calc: v => 1/v.f },
+    // Vinkelfrekvens
+    { name: 'Vinkelfrekvens',     expr: 'ω = 2π × f',             sf: 'omega', req: ['f'],                  unit: 'rad/s',    calc: v => 2*Math.PI*v.f },
+    { name: 'Vinkelfrekvens',     expr: 'f = ω / (2π)',           sf: 'f',     req: ['omega'],              unit: 'Hz',       calc: v => v.omega/(2*Math.PI) },
+    // Induktiv reaktans
+    { name: 'Induktiv reaktans',  expr: 'X_L = 2πfL',             sf: 'XL',    req: ['f','Lind'],           unit: 'Ω',        calc: v => 2*Math.PI*v.f*v.Lind },
+    { name: 'Induktiv reaktans',  expr: 'f = X_L / (2πL)',        sf: 'f',     req: ['XL','Lind'],          unit: 'Hz',       calc: v => v.XL/(2*Math.PI*v.Lind) },
+    { name: 'Induktiv reaktans',  expr: 'L = X_L / (2πf)',        sf: 'Lind',  req: ['XL','f'],             unit: 'H',        calc: v => v.XL/(2*Math.PI*v.f) },
+    // Kapacitiv reaktans
+    { name: 'Kapacitiv reaktans', expr: 'X_C = 1 / (2πfC)',       sf: 'XC',    req: ['f','C'],              unit: 'Ω',        calc: v => 1/(2*Math.PI*v.f*v.C) },
+    { name: 'Kapacitiv reaktans', expr: 'f = 1 / (2πC×X_C)',      sf: 'f',     req: ['XC','C'],             unit: 'Hz',       calc: v => 1/(2*Math.PI*v.C*v.XC) },
+    { name: 'Kapacitiv reaktans', expr: 'C = 1 / (2πf×X_C)',      sf: 'C',     req: ['f','XC'],             unit: 'F',        calc: v => 1/(2*Math.PI*v.f*v.XC) },
+    // Impedans
+    { name: 'Impedans',           expr: 'Z = √(R² + X²)',         sf: 'Z',     req: ['R','X'],              unit: 'Ω',        calc: v => Math.sqrt(v.R**2 + v.X**2) },
+    { name: 'Impedans',           expr: 'R = √(Z² − X²)',         sf: 'R',     req: ['Z','X'],              unit: 'Ω',        calc: v => { const d=v.Z**2-v.X**2; return d>=0?Math.sqrt(d):NaN; } },
+    { name: 'Impedans',           expr: 'X = √(Z² − R²)',         sf: 'X',     req: ['Z','R'],              unit: 'Ω',        calc: v => { const d=v.Z**2-v.R**2; return d>=0?Math.sqrt(d):NaN; } },
+    // Ohms lag (AC)
+    { name: 'Ohms lag (AC)',      expr: 'U = Z × I',              sf: 'U',     req: ['Z','I'],              unit: 'V',        calc: v => v.Z*v.I },
+    { name: 'Ohms lag (AC)',      expr: 'Z = U / I',              sf: 'Z',     req: ['U','I'],              unit: 'Ω',        calc: v => v.U/v.I },
+    { name: 'Ohms lag (AC)',      expr: 'I = U / Z',              sf: 'I',     req: ['U','Z'],              unit: 'A',        calc: v => v.U/v.Z },
+    // Trefasspänning
+    { name: 'Trefasspänning',     expr: 'U_led = U_fas × √3',     sf: 'Uled',  req: ['Ufas'],               unit: 'V',        calc: v => v.Ufas*Math.sqrt(3) },
+    { name: 'Trefasspänning',     expr: 'U_fas = U_led / √3',     sf: 'Ufas',  req: ['Uled'],               unit: 'V',        calc: v => v.Uled/Math.sqrt(3) },
+    // Trefaseffekt
+    { name: 'Trefaseffekt',       expr: 'P = √3×U_led×I×cosφ',    sf: 'P',     req: ['Uled','I','cosfi'],   unit: 'W',        calc: v => Math.sqrt(3)*v.Uled*v.I*v.cosfi },
+    { name: 'Trefaseffekt',       expr: 'I = P / (√3×U_led×cosφ)',sf: 'I',     req: ['P','Uled','cosfi'],   unit: 'A',        calc: v => v.P/(Math.sqrt(3)*v.Uled*v.cosfi) },
+    { name: 'Trefaseffekt',       expr: 'cosφ = P / (√3×U_led×I)',sf: 'cosfi', req: ['P','Uled','I'],       unit: '',         calc: v => v.P/(Math.sqrt(3)*v.Uled*v.I) },
+    { name: 'Trefaseffekt',       expr: 'U_led = P / (√3×I×cosφ)',sf: 'Uled',  req: ['P','I','cosfi'],      unit: 'V',        calc: v => v.P/(Math.sqrt(3)*v.I*v.cosfi) },
+    // Skenbar effekt
+    { name: 'Skenbar effekt',     expr: 'S = √(P² + Q²)',         sf: 'S',     req: ['P','Q'],              unit: 'VA',       calc: v => Math.sqrt(v.P**2+v.Q**2) },
+    { name: 'Skenbar effekt',     expr: 'P = √(S² − Q²)',         sf: 'P',     req: ['S','Q'],              unit: 'W',        calc: v => { const d=v.S**2-v.Q**2; return d>=0?Math.sqrt(d):NaN; } },
+    { name: 'Skenbar effekt',     expr: 'Q = √(S² − P²)',         sf: 'Q',     req: ['S','P'],              unit: 'VAr',      calc: v => { const d=v.S**2-v.P**2; return d>=0?Math.sqrt(d):NaN; } },
+    // Effektfaktor
+    { name: 'Effektfaktor',       expr: 'cosφ = P / S',           sf: 'cosfi', req: ['P','S'],              unit: '',         calc: v => v.P/v.S },
+    { name: 'Effektfaktor',       expr: 'P = S × cosφ',           sf: 'P',     req: ['S','cosfi'],          unit: 'W',        calc: v => v.S*v.cosfi },
+    { name: 'Effektfaktor',       expr: 'S = P / cosφ',           sf: 'S',     req: ['P','cosfi'],          unit: 'VA',       calc: v => v.P/v.cosfi },
+    // Transformator
+    { name: 'Transformator',      expr: 'U₂ = U₁ × N₂ / N₁',     sf: 'U2',    req: ['U1','N1','N2'],       unit: 'V',        calc: v => v.U1*v.N2/v.N1 },
+    { name: 'Transformator',      expr: 'U₁ = U₂ × N₁ / N₂',     sf: 'U1',    req: ['U2','N1','N2'],       unit: 'V',        calc: v => v.U2*v.N1/v.N2 },
+    { name: 'Transformator',      expr: 'N₁ = N₂ × U₁ / U₂',     sf: 'N1',    req: ['N2','U1','U2'],       unit: 'varv',     calc: v => v.N2*v.U1/v.U2 },
+    { name: 'Transformator',      expr: 'N₂ = N₁ × U₂ / U₁',     sf: 'N2',    req: ['N1','U1','U2'],       unit: 'varv',     calc: v => v.N1*v.U2/v.U1 },
+  ];
+
+  /* ---------- State ---------- */
+  const selected = new Set();
+
+  /* ---------- Build widget DOM ---------- */
+  function buildWidget() {
+    // FAB
+    const fab = document.createElement('button');
+    fab.id = 'fb-fab';
+    fab.setAttribute('aria-label', 'Öppna Formelbyggaren');
+    fab.setAttribute('aria-expanded', 'false');
+    fab.textContent = 'f(x)';
+    document.body.appendChild(fab);
+
+    // Panel
+    const widget = document.createElement('div');
+    widget.id = 'fb-widget';
+    widget.setAttribute('role', 'dialog');
+    widget.setAttribute('aria-modal', 'true');
+    widget.setAttribute('aria-label', 'Formelbyggaren');
+    widget.innerHTML = `
+      <div class="fb-header">
+        <span class="fb-title">Formelbyggaren</span>
+        <button class="fb-close" aria-label="Stäng">✕</button>
+      </div>
+      <div class="fb-body">
+        <p class="fb-hint">Bocka i de värden du <strong>känner till</strong>:</p>
+        <div class="fb-vargroups" id="fb-vargroups"></div>
+        <div style="margin-top:0.5rem">
+          <button class="fb-reset" id="fb-reset">Rensa allt</button>
+        </div>
+        <div id="fb-results-section" hidden>
+          <div class="fb-divider"></div>
+          <p class="fb-hint">Välj vad du vill räkna ut:</p>
+          <div class="fb-formulas" id="fb-formulas"></div>
+        </div>
+        <div id="fb-calc-section" hidden>
+          <div class="fb-divider"></div>
+          <div id="fb-calc"></div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(widget);
+
+    // Build variable chips
+    const container = widget.querySelector('#fb-vargroups');
+    ['dc','mat','ac','rea','3f','pwr','tra'].forEach(gk => {
+      const vars = Object.entries(VARS).filter(([,v]) => v.group === gk);
+      if (!vars.length) return;
+      const section = document.createElement('div');
+      section.className = 'fb-group';
+      section.innerHTML = `<div class="fb-group-label">${GROUPS[gk]}</div><div class="fb-chips"></div>`;
+      const chips = section.querySelector('.fb-chips');
+      vars.forEach(([key, meta]) => {
+        const btn = document.createElement('button');
+        btn.className = 'fb-chip';
+        btn.dataset.key = key;
+        btn.title = meta.label + (meta.unit ? ` (${meta.unit})` : '');
+        btn.innerHTML = `<span class="fb-chip-sym">${meta.sym}</span><span class="fb-chip-unit">${meta.unit || '–'}</span>`;
+        btn.addEventListener('click', () => toggleVar(key));
+        chips.appendChild(btn);
+      });
+      container.appendChild(section);
+    });
+
+    // Events
+    fab.addEventListener('click', () => {
+      const open = widget.classList.toggle('fb-open');
+      fab.setAttribute('aria-expanded', String(open));
+      if (open) widget.querySelector('.fb-close').focus();
+    });
+    widget.querySelector('.fb-close').addEventListener('click', closeWidget);
+    widget.querySelector('#fb-reset').addEventListener('click', resetAll);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeWidget(); });
+  }
+
+  function closeWidget() {
+    document.getElementById('fb-widget').classList.remove('fb-open');
+    document.getElementById('fb-fab').setAttribute('aria-expanded', 'false');
+  }
+
+  function resetAll() {
+    selected.clear();
+    document.querySelectorAll('.fb-chip').forEach(b => b.classList.remove('fb-chip--on'));
+    document.getElementById('fb-results-section').hidden = true;
+    document.getElementById('fb-calc-section').hidden = true;
+    document.getElementById('fb-formulas').innerHTML = '';
+    document.getElementById('fb-calc').innerHTML = '';
+  }
+
+  function toggleVar(key) {
+    const btn = document.querySelector(`.fb-chip[data-key="${key}"]`);
+    if (selected.has(key)) {
+      selected.delete(key);
+      btn.classList.remove('fb-chip--on');
+    } else {
+      selected.add(key);
+      btn.classList.add('fb-chip--on');
+    }
+    // Clear calc when selection changes
+    document.getElementById('fb-calc-section').hidden = true;
+    document.getElementById('fb-calc').innerHTML = '';
+    document.querySelectorAll('.fb-formula-card').forEach(c => c.classList.remove('fb-formula-card--active'));
+    updateResults();
+  }
+
+  function updateResults() {
+    const resultsEl = document.getElementById('fb-results-section');
+    const formulasEl = document.getElementById('fb-formulas');
+
+    if (selected.size === 0) { resultsEl.hidden = true; return; }
+
+    const matches = FORMULAS.filter(f =>
+      f.req.every(r => selected.has(r)) && !selected.has(f.sf)
+    );
+
+    formulasEl.innerHTML = '';
+    if (!matches.length) {
+      formulasEl.innerHTML = '<p class="fb-no-match">Inga formler matchar — prova att avmarkera en variabel.</p>';
+    } else {
+      matches.forEach(formula => {
+        const card = document.createElement('button');
+        card.className = 'fb-formula-card';
+        card.innerHTML = `<span class="fb-formula-expr">${formula.expr}</span><span class="fb-formula-meta">${formula.name}</span>`;
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.fb-formula-card').forEach(c => c.classList.remove('fb-formula-card--active'));
+          card.classList.add('fb-formula-card--active');
+          showCalculator(formula);
+        });
+        formulasEl.appendChild(card);
+      });
+    }
+    resultsEl.hidden = false;
+  }
+
+  function showCalculator(formula) {
+    const calcSection = document.getElementById('fb-calc-section');
+    const calcEl = document.getElementById('fb-calc');
+    const sfMeta = VARS[formula.sf];
+
+    calcEl.innerHTML = `
+      <div class="fb-calc-title">Räkna ut ${sfMeta.sym} – ${sfMeta.label}</div>
+      <div class="fb-calc-inputs" id="fb-inputs"></div>
+      <button class="fb-calc-btn" id="fb-calc-go">Räkna ut</button>
+      <div class="fb-calc-result" id="fb-result" hidden></div>
+    `;
+
+    const inputsEl = calcEl.querySelector('#fb-inputs');
+    formula.req.forEach(varKey => {
+      const meta = VARS[varKey];
+      const row = document.createElement('div');
+      row.className = 'fb-input-row';
+      row.innerHTML = `
+        <label class="fb-input-label">${meta.sym}${meta.unit ? ` <span class="fb-input-unit">(${meta.unit})</span>` : ''}</label>
+        <input class="fb-input" type="number" data-var="${varKey}" placeholder="${meta.label}" step="any" inputmode="decimal">
+      `;
+      inputsEl.appendChild(row);
+    });
+
+    calcEl.querySelector('#fb-calc-go').addEventListener('click', runCalc);
+    calcEl.querySelector('#fb-inputs').addEventListener('keydown', e => {
+      if (e.key === 'Enter') runCalc();
+    });
+    // Auto-focus first input
+    const first = calcEl.querySelector('.fb-input');
+    if (first) first.focus();
+
+    calcSection.hidden = false;
+    setTimeout(() => calcSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+
+    function runCalc() {
+      const vals = {};
+      let ok = true;
+      calcEl.querySelectorAll('.fb-input').forEach(inp => {
+        const val = parseFloat(inp.value);
+        if (!isFinite(val)) { ok = false; inp.classList.add('fb-input--err'); }
+        else { inp.classList.remove('fb-input--err'); vals[inp.dataset.var] = val; }
+      });
+      if (!ok) return;
+
+      const result = formula.calc(vals);
+      const resultEl = calcEl.querySelector('#fb-result');
+      if (!isFinite(result) || isNaN(result)) {
+        resultEl.innerHTML = `<span class="fb-result-err">Ogiltigt resultat – kontrollera värdena.</span>`;
+      } else {
+        resultEl.innerHTML = `<span class="fb-result-val">${fmtNum(result)}</span>${formula.unit ? `<span class="fb-result-unit"> ${formula.unit}</span>` : ''}`;
+      }
+      resultEl.hidden = false;
+    }
+  }
+
+  function fmtNum(n) {
+    const abs = Math.abs(n);
+    if (abs === 0) return '0';
+    if (abs < 0.001 || abs >= 1e6) return n.toExponential(3);
+    if (Number.isInteger(n)) return n.toString();
+    return parseFloat(n.toPrecision(5)).toString();
+  }
+
+  document.addEventListener('DOMContentLoaded', buildWidget);
 })();
