@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kabeldimensionering – Test | Ellära</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+    <div id="quiz-root"></div>
+  </div>
+</div>
+<script>
+const QUIZ_DATA = {
+  chapterId: 'kabeldim',
+  chapterTitle: 'Kabeldimensionering',
+  chapterUrl: 'kabeldim.html',
+  icon: '📏',
+  passPct: 95,
+  questions: [
+    {
+      type: 'mc',
+      q: 'Vad är spänningen mellan fas och nolla (L–N) i det svenska elnätet?',
+      opts: ['110 V', '230 V', '400 V', '690 V'],
+      ans: 1,
+      exp: '230 V är standardspänningen fas-nolla (enfas) i Sverige och Europa. Trefas fas-fas är 400 V.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är spänningen mellan två faser (L1–L2) i trefassystemet?',
+      opts: ['115 V', '230 V', '400 V', '690 V'],
+      ans: 2,
+      exp: 'Spänningen fas-fas i trefassystemet är 400 V. Relationen: U_fas-fas = U_fas-nolla × √3 ≈ 230 × 1,732 ≈ 400 V.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken minsta kabelarea (koppar) krävs för en 16 A säkring?',
+      opts: ['1,5 mm²', '2,5 mm²', '4 mm²', '6 mm²'],
+      ans: 1,
+      exp: '16 A (grå säkring) kräver minst 2,5 mm² koppar. Grundregeln: 6A→1mm², 10A→1,5mm², 16A→2,5mm², 20A→4mm².'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken färg har en 10 A säkring?',
+      opts: ['Grön', 'Röd', 'Grå', 'Blå'],
+      ans: 1,
+      exp: '10 A säkring är röd. Färgkod: 6A=Grön, 10A=Röd, 16A=Grå, 20A=Blå, 25A=Gul, 32A=Svart.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är den högsta spänningsnivån i det svenska stamnätet?',
+      opts: ['130 kV', '220 kV', '400 kV', '750 kV'],
+      ans: 2,
+      exp: 'Svenska stamnätet opererar på 400 kV (och delvis 220 kV). Det förvaltas av Svenska kraftnät.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad sker i en nätstation?',
+      opts: ['400 kV → 130 kV', '130 kV → 10–20 kV', '10–20 kV → 400 V', '400 V → 230 V'],
+      ans: 2,
+      exp: 'Nätstationen transformerar mellanspänning (10–20 kV) ner till lågspänning (400 V trefas / 230 V enfas) som levereras till hushåll.'
+    },
+    {
+      type: 'mc',
+      q: 'Hur stor del av ett VP-rörs tvärsnittsarea får max fyllas med kablar?',
+      opts: ['70 %', '60 %', '50 %', '40 %'],
+      ans: 3,
+      exp: 'Kablar får fylla max 40 % av VP-rörets tvärsnittsarea. Detta säkerställer att kablarna kan dras utan skada och har tillräcklig kylning.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken säkringsfärg har 6 A?',
+      opts: ['Röd', 'Grön', 'Blå', 'Grå'],
+      ans: 1,
+      exp: '6 A säkring är grön. Kom ihåg färgordningen: 6A=Grön, 10A=Röd, 16A=Grå, 20A=Blå, 25A=Gul, 32A=Svart.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är spänningen mellan fas och skyddsjord (L–PE)?',
+      opts: ['0 V', '115 V', '230 V', '400 V'],
+      ans: 2,
+      exp: 'PE (skyddsjord) är ansluten till jordjord och bär normalt 0 V. Spänningen L–PE är alltså samma som L–N = 230 V.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken kabelarea krävs för en 25 A säkring (koppar)?',
+      opts: ['4 mm²', '6 mm²', '10 mm²', '16 mm²'],
+      ans: 1,
+      exp: '25 A (gul säkring) kräver minst 6 mm² koppar vid normala installationsförhållanden.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är spänningen PE–Neutral (skyddsjord–nolla)?',
+      opts: ['230 V', '400 V', '115 V', '0 V'],
+      ans: 3,
+      exp: 'Både PE och N är anslutna till jord (N via PEN-punkten i elcentralen). Spänningen PE–N är nominellt 0 V.'
+    },
+    {
+      type: 'mc',
+      q: 'Vem förvaltar det svenska stamnätet (400 kV-nätet)?',
+      opts: ['Vattenfall', 'E.ON', 'Svenska kraftnät', 'Ellevio'],
+      ans: 2,
+      exp: 'Svenska kraftnät är en statlig myndighet som äger och förvaltar det svenska stamnätet (400 kV och 220 kV).'
+    }
+  ]
+};
+</script>
+<script src="../script.js"></script>
+</body>
+</html>

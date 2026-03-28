@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Installation – Test | Ellära</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+    <div id="quiz-root"></div>
+  </div>
+</div>
+<script>
+const QUIZ_DATA = {
+  chapterId: 'installation',
+  chapterTitle: 'Installation',
+  chapterUrl: 'installation.html',
+  icon: '🏗️',
+  passPct: 95,
+  questions: [
+    {
+      type: 'mc',
+      q: 'Vad är spänningsfall i ett elsystem?',
+      opts: ['Spänningsökning längs kabeln', 'Spänningsminskning längs kabeln pga kabelmotstånd', 'Kortslutning i kabeln', 'Isolationsfel'],
+      ans: 1,
+      exp: 'Spänningsfall uppstår pga kabeln resistans. Ju längre kabel och ju högre ström, desto mer spänning "försvinner" i kabeln: U_fall = I × R_kabel.'
+    },
+    {
+      type: 'mc',
+      q: 'Hur stort spänningsfall tillåts maximalt i en enkel krets (SS 437 01 40)?',
+      opts: ['1 %', '3 %', '5 %', '10 %'],
+      ans: 1,
+      exp: 'Max 3 % spänningsfall tillåts i en enskild krets. För hela systemet (inkl. matning) gäller max 5 % enligt svensk standard.'
+    },
+    {
+      type: 'num',
+      q: 'En kabel har resistansen R = 0,3 Ω och leder strömmen I = 10 A. Vad är spänningsfallet U_fall?',
+      ans: 3,
+      unit: 'V',
+      tol: 0.1,
+      exp: 'U_fall = I × R = 10 × 0,3 = 3 V'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är standardfärgen för tändtråden (switched live)?',
+      opts: ['Brun', 'Blå', 'Grå', 'Gul-Grön'],
+      ans: 2,
+      exp: 'Tändtråden (switched live) är grå – den är spänningssatt när strömbrytaren är på. Brun = fas (L), Blå = nolla (N), Gul-grön = PE.'
+    },
+    {
+      type: 'mc',
+      q: 'I vilket jordningssystem delas PEN-ledaren upp i PE och N i elcentralen?',
+      opts: ['TT-system', 'IT-system', 'TN-C-S-system', 'TN-C-system'],
+      ans: 2,
+      exp: 'TN-C-S: PEN-ledaren från nätstationen delas i elcentralen till separata PE-skena och N-skena. Vanligast i svenska bostäder och industri.'
+    },
+    {
+      type: 'num',
+      q: 'En 2,5 mm² kopparkabel (ρ = 0,018 Ω·mm²/m) är 50 m lång. Vad är resistansen R (enkel väg)?',
+      ans: 0.36,
+      unit: 'Ω',
+      tol: 0.02,
+      exp: 'R = ρ × L / A = 0,018 × 50 / 2,5 = 0,36 Ω. (Obs: för tur-retur spänningsfall används 2 × L.)'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är en PEN-skruv?',
+      opts: ['En typ av automatsäkring', 'En skruvplint där PEN-ledaren ansluts och delas upp i PE och N', 'Ett jordtag i marken', 'En kabelklämma för armerad kabel'],
+      ans: 1,
+      exp: 'PEN-skruven är en märkt skruvplint i elcentralen (t.ex. DiAze-central) där inkommande PEN-ledare ansluts. Därifrån dras separata PE- och N-skenor.'
+    },
+    {
+      type: 'mc',
+      q: 'Varför är det farligt att lita på gamla kabelfärger utan att mäta?',
+      opts: ['Gamla kablar leder bättre', 'Äldre installationer kan ha andra standarder – färgerna kan vara fel', 'Gamla kablar har alltid rätt färger', 'Det spelar ingen roll vilken färg'],
+      ans: 1,
+      exp: 'Före nuvarande standard (IEC 60446) användes andra färgkoder i Sverige. R/S/T för trefas, svart eller grå nolla. Mät ALLTID med en mätare.'
+    },
+    {
+      type: 'num',
+      q: 'Spänningsfallet i en krets är 6,9 V på nominellt 230 V. Hur stor procent är det?',
+      ans: 3.0,
+      unit: '%',
+      tol: 0.2,
+      exp: 'U_fall% = (U_fall / U_nom) × 100 = (6,9 / 230) × 100 ≈ 3,0 %'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är en apparatgrupp i en elcentral?',
+      opts: ['Gruppen av alla elmätare', 'En kombination av automatsäkring (+ ev. jordfelsbrytare) för en krets', 'Samlingen av alla uttag i ett rum', 'En kabeltyp för fast installation'],
+      ans: 1,
+      exp: 'En apparatgrupp är en enskild krets med sin säkring (och ofta jordfelsbrytare). T.ex. "Kök vägguttag" skyddas av en 16 A automatsäkring med 30 mA jordfelsbrytare.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken ledare är obligatorisk i alla moderna svenska installationer?',
+      opts: ['Tändtråd (switched live)', 'Skyddsjord (PE)', 'Neutral (N)', 'PEN-ledare'],
+      ans: 1,
+      exp: 'Skyddsjord (PE) är obligatorisk i alla moderna installationer. Den ger skydd mot beröringsspänning om ett isolationsfel uppstår.'
+    },
+    {
+      type: 'num',
+      q: 'En 1,5 mm² kopparkabel (ρ = 0,018) är 30 m lång. Vad är tur-retur resistansen (2 × L)?',
+      ans: 0.72,
+      unit: 'Ω',
+      tol: 0.05,
+      exp: 'R = ρ × (2 × L) / A = 0,018 × 60 / 1,5 = 0,72 Ω. Tur-retur används för att beräkna spänningsfall (strömmen går dit och tillbaka).'
+    }
+  ]
+};
+</script>
+<script src="../script.js"></script>
+</body>
+</html>

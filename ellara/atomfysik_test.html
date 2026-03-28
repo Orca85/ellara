@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grunder & Atomfysik – Test | Ellära</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+    <div id="quiz-root"></div>
+  </div>
+</div>
+<script>
+const QUIZ_DATA = {
+  chapterId: 'atomfysik',
+  chapterTitle: 'Grunder & Atomfysik',
+  chapterUrl: 'atomfysik.html',
+  icon: '⚛️',
+  passPct: 95,
+  questions: [
+    {
+      type: 'mc',
+      q: 'Var i atomen sitter protonerna?',
+      opts: ['I elektronskalen', 'I kärnan', 'I mellannivån', 'Utanför atomen'],
+      ans: 1,
+      exp: 'Protoner (och neutroner) sitter i atomkärnan. Elektroner kretsar runt kärnan i skal.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken laddning har en elektron?',
+      opts: ['+1', '0', '−1', '+½'],
+      ans: 2,
+      exp: 'Elektronen har negativ laddning (−1). Protonen har positiv laddning (+1) och neutronen är neutral (0).'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är frekvensen på det svenska elnätet?',
+      opts: ['60 Hz', '50 Hz', '100 Hz', '25 Hz'],
+      ans: 1,
+      exp: 'Sverige (och Europa) använder 50 Hz. USA och Kanada använder 60 Hz.'
+    },
+    {
+      type: 'mc',
+      q: 'Hur många gånger per sekund byter 50 Hz-växelström riktning?',
+      opts: ['50', '25', '100', '200'],
+      ans: 2,
+      exp: 'Vid 50 Hz sker 50 hela svängningar per sekund. Varje svängning innehåller 2 riktningsbyten → 100 gånger/sekund.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad orsakar statisk elektricitet?',
+      opts: ['Hög temperatur', 'Starkt magnetfält', 'Elektronöverföring mellan material', 'Protonflöde'],
+      ans: 2,
+      exp: 'Statisk elektricitet uppstår när elektroner överförs från ett material till ett annat, t.ex. gummi mot ull.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken spänning har ett vanligt AA-batteri?',
+      opts: ['3 V', '9 V', '12 V', '1,5 V'],
+      ans: 3,
+      exp: 'Ett AA-batteri (alkaliskt) ger nominellt 1,5 V likspänning (DC).'
+    },
+    {
+      type: 'mc',
+      q: 'Vad kännetecknar likström (DC)?',
+      opts: ['Varierar sinusformigt', 'Byter riktning 100 ggr/s', 'Konstant riktning och storlek', 'Är alltid 230 V'],
+      ans: 2,
+      exp: 'Likström (DC – Direct Current) flödar alltid i samma riktning med konstant storlek. Batteri och solcell ger DC.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad mäter enheten Hertz (Hz)?',
+      opts: ['Spänning', 'Ström', 'Resistans', 'Frekvens – antal svängningar per sekund'],
+      ans: 3,
+      exp: 'Hertz (Hz) mäter frekvens, d.v.s. hur många svängningar som sker per sekund. Enheten är uppkallad efter Heinrich Hertz (1888).'
+    },
+    {
+      type: 'mc',
+      q: 'Vad händer när två lika laddningar möts?',
+      opts: ['De attraherar varandra', 'De annihilerar', 'De repellerar varandra', 'Ingenting händer'],
+      ans: 2,
+      exp: 'Lika laddningar (+ och + eller − och −) repellerar varandra. Olika laddningar attraherar.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är en atom elektriskt neutral?',
+      opts: ['När den saknar elektroner', 'När antalet protoner = antalet elektroner', 'När den bara har neutroner', 'När den är kall'],
+      ans: 1,
+      exp: 'En atom är elektriskt neutral när antalet positiva protoner är lika med antalet negativa elektroner – laddningarna tar ut varandra.'
+    }
+  ]
+};
+</script>
+<script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kabeltyper – Test | Ellära</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+    <div id="quiz-root"></div>
+  </div>
+</div>
+<script>
+const QUIZ_DATA = {
+  chapterId: 'kabeltyper',
+  chapterTitle: 'Kabeltyper',
+  chapterUrl: 'kabeltyper.html',
+  icon: '🔌',
+  passPct: 95,
+  questions: [
+    {
+      type: 'mc',
+      q: 'Hur många trådar har en enkardelig (EK) kabel?',
+      opts: ['1 massiv tråd', '7 trådar', '19 trådar', '49+ trådar'],
+      ans: 0,
+      exp: 'EK (enkardelig) har EN enda massiv tråd (heltråd). Den är stel och behåller formen vid bockning.'
+    },
+    {
+      type: 'mc',
+      q: 'Hur många trådar har typiskt en flerkardelig (FK) kabel?',
+      opts: ['1', '7', '19', '49+'],
+      ans: 1,
+      exp: 'FK (flerkardelig) har typiskt 7 trådar. Det gör den något mjukare än EK men ändå relativt stel.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken kabeltyp är lämplig för svetskablar och industrirobotar med konstant rörelse?',
+      opts: ['EK – enkardelig', 'FK – flerkardelig', 'MK – mångkardelig', 'RK – rikkardelig'],
+      ans: 3,
+      exp: 'RK (rikkardelig) har 49 eller fler mycket fina trådar och är extremt böjlig. Den tål tusentals böjcykler och konstant rörelse.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är standardfärgen för skyddsjordledaren (PE)?',
+      opts: ['Brun', 'Blå', 'Svart', 'Gul-Grön'],
+      ans: 3,
+      exp: 'Skyddsjord (PE – Protective Earth) är alltid gul-grön (spiralad). Denna färg är RESERVERAD – får aldrig användas för fas eller nolla.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är standardfärgen för nolledaren (N)?',
+      opts: ['Brun', 'Blå', 'Grå', 'Röd'],
+      ans: 1,
+      exp: 'Nolledaren (N – Neutral) ska vara blå enligt modern svensk standard.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är standardfärgen för fasledaren (L) i enfassystem?',
+      opts: ['Brun', 'Blå', 'Grå', 'Grön'],
+      ans: 0,
+      exp: 'Fas (L) är brun i moderna enfas- och trefasinstallationer. L1 = Brun, L2 = Svart, L3 = Grå.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är LSZH/FRHF-kablar speciellt lämpade för?',
+      opts: ['Utomhusinstallation i mark', 'Offentliga byggnader, tunnlar och utrymmen med folk', 'Högspänningsinstallationer', 'Kraftledningar'],
+      ans: 1,
+      exp: 'LSZH (Low Smoke Zero Halogen) är selvsläckande, avger minimal rök och ingen giftig halogengas vid brand. Obligatoriska i t.ex. tunnelbana, sjukhus och tunnlar.'
+    },
+    {
+      type: 'mc',
+      q: 'Hur böjbar är en rikkardelig (RK) kabel jämfört med enkardelig (EK)?',
+      opts: ['Ungefär lika', 'Lite mjukare', 'Tydligt mjukare', 'Extremt mycket mjukare'],
+      ans: 3,
+      exp: 'RK har 49+ extremt fina trådar jämfört med EK\'s 1 massiva tråd. RK är extremt böjlig och tål tiotusentals böjcykler.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är standardfärgen för tändtråden (switched live)?',
+      opts: ['Gul', 'Röd', 'Grå', 'Orange'],
+      ans: 2,
+      exp: 'Tändtråden (switched live) är grå. Den är spänningssatt när strömbrytaren är påslagen och används mellan strömbrytare och armatur.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad gäller absolut för gul-grön kabel?',
+      opts: ['Kan användas som fas om märkt', 'Får ALDRIG användas som fas eller nolla', 'Är alltid märkt med R eller S', 'Används bara i DC-system'],
+      ans: 1,
+      exp: 'Gul-grön är RESERVERAD för skyddsjord (PE). Att använda den som fas eller nolla är livsfarligt och strider mot standard.'
+    }
+  ]
+};
+</script>
+<script src="../script.js"></script>
+</body>
+</html>

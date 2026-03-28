@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Material & Resistivitet – Test | Ellära</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+    <div id="quiz-root"></div>
+  </div>
+</div>
+<script>
+const QUIZ_DATA = {
+  chapterId: 'material',
+  chapterTitle: 'Material & Resistivitet',
+  chapterUrl: 'material.html',
+  icon: '🧱',
+  passPct: 95,
+  questions: [
+    {
+      type: 'mc',
+      q: 'Vilken resistivitet har koppar (Cu)?',
+      opts: ['0,028 Ω·mm²/m', '0,016 Ω·mm²/m', '0,022 Ω·mm²/m', '0,018 Ω·mm²/m'],
+      ans: 3,
+      exp: 'Koppar har resistiviteten ρ = 0,018 Ω·mm²/m. Det är därför koppar är standardmaterial för elkablar.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilket av dessa material är den bästa elektriska ledaren (lägst resistivitet)?',
+      opts: ['Koppar', 'Silver', 'Guld', 'Aluminium'],
+      ans: 1,
+      exp: 'Silver har lägst resistivitet (0,016 Ω·mm²/m) av alla vanliga metaller. Det används i kontakter och specialtillämpningar – men är dyrare än koppar.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är resistiviteten för aluminium (Al) i Ω·mm²/m?',
+      ans: 0.028,
+      unit: 'Ω·mm²/m',
+      tol: 0.001,
+      exp: 'Aluminium har ρ = 0,028 Ω·mm²/m. Trots högre resistivitet än koppar används det i kraftledningar pga lägre vikt och kostnad.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilket halvledarmaterial är vanligast i CPU:er och transistorer?',
+      opts: ['Germanium (Ge)', 'Galliumarsenid (GaAs)', 'Kisel (Si)', 'Kiselkarbid (SiC)'],
+      ans: 2,
+      exp: 'Kisel (Si) är det överlägset vanligaste halvledarmaterialet och används i praktiskt taget all modern elektronik.'
+    },
+    {
+      type: 'mc',
+      q: 'Vid ungefär vilken elektrisk fältstyrka slår luft igenom?',
+      opts: ['0,3 kV/mm', '1 kV/mm', '3 kV/mm', '30 kV/mm'],
+      ans: 2,
+      exp: 'Luft har en genomslagsspänning på ungefär 3 kV/mm. Blixt uppstår när spänningsskillnaden i atmosfären överskrider detta.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är PVC ett exempel på i elektrisk klassificering?',
+      opts: ['Ledare', 'Halvledare', 'Isolator', 'Supraledare'],
+      ans: 2,
+      exp: 'PVC (polyvinylklorid) är en isolator med mycket hög resistivitet (≈10¹⁴ Ω·m) och används som kabelisolation och kabelmantel.'
+    },
+    {
+      type: 'mc',
+      q: 'Varför används aluminium i kraftledningar trots högre resistivitet än koppar?',
+      opts: ['Lägre resistivitet', 'Billigare och lättare', 'Bättre isoleringsförmåga', 'Tål högre temperatur'],
+      ans: 1,
+      exp: 'Aluminium är ca 3 gånger lättare och betydligt billigare än koppar. För långa kraftledningar är vikten avgörande.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad innebär "dopning" av ett halvledarmaterial?',
+      opts: ['Kyla ned materialet', 'Tillföra specifika atomer för att styra ledningsförmågan', 'Belasta materialet mekaniskt', 'Utsätta för radioaktiv strålning'],
+      ans: 1,
+      exp: 'Dopning = tillsats av små mängder föroreningar (t.ex. bor för P-typ eller fosfor för N-typ) för att skapa fria laddningsbärare.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är resistiviteten för silver (Ag) i Ω·mm²/m?',
+      ans: 0.016,
+      unit: 'Ω·mm²/m',
+      tol: 0.001,
+      exp: 'Silver har ρ = 0,016 Ω·mm²/m – lägst av alla vanliga metaller. Används i kontakter och specialtillämpningar.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad klassificeras järn/stål (Fe) som i en elektrisk kontext?',
+      opts: ['Isolator', 'Halvledare', 'Ledare', 'Supraledare'],
+      ans: 2,
+      exp: 'Järn är en ledare med resistiviteten ≈0,10 Ω·mm²/m. Det leder sämre än koppar men används t.ex. i jordtag och armering.'
+    }
+  ]
+};
+</script>
+<script src="../script.js"></script>
+</body>
+</html>

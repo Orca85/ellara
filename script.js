@@ -2468,3 +2468,414 @@ function format(n) {
 
   document.addEventListener('DOMContentLoaded', buildWidget);
 })();
+
+/* =========================================================
+   KAPITELNAVIGATION – Förkunskaper, nästa steg & progress
+   ========================================================= */
+(function () {
+  'use strict';
+
+  /* ---------- Kapitelmetadata ---------- */
+  // Rekommenderad studieordning + beroenden
+  const CHAPTERS = [
+    {
+      id: 'atomfysik', url: 'atomfysik.html', icon: '⚛️', title: 'Atomfysik',
+      prereqs: [], next: ['material'], quiz: 'atomfysik_test.html',
+    },
+    {
+      id: 'material', url: 'material.html', icon: '🧱', title: 'Material',
+      prereqs: ['atomfysik'], next: ['kretsar', 'kabeltyper'], quiz: 'material_test.html',
+    },
+    {
+      id: 'kretsar', url: 'kretsar.html', icon: '⚙️', title: 'Kretsar & Lagar',
+      prereqs: ['atomfysik', 'material'], next: ['trefas', 'kabeldim'], quiz: 'kretsar_test.html',
+    },
+    {
+      id: 'kabeltyper', url: 'kabeltyper.html', icon: '🔌', title: 'Kabeltyper',
+      prereqs: ['material'], next: ['kabeldim'], quiz: 'kabeltyper_test.html',
+    },
+    {
+      id: 'kabeldim', url: 'kabeldim.html', icon: '📏', title: 'Kabeldim.',
+      prereqs: ['kretsar', 'kabeltyper'], next: ['skydd', 'installation'], quiz: 'kabeldim_test.html',
+    },
+    {
+      id: 'trefas', url: 'trefas.html', icon: '🔄', title: 'Trefassystem',
+      prereqs: ['kretsar'], next: ['skydd'], quiz: 'trefas_test.html',
+    },
+    {
+      id: 'skydd', url: 'skydd.html', icon: '🛡️', title: 'Skydd & Säkerhet',
+      prereqs: ['kretsar', 'kabeldim'], next: ['installation'], quiz: 'skydd_test.html',
+    },
+    {
+      id: 'installation', url: 'installation.html', icon: '🏗️', title: 'Installation',
+      prereqs: ['kabeltyper', 'kabeldim', 'skydd'], next: [], quiz: 'installation_test.html',
+    },
+  ];
+
+  const STORAGE_KEY = 'ellara_progress';
+
+  /* ---------- Progress helpers ---------- */
+  function getProgress() {
+    try { return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')); }
+    catch { return new Set(); }
+  }
+
+  function saveProgress(set) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]));
+  }
+
+  function toggleDone(id) {
+    const p = getProgress();
+    if (p.has(id)) p.delete(id); else p.add(id);
+    saveProgress(p);
+    return p.has(id);
+  }
+
+  function currentFile() {
+    return window.location.pathname.split('/').pop() || 'index.html';
+  }
+
+  /* ---------- Chapter page: prereq bar + done btn + next bar ---------- */
+  function initChapterNav() {
+    const chapter = CHAPTERS.find(c => c.url === currentFile());
+    if (!chapter) return;
+
+    const progress = getProgress();
+    let isDone = progress.has(chapter.id);
+
+    // Build top bar
+    const bar = document.createElement('div');
+    bar.className = 'ch-nav-bar';
+
+    if (chapter.prereqs.length) {
+      const section = document.createElement('div');
+      section.className = 'ch-nav-section';
+      const lbl = document.createElement('span');
+      lbl.className = 'ch-nav-label';
+      lbl.textContent = 'Förkunskaper:';
+      section.appendChild(lbl);
+      chapter.prereqs.forEach(pid => {
+        const pc = CHAPTERS.find(c => c.id === pid);
+        if (!pc) return;
+        const done = progress.has(pid);
+        const chip = document.createElement('a');
+        chip.href = pc.url;
+        chip.className = 'ch-prereq-chip' + (done ? ' ch-prereq-chip--done' : '');
+        chip.textContent = `${pc.icon} ${pc.title}${done ? ' ✓' : ''}`;
+        section.appendChild(chip);
+      });
+      bar.appendChild(section);
+    } else {
+      const lbl = document.createElement('span');
+      lbl.className = 'ch-nav-label';
+      lbl.textContent = 'Startkapitel';
+      bar.appendChild(lbl);
+    }
+
+    const doneBtn = document.createElement('button');
+    doneBtn.className = 'ch-done-btn' + (isDone ? ' ch-done-btn--active' : '');
+    doneBtn.textContent = isDone ? '✓ Klar' : 'Markera som klar';
+    doneBtn.addEventListener('click', () => {
+      isDone = toggleDone(chapter.id);
+      doneBtn.className = 'ch-done-btn' + (isDone ? ' ch-done-btn--active' : '');
+      doneBtn.textContent = isDone ? '✓ Klar' : 'Markera som klar';
+    });
+    bar.appendChild(doneBtn);
+
+    // Inject after search bar (or at start of main-content)
+    const searchWrap = document.getElementById('search-wrap');
+    const mainContent = document.querySelector('.main-content');
+    if (searchWrap) searchWrap.insertAdjacentElement('afterend', bar);
+    else if (mainContent) mainContent.prepend(bar);
+
+    const footer = document.querySelector('footer');
+
+    // Bottom "next steps" bar
+    if (chapter.next.length) {
+      const nextBar = document.createElement('div');
+      nextBar.className = 'ch-next-bar';
+      const lbl = document.createElement('span');
+      lbl.className = 'ch-nav-label';
+      lbl.textContent = 'Nästa steg:';
+      nextBar.appendChild(lbl);
+      chapter.next.forEach(nid => {
+        const nc = CHAPTERS.find(c => c.id === nid);
+        if (!nc) return;
+        const chip = document.createElement('a');
+        chip.href = nc.url;
+        chip.className = 'ch-next-chip';
+        chip.textContent = `${nc.icon} ${nc.title} →`;
+        nextBar.appendChild(chip);
+      });
+      if (footer) footer.insertAdjacentElement('beforebegin', nextBar);
+    }
+
+    // Test banner
+    if (chapter.quiz) {
+      const testBar = document.createElement('div');
+      testBar.className = 'ch-test-bar';
+      testBar.innerHTML = `
+        <div class="ch-test-bar-text">
+          <div class="ch-test-bar-title">Redo att testa dina kunskaper?</div>
+          <div class="ch-test-bar-sub">10–15 frågor · Blandat · Klara 95% för att markera kapitlet som klart</div>
+        </div>
+        <a href="${chapter.quiz}" class="ch-test-btn">Starta test →</a>
+      `;
+      if (footer) footer.insertAdjacentElement('beforebegin', testBar);
+    }
+  }
+
+  /* ---------- Index page: roadmap + progress on cards ---------- */
+  function initIndexProgress() {
+    // Only run on ellara/index.html (has chapter cards)
+    if (!document.querySelector('.chapter-card')) return;
+
+    const progress = getProgress();
+    const doneCount = CHAPTERS.filter(c => progress.has(c.id)).length;
+    const total = CHAPTERS.length;
+
+    // 1. Progress summary bar
+    const summary = document.createElement('div');
+    summary.className = 'ch-progress-summary';
+    const pct = total > 0 ? Math.round((doneCount / total) * 100) : 0;
+    summary.innerHTML = `
+      <span class="ch-progress-text">${doneCount} av ${total} kapitel klara</span>
+      <div class="ch-progress-bar"><div class="ch-progress-fill" style="width:${pct}%"></div></div>
+    `;
+    const sectionHeader = document.querySelector('#kapitel .section-header');
+    if (sectionHeader) sectionHeader.insertAdjacentElement('afterend', summary);
+
+    // 2. Roadmap strip
+    const roadmap = document.createElement('div');
+    roadmap.className = 'ch-roadmap';
+    const roadTitle = document.createElement('div');
+    roadTitle.className = 'ch-roadmap-title';
+    roadTitle.textContent = 'Studiepath – rekommenderad ordning';
+    roadmap.appendChild(roadTitle);
+
+    const path = document.createElement('div');
+    path.className = 'ch-roadmap-path';
+
+    CHAPTERS.forEach((ch, i) => {
+      const done = progress.has(ch.id);
+      const node = document.createElement('a');
+      node.href = ch.url;
+      node.className = 'ch-roadmap-node' + (done ? ' ch-roadmap-node--done' : '');
+
+      const iconEl = document.createElement('div');
+      iconEl.className = 'ch-roadmap-node-icon';
+      iconEl.textContent = ch.icon;
+
+      const labelEl = document.createElement('div');
+      labelEl.className = 'ch-roadmap-node-label';
+      labelEl.textContent = ch.title;
+
+      node.appendChild(iconEl);
+      node.appendChild(labelEl);
+      if (done) {
+        const check = document.createElement('div');
+        check.className = 'ch-roadmap-node-check';
+        check.textContent = '✓';
+        node.appendChild(check);
+      }
+      path.appendChild(node);
+
+      if (i < CHAPTERS.length - 1) {
+        const arrow = document.createElement('span');
+        arrow.className = 'ch-roadmap-arrow';
+        arrow.textContent = '→';
+        path.appendChild(arrow);
+      }
+    });
+
+    roadmap.appendChild(path);
+    if (sectionHeader) sectionHeader.insertAdjacentElement('afterend', roadmap);
+
+    // 3. Done dots on chapter cards
+    document.querySelectorAll('.chapter-card').forEach(card => {
+      const href = card.getAttribute('href') || '';
+      const file = href.split('/').pop();
+      const ch = CHAPTERS.find(c => c.url === file);
+      if (!ch || !progress.has(ch.id)) return;
+      card.classList.add('ch-card--done');
+      const dot = document.createElement('div');
+      dot.className = 'ch-card-done-dot';
+      dot.textContent = '✓';
+      dot.title = 'Klar!';
+      card.appendChild(dot);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initChapterNav();
+    initIndexProgress();
+  });
+})();
+
+/* =========================================================
+   QUIZ-MOTOR – Per-kapitel kunskapstester
+   ========================================================= */
+(function () {
+  'use strict';
+  if (typeof QUIZ_DATA === 'undefined') return;
+
+  const { chapterId, chapterTitle, chapterUrl, icon, passPct = 95, questions } = QUIZ_DATA;
+  const STORAGE_KEY = 'ellara_progress';
+
+  // Shuffle array in place
+  function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
+
+  const shuffled = shuffle([...questions]);
+  let current = 0, score = 0;
+  const answered = [];
+
+  const root = document.getElementById('quiz-root');
+  if (!root) return;
+
+  function render() {
+    if (current < shuffled.length) renderQuestion();
+    else renderResults();
+    root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function renderQuestion() {
+    const q = shuffled[current];
+    const n = current + 1;
+    const total = shuffled.length;
+    const pct = Math.round(((n - 1) / total) * 100);
+
+    root.innerHTML = `
+      <div class="quiz-header">
+        <a href="${chapterUrl}" class="quiz-back">← ${icon} ${chapterTitle}</a>
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+          <div class="quiz-progress-text">Fråga ${n} av ${total}</div>
+        </div>
+      </div>
+      <div class="quiz-card" id="quiz-card">
+        <div class="quiz-q-type">${q.type === 'mc' ? '📋 Flerval' : '🔢 Beräkning'}</div>
+        <div class="quiz-q-text">${q.q}</div>
+        ${q.type === 'mc' ? buildMC(q) : buildNum(q)}
+        <div class="quiz-explanation" id="quiz-exp" hidden></div>
+        <button class="quiz-next-btn" id="quiz-next" hidden></button>
+      </div>`;
+
+    if (q.type === 'mc') attachMC(q);
+    else attachNum(q);
+  }
+
+  function buildMC(q) {
+    return `<div class="quiz-opts">${q.opts.map((o, i) =>
+      `<button class="quiz-opt" data-i="${i}">${o}</button>`).join('')}</div>`;
+  }
+
+  function buildNum(q) {
+    return `<div class="quiz-num-wrap">
+      <input class="quiz-num-input" id="qni" type="number" step="any" inputmode="decimal" placeholder="Ange svar…" autocomplete="off">
+      ${q.unit ? `<span class="quiz-num-unit">${q.unit}</span>` : ''}
+      <button class="quiz-num-btn" id="qnb">Kontrollera</button>
+    </div>`;
+  }
+
+  function attachMC(q) {
+    root.querySelectorAll('.quiz-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = +btn.dataset.i;
+        const ok = i === q.ans;
+        root.querySelectorAll('.quiz-opt').forEach(b => {
+          b.disabled = true;
+          const j = +b.dataset.i;
+          if (j === q.ans) b.classList.add('quiz-opt--correct');
+          else if (j === i && !ok) b.classList.add('quiz-opt--wrong');
+        });
+        if (ok) score++;
+        answered.push({ q, ok, given: q.opts[i] });
+        showExp(q, ok);
+      });
+    });
+  }
+
+  function attachNum(q) {
+    const inp = root.querySelector('#qni');
+    const btn = root.querySelector('#qnb');
+    function check() {
+      const v = parseFloat(inp.value.replace(',', '.'));
+      if (!isFinite(v)) { inp.classList.add('quiz-input--err'); return; }
+      inp.classList.remove('quiz-input--err');
+      const tol = q.tol !== undefined ? q.tol : Math.max(0.01, Math.abs(q.ans) * 0.02);
+      const ok = Math.abs(v - q.ans) <= tol;
+      inp.disabled = true; btn.disabled = true;
+      inp.classList.add(ok ? 'quiz-num-input--correct' : 'quiz-num-input--wrong');
+      if (ok) score++;
+      answered.push({ q, ok, given: v });
+      showExp(q, ok);
+    }
+    btn.addEventListener('click', check);
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+    setTimeout(() => inp.focus(), 50);
+  }
+
+  function showExp(q, ok) {
+    const expEl = root.querySelector('#quiz-exp');
+    const correctStr = q.type === 'num'
+      ? `${q.ans}${q.unit ? ' ' + q.unit : ''}`
+      : q.opts[q.ans];
+    expEl.innerHTML = `
+      <div class="quiz-exp-status ${ok ? 'quiz-exp--ok' : 'quiz-exp--fail'}">
+        ${ok ? '✓ Rätt!' : `✗ Fel – rätt svar: <strong>${correctStr}</strong>`}
+      </div>
+      ${q.exp ? `<div class="quiz-exp-text">${q.exp}</div>` : ''}`;
+    expEl.hidden = false;
+    const nxt = root.querySelector('#quiz-next');
+    nxt.textContent = current + 1 < shuffled.length ? 'Nästa fråga →' : 'Se resultat →';
+    nxt.hidden = false;
+    nxt.addEventListener('click', () => { current++; render(); });
+  }
+
+  function renderResults() {
+    const total = shuffled.length;
+    const pct = Math.round((score / total) * 100);
+    const pass = pct >= passPct;
+
+    if (pass) {
+      try {
+        const p = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
+        p.add(chapterId);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([...p]));
+      } catch (e) {}
+    }
+
+    root.innerHTML = `
+      <div class="quiz-results">
+        <div class="quiz-results-icon">${pass ? '🏆' : '📚'}</div>
+        <div class="quiz-results-score quiz-results--${pass ? 'pass' : 'fail'}">${pct}%</div>
+        <div class="quiz-results-fraction">${score} av ${total} rätt</div>
+        <div class="quiz-results-msg">${pass
+          ? `Utmärkt! ${icon} <strong>${chapterTitle}</strong> har markerats som klar.`
+          : `Fortsätt träna! Du behöver ${passPct}% för att klara testet.`}</div>
+        <div class="quiz-results-actions">
+          <button class="quiz-retry-btn" id="qr-retry">Försök igen</button>
+          <a href="${chapterUrl}" class="quiz-back-btn">← Tillbaka till kapitlet</a>
+        </div>
+        <details class="quiz-breakdown">
+          <summary>Visa alla svar (${score}/${total})</summary>
+          <div class="quiz-breakdown-list">
+            ${answered.map((a, i) => `
+              <div class="quiz-breakdown-item breakdown--${a.ok ? 'ok' : 'fail'}">
+                <span class="breakdown-num">${i + 1}.</span>
+                <span class="breakdown-q">${a.q.q}</span>
+                <span class="breakdown-result">${a.ok ? '✓' : '✗'}</span>
+              </div>`).join('')}
+          </div>
+        </details>
+      </div>`;
+
+    root.querySelector('#qr-retry').addEventListener('click', () => {
+      current = 0; score = 0; answered.length = 0;
+      shuffle(shuffled);
+      render();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', render);
+})();

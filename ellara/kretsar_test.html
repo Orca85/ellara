@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kretsar & Lagar – Test | Ellära</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+    <div id="quiz-root"></div>
+  </div>
+</div>
+<script>
+const QUIZ_DATA = {
+  chapterId: 'kretsar',
+  chapterTitle: 'Kretsar & Lagar',
+  chapterUrl: 'kretsar.html',
+  icon: '⚙️',
+  passPct: 95,
+  questions: [
+    {
+      type: 'num',
+      q: 'En krets har spänningen U = 12 V och resistansen R = 4 Ω. Vad är strömmen I?',
+      ans: 3,
+      unit: 'A',
+      tol: 0.1,
+      exp: 'Ohms lag: I = U / R = 12 / 4 = 3 A'
+    },
+    {
+      type: 'num',
+      q: 'En krets har strömmen I = 2 A och resistansen R = 6 Ω. Vad är spänningen U?',
+      ans: 12,
+      unit: 'V',
+      tol: 0.5,
+      exp: 'Ohms lag: U = R × I = 6 × 2 = 12 V'
+    },
+    {
+      type: 'num',
+      q: 'En lampa drivs med U = 230 V och I = 0,5 A. Vad är effekten P?',
+      ans: 115,
+      unit: 'W',
+      tol: 1,
+      exp: 'Effektlagen: P = U × I = 230 × 0,5 = 115 W'
+    },
+    {
+      type: 'num',
+      q: 'En komponent har P = 60 W och U = 12 V. Vad är strömmen I?',
+      ans: 5,
+      unit: 'A',
+      tol: 0.1,
+      exp: 'Effektlagen omskriven: I = P / U = 60 / 12 = 5 A'
+    },
+    {
+      type: 'mc',
+      q: 'Tre resistorer 10 Ω, 20 Ω och 30 Ω kopplas i serie. Vad är totalresistansen R_tot?',
+      opts: ['5 Ω', '60 Ω', '6 Ω', '30 Ω'],
+      ans: 1,
+      exp: 'Seriekoppling: R_tot = R₁ + R₂ + R₃ = 10 + 20 + 30 = 60 Ω'
+    },
+    {
+      type: 'num',
+      q: 'Två resistorer, 8 Ω och 8 Ω, kopplas parallellt. Vad är totalresistansen R_tot?',
+      ans: 4,
+      unit: 'Ω',
+      tol: 0.1,
+      exp: 'Genvägsformel för lika resistorer: R_tot = R / n = 8 / 2 = 4 Ω'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är karakteristiskt för en seriekoppling?',
+      opts: ['Samma spänning i alla grenar', 'Strömmen summeras i varje gren', 'Samma ström flödar genom alla komponenter', 'Resistansen halveras'],
+      ans: 2,
+      exp: 'I en seriekoppling är strömmen densamma i hela kretsen. Spänningen däremot fördelas proportionellt mot resistanserna.'
+    },
+    {
+      type: 'mc',
+      q: 'Var kopplas en amperemeter korrekt i en krets?',
+      opts: ['Parallellt med komponenten', 'I serie med komponenten', 'Spelar ingen roll', 'Aldrig direkt i kretsen'],
+      ans: 1,
+      exp: 'Amperemetern kopplas alltid i serie för att mäta ström. En ideal amperemeter har internmotstånd ≈ 0 Ω och stör därför inte kretsen.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad säger Kirchhoffs strömlag (KCL)?',
+      opts: ['Summan av spänningsfall runt en slinga = 0', 'ΣI_in = ΣI_ut i en nod', 'R_tot = ΣR', 'P = U × I'],
+      ans: 1,
+      exp: 'KCL: Summan av all ström in i en nod är lika med summan av all ström ut ur noden. Ström kan varken skapas eller försvinna.'
+    },
+    {
+      type: 'num',
+      q: 'En transformator har N₁ = 1 000 varv och N₂ = 100 varv. Primärspänningen är 230 V. Vad är sekundärspänningen U₂?',
+      ans: 23,
+      unit: 'V',
+      tol: 0.5,
+      exp: 'Transformatorformel: U₂ = U₁ × N₂/N₁ = 230 × 100/1000 = 23 V. Det är en steg-ned-transformator.'
+    },
+    {
+      type: 'num',
+      q: 'En komponent förbrukar P = 100 W vid strömmen I = 2 A. Vad är resistansen R?',
+      ans: 25,
+      unit: 'Ω',
+      tol: 0.5,
+      exp: 'Effektformel: P = I² × R → R = P / I² = 100 / 4 = 25 Ω'
+    },
+    {
+      type: 'mc',
+      q: 'Vad har en ideal voltmeter för internmotstånd?',
+      opts: ['0 Ω', '1 Ω', '1 kΩ', 'Oändlighet (∞)'],
+      ans: 3,
+      exp: 'En ideal voltmeter har oändligt internmotstånd – den tar ingen ström och stör inte kretsen. Kopplas alltid parallellt.'
+    },
+    {
+      type: 'num',
+      q: 'Fyra lika resistorer på 20 Ω var kopplas parallellt. Vad är totalresistansen?',
+      ans: 5,
+      unit: 'Ω',
+      tol: 0.1,
+      exp: 'Lika resistorer parallellt: R_tot = R / n = 20 / 4 = 5 Ω'
+    },
+    {
+      type: 'num',
+      q: 'En kabel är 100 m lång med ledararea 2,5 mm². Resistiviteten för koppar är 0,018 Ω·mm²/m. Vad är kabeln resistans R?',
+      ans: 0.72,
+      unit: 'Ω',
+      tol: 0.05,
+      exp: 'R = ρ × L / A = 0,018 × 100 / 2,5 = 0,72 Ω'
+    },
+    {
+      type: 'mc',
+      q: 'Vad händer om en amperemeter kopplas parallellt med en komponent?',
+      opts: ['Mäter spänning istället', 'Kortsluter komponenten – säkring kan lösa ut', 'Visar noll ampere', 'Mäter effekten'],
+      ans: 1,
+      exp: 'Eftersom amperemetern har nästan noll internmotstånd skapas en kortslutning parallellt med komponenten. Säkringen löser ut.'
+    }
+  ]
+};
+</script>
+<script src="../script.js"></script>
+</body>
+</html>

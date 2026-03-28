@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trefassystem – Test | Ellära</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+    <div id="quiz-root"></div>
+  </div>
+</div>
+<script>
+const QUIZ_DATA = {
+  chapterId: 'trefas',
+  chapterTitle: 'Trefassystem',
+  chapterUrl: 'trefas.html',
+  icon: '🔄',
+  passPct: 95,
+  questions: [
+    {
+      type: 'mc',
+      q: 'Med hur många grader är faserna i ett trefassystem förskjutna?',
+      opts: ['60°', '90°', '120°', '180°'],
+      ans: 2,
+      exp: 'De tre faserna L1, L2 och L3 är exakt 120° (360°/3) förskjutna i förhållande till varandra.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är spänningen fas–nolla (L–N) i det svenska trefasnätet?',
+      opts: ['115 V', '230 V', '400 V', '690 V'],
+      ans: 1,
+      exp: 'Fasspänningen (fas–nolla) är 230 V. Linjespänningen (fas–fas) är 400 V = 230 × √3.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är den vanligaste elmaskinstypen i industrin?',
+      opts: ['Synkronmotor', 'Asynkronmotor', 'Likströmsmotor', 'Stegmotor'],
+      ans: 1,
+      exp: 'Asynkronmotorn (induktionsmotorn) är den överlägset vanligaste industriella elmaskinen pga enkelhet, robusthet och låg kostnad.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad kallas systemet där PEN-ledaren obligatoriskt delas upp i elcentralen?',
+      opts: ['TT-system', 'IT-system', 'TN-C-system', 'TN-C-S-system'],
+      ans: 3,
+      exp: 'TN-C-S är det vanligaste systemet i Sverige. PEN-ledaren (kombinerad PE+N) från nätstationen delas upp i separata PE- och N-skenor i elcentralen.'
+    },
+    {
+      type: 'num',
+      q: 'Beräkna trefaseffekten P för en motor med U_led = 400 V, I = 10 A och cos φ = 0,85. Ange svaret i W (avrundat till hela W).',
+      ans: 5888,
+      unit: 'W',
+      tol: 50,
+      exp: 'P = √3 × U_led × I × cos φ = 1,732 × 400 × 10 × 0,85 ≈ 5 888 W'
+    },
+    {
+      type: 'num',
+      q: 'Frekvensen i elnätet är 50 Hz. Vad är vinkelfrekvensen ω? (Ange i rad/s, avrundat till heltal)',
+      ans: 314,
+      unit: 'rad/s',
+      tol: 2,
+      exp: 'ω = 2π × f = 2 × 3,14159 × 50 ≈ 314 rad/s'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken komponent skapar induktiv reaktans (X_L) i en AC-krets?',
+      opts: ['Resistor', 'Kondensator', 'Spole (induktor)', 'Diod'],
+      ans: 2,
+      exp: 'En spole (induktor) motstår förändringar i ström. Dess reaktans X_L = 2πfL ökar med frekvensen.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad händer med en kondensators reaktans X_C när frekvensen ökar?',
+      opts: ['Ökar', 'Minskar', 'Förblir oförändrad', 'Blir oändlig'],
+      ans: 1,
+      exp: 'X_C = 1/(2πfC). När f ökar minskar X_C – kondensatorn leder AC bättre vid högre frekvenser.'
+    },
+    {
+      type: 'num',
+      q: 'En spole har induktansen L = 0,1 H. Vad är den induktiva reaktansen X_L vid 50 Hz?',
+      ans: 31.4,
+      unit: 'Ω',
+      tol: 0.5,
+      exp: 'X_L = 2π × f × L = 2 × 3,14159 × 50 × 0,1 ≈ 31,4 Ω'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är impedansen Z?',
+      opts: ['Enbart resistansen i en DC-krets', 'Enbart reaktansen', 'Det totala motståndet i AC-krets: Z = √(R² + X²)', 'Effekt per frekvens'],
+      ans: 2,
+      exp: 'Impedansen Z är det totala motståndet i en AC-krets och kombinerar resistans (R) och reaktans (X): Z = √(R² + X²). Enhet: Ohm (Ω).'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är cos φ (effektfaktorn)?',
+      opts: ['Vinkelfrekvensen', 'Förhållandet aktiv effekt / skenbar effekt (P/S)', 'Spänningsfallet', 'Reaktansen per frekvens'],
+      ans: 1,
+      exp: 'cos φ = P / S, där P är aktiv effekt (W) och S är skenbar effekt (VA). En effektfaktor nära 1 innebär effektiv energianvändning.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är EMK (elektromotorisk kraft)?',
+      opts: ['Mekanisk kraft som driver en motor', 'Den drivande spänningen som alstras i en källa', 'Motstånd mot ström', 'Magnetisk induktans'],
+      ans: 1,
+      exp: 'EMK är den spänning som en källa (t.ex. generator eller batteri) alstrar. Det är den "drivande kraften" bakom strömmen.'
+    },
+    {
+      type: 'num',
+      q: 'En trefasmotor har P = 7 500 W, U_led = 400 V och cos φ = 1,0. Vad är strömmen I?',
+      ans: 10.83,
+      unit: 'A',
+      tol: 0.5,
+      exp: 'I = P / (√3 × U_led × cos φ) = 7500 / (1,732 × 400 × 1,0) ≈ 10,83 A'
+    }
+  ]
+};
+</script>
+<script src="../script.js"></script>
+</body>
+</html>

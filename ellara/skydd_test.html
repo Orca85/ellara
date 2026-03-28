@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skydd & Säkerhet – Test | Ellära</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+    <div id="quiz-root"></div>
+  </div>
+</div>
+<script>
+const QUIZ_DATA = {
+  chapterId: 'skydd',
+  chapterTitle: 'Skydd & Säkerhet',
+  chapterUrl: 'skydd.html',
+  icon: '🛡️',
+  passPct: 95,
+  questions: [
+    {
+      type: 'mc',
+      q: 'Vilken utlösningsström har en jordfelsbrytare avsedd för personskydd?',
+      opts: ['10 mA', '30 mA', '100 mA', '300 mA'],
+      ans: 1,
+      exp: '30 mA jordfelsbrytare används för personskydd (badrum, utomhus, tillfälliga anläggningar). En ström på 30 mA kan orsaka hjärtrytmrubbningar.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken utlösningsström har en jordfelsbrytare avsedd för brandskydd?',
+      opts: ['10 mA', '30 mA', '100 mA', '300 mA'],
+      ans: 3,
+      exp: '300 mA jordfelsbrytare monteras ofta vid huvudcentralen för brandskydd av hela fastigheten. Den löser ut vid brandfarliga läckströmmar.'
+    },
+    {
+      type: 'mc',
+      q: 'Hur detekterar en jordfelsbrytare (RCD) ett jordfel?',
+      opts: ['Mäter total spänning', 'Detekterar obalans: I_fas ≠ I_nolla', 'Mäter kortslutningsström', 'Mäter kabeltemeperatur'],
+      ans: 1,
+      exp: 'Jordfelsbrytaren mäter kontinuerligt skillnaden mellan ström in (L) och ström ut (N). Om det finns en läckström (jordfel) är I_L ≠ I_N och brytaren löser ut.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken skyddsanordning reagerar på kortslutningsström inom millisekunder?',
+      opts: ['Termisk säkring', 'Magnetisk säkring', 'Jordfelsbrytare', 'Överspänningsskydd'],
+      ans: 1,
+      exp: 'Den magnetiska delen i en automatsäkring reagerar blixtsnabbt (ms) på kortslutningsström via elektromagnet. Den termiska delen reagerar långsammare på överbelastning.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är syftet med en nödstopp?',
+      opts: ['Starta maskinen vid nödsituation', 'Reglera maskinens hastighet', 'Omedelbart avbryta all farlig rörelse eller funktion', 'Spara energi'],
+      ans: 2,
+      exp: 'Nödstoppet (röd svamp-knapp) ska omedelbart och säkert avbryta all farlig rörelse. Det är ett säkerhetsskydd för personer, inte för maskinen.'
+    },
+    {
+      type: 'mc',
+      q: 'Var installeras ett överspänningsskydd av typ 1?',
+      opts: ['Vid varje känslig elektronik', 'I fördelningsgrupper', 'Vid huvudinmatningen (åskskydd)', 'Vid varje vägguttag'],
+      ans: 2,
+      exp: 'SPD typ 1 är åskskydd och installeras vid inkommande elcentral för att avleda direkta åsköverspänningar. Typ 2 i fördelning, typ 3 vid utrustning.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad skyddar en termisk säkring mot?',
+      opts: ['Kortslutning (ms)', 'Överspänning', 'Jordfel', 'Långvarig överbelastning (sekunder till minuter)'],
+      ans: 3,
+      exp: 'Den termiska delen i en säkring (smältlänk eller bimetall) reagerar på värme som byggs upp vid långvarig överström. Det tar sekunder till minuter.'
+    },
+    {
+      type: 'mc',
+      q: 'Varför är skyddsjord (PE) obligatorisk i moderna installationer?',
+      opts: ['Leder bort returströmmen', 'Skapar en säker väg för felström till jord – utlöser säkring', 'Ökar effekten', 'Minskar spänningsfallet'],
+      ans: 1,
+      exp: 'PE ger felströmmen en avsiktlig, lågohmig väg till jord. Det gör att säkringen/jordfelsbrytaren löser ut snabbt istället för att metalhöljet blir strömförande.'
+    },
+    {
+      type: 'mc',
+      q: 'Vad är Lockout/Tagout (LOTO)?',
+      opts: ['En typ av jordfelsbrytare', 'En procedur för att låsa och märka utrustning så den inte kan startas av misstag', 'En kabeltyp för farliga miljöer', 'En säkringsstorlek'],
+      ans: 1,
+      exp: 'LOTO är en säkerhetsprocedur: man låser strömbrytare i frånläge och sätter en tagg. Ingen annan kan slå på maskinen medan arbete pågår.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilket material används i ett metalloxidöverspänningsskydd (MOV/SPD)?',
+      opts: ['Koppar', 'Aluminium', 'Metalloxidvristor (zinkoxid)', 'Kisel'],
+      ans: 2,
+      exp: 'MOV (Metal Oxide Varistor) är gjord av zinkoxid (ZnO)-granulat. Den har icke-linjär resistans – leder vid överspänning och isolerar normalt.'
+    }
+  ]
+};
+</script>
+<script src="../script.js"></script>
+</body>
+</html>
