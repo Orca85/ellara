@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prefix & Enhetsomvandling – Test | Ellära</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+    <div id="quiz-root"></div>
+  </div>
+</div>
+<script>
+const QUIZ_DATA = {
+  chapterId: 'prefix',
+  chapterTitle: 'Prefix & Enhetsomvandling',
+  chapterUrl: 'matematik.html#prefix',
+  icon: '📏',
+  passPct: 80,
+  questions: [
+    // ── Prefix → grundenhet ──
+    {
+      type: 'num',
+      q: 'Vad är 3 kΩ uttryckt i Ω (utan prefix)?',
+      ans: 3000,
+      unit: 'Ω',
+      tol: 0,
+      exp: '3 kΩ = 3 × 1 000 = 3 000 Ω. Kilo (k) = × 1 000.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är 47 kΩ uttryckt i Ω (utan prefix)?',
+      ans: 47000,
+      unit: 'Ω',
+      tol: 0,
+      exp: '47 kΩ = 47 × 1 000 = 47 000 Ω.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är 4,7 kV uttryckt i V (utan prefix)?',
+      ans: 4700,
+      unit: 'V',
+      tol: 0,
+      exp: '4,7 kV = 4,7 × 1 000 = 4 700 V.'
+    },
+    {
+      type: 'num',
+      q: 'En jordfelsbrytare löser ut vid 30 mA. Hur många ampere (A) är det?',
+      ans: 0.03,
+      unit: 'A',
+      tol: 0.0001,
+      exp: '30 mA = 30 ÷ 1 000 = 0,03 A. Milli (m) = × 0,001.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är 250 mV uttryckt i V (utan prefix)?',
+      ans: 0.25,
+      unit: 'V',
+      tol: 0.0001,
+      exp: '250 mV = 250 × 0,001 = 0,25 V.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är 2,2 MΩ uttryckt i kΩ?',
+      ans: 2200,
+      unit: 'kΩ',
+      tol: 0,
+      exp: '2,2 MΩ = 2,2 × 1 000 000 Ω = 2 200 000 Ω = 2 200 kΩ. Mega = × 1 000 kilo.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är 470 µA uttryckt i mA?',
+      ans: 0.47,
+      unit: 'mA',
+      tol: 0.001,
+      exp: '470 µA = 470 ÷ 1 000 mA = 0,47 mA. Mikro är 1 000 gånger mindre än milli.'
+    },
+    // ── Grundenhet → prefix ──
+    {
+      type: 'num',
+      q: 'Vad är 0,456 Ω uttryckt i mΩ (milliohm)?',
+      ans: 456,
+      unit: 'mΩ',
+      tol: 0,
+      exp: '0,456 Ω = 0,456 × 1 000 = 456 mΩ. För att gå till milli multiplicerar du med 1 000.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är 4 700 Ω uttryckt i kΩ?',
+      ans: 4.7,
+      unit: 'kΩ',
+      tol: 0.01,
+      exp: '4 700 Ω ÷ 1 000 = 4,7 kΩ. För att lägga till kilo-prefix dividerar du med 1 000.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är 0,033 A uttryckt i mA?',
+      ans: 33,
+      unit: 'mA',
+      tol: 0,
+      exp: '0,033 A × 1 000 = 33 mA.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är 400 000 V uttryckt i kV?',
+      ans: 400,
+      unit: 'kV',
+      tol: 0,
+      exp: '400 000 V ÷ 1 000 = 400 kV. Stamnätets spänning i Sverige är 400 kV.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är 0,000047 F uttryckt i µF (mikrofarad)?',
+      ans: 47,
+      unit: 'µF',
+      tol: 0,
+      exp: '0,000047 F × 1 000 000 = 47 µF. Kapacitans anges nästan alltid i µF.'
+    },
+    // ── Kors-omvandling ──
+    {
+      type: 'num',
+      q: 'Vad är 3 500 mΩ uttryckt i Ω?',
+      ans: 3.5,
+      unit: 'Ω',
+      tol: 0.01,
+      exp: '3 500 mΩ ÷ 1 000 = 3,5 Ω.'
+    },
+    {
+      type: 'num',
+      q: 'Vad är 1 500 µA uttryckt i mA?',
+      ans: 1.5,
+      unit: 'mA',
+      tol: 0.01,
+      exp: '1 500 µA ÷ 1 000 = 1,5 mA. Mikro till milli: dela med 1 000.'
+    },
+    {
+      type: 'num',
+      q: 'En kabel har resistansen 2 200 000 Ω. Uttryck detta i MΩ.',
+      ans: 2.2,
+      unit: 'MΩ',
+      tol: 0.01,
+      exp: '2 200 000 Ω ÷ 1 000 000 = 2,2 MΩ. Mega = × 1 000 000.'
+    },
+    // ── Flervalsfrågor om prefixtabell ──
+    {
+      type: 'mc',
+      q: 'Vilket prefix representerar faktorn × 0,001?',
+      opts: ['Mega (M)', 'Kilo (k)', 'Milli (m)', 'Mikro (µ)'],
+      ans: 2,
+      exp: 'Milli (m) = × 0,001 = ÷ 1 000. Mikro (µ) = × 0,000001 = ÷ 1 000 000.'
+    },
+    {
+      type: 'mc',
+      q: 'Hur många gånger större är kilo (k) jämfört med milli (m)?',
+      opts: ['100 gånger', '1 000 gånger', '10 000 gånger', '1 000 000 gånger'],
+      ans: 3,
+      exp: 'k = × 1 000 och m = × 0,001 = ÷ 1 000. Kvoten: 1 000 ÷ 0,001 = 1 000 000 gånger.'
+    },
+    {
+      type: 'mc',
+      q: 'En säkring är märkt "16 A". En elektriker mäter strömmen till 15 800 mA. Löser säkringen ut?',
+      opts: ['Ja, 15 800 mA > 16 A', 'Nej, 15 800 mA = 15,8 A < 16 A', 'Det går inte att säga', 'Ja, alla mA-värden är högre'],
+      ans: 1,
+      exp: '15 800 mA = 15 800 ÷ 1 000 = 15,8 A. Eftersom 15,8 A < 16 A löser säkringen inte ut.'
+    }
+  ]
+};
+</script>
+<script src="../script.js"></script>
+</body>
+</html>
