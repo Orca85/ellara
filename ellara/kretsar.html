@@ -73,6 +73,8 @@
       <a href="#matteknik" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔬 Mätteknik</a>
       <a href="#transformator" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔄 Transformator</a>
       <a href="#krets-losare" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🧮 Guidad kretslösare</a>
+      <a href="#kondensatorer-koppling" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⊣⊢ Kondensatorer i serie/parallell</a>
+      <a href="#induktorer-koppling" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🌀 Induktorer i serie/parallell</a>
     </div>
   </div>
 </section>
@@ -587,37 +589,37 @@
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.75rem;margin-bottom:1rem">
 
-      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FFD700">
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border:2px solid #FFD700">
         <div style="color:var(--yellow);font-weight:700;font-size:1rem;margin-bottom:0.4rem">U<sub>tot</sub> / U<sub>källa</sub></div>
         <div style="font-size:0.85rem;color:var(--muted)">Den totala spänningen som källan (batteriet/uttaget) levererar. Fördelas sedan över komponenterna.</div>
         <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">Exempel: U<sub>tot</sub> = 30 V</div>
       </div>
 
-      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FF9B4D">
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border:2px solid #FF9B4D">
         <div style="color:#FF9B4D;font-weight:700;font-size:1rem;margin-bottom:0.4rem">U<sub>R1</sub>, U<sub>R2</sub></div>
         <div style="font-size:0.85rem;color:var(--muted)">Spänningen som faller över just den komponenten. I en seriekrets: U<sub>R1</sub> + U<sub>R2</sub> = U<sub>tot</sub></div>
         <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">Beräknas med Ohms lag: U<sub>R1</sub> = R1 × I</div>
       </div>
 
-      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #4ECDC4">
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border:2px solid #4ECDC4">
         <div style="color:var(--teal);font-weight:700;font-size:1rem;margin-bottom:0.4rem">I<sub>tot</sub></div>
         <div style="font-size:0.85rem;color:var(--muted)">Den totala strömmen från källan. I en seriekrets är den samma överallt. I parallell delas den upp.</div>
         <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">I<sub>tot</sub> = <span class="frac"><span>U<sub>tot</sub></span><span>R<sub>tot</sub></span></span></div>
       </div>
 
-      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #4CFFA0">
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border:2px solid #4CFFA0">
         <div style="color:var(--lime);font-weight:700;font-size:1rem;margin-bottom:0.4rem">I<sub>1</sub>, I<sub>2</sub></div>
         <div style="font-size:0.85rem;color:var(--muted)">Strömmen genom en specifik gren i en parallellkrets. Grenar med lägre R får mer ström.</div>
         <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">I<sub>1</sub> = <span class="frac"><span>U<sub>tot</sub></span><span>R1</span></span> &nbsp; (samma U över alla grenar)</div>
       </div>
 
-      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #C0A0FF">
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border:2px solid #C0A0FF">
         <div style="color:#C0A0FF;font-weight:700;font-size:1rem;margin-bottom:0.4rem">R<sub>tot</sub></div>
         <div style="font-size:0.85rem;color:var(--muted)">Den totala resistansen som källan "ser". Bestäms av hur komponenterna är kopplade (serie eller parallell).</div>
         <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">Serie: summeras &nbsp;|&nbsp; Parallell: inverteras</div>
       </div>
 
-      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FF4C4C">
+      <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border:2px solid #FF4C4C">
         <div style="color:#FF4C4C;font-weight:700;font-size:1rem;margin-bottom:0.4rem">R<sub>par</sub></div>
         <div style="font-size:0.85rem;color:var(--muted)">Den ekvivalenta resistansen för en parallellgrupp i en kombinerad krets — används som ett block i seriedelen.</div>
         <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem;line-height:2.2"><span class="frac"><span>1</span><span>R<sub>par</sub></span></span> = <span class="frac"><span>1</span><span>R2</span></span> + <span class="frac"><span>1</span><span>R3</span></span></div>
@@ -989,7 +991,7 @@
     <!-- KCL -->
     <div style="margin-top:1.5rem">
       <h4 style="color:var(--teal);margin-bottom:0.5rem">KCL — Kirchhoffs strömlag (1:a lagen)</h4>
-      <div style="background:rgba(78,205,196,0.07);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:0.75rem 1rem;margin-bottom:0.75rem">
+      <div style="background:rgba(78,205,196,0.07);border:2px solid var(--teal);border-radius:0 8px 8px 0;padding:0.75rem 1rem;margin-bottom:0.75rem">
         <span style="font-size:1.05rem;font-weight:700;color:var(--teal)">ΣI<sub>in</sub> = ΣI<sub>ut</sub></span>
         <span style="color:var(--muted);font-size:0.85rem;margin-left:1rem">Summan av all ström in i en nod = summan ut ur noden</span>
       </div>
@@ -1039,7 +1041,7 @@
     <!-- KVL -->
     <div style="margin-top:2rem">
       <h4 style="color:var(--yellow);margin-bottom:0.5rem">KVL — Kirchhoffs spänningslag (2:a lagen)</h4>
-      <div style="background:rgba(255,215,0,0.07);border-left:3px solid var(--yellow);border-radius:0 8px 8px 0;padding:0.75rem 1rem;margin-bottom:0.75rem">
+      <div style="background:rgba(255,215,0,0.07);border:2px solid var(--yellow);border-radius:0 8px 8px 0;padding:0.75rem 1rem;margin-bottom:0.75rem">
         <span style="font-size:1.05rem;font-weight:700;color:var(--yellow)">ΣU = 0</span>
         <span style="color:var(--muted);font-size:0.85rem;margin-left:1rem">Summan av alla spänningar runt en sluten slinga = 0</span>
       </div>
@@ -1508,6 +1510,138 @@
         <li>Växlar du <strong style="color:var(--white)">ner</strong> spänningen → strömmen måste gå <strong style="color:var(--white)">upp</strong></li>
       </ul>
     </div>
+
+    <!-- TRANSFORMER SIMULATOR -->
+    <div style="margin-top:1.5rem;background:var(--bg-card);border-radius:0.75rem;padding:1.25rem">
+      <h4 style="font-size:0.95rem;margin-bottom:1rem;color:var(--white)">🔄 Prova själv — Transformatorsimulator</h4>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.75rem;margin-bottom:1rem">
+        <div class="input-group">
+          <label for="ts-n1">N₁ (primärvarv)</label>
+          <input type="number" id="ts-n1" value="1000" min="1" step="1">
+        </div>
+        <div class="input-group">
+          <label for="ts-n2">N₂ (sekundärvarv)</label>
+          <input type="number" id="ts-n2" value="100" min="1" step="1">
+        </div>
+        <div class="input-group">
+          <label for="ts-u1">U₁ (V)</label>
+          <input type="number" id="ts-u1" value="230" min="0" step="1">
+        </div>
+        <div class="input-group">
+          <label for="ts-i1">I₁ (A)</label>
+          <input type="number" id="ts-i1" value="2" min="0" step="0.1">
+        </div>
+      </div>
+      <button class="calc-btn" id="ts-btn">Beräkna →</button>
+      <div id="ts-result" style="margin-top:1rem"></div>
+    </div>
+  </div>
+
+  <!-- GUIDED TRANSFORMER EXERCISE -->
+  <div class="card" id="transformator-ovning" style="margin-top:1rem">
+    <h3>📝 Steg-för-steg — Transformatorövning</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Lös uppgiften ett steg i taget. Varje steg låses upp när föregående är rätt.</p>
+    <div id="tov-given" style="background:var(--bg-card);border-radius:0.6rem;padding:0.85rem;font-size:0.88rem;margin-bottom:1rem;color:var(--muted)"></div>
+    <div class="ms-question" id="tov-steps"></div>
+    <button class="quiz-retry-btn" id="tov-new" style="margin-top:1rem">Ny uppgift 🔀</button>
+  </div>
+
+  <!-- Kondensatorer i serie och parallell -->
+  <div class="card" id="kondensatorer-koppling" style="margin-top:1.5rem">
+    <h3>⊣⊢ Kondensatorer i serie och parallell</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Precis som resistorer kan kondensatorer kopplas i serie eller parallell — men reglerna är omvända. Seriekoppling minskar kapacitansen, parallellkoppling ökar den.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.5rem">Seriekoppling</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem">
+          <span class="frac"><span>1</span><span>C<sub>tot</sub></span></span> =
+          <span class="frac"><span>1</span><span>C<sub>1</sub></span></span> +
+          <span class="frac"><span>1</span><span>C<sub>2</sub></span></span> + …
+        </div>
+        <p style="color:var(--muted);font-size:0.85rem">Kapacitansen <em>minskar</em> — likt resistorer i parallell. Spänningen fördelas över kondensatorerna.</p>
+        <div style="background:var(--bg-light);border-radius:0.5rem;padding:0.75rem;font-size:0.85rem;margin-top:0.75rem;line-height:1.8">
+          <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Exempel: 8 µF + 4 µF + 2 µF</strong><br>
+          <span class="frac"><span>1</span><span>C<sub>tot</sub></span></span> =
+          <span class="frac"><span>1</span><span>8</span></span> +
+          <span class="frac"><span>1</span><span>4</span></span> +
+          <span class="frac"><span>1</span><span>2</span></span> =
+          <span class="frac"><span>1+2+4</span><span>8</span></span> =
+          <span class="frac"><span>7</span><span>8</span></span><br>
+          C<sub>tot</sub> = <strong style="color:var(--primary)">8/7 ≈ 1,14 µF</strong>
+        </div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.5rem">Parallellkoppling</div>
+        <div style="font-size:1.1rem;font-weight:700;color:#059669;margin-bottom:0.5rem">
+          C<sub>tot</sub> = C<sub>1</sub> + C<sub>2</sub> + C<sub>3</sub> + …
+        </div>
+        <p style="color:var(--muted);font-size:0.85rem">Kapacitansen <em>adderas</em> — likt resistorer i serie. Alla kondensatorer har samma spänning.</p>
+        <div style="background:var(--bg-light);border-radius:0.5rem;padding:0.75rem;font-size:0.85rem;margin-top:0.75rem;line-height:1.8">
+          <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Exempel: 2 + 4 + 6 + 16 µF</strong><br>
+          C<sub>tot</sub> = 2 + 4 + 6 + 16 = <strong style="color:#059669">28 µF</strong>
+        </div>
+      </div>
+    </div>
+    <div class="tip-box" style="margin-top:1rem">
+      <strong>Minnesregel:</strong> Kondensatorer beter sig <em>omvänt</em> mot resistorer — seriekoppling ger reciprokformel, parallellkoppling ger addition. Tänk på det som att ytorna (och därmed laddningsförmågan) kombineras på olika sätt.
+    </div>
+
+    <!-- KONDENSATOR BUILDER -->
+    <div style="margin-top:1.5rem;background:var(--bg-card);border-radius:0.75rem;padding:1.25rem">
+      <h4 style="font-size:0.95rem;margin-bottom:0.75rem;color:var(--white)">⊣⊢ Prova själv — Kondensatorbyggnare</h4>
+      <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap">
+        <button class="kk-type-btn active" data-ck="serie" onclick="ckMode('serie')">Seriekoppling</button>
+        <button class="kk-type-btn" data-ck="parallell" onclick="ckMode('parallell')">Parallellkoppling</button>
+      </div>
+      <div id="ck-caps" style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;align-items:center"></div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem">
+        <button class="calc-btn" onclick="ckAdd()">+ Lägg till</button>
+        <button class="clear-btn" onclick="ckRemove()">− Ta bort</button>
+      </div>
+      <div id="ck-result" style="font-size:1rem;font-weight:700;color:var(--primary);min-height:1.4em"></div>
+    </div>
+  </div>
+
+  <!-- Induktorer i serie och parallell -->
+  <div class="card" id="induktorer-koppling" style="margin-top:1rem;margin-bottom:1rem">
+    <h3>🌀 Induktorer i serie och parallell</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">Induktorer (spolar) beter sig precis som resistorer — seriekoppling adderar induktansen, parallellkoppling ger reciprokformel.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.5rem">Seriekoppling</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--primary);margin-bottom:0.5rem">
+          L<sub>tot</sub> = L<sub>1</sub> + L<sub>2</sub> + L<sub>3</sub> + …
+        </div>
+        <p style="color:var(--muted);font-size:0.85rem">Induktansen adderas direkt — som resistorer i serie. Samma ström flödar genom alla spolar.</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.5rem">Parallellkoppling</div>
+        <div style="font-size:1.1rem;font-weight:700;color:#059669;margin-bottom:0.5rem">
+          <span class="frac"><span>1</span><span>L<sub>tot</sub></span></span> =
+          <span class="frac"><span>1</span><span>L<sub>1</sub></span></span> +
+          <span class="frac"><span>1</span><span>L<sub>2</sub></span></span> + …
+        </div>
+        <p style="color:var(--muted);font-size:0.85rem">Reciprokformel — som resistorer i parallell. Alla spolar har samma spänning.</p>
+      </div>
+    </div>
+    <div class="tip-box" style="margin-top:1rem">
+      <strong>Minnesregel:</strong> L (induktor) = samma regler som R (resistor). C (kondensator) = omvända regler. Lär dig regeln för R, invertera den för C.
+    </div>
+
+    <!-- INDUKTOR BUILDER -->
+    <div style="margin-top:1.5rem;background:var(--bg-card);border-radius:0.75rem;padding:1.25rem">
+      <h4 style="font-size:0.95rem;margin-bottom:0.75rem;color:var(--white)">🌀 Prova själv — Induktorbyggnare</h4>
+      <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap">
+        <button class="kk-type-btn active" data-lk="serie" onclick="lkMode('serie')">Seriekoppling</button>
+        <button class="kk-type-btn" data-lk="parallell" onclick="lkMode('parallell')">Parallellkoppling</button>
+      </div>
+      <div id="lk-inds" style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem;align-items:center"></div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.75rem">
+        <button class="calc-btn" onclick="lkAdd()">+ Lägg till</button>
+        <button class="clear-btn" onclick="lkRemove()">− Ta bort</button>
+      </div>
+      <div id="lk-result" style="font-size:1rem;font-weight:700;color:#059669;min-height:1.4em"></div>
+    </div>
   </div>
 
 </section>
@@ -1801,6 +1935,233 @@ document.querySelectorAll('.kk-type-btn').forEach(function(btn) {
 });
 document.querySelector('.calc-btn').addEventListener('click', kkSolve);
 document.querySelector('.clear-btn').addEventListener('click', kkClear);
+
+/* === TRANSFORMATOR-SIMULATOR === */
+(function () {
+  const btn = document.getElementById('ts-btn');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    const n1 = parseFloat(document.getElementById('ts-n1').value);
+    const n2 = parseFloat(document.getElementById('ts-n2').value);
+    const u1 = parseFloat(document.getElementById('ts-u1').value);
+    const i1 = parseFloat(document.getElementById('ts-i1').value);
+    if ([n1, n2, u1, i1].some(v => !isFinite(v) || v <= 0)) {
+      document.getElementById('ts-result').innerHTML = '<p style="color:#dc2626">Ange giltiga värden (alla &gt; 0).</p>';
+      return;
+    }
+    const u2 = +(u1 * n2 / n1).toFixed(2);
+    const i2 = +(i1 * n1 / n2).toFixed(3);
+    const p  = +(u1 * i1).toFixed(2);
+    const r  = n2 / n1;
+    const typ = r > 1.001 ? '⬆️ Stegas upp' : r < 0.999 ? '⬇️ Stegas ned' : '↔️ Isoleringstransformator';
+    const w1 = Math.round(n1 / (n1 + n2) * 100);
+    const w2 = 100 - w1;
+    document.getElementById('ts-result').innerHTML = `
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.6rem;margin-bottom:0.75rem">
+        <div style="background:var(--bg-light);border-radius:0.5rem;padding:0.7rem;text-align:center">
+          <div style="font-size:0.72rem;color:var(--muted)">U₂</div>
+          <div style="font-size:1.4rem;font-weight:800;color:var(--primary)">${u2} V</div>
+        </div>
+        <div style="background:var(--bg-light);border-radius:0.5rem;padding:0.7rem;text-align:center">
+          <div style="font-size:0.72rem;color:var(--muted)">I₂</div>
+          <div style="font-size:1.4rem;font-weight:800;color:var(--teal)">${i2} A</div>
+        </div>
+        <div style="background:var(--bg-light);border-radius:0.5rem;padding:0.7rem;text-align:center">
+          <div style="font-size:0.72rem;color:var(--muted)">P₁ = P₂</div>
+          <div style="font-size:1.4rem;font-weight:800;color:#059669">${p} W</div>
+        </div>
+        <div style="background:var(--bg-light);border-radius:0.5rem;padding:0.7rem;text-align:center">
+          <div style="font-size:0.72rem;color:var(--muted)">Typ</div>
+          <div style="font-size:0.9rem;font-weight:700;color:#d97706">${typ}</div>
+        </div>
+      </div>
+      <div style="background:var(--bg-light);border-radius:0.5rem;padding:0.75rem;font-size:0.85rem">
+        <div style="color:var(--muted);margin-bottom:0.4rem">Varvsförhållande N₁ : N₂ = ${n1} : ${n2}</div>
+        <div style="display:flex;height:10px;border-radius:5px;overflow:hidden;gap:2px">
+          <div style="width:${w1}%;background:var(--primary)"></div>
+          <div style="width:${w2}%;background:var(--teal)"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.77rem;margin-top:0.3rem">
+          <span style="color:var(--primary)">■ Primär N₁ = ${n1}</span>
+          <span style="color:var(--teal)">■ Sekundär N₂ = ${n2}</span>
+        </div>
+      </div>`;
+  });
+})();
+
+/* === TRANSFORMATOR-ÖVNING (guided) === */
+(function () {
+  const problems = [
+    { n1:1000, n2:100,  u1:230,  i1:5   },
+    { n1:500,  n2:2000, u1:230,  i1:1   },
+    { n1:200,  n2:50,   u1:400,  i1:3   },
+    { n1:1000, n2:1000, u1:230,  i1:2   },
+    { n1:800,  n2:200,  u1:240,  i1:4   },
+    { n1:100,  n2:500,  u1:48,   i1:10  },
+  ];
+  let prob;
+
+  function tov_fb(id, ok, msg) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.className = 'ms-feedback ' + (ok ? 'ms-correct' : 'ms-wrong');
+    el.textContent = msg;
+  }
+
+  function tov_render() {
+    prob = problems[Math.floor(Math.random() * problems.length)];
+    const u2 = +(prob.u1 * prob.n2 / prob.n1).toFixed(2);
+    const i2 = +(prob.i1 * prob.n1 / prob.n2).toFixed(3);
+    const p  = +(prob.u1 * prob.i1).toFixed(2);
+
+    document.getElementById('tov-given').innerHTML =
+      `<strong style="color:var(--white)">Givet:</strong> &nbsp;
+       N₁ = ${prob.n1} varv &nbsp;|&nbsp; N₂ = ${prob.n2} varv &nbsp;|&nbsp;
+       U₁ = ${prob.u1} V &nbsp;|&nbsp; I₁ = ${prob.i1} A`;
+
+    document.getElementById('tov-steps').innerHTML = `
+      <div class="ms-subq" id="tov-s1">
+        <div class="ms-subq-label">Steg 1 — Beräkna sekundärspänningen U₂</div>
+        <div class="ms-subq-hint">U₂ = U₁ · (N₂ / N₁)</div>
+        <div class="ms-input-row">
+          <input type="number" id="tov-s1-in" class="ms-input" step="any" placeholder="U₂ …">
+          <span style="color:var(--muted);font-size:0.9rem">V</span>
+          <button class="ms-check-btn" onclick="tov_check(1,${u2},0.5,'V','tov-s2')">Kontrollera</button>
+        </div>
+        <div class="ms-feedback" id="tov-s1-fb"></div>
+      </div>
+      <div class="ms-subq locked" id="tov-s2">
+        <div class="ms-subq-label">Steg 2 — Beräkna sekundärströmmen I₂</div>
+        <div class="ms-subq-hint">I₂ = I₁ · (N₁ / N₂)</div>
+        <div class="ms-input-row">
+          <input type="number" id="tov-s2-in" class="ms-input" step="any" placeholder="I₂ …" disabled>
+          <span style="color:var(--muted);font-size:0.9rem">A</span>
+          <button class="ms-check-btn" onclick="tov_check(2,${i2},0.05,'A','tov-s3')" disabled>Kontrollera</button>
+        </div>
+        <div class="ms-feedback" id="tov-s2-fb"></div>
+      </div>
+      <div class="ms-subq locked" id="tov-s3">
+        <div class="ms-subq-label">Steg 3 — Verifiera effektbalansen P₁ = U₁ · I₁</div>
+        <div class="ms-subq-hint">P₁ = U₁ · I₁ &nbsp;(ska vara samma som P₂ = U₂ · I₂)</div>
+        <div class="ms-input-row">
+          <input type="number" id="tov-s3-in" class="ms-input" step="any" placeholder="P …" disabled>
+          <span style="color:var(--muted);font-size:0.9rem">W</span>
+          <button class="ms-check-btn" onclick="tov_check(3,${p},1,'W',null)" disabled>Kontrollera</button>
+        </div>
+        <div class="ms-feedback" id="tov-s3-fb"></div>
+      </div>`;
+  }
+
+  window.tov_check = function (step, correct, tol, unit, nextId) {
+    const inp = document.getElementById('tov-s' + step + '-in');
+    const val = parseFloat(inp.value);
+    if (!isFinite(val)) { tov_fb('tov-s' + step + '-fb', false, 'Ange ett värde.'); return; }
+    const ok = Math.abs(val - correct) <= tol;
+    tov_fb('tov-s' + step + '-fb', ok,
+      ok ? `✓ Rätt! ${correct} ${unit}` : `✗ Inte riktigt. Tips: ${correct} ${unit}`);
+    if (ok && nextId) {
+      const next = document.getElementById(nextId);
+      if (next) {
+        next.classList.remove('locked');
+        next.querySelector('input').disabled = false;
+        next.querySelector('button').disabled = false;
+        next.querySelector('input').focus();
+      }
+    }
+  };
+
+  const newBtn = document.getElementById('tov-new');
+  if (newBtn) newBtn.addEventListener('click', tov_render);
+  if (document.getElementById('tov-steps')) tov_render();
+})();
+
+/* === KONDENSATOR-BYGGNARE === */
+(function () {
+  if (!document.getElementById('ck-caps')) return;
+  let ckType = 'serie';
+  let caps = [10, 22, 47];
+
+  function ckCalc() {
+    if (!caps.length) return;
+    let result, formula;
+    if (ckType === 'serie') {
+      const r = caps.reduce((s, c) => s + 1 / c, 0);
+      result = 1 / r;
+      formula = '1/C<sub>tot</sub> = ' + caps.map(c => '1/' + c).join(' + ') + ' → ';
+    } else {
+      result = caps.reduce((s, c) => s + c, 0);
+      formula = 'C<sub>tot</sub> = ' + caps.join(' + ') + ' = ';
+    }
+    document.getElementById('ck-result').innerHTML = formula + '<strong>' + result.toFixed(2) + ' µF</strong>';
+  }
+
+  function ckRender() {
+    document.getElementById('ck-caps').innerHTML = caps.map((c, i) =>
+      `<div style="background:var(--bg-light);border:2px solid var(--primary);border-radius:0.5rem;padding:0.4rem 0.7rem;font-size:0.88rem;display:flex;align-items:center;gap:0.35rem">
+        C<sub>${i + 1}</sub>:
+        <input type="number" value="${c}" min="0.1" step="1"
+          style="width:52px;background:transparent;border:none;border-bottom:1px solid var(--muted);color:inherit;font-size:0.88rem;text-align:center"
+          oninput="ckVal(${i},this.value)"> µF
+      </div>`
+    ).join('');
+    ckCalc();
+  }
+
+  window.ckMode = function (m) {
+    ckType = m;
+    document.querySelectorAll('[data-ck]').forEach(b => b.classList.toggle('active', b.dataset.ck === m));
+    ckCalc();
+  };
+  window.ckAdd    = function () { caps.push(10); ckRender(); };
+  window.ckRemove = function () { if (caps.length > 1) { caps.pop(); ckRender(); } };
+  window.ckVal    = function (i, v) { caps[i] = parseFloat(v) || 1; ckCalc(); };
+
+  ckRender();
+})();
+
+/* === INDUKTOR-BYGGNARE === */
+(function () {
+  if (!document.getElementById('lk-inds')) return;
+  let lkType = 'serie';
+  let inds = [10, 22, 47];
+
+  function lkCalc() {
+    if (!inds.length) return;
+    let result, formula;
+    if (lkType === 'serie') {
+      result = inds.reduce((s, l) => s + l, 0);
+      formula = 'L<sub>tot</sub> = ' + inds.join(' + ') + ' = ';
+    } else {
+      const r = inds.reduce((s, l) => s + 1 / l, 0);
+      result = 1 / r;
+      formula = '1/L<sub>tot</sub> = ' + inds.map(l => '1/' + l).join(' + ') + ' → ';
+    }
+    document.getElementById('lk-result').innerHTML = formula + '<strong>' + result.toFixed(2) + ' mH</strong>';
+  }
+
+  function lkRender() {
+    document.getElementById('lk-inds').innerHTML = inds.map((l, i) =>
+      `<div style="background:var(--bg-light);border:2px solid #059669;border-radius:0.5rem;padding:0.4rem 0.7rem;font-size:0.88rem;display:flex;align-items:center;gap:0.35rem">
+        L<sub>${i + 1}</sub>:
+        <input type="number" value="${l}" min="0.1" step="1"
+          style="width:52px;background:transparent;border:none;border-bottom:1px solid var(--muted);color:inherit;font-size:0.88rem;text-align:center"
+          oninput="lkVal(${i},this.value)"> mH
+      </div>`
+    ).join('');
+    lkCalc();
+  }
+
+  window.lkMode = function (m) {
+    lkType = m;
+    document.querySelectorAll('[data-lk]').forEach(b => b.classList.toggle('active', b.dataset.lk === m));
+    lkCalc();
+  };
+  window.lkAdd    = function () { inds.push(10); lkRender(); };
+  window.lkRemove = function () { if (inds.length > 1) { inds.pop(); lkRender(); } };
+  window.lkVal    = function (i, v) { inds[i] = parseFloat(v) || 1; lkCalc(); };
+
+  lkRender();
+})();
 </script>
   </div><!-- /main-content -->
 </div><!-- /layout-wrapper -->

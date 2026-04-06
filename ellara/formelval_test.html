@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Välj rätt formel – Test | Ellära</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .quiz-opt { font-family: 'Courier New', monospace; font-size: 0.95rem; text-align: left; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
+  <div class="nav-controls">
+    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+  </div>
+</nav>
+<div class="layout-wrapper">
+  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+    <div id="quiz-root"></div>
+  </div>
+</div>
+<script>
+const QUIZ_DATA = {
+  chapterId: 'formelval',
+  chapterTitle: 'Välj rätt formel',
+  chapterUrl: 'ovningar.html',
+  icon: '🧮',
+  passPct: 75,
+  questions: [
+
+    // ── Ohms lag ──
+    {
+      type: 'mc',
+      q: 'Du mäter strömmen I och känner till resistansen R. Vilken formel ger spänningen U?',
+      opts: ['U = R · I', 'U = I / R', 'U = R / I', 'U = R + I'],
+      ans: 0,
+      exp: 'Ohms lag: U = R · I. Spänning = motstånd × ström.'
+    },
+    {
+      type: 'mc',
+      q: 'Du vet spänningen U och resistansen R. Vilken formel ger strömmen I?',
+      opts: ['I = U · R', 'I = R / U', 'I = U / R', 'I = U − R'],
+      ans: 2,
+      exp: 'Ohms lag omskriven: I = U / R. Ström = spänning delat med motstånd.'
+    },
+
+    // ── Effekt ──
+    {
+      type: 'mc',
+      q: 'Du vet spänningen U och strömmen I. Vilken formel ger effekten P?',
+      opts: ['P = U / I', 'P = U · I', 'P = I / U', 'P = U + I'],
+      ans: 1,
+      exp: 'Effektlagen: P = U · I. Effekt = spänning × ström.'
+    },
+    {
+      type: 'mc',
+      q: 'Du vet bara strömmen I och resistansen R — ingen spänning. Vilken formel ger effekten P?',
+      opts: ['P = U · I', 'P = U² / R', 'P = I² · R', 'P = I / R'],
+      ans: 2,
+      exp: 'P = I² · R används när spänningen inte är känd. Härleds ur P = U · I och U = R · I.'
+    },
+    {
+      type: 'mc',
+      q: 'Du vet spänningen U och resistansen R — ingen ström. Vilken formel ger effekten P?',
+      opts: ['P = I² · R', 'P = U · R', 'P = R / U²', 'P = U² / R'],
+      ans: 3,
+      exp: 'P = U² / R används när strömmen inte är känd. Härleds ur P = U · I och I = U / R.'
+    },
+
+    // ── Serie / Parallell R ──
+    {
+      type: 'mc',
+      q: 'Tre resistorer sitter i serie. Vilken formel ger den totala resistansen?',
+      opts: [
+        '1/R<sub>tot</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + 1/R<sub>3</sub>',
+        'R<sub>tot</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub>',
+        'R<sub>tot</sub> = R<sub>1</sub> · R<sub>2</sub> · R<sub>3</sub>',
+        'R<sub>tot</sub> = R<sub>1</sub> / (R<sub>2</sub> + R<sub>3</sub>)'
+      ],
+      ans: 1,
+      exp: 'Seriekoppling: resistanserna adderas direkt. R<sub>tot</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub>.'
+    },
+    {
+      type: 'mc',
+      q: 'Tre resistorer sitter i parallell. Vilken formel ger den totala resistansen?',
+      opts: [
+        'R<sub>tot</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub>',
+        'R<sub>tot</sub> = R<sub>1</sub> · R<sub>2</sub> · R<sub>3</sub>',
+        '1/R<sub>tot</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + 1/R<sub>3</sub>',
+        'R<sub>tot</sub> = 1 / (R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub>)'
+      ],
+      ans: 2,
+      exp: 'Parallellkoppling: reciprokformeln gäller. 1/R<sub>tot</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + 1/R<sub>3</sub>.'
+    },
+
+    // ── Kabelresistans ──
+    {
+      type: 'mc',
+      q: 'Du ska beräkna en kabels resistans. Du vet resistiviteten ρ, längden L och tvärsnittsarean A. Vilken formel?',
+      opts: ['R = ρ · A / L', 'R = ρ · L · A', 'R = L / (ρ · A)', 'R = ρ · L / A'],
+      ans: 3,
+      exp: 'R = ρ · L / A. Lång kabel och liten area ger hög resistans.'
+    },
+
+    // ── Reaktans ──
+    {
+      type: 'mc',
+      q: 'Du ska beräkna induktiv reaktans. Du vet frekvensen f och induktansen L. Vilken formel?',
+      opts: [
+        'X<sub>L</sub> = 1 / (2π · f · L)',
+        'X<sub>L</sub> = 2π · f · L',
+        'X<sub>C</sub> = 1 / (2π · f · C)',
+        'X<sub>L</sub> = f · L'
+      ],
+      ans: 1,
+      exp: 'X<sub>L</sub> = 2π · f · L. Högre frekvens eller induktans → högre induktiv reaktans.'
+    },
+    {
+      type: 'mc',
+      q: 'Du ska beräkna kapacitiv reaktans. Du vet frekvensen f och kapacitansen C. Vilken formel?',
+      opts: [
+        'X<sub>C</sub> = 2π · f · C',
+        'X<sub>L</sub> = 2π · f · L',
+        'X<sub>C</sub> = 1 / (2π · f · C)',
+        'X<sub>C</sub> = f / C'
+      ],
+      ans: 2,
+      exp: 'X<sub>C</sub> = 1 / (2π · f · C). Notera att X<sub>C</sub> minskar när frekvensen ökar — tvärt emot X<sub>L</sub>.'
+    },
+
+    // ── Impedans ──
+    {
+      type: 'mc',
+      q: 'En krets har resistansen R och induktiv reaktans X<sub>L</sub> i serie. Vilken formel ger impedansen Z?',
+      opts: [
+        'Z = R + X<sub>L</sub>',
+        'Z = R − X<sub>L</sub>',
+        'Z = √(R² − X<sub>L</sub>²)',
+        'Z = √(R² + X<sub>L</sub>²)'
+      ],
+      ans: 3,
+      exp: 'Z = √(R² + X<sub>L</sub>²). R och X<sub>L</sub> adderas inte direkt — de är 90° förskjutna, så Pythagoras används.'
+    },
+    {
+      type: 'mc',
+      q: 'En krets har R, X<sub>L</sub> och X<sub>C</sub> i serie. Vilken formel ger impedansen |Z|?',
+      opts: [
+        '|Z| = R + X<sub>L</sub> + X<sub>C</sub>',
+        '|Z| = √(R² + X<sub>L</sub>² + X<sub>C</sub>²)',
+        '|Z| = √(R² + (X<sub>L</sub> − X<sub>C</sub>)²)',
+        '|Z| = √((X<sub>L</sub> − X<sub>C</sub>)² − R²)'
+      ],
+      ans: 2,
+      exp: '|Z| = √(R² + (X<sub>L</sub> − X<sub>C</sub>)²). X<sub>L</sub> och X<sub>C</sub> motverkar varandra — deras nettoreaktans är X<sub>L</sub> − X<sub>C</sub>.'
+    },
+
+    // ── Effektfaktor / P·Q·S ──
+    {
+      type: 'mc',
+      q: 'Du ska beräkna aktiv effekt P i en AC-krets med fasförskjutning φ. Vilken formel?',
+      opts: [
+        'P = U · I · sin φ',
+        'P = U · I',
+        'P = U · I · cos φ',
+        'P = S · sin φ'
+      ],
+      ans: 2,
+      exp: 'P = U · I · cos φ. cos φ är effektfaktorn och anger hur stor del av effekten som är aktiv (nyttig).'
+    },
+    {
+      type: 'mc',
+      q: 'Du ska beräkna reaktiv effekt Q. Vilken formel?',
+      opts: [
+        'Q = U · I · cos φ',
+        'Q = U · I · sin φ',
+        'Q = √(P² + S²)',
+        'Q = U · I'
+      ],
+      ans: 1,
+      exp: 'Q = U · I · sin φ. Reaktiv effekt beskriver den energi som pendlar fram och tillbaka utan att göra nyttigt arbete.'
+    },
+    {
+      type: 'mc',
+      q: 'Du känner aktiv effekt P och reaktiv effekt Q. Vilken formel ger skenbar effekt S?',
+      opts: [
+        'S = P + Q',
+        'S = P · Q',
+        'S = √(P² − Q²)',
+        'S = √(P² + Q²)'
+      ],
+      ans: 3,
+      exp: 'S = √(P² + Q²). P, Q och S bildar en rätvinklig triangel — Pythagoras gäller.'
+    },
+    {
+      type: 'mc',
+      q: 'Du vet skenbar effekt S och aktiv effekt P. Vilken formel ger effektfaktorn cos φ?',
+      opts: [
+        'cos φ = S / P',
+        'cos φ = P / S',
+        'cos φ = Q / S',
+        'cos φ = P · S'
+      ],
+      ans: 1,
+      exp: 'cos φ = P / S. Effektfaktorn är kvoten aktiv/skenbar effekt. Ju närmare 1, desto bättre.'
+    },
+
+    // ── Trefas ──
+    {
+      type: 'mc',
+      q: 'Sambandet mellan fasspänning U<sub>F</sub> och huvudspänning U<sub>H</sub> i ett trefassystem?',
+      opts: [
+        'U<sub>H</sub> = U<sub>F</sub> · 3',
+        'U<sub>H</sub> = U<sub>F</sub> / √3',
+        'U<sub>H</sub> = U<sub>F</sub> · 2',
+        'U<sub>H</sub> = U<sub>F</sub> · √3'
+      ],
+      ans: 3,
+      exp: 'U<sub>H</sub> = U<sub>F</sub> · √3. Exempel: 230 V · 1,73 ≈ 400 V.'
+    },
+    {
+      type: 'mc',
+      q: 'Vilken formel ger total aktiv effekt i ett symmetriskt trefassystem?',
+      opts: [
+        'P<sub>tot</sub> = 3 · U<sub>H</sub> · I · cos φ',
+        'P<sub>tot</sub> = U<sub>H</sub> · I · cos φ',
+        'P<sub>tot</sub> = √3 · U<sub>H</sub> · I · cos φ',
+        'P<sub>tot</sub> = √3 · U<sub>F</sub> · I · cos φ'
+      ],
+      ans: 2,
+      exp: 'P<sub>tot</sub> = √3 · U<sub>H</sub> · I · cos φ. Faktorn √3 (≈ 1,73) beror på det trefasiga systemet.'
+    },
+
+    // ── Transformator ──
+    {
+      type: 'mc',
+      q: 'En transformator: sambandet mellan spänningar och lindningsantal?',
+      opts: [
+        'U<sub>1</sub> · N<sub>1</sub> = U<sub>2</sub> · N<sub>2</sub>',
+        'U<sub>1</sub> / U<sub>2</sub> = N<sub>2</sub> / N<sub>1</sub>',
+        'U<sub>1</sub> / N<sub>1</sub> = U<sub>2</sub> / N<sub>2</sub>',
+        'U<sub>1</sub> / U<sub>2</sub> = N<sub>1</sub> / N<sub>2</sub>'
+      ],
+      ans: 3,
+      exp: 'U<sub>1</sub> / U<sub>2</sub> = N<sub>1</sub> / N<sub>2</sub>. Fler varv på primärsidan → högre spänning. Färre varv → lägre spänning.'
+    },
+
+    // ── Toppvärde / Effektivvärde ──
+    {
+      type: 'mc',
+      q: 'Du vet effektivvärdet U (t.ex. 230 V). Vilken formel ger toppspänningen û?',
+      opts: [
+        'û = U · √3',
+        'û = U / √2',
+        'û = U · 2',
+        'û = U · √2'
+      ],
+      ans: 3,
+      exp: 'û = U · √2. Exempel: 230 · 1,414 ≈ 325 V. Förväxla inte √2 (toppvärde) med √3 (trefas).'
+    },
+
+    // ── Verkningsgrad ──
+    {
+      type: 'mc',
+      q: 'Vilken formel ger verkningsgraden η för en elmotor?',
+      opts: [
+        'η = P<sub>in</sub> · P<sub>ut</sub>',
+        'η = P<sub>in</sub> / P<sub>ut</sub>',
+        'η = P<sub>ut</sub> / P<sub>in</sub>',
+        'η = P<sub>in</sub> − P<sub>ut</sub>'
+      ],
+      ans: 2,
+      exp: 'η = P<sub>ut</sub> / P<sub>in</sub>. Verkningsgraden är alltid &lt; 1 — ingen maskin är 100 % effektiv.'
+    },
+
+    // ── Kondensatorer ──
+    {
+      type: 'mc',
+      q: 'Tre kondensatorer i serie. Vilken formel ger C<sub>tot</sub>?',
+      opts: [
+        'C<sub>tot</sub> = C<sub>1</sub> + C<sub>2</sub> + C<sub>3</sub>',
+        '1/C<sub>tot</sub> = 1/C<sub>1</sub> + 1/C<sub>2</sub> + 1/C<sub>3</sub>',
+        'C<sub>tot</sub> = C<sub>1</sub> · C<sub>2</sub> · C<sub>3</sub>',
+        '1/C<sub>tot</sub> = C<sub>1</sub> + C<sub>2</sub> + C<sub>3</sub>'
+      ],
+      ans: 1,
+      exp: 'Seriekopplade kondensatorer: 1/C<sub>tot</sub> = 1/C<sub>1</sub> + 1/C<sub>2</sub> + … Kapacitansen minskar — tvärt emot resistorer i serie.'
+    },
+    {
+      type: 'mc',
+      q: 'Tre kondensatorer i parallell. Vilken formel ger C<sub>tot</sub>?',
+      opts: [
+        '1/C<sub>tot</sub> = 1/C<sub>1</sub> + 1/C<sub>2</sub> + 1/C<sub>3</sub>',
+        'C<sub>tot</sub> = C<sub>1</sub> · C<sub>2</sub> · C<sub>3</sub>',
+        'C<sub>tot</sub> = 1 / (C<sub>1</sub> + C<sub>2</sub> + C<sub>3</sub>)',
+        'C<sub>tot</sub> = C<sub>1</sub> + C<sub>2</sub> + C<sub>3</sub>'
+      ],
+      ans: 3,
+      exp: 'Parallellkopplade kondensatorer adderas direkt: C<sub>tot</sub> = C<sub>1</sub> + C<sub>2</sub> + C<sub>3</sub>. Tvärt emot resistorer i parallell.'
+    },
+
+    // ── Frekvens ──
+    {
+      type: 'mc',
+      q: 'Du vet perioden T. Vilken formel ger frekvensen f?',
+      opts: ['f = T', 'f = 2π · T', 'f = 1 / T', 'f = T / 2'],
+      ans: 2,
+      exp: 'f = 1 / T. Frekvens och period är varandras reciprokvärden. T = 0,02 s → f = 50 Hz.'
+    }
+
+  ]
+};
+</script>
+<script src="../script.js"></script>
+</body>
+</html>

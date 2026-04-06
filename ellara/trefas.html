@@ -68,6 +68,12 @@
       <a href="#kondensator" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⊣⊢ Kondensator &amp; Kapacitiv reaktans</a>
       <a href="#fasforskjutning" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">〰️ Fasförskjutning</a>
       <a href="#effekttyper" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">📊 Effekttyper P, Q &amp; S</a>
+      <a href="#verkningsgrad" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⚙️ Verkningsgrad η</a>
+      <a href="#yd-berakningar" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔺 Y/D-koppling — beräkningar</a>
+      <a href="#yd-start" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🚀 Y/D-motorstart</a>
+      <a href="#rlc-kretsar" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">〰️ RLC-kretsar</a>
+      <a href="#reaktans-slider" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">📈 X<sub>L</sub> vs X<sub>C</sub> — frekvensslider</a>
+      <a href="#vad-hander-om" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🤔 Vad händer om…?</a>
     </div>
   </div>
 </section>
@@ -904,19 +910,19 @@
   <p style="color:var(--muted);margin-bottom:2rem">I växelströmskretsar med spolar och kondensatorer finns tre typer av effekt. Bara den aktiva effekten gör verkligt arbete.</p>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem">
-    <div class="card" style="border-left:3px solid #059669">
+    <div class="card" style="border:2px solid #059669">
       <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Aktiv effekt</div>
       <div style="font-size:2rem;font-weight:800;color:#059669">P</div>
       <div style="font-size:0.9rem;color:var(--muted);margin-top:0.3rem">Enhet: <strong style="color:var(--white)">Watt (W)</strong></div>
       <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">Den effekt som faktiskt gör <strong style="color:var(--white)">nyttigt arbete</strong> — driver motorer, lyser lampor, värmer element.</p>
     </div>
-    <div class="card" style="border-left:3px solid #d97706">
+    <div class="card" style="border:2px solid #d97706">
       <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Reaktiv effekt</div>
       <div style="font-size:2rem;font-weight:800;color:#d97706">Q</div>
       <div style="font-size:0.9rem;color:var(--muted);margin-top:0.3rem">Enhet: <strong style="color:var(--white)">VAr</strong> (Voltampere reaktiv)</div>
       <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">Pendlar fram och tillbaka i kretsen — gör inget nyttigt arbete men <strong style="color:var(--white)">belastar elnätet</strong>. Skapas av spolar och kondensatorer.</p>
     </div>
-    <div class="card" style="border-left:3px solid var(--primary)">
+    <div class="card" style="border:2px solid var(--primary)">
       <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Skenbar effekt</div>
       <div style="font-size:2rem;font-weight:800;color:var(--primary)">S</div>
       <div style="font-size:0.9rem;color:var(--muted);margin-top:0.3rem">Enhet: <strong style="color:var(--white)">VA</strong> (Voltampere)</div>
@@ -975,12 +981,469 @@
   </div>
 </section>
 
+<hr class="del-divider">
+
+<!-- VERKNINGSGRAD -->
+<section class="section" id="verkningsgrad">
+  <div class="section-header">
+    <div class="section-icon">⚙️</div>
+    <div>
+      <h4>Avsnitt 5j</h4>
+      <h2>Verkningsgrad — η (eta)</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">Ingen maskin omvandlar energi utan förluster. Verkningsgraden η (eta) anger hur stor del av den inmatade effekten som faktiskt utnyttjas.</p>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Formel</h3>
+    <div style="font-size:1.4rem;font-weight:700;color:var(--primary);text-align:center;margin:1rem 0">
+      η = <span class="frac"><span>P<sub>ut</sub></span><span>P<sub>in</sub></span></span> &nbsp;&nbsp; (alltid: η &lt; 1,0)
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.75rem;margin-top:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;text-align:center">
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.3rem">P<sub>in</sub> — inmatad effekt</div>
+        <div style="font-weight:700;color:var(--primary)">100 %</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;text-align:center">
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.3rem">P<sub>ut</sub> — nyttig effekt</div>
+        <div style="font-weight:700;color:#059669">η × P<sub>in</sub></div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;text-align:center">
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.3rem">P<sub>förlust</sub> — värme/friktion</div>
+        <div style="font-weight:700;color:#dc2626">P<sub>in</sub> − P<sub>ut</sub></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Exempel — elmotor 80 %</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">En motor tar in P<sub>in</sub> = 1 000 W och har η = 0,80 (80 %).</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0.75rem;font-size:0.9rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.85rem">
+        <div style="color:var(--muted);font-size:0.78rem;margin-bottom:0.2rem">Inmatad</div>
+        <strong style="color:var(--white)">P<sub>in</sub> = 1 000 W</strong>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.85rem">
+        <div style="color:var(--muted);font-size:0.78rem;margin-bottom:0.2rem">Nyttig effekt</div>
+        <strong style="color:#059669">P<sub>ut</sub> = 800 W</strong>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.85rem">
+        <div style="color:var(--muted);font-size:0.78rem;margin-bottom:0.2rem">Förlust (värme)</div>
+        <strong style="color:#dc2626">P<sub>förlust</sub> = 200 W</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Typiska verkningsgrader</h3>
+    <table style="width:100%;border-collapse:separate;border-spacing:0 4px;font-size:0.9rem;margin-top:0.5rem">
+      <thead>
+        <tr>
+          <th style="text-align:left;color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:.04em;padding:0.4rem 0.75rem">Apparat</th>
+          <th style="text-align:center;color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:.04em;padding:0.4rem 0.75rem">η (typiskt)</th>
+          <th style="text-align:left;color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:.04em;padding:0.4rem 0.75rem">Kommentar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:0.5rem 0.75rem;background:var(--bg-light);border-radius:6px 0 0 6px">Transformator</td>
+          <td style="padding:0.5rem 0.75rem;background:var(--bg-light);text-align:center;font-weight:700;color:#059669">95–99 %</td>
+          <td style="padding:0.5rem 0.75rem;background:var(--bg-light);border-radius:0 6px 6px 0;color:var(--muted)">Mycket effektiv energiöverföring</td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem 0.75rem">Elmotor (stor)</td>
+          <td style="padding:0.5rem 0.75rem;text-align:center;font-weight:700;color:#059669">85–95 %</td>
+          <td style="padding:0.5rem 0.75rem;color:var(--muted)">Hög energiklass (IE3/IE4)</td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem 0.75rem;background:var(--bg-light);border-radius:6px 0 0 6px">Lysrör / LED</td>
+          <td style="padding:0.5rem 0.75rem;background:var(--bg-light);text-align:center;font-weight:700;color:#d97706">25–40 %</td>
+          <td style="padding:0.5rem 0.75rem;background:var(--bg-light);border-radius:0 6px 6px 0;color:var(--muted)">Resten omvandlas till värme</td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem 0.75rem">Bensinmotor</td>
+          <td style="padding:0.5rem 0.75rem;text-align:center;font-weight:700;color:#dc2626">25–35 %</td>
+          <td style="padding:0.5rem 0.75rem;color:var(--muted)">Stor energiförlust som avgasvärme</td>
+        </tr>
+        <tr>
+          <td style="padding:0.5rem 0.75rem;background:var(--bg-light);border-radius:6px 0 0 6px">Glödlampa</td>
+          <td style="padding:0.5rem 0.75rem;background:var(--bg-light);text-align:center;font-weight:700;color:#dc2626">≈ 5 %</td>
+          <td style="padding:0.5rem 0.75rem;background:var(--bg-light);border-radius:0 6px 6px 0;color:var(--muted)">95 % förloras som värme — förbjuden i EU</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tip-box" style="margin-top:1rem">
+      <strong>η ≠ cos φ:</strong> Verkningsgraden beskriver energiförluster (värme, friktion). Effektfaktorn cos φ beskriver fasförskjutning. En motor kan ha hög η men låg cos φ — båda är viktiga att känna till.
+    </div>
+  </div>
+</section>
+
+<hr class="del-divider">
+
+<!-- Y/D-KOPPLING BERÄKNINGSEXEMPEL -->
+<section class="section" id="yd-berakningar">
+  <div class="section-header">
+    <div class="section-icon">🔺</div>
+    <div>
+      <h4>Avsnitt 5k</h4>
+      <h2>Y- och D-koppling — beräkningsexempel</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">I ett trefassystem kan en last kopplas antingen Y (stjärna) eller D (delta). Spänningen som varje del utsätts för skiljer sig — och därmed även strömmen och effekten.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:1.5rem">
+    <div class="card" style="border:2px solid #059669">
+      <h3 style="color:#059669">Y-koppling (Stjärna)</h3>
+      <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Varje del kopplas mellan en fas och nollpunkten → <strong style="color:var(--white)">fasspänning 230 V</strong>.</p>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;line-height:2">
+        <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Exempel: R = 100 Ω per fas</strong><br>
+        U<sub>fas</sub> = 230 V<br>
+        I = <span class="frac"><span>U<sub>fas</sub></span><span>R</span></span> = <span class="frac"><span>230</span><span>100</span></span> = <strong style="color:#059669">2,3 A</strong><br>
+        P<sub>fas</sub> = U<sub>fas</sub> · I = 230 · 2,3 ≈ <strong>530 W</strong><br>
+        P<sub>tot</sub> = 3 · P<sub>fas</sub> = <strong style="color:#059669">1 590 W ≈ 1,6 kW</strong>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;margin-top:0.75rem;line-height:2">
+        <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Kontroll med trefasformeln</strong><br>
+        P<sub>tot</sub> = √3 · U<sub>H</sub> · I · cos φ<br>
+        = 1,73 · 400 · 2,3 · 1 ≈ <strong style="color:#059669">1 591 W ✓</strong>
+      </div>
+    </div>
+
+    <div class="card" style="border:2px solid var(--primary)">
+      <h3 style="color:var(--primary)">D-koppling (Delta)</h3>
+      <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Varje del kopplas direkt fas–fas → <strong style="color:var(--white)">huvudspänning 400 V</strong>.</p>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;line-height:2">
+        <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Exempel: R = 100 Ω per fas</strong><br>
+        U<sub>fas</sub> = 400 V<br>
+        I<sub>fas</sub> = <span class="frac"><span>U<sub>fas</sub></span><span>R</span></span> = <span class="frac"><span>400</span><span>100</span></span> = <strong style="color:var(--primary)">4 A</strong><br>
+        P<sub>fas</sub> = U<sub>fas</sub> · I<sub>fas</sub> = 400 · 4 = <strong>1 600 W</strong><br>
+        P<sub>tot</sub> = 3 · P<sub>fas</sub> = <strong style="color:var(--primary)">4 800 W = 4,8 kW</strong>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;margin-top:0.75rem;line-height:2">
+        <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Kontroll med trefasformeln</strong><br>
+        I<sub>H</sub> = I<sub>fas</sub> · √3 = 4 · 1,73 ≈ 6,9 A<br>
+        P<sub>tot</sub> = √3 · 400 · 6,9 · 1 ≈ <strong style="color:var(--primary)">4 788 W ✓</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>Y vs D — samma motstånd:</strong> D-kopplingen ger exakt 3× högre total effekt än Y-kopplingen. Förklaring: D utsätter varje del för √3 gånger högre spänning (400 vs 230 V) → effekten (∝ U²) blir (√3)² = 3 gånger högre.
+  </div>
+</section>
+
+<hr class="del-divider">
+
+<!-- Y/D-MOTORSTART -->
+<section class="section" id="yd-start">
+  <div class="section-header">
+    <div class="section-icon">🚀</div>
+    <div>
+      <h4>Avsnitt 5l</h4>
+      <h2>Y/D-motorstart — mjuk start av elmotorer</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">En elmotor drar 5–8 gånger sin driftström vid direktstart. Y/D-start är en klassisk metod för att begränsa startströmmen och skydda elnätet.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:1.5rem">
+    <div class="card" style="border:2px solid #059669">
+      <h3 style="font-size:1rem">Steg 1 — Starta i Y</h3>
+      <p style="color:var(--muted);font-size:0.9rem">Lindningarna kopplas i Y → varje lindning får <strong style="color:var(--white)">230 V</strong> (fasspänning).</p>
+      <ul style="color:var(--muted);font-size:0.88rem;padding-left:1.2rem;margin-top:0.5rem;line-height:1.8">
+        <li>Startström = <strong style="color:#059669">⅓ av direktstart</strong></li>
+        <li>Startmoment = ⅓ av direktstart</li>
+        <li>Lägre påfrestning på nät och mekanik</li>
+      </ul>
+    </div>
+    <div class="card" style="border:2px solid var(--primary)">
+      <h3 style="font-size:1rem">Steg 2 — Byt till D</h3>
+      <p style="color:var(--muted);font-size:0.9rem">När motorn nått ca 75–80 % av driftvarvtalet: koppla om till D → <strong style="color:var(--white)">400 V</strong> per lindning.</p>
+      <ul style="color:var(--muted);font-size:0.88rem;padding-left:1.2rem;margin-top:0.5rem;line-height:1.8">
+        <li>Full drifteffekt uppnås</li>
+        <li>Liten strömstöt vid omkoppling</li>
+        <li>Motorn accelererar till full hastighet</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Varför Y/D-start?</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.75rem">En motor som startar direkt i D (direktstart) drar en strömstöt som kan lösa ut säkringar, orsaka spänningsfall i elnätet och slita hårt på mekaniska delar.</p>
+    <div class="tip-box">
+      <strong>Tumregel:</strong> Y/D-start används typiskt för motorer ≥ 4 kW. För ännu mjukare och mer styrd start används idag ofta <strong>frekvensomriktare (VFD)</strong> som ger steglös hastighetskontroll från 0 till full fart.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Kopplingsblock — Y vs D i praktiken</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Så här ser det ut när man väljer Y- eller D-koppling på en motors kopplingsplint. Byglingarnas placering avgör kopplingssättet.</p>
+    <div style="text-align:center">
+      <img src="images/y_d_koppling.jpg"
+           alt="Y-koppling och D-koppling på motors kopplingsblock — visar hur byglar placeras för stjärn- respektive deltagoppling"
+           style="max-width:100%;border-radius:10px;border:1px solid var(--outline)">
+    </div>
+    <p style="color:var(--muted);font-size:0.82rem;text-align:center;margin-top:0.5rem">Källa: BluePeak AB / ElVAab</p>
+  </div>
+</section>
+
+<hr class="del-divider">
+
+<!-- RLC-KRETSAR -->
+<section class="section" id="rlc-kretsar">
+  <div class="section-header">
+    <div class="section-icon">〰️</div>
+    <div>
+      <h4>Avsnitt 5m</h4>
+      <h2>RLC-kretsar — fasförskjutning i blandade kretsar</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1.5rem">I rena DC-kretsar har vi bara resistorer (R). I växelströmskretsar tillkommer spolar (L) och kondensatorer (C) — och när alla tre förekommer i samma krets pratar vi om en RLC-krets.</p>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>Vad är R, L och C?</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">De tre bokstäverna står för tre olika typer av komponenter som alla påverkar ström och spänning på olika sätt i en växelströmskrets:</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;border:2px solid #d97706">
+        <div style="font-size:1.6rem;font-weight:900;color:#d97706">R</div>
+        <div style="font-weight:700;color:var(--white);margin-bottom:0.3rem">Resistor (motstånd)</div>
+        <p style="color:var(--muted);font-size:0.85rem">Bromsar strömmen — utan fasförskjutning. Omvandlar elektrisk energi till värme. Enhet: Ω.</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;border:2px solid var(--primary)">
+        <div style="font-size:1.6rem;font-weight:900;color:var(--primary)">L</div>
+        <div style="font-weight:700;color:var(--white);margin-bottom:0.3rem">Induktor (spole)</div>
+        <p style="color:var(--muted);font-size:0.85rem">Bromsar strömförändringar — ström <em>ligger efter</em> spänningen (90° fasförskjutning). Reaktans X<sub>L</sub> = 2π·f·L. Enhet: H (henry).</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;border:2px solid #059669">
+        <div style="font-size:1.6rem;font-weight:900;color:#059669">C</div>
+        <div style="font-weight:700;color:var(--white);margin-bottom:0.3rem">Kondensator</div>
+        <p style="color:var(--muted);font-size:0.85rem">Lagrar laddning — ström <em>ligger före</em> spänningen (90° fasförskjutning, men åt andra hållet). Reaktans X<sub>C</sub> = 1/(2π·f·C). Enhet: F (farad).</p>
+      </div>
+    </div>
+    <div class="tip-box" style="margin-top:1rem">
+      <strong>Varför kombinera dem?</strong> I praktiken innehåller t.ex. en elmotor både resistans (lindningens koppartråd) och induktans (spolen). Ett filter i ett elsystem kan ha kondensatorer och spolar. En RLC-krets uppstår alltså naturligt — inte som ett val utan som en verklighet.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1rem">
+    <h3>L och C i serie</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:0.75rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;line-height:1.9">
+        <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Formler</strong><br>
+        Z = X<sub>L</sub> − X<sub>C</sub><br>
+        U = U<sub>L</sub> − U<sub>C</sub><br>
+        I = <span class="frac"><span>U</span><span>Z</span></span>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;line-height:1.9">
+        <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Fasförskjutning</strong><br>
+        X<sub>L</sub> &gt; X<sub>C</sub> → induktiv (ström efter spänning)<br>
+        X<sub>C</sub> &gt; X<sub>L</sub> → kapacitiv (ström före spänning)<br>
+        X<sub>L</sub> = X<sub>C</sub> → <strong style="color:#059669">resonans, Z = 0</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1rem">
+    <h3>R, L och C i serie</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:0.75rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;line-height:1.9">
+        <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Impedans och ström</strong><br>
+        |Z| = √(R² + (X<sub>L</sub> − X<sub>C</sub>)²)<br>
+        U = √(U<sub>R</sub>² + (U<sub>L</sub> − U<sub>C</sub>)²)<br>
+        I = <span class="frac"><span>U</span><span>|Z|</span></span>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;line-height:1.9">
+        <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Effektfaktor</strong><br>
+        cos φ = <span class="frac"><span>R</span><span>|Z|</span></span><br>
+        tan φ = <span class="frac"><span>X<sub>L</sub> − X<sub>C</sub></span><span>R</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>R, L och C i parallell</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.75rem">Spänningen är gemensam — ström beräknas per gren, sedan adderas de som vektorer.</p>
+    <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;font-size:0.88rem;line-height:1.9">
+      <strong style="color:var(--muted);font-size:0.78rem;text-transform:uppercase">Formler</strong><br>
+      I<sub>R</sub> = <span class="frac"><span>U</span><span>R</span></span> &nbsp;|&nbsp;
+      I<sub>L</sub> = <span class="frac"><span>U</span><span>X<sub>L</sub></span></span> &nbsp;|&nbsp;
+      I<sub>C</sub> = <span class="frac"><span>U</span><span>X<sub>C</sub></span></span><br>
+      I<sub>tot</sub> = √(I<sub>R</sub>² + (I<sub>C</sub> − I<sub>L</sub>)²)<br>
+      cos φ = <span class="frac"><span>I<sub>R</sub></span><span>I<sub>tot</sub></span></span>
+    </div>
+    <div class="tip-box" style="margin-top:0.75rem">
+      <strong>Resonans:</strong> När X<sub>L</sub> = X<sub>C</sub> uppstår resonans. I seriekrets → minimal impedans (maxström). I parallellkrets → maximal impedans (minström). Resonansfrekvens: f<sub>0</sub> = <span class="frac"><span>1</span><span>2π√(LC)</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- REAKTANS-SLIDER -->
+<section class="section" id="reaktans-slider">
+  <div class="section-header">
+    <div class="section-icon">📈</div>
+    <div>
+      <h4>Avsnitt 5n</h4>
+      <h2>X<sub>L</sub> vs X<sub>C</sub> — frekvensslider</h2>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1rem">
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">
+      Induktiv reaktans X<sub>L</sub> ökar med frekvensen — kondensatorns X<sub>C</sub> minskar. Dra i slidern och se vad som händer.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.25rem">
+      <div class="input-group">
+        <label for="rs-l">Induktans L (mH)</label>
+        <input type="number" id="rs-l" value="100" min="1" max="10000" step="1" />
+      </div>
+      <div class="input-group">
+        <label for="rs-c">Kapacitans C (µF)</label>
+        <input type="number" id="rs-c" value="100" min="0.1" max="10000" step="0.1" />
+      </div>
+    </div>
+
+    <div style="margin-bottom:0.5rem">
+      <label for="rs-freq" style="font-size:0.88rem;color:var(--muted)">Frekvens: <strong id="rs-freq-label">50 Hz</strong></label>
+      <input type="range" id="rs-freq" min="1" max="500" value="50" step="1"
+        style="width:100%;margin-top:0.4rem;accent-color:var(--primary)" />
+      <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--muted);margin-top:0.2rem">
+        <span>1 Hz</span><span>250 Hz</span><span>500 Hz</span>
+      </div>
+    </div>
+
+    <div id="rs-bars" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.25rem"></div>
+
+    <div id="rs-resonance" style="display:none;margin-top:1rem" class="tip-box">
+      <strong>Resonans!</strong> X<sub>L</sub> ≈ X<sub>C</sub> — impedansen är minimal i seriekrets och maximal i parallellkrets.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Vad ser du?</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem;margin-top:0.75rem;font-size:0.88rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.85rem;border-left:3px solid var(--primary)">
+        <strong style="color:var(--primary)">X<sub>L</sub> = 2π · f · L</strong><br>
+        <span style="color:var(--muted)">Ökar linjärt med frekvensen. Dubbel frekvens → dubbel X<sub>L</sub>.</span>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.85rem;border-left:3px solid #059669">
+        <strong style="color:#059669">X<sub>C</sub> = 1 / (2π · f · C)</strong><br>
+        <span style="color:var(--muted)">Minskar omvänt med frekvensen. Dubbel frekvens → halv X<sub>C</sub>.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VAD HÄNDER OM -->
+<section class="section" id="vad-hander-om">
+  <div class="section-header">
+    <div class="section-icon">🤔</div>
+    <div>
+      <h4>Avsnitt 5o</h4>
+      <h2>Vad händer om…?</h2>
+    </div>
+  </div>
+  <p style="color:var(--muted);margin-bottom:1rem;font-size:0.9rem">Klicka på ett kort för att se svaret. Testa dig själv innan du tittar!</p>
+
+  <div id="who-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem"></div>
+</section>
+
 <footer>
   <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
   <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard. Kontrollera alltid med din lärare eller handledare.</p>
 </footer>
 
 <script src="../script.js"></script>
+<script>
+(function(){
+  // ── Feature 2: XL vs XC frekvensslider ──────────────────────────────────
+  var rsFreq = document.getElementById('rs-freq');
+  var rsL    = document.getElementById('rs-l');
+  var rsC    = document.getElementById('rs-c');
+  var rsLabel= document.getElementById('rs-freq-label');
+  var rsBars = document.getElementById('rs-bars');
+  var rsRes  = document.getElementById('rs-resonance');
+
+  function rsUpdate(){
+    var f = parseFloat(rsFreq.value) || 50;
+    var L = (parseFloat(rsL.value) || 100) / 1000;   // mH → H
+    var C = (parseFloat(rsC.value) || 100) / 1e6;    // µF → F
+    rsLabel.textContent = f + ' Hz';
+
+    var XL = 2 * Math.PI * f * L;
+    var XC = 1 / (2 * Math.PI * f * C);
+
+    var maxVal = Math.max(XL, XC, 1);
+    var wL = Math.round((XL / maxVal) * 100);
+    var wC = Math.round((XC / maxVal) * 100);
+
+    function fmt(v){ return v < 10 ? v.toFixed(2) : v < 1000 ? v.toFixed(1) : (v/1000).toFixed(2)+' kΩ'; }
+
+    rsBars.innerHTML =
+      '<div>' +
+        '<div style="font-size:0.82rem;color:var(--muted);margin-bottom:0.4rem">X<sub>L</sub> — induktiv reaktans</div>' +
+        '<div style="background:var(--bg-light);border-radius:6px;height:28px;overflow:hidden">' +
+          '<div style="background:var(--primary);width:'+wL+'%;height:100%;border-radius:6px;transition:width 0.2s;min-width:2px"></div>' +
+        '</div>' +
+        '<div style="font-size:1.1rem;font-weight:800;color:var(--primary);margin-top:0.35rem">'+fmt(XL)+' Ω</div>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-size:0.82rem;color:var(--muted);margin-bottom:0.4rem">X<sub>C</sub> — kapacitiv reaktans</div>' +
+        '<div style="background:var(--bg-light);border-radius:6px;height:28px;overflow:hidden">' +
+          '<div style="background:#059669;width:'+wC+'%;height:100%;border-radius:6px;transition:width 0.2s;min-width:2px"></div>' +
+        '</div>' +
+        '<div style="font-size:1.1rem;font-weight:800;color:#059669;margin-top:0.35rem">'+fmt(XC)+' Ω</div>' +
+      '</div>';
+
+    // Show resonance notice when within 5%
+    var ratio = XL / XC;
+    rsRes.style.display = (ratio > 0.95 && ratio < 1.05) ? '' : 'none';
+  }
+
+  rsFreq.addEventListener('input', rsUpdate);
+  rsL.addEventListener('input', rsUpdate);
+  rsC.addEventListener('input', rsUpdate);
+  rsUpdate();
+
+  // ── Feature 5: Vad händer om…? ──────────────────────────────────────────
+  var whoScenarios = [
+    { cat:'Induktor', q:'Frekvensen <strong>fördubblas</strong> — vad händer med X<sub>L</sub>?', a:'X<sub>L</sub> <strong>fördubblas</strong>. X<sub>L</sub> = 2π·f·L är direkt proportionell mot f.' },
+    { cat:'Induktor', q:'Frekvensen <strong>halveras</strong> — vad händer med X<sub>L</sub>?', a:'X<sub>L</sub> <strong>halveras</strong>. Lägre frekvens → lägre reaktans → spolen "släpper igenom" mer.' },
+    { cat:'Induktor', q:'Induktansen L <strong>fördubblas</strong> (vid 50 Hz) — vad händer?', a:'X<sub>L</sub> <strong>fördubblas</strong>. L och f är båda proportionella faktorer i X<sub>L</sub> = 2π·f·L.' },
+    { cat:'Kondensator', q:'Frekvensen <strong>fördubblas</strong> — vad händer med X<sub>C</sub>?', a:'X<sub>C</sub> <strong>halveras</strong>. X<sub>C</sub> = 1/(2π·f·C) — omvänt proportionell mot f.' },
+    { cat:'Kondensator', q:'Kapacitansen C <strong>fördubblas</strong> — vad händer med X<sub>C</sub>?', a:'X<sub>C</sub> <strong>halveras</strong>. Större C → lättare för växelström att passera.' },
+    { cat:'Kondensator', q:'Frekvensen <strong>är 0 Hz (likström)</strong> — vad händer?', a:'X<sub>C</sub> → <strong>oändlighet</strong>. Kondensatorn blockerar likström helt.' },
+    { cat:'Transformator', q:'Antalet varv N<sub>2</sub> <strong>fördubblas</strong> — vad händer med U<sub>2</sub>?', a:'U<sub>2</sub> <strong>fördubblas</strong>. U<sub>2</sub>/U<sub>1</sub> = N<sub>2</sub>/N<sub>1</sub> — spänningen är proportionell mot lindningsförhållandet.' },
+    { cat:'Transformator', q:'U<sub>1</sub> <strong>halveras</strong> — vad händer med U<sub>2</sub>?', a:'U<sub>2</sub> <strong>halveras</strong>. Transformatorn ändrar spänning i exakt samma förhållande som ingångsspänningen.' },
+    { cat:'Transformator', q:'N<sub>2</sub> &gt; N<sub>1</sub> — upptrappning eller nedtrappning?', a:'<strong>Upptrappning</strong> — U<sub>2</sub> &gt; U<sub>1</sub>. Fler varv på sekundärsidan ger högre spänning ut.' },
+    { cat:'Transformator', q:'Effekten in är 500 W — hur stor är effekten ut (ideal transformator)?', a:'Också <strong>500 W</strong>. En ideal transformator har η = 100%. P<sub>in</sub> = P<sub>ut</sub> alltid.' },
+    { cat:'RLC', q:'X<sub>L</sub> = X<sub>C</sub> i en serierkrets — vad händer med impedansen?', a:'Z = <strong>minimum</strong> = R. Resonans — strömmen är som störst. Z = √(R² + 0²) = R.' },
+    { cat:'RLC', q:'Frekvensen höjs över resonansfrekvensen — induktiv eller kapacitiv?', a:'<strong>Induktiv</strong>. X<sub>L</sub> stiger snabbare än X<sub>C</sub> sjunker — kretsen domineras av L.' },
+  ];
+
+  var catColors = { 'Induktor':'var(--primary)', 'Kondensator':'#059669', 'Transformator':'#d97706', 'RLC':'#7c3aed' };
+  var grid = document.getElementById('who-grid');
+
+  whoScenarios.forEach(function(s, i){
+    var color = catColors[s.cat] || 'var(--primary)';
+    var div = document.createElement('div');
+    div.style.cssText = 'background:var(--bg-card);border-radius:10px;padding:1.1rem;cursor:pointer;border:2px solid var(--outline);transition:border-color 0.15s';
+    div.innerHTML =
+      '<div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;color:'+color+';margin-bottom:0.5rem;letter-spacing:0.05em">'+s.cat+'</div>' +
+      '<div style="font-size:0.9rem;color:var(--white);line-height:1.5;margin-bottom:0.75rem">'+s.q+'</div>' +
+      '<div class="who-answer" style="display:none;background:var(--bg-light);border-radius:6px;padding:0.7rem 0.9rem;font-size:0.88rem;color:var(--muted);line-height:1.5;border-left:3px solid '+color+'">'+s.a+'</div>' +
+      '<div class="who-toggle" style="font-size:0.8rem;font-weight:700;color:'+color+'">Visa svar ▼</div>';
+    div.addEventListener('click', function(){
+      var ans = div.querySelector('.who-answer');
+      var tog = div.querySelector('.who-toggle');
+      var open = ans.style.display !== 'none';
+      ans.style.display = open ? 'none' : '';
+      tog.textContent = open ? 'Visa svar ▼' : 'Dölj svar ▲';
+      div.style.borderColor = open ? 'var(--outline)' : color;
+    });
+    grid.appendChild(div);
+  });
+})();
+</script>
   </div><!-- /main-content -->
 </div><!-- /layout-wrapper -->
 </body>

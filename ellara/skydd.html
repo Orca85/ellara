@@ -84,7 +84,7 @@
     <h3>Hur fungerar den?</h3>
     <p>Strömmen som leds ut i fasledarna ska vara <strong style="color:var(--primary)">densamma</strong> som kommer i retur i neutralledaren. Om det uppmätta värdet (summaströmmen) inte är noll betyder det att ström försvinner någonstans på vägen — det kallas <strong style="color:var(--primary)">jordfel (läckström)</strong>.</p>
     <p style="margin-top:0.75rem;color:var(--muted)">Om skillnaden blir 30 mA eller mer bryter jordfelsbrytaren strömmen <strong style="color:var(--white)">mycket snabbt</strong> (30 mA för personskydd).</p>
-    <div style="margin-top:1rem;background:rgba(220,38,38,0.07);border-radius:0.6rem;padding:1rem;border-left:3px solid var(--red)">
+    <div style="margin-top:1rem;background:rgba(220,38,38,0.07);border-radius:0.6rem;padding:1rem;border:2px solid var(--red)">
       <div style="font-weight:700;color:var(--red);margin-bottom:0.4rem">⏱ Tid + Ström = Fara</div>
       <p style="font-size:0.88rem;color:var(--muted)">Det är <strong style="color:var(--white)">kombinationen av ström och tid</strong> som dödar. Redan vid 30 mA i &gt;100 ms kan hjärtat börja flimra. Jordfelsbrytaren bryter på &lt;40 ms — snabbt nog för att rädda liv. Säkringen skyddar <em>kabeln</em>, jordfelsbrytaren skyddar <em>dig</em>.</p>
     </div>
@@ -276,14 +276,14 @@
     <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Ett praktiskt exempel som visar varför PE-ledaren finns.</p>
     <img src="images/skyddsjord.png" alt="Skyddsjord – hur PE skyddar vid isolationsfel" class="zoomable" style="width:100%;max-width:480px;display:block;margin:0 auto 1rem;border-radius:10px;border:1px solid var(--outline)">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-      <div style="background:rgba(186,26,26,0.07);border-radius:0.6rem;padding:1rem;border-left:3px solid var(--red)">
+      <div style="background:rgba(186,26,26,0.07);border-radius:0.6rem;padding:1rem;border:2px solid var(--red)">
         <div style="font-weight:700;color:var(--red);margin-bottom:0.5rem">⚠️ Utan skyddsjord</div>
         <p style="font-size:0.87rem;color:var(--muted)">Isolationen i brödrosten går sönder. Fasen når metallhöljet. En person som rör höljet bildar en krets <strong style="color:var(--white)">genom kroppen till jord</strong>. Strömmen väljer personen — livsfarligt.</p>
         <div style="margin-top:0.75rem;font-size:0.82rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted)">
           Fas → Hölje → Person → Jord
         </div>
       </div>
-      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:1rem;border-left:3px solid #2a7a4b">
+      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:1rem;border:2px solid #2a7a4b">
         <div style="font-weight:700;color:#4caf50;margin-bottom:0.5rem">✓ Med skyddsjord (PE)</div>
         <p style="font-size:0.87rem;color:var(--muted)">PE-ledaren (gröngul) kopplar metallhöljet direkt till jord. Vid isolationsfel flödar strömmen via PE — <strong style="color:var(--white)">inte via personen</strong>. Strömmen blir stor → säkringen löser ut.</p>
         <div style="margin-top:0.75rem;font-size:0.82rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted)">
@@ -554,7 +554,7 @@
         </tbody>
       </table>
     </div>
-    <div style="margin-top:1rem;background:rgba(250,204,21,0.07);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border-left:3px solid var(--primary)">
+    <div style="margin-top:1rem;background:rgba(250,204,21,0.07);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border:2px solid var(--primary)">
       <strong style="color:var(--primary)">Varför 30 mA JFB?</strong> Jordfelsbrytaren bryter vid 30 mA på &lt;40 ms — strömmen är i det farliga spannet (10–40 mA) men exponeringstiden är för kort för att orsaka andningsförlamning eller hjärtflimmer.
     </div>
   </div>
@@ -622,11 +622,11 @@
     <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem">
       <div style="font-size:2.5rem;font-weight:900;color:var(--primary);font-family:monospace">IP55</div>
       <div style="display:flex;gap:0.75rem">
-        <div style="background:rgba(255,215,0,0.08);border-radius:0.6rem;padding:0.75rem 1rem;border-left:3px solid var(--primary)">
+        <div style="background:rgba(255,215,0,0.08);border-radius:0.6rem;padding:0.75rem 1rem;border:2px solid var(--primary)">
           <div style="font-size:1.4rem;font-weight:800;color:var(--primary)">5</div>
           <div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem">Dammskyddad</div>
         </div>
-        <div style="background:rgba(78,205,196,0.08);border-radius:0.6rem;padding:0.75rem 1rem;border-left:3px solid #4ECDC4">
+        <div style="background:rgba(78,205,196,0.08);border-radius:0.6rem;padding:0.75rem 1rem;border:2px solid #4ECDC4">
           <div style="font-size:1.4rem;font-weight:800;color:#4ECDC4">5</div>
           <div style="font-size:0.8rem;color:var(--muted);margin-top:0.2rem">Vattenstråle</div>
         </div>
@@ -639,15 +639,15 @@
     <h3>🚿 Badrumszon</h3>
     <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.75rem">I bad- och duschrum gäller extra restriktioner. Zonerna definieras av avstånd och höjd från vattenkällan (Boverket):</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:0.75rem">
-      <div style="background:rgba(220,38,38,0.08);border-radius:0.6rem;padding:0.85rem;border-left:3px solid var(--red)">
+      <div style="background:rgba(220,38,38,0.08);border-radius:0.6rem;padding:0.85rem;border:2px solid var(--red)">
         <div style="font-weight:700;color:var(--red);margin-bottom:0.35rem">Zon 1</div>
         <p style="font-size:0.83rem;color:var(--muted)">Inuti badkar/duschkabin. Endast fast monterad utrustning med <strong style="color:var(--white)">klenspänning (≤ 12 V AC)</strong>. Min. IPX7.</p>
       </div>
-      <div style="background:rgba(249,115,22,0.08);border-radius:0.6rem;padding:0.85rem;border-left:3px solid #fb923c">
+      <div style="background:rgba(249,115,22,0.08);border-radius:0.6rem;padding:0.85rem;border:2px solid #fb923c">
         <div style="font-weight:700;color:#fb923c;margin-bottom:0.35rem">Zon 2</div>
         <p style="font-size:0.83rem;color:var(--muted)">0–60 cm utanför zon 1, upp till 2,25 m höjd. <strong style="color:var(--white)">Min. IP44</strong>. Inga vanliga uttag.</p>
       </div>
-      <div style="background:rgba(234,179,8,0.08);border-radius:0.6rem;padding:0.85rem;border-left:3px solid #facc15">
+      <div style="background:rgba(234,179,8,0.08);border-radius:0.6rem;padding:0.85rem;border:2px solid #facc15">
         <div style="font-weight:700;color:#facc15;margin-bottom:0.35rem">Zon 3</div>
         <p style="font-size:0.83rem;color:var(--muted)">60 cm–2,4 m utanför zon 2. <strong style="color:var(--white)">Min. IP24</strong>. Uttag tillåtet om JFB ≤ 30 mA.</p>
       </div>

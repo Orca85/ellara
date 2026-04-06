@@ -217,7 +217,7 @@
     <p style="margin-top:1rem;font-size:0.85rem;color:var(--muted)">
       <strong style="color:var(--yellow)">Kom ihåg:</strong> Vid parallellkoppling av uttag delar alla på samma säkring. Räkna alltid på worst-case-last.
     </p>
-    <div style="margin-top:0.75rem;background:rgba(119,90,25,0.08);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border-left:3px solid var(--primary)">
+    <div style="margin-top:0.75rem;background:rgba(119,90,25,0.08);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border:2px solid var(--primary)">
       <strong style="color:var(--primary)">OBS: 13 A-säkring</strong> — finns men är <strong style="color:var(--white)">inte svensk standard</strong>. Används t.ex. i brittiska installationer (BS 1363). En 1,5 mm²-kabel klarar tekniskt upp till ~13 A men dimensioneras i Sverige alltid mot närmaste standard­säkring (10 A eller 16 A).
     </div>
   </div>
@@ -389,19 +389,19 @@
 
       <!-- Punktlista -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;font-size:0.85rem;margin-bottom:1rem">
-        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FF9B4D">
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border:2px solid #FF9B4D">
           <strong style="color:#FF9B4D">Varför uppstår det?</strong><br>
           <span style="color:var(--muted)">Alla kablar har resistans. Ju längre och tunnare kabel, desto högre resistans och större spänningsfall.</span>
         </div>
-        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #4ECDC4">
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border:2px solid #4ECDC4">
           <strong style="color:var(--teal)">Faktorn 2 i formeln</strong><br>
           <span style="color:var(--muted)">Strömmen går <em>fram</em> i L-ledaren och <em>tillbaka</em> i N-ledaren — båda bidrar till fallet, därav × 2.</span>
         </div>
-        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #FF4C4C">
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border:2px solid #FF4C4C">
           <strong style="color:#FF4C4C">Konsekvenser</strong><br>
           <span style="color:var(--muted)">Motorer kan överhettas, lampor lyser svagare, elektronik kan fungera sämre eller gå sönder.</span>
         </div>
-        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border-left:3px solid #4CFFA0">
+        <div style="background:var(--bg-light);border-radius:8px;padding:0.75rem;border:2px solid #4CFFA0">
           <strong style="color:var(--lime)">Hur minskar man det?</strong><br>
           <span style="color:var(--muted)">Använd tjockare kabel (större A), kortare dragning, eller flytta säkringsskåpet närmare lasten.</span>
         </div>
@@ -417,7 +417,7 @@
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.25rem">
-      <div style="background:var(--bg-light);border-left:3px solid var(--yellow);border-radius:0 8px 8px 0;padding:0.75rem 1rem;font-size:0.9rem">
+      <div style="background:var(--bg-light);border:2px solid var(--yellow);border-radius:0 8px 8px 0;padding:0.75rem 1rem;font-size:0.9rem">
         <div style="color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem">Beräkna spänningsfallet</div>
         <strong>U_fall = <span class="frac"><span>2 · ρ · L · I</span><span>A</span></span></strong>
         <div style="color:var(--muted);font-size:0.8rem;margin-top:0.4rem">Faktorn 2 = fram- och returledare</div>
@@ -426,7 +426,7 @@
           Skillnaden i spänning mellan källan och belastningen. Exempel: källan ger 230 V men lampan får bara 223 V → U_fall = 7 V. <em style="color:var(--muted)">(Kallas även ΔU i läroböcker)</em>
         </div>
       </div>
-      <div style="background:var(--bg-light);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:0.75rem 1rem;font-size:0.9rem">
+      <div style="background:var(--bg-light);border:2px solid var(--teal);border-radius:0 8px 8px 0;padding:0.75rem 1rem;font-size:0.9rem">
         <div style="color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem">Spänning vid belastningen</div>
         <strong style="color:var(--teal)">U<sub>bel</sub> = U<sub>tot</sub> − U_fall</strong>
         <div style="color:var(--muted);font-size:0.8rem;margin-top:0.4rem">Det som "är kvar" efter spänningsfallet i kabeln</div>
@@ -500,19 +500,19 @@
   <div class="card" style="margin-bottom:1.5rem">
     <h3>🔩 Skenor i elcentralen</h3>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-top:0.75rem">
-      <div style="background:rgba(0,107,53,0.1);border-radius:8px;padding:0.75rem;border-left:3px solid #4caf50">
+      <div style="background:rgba(0,107,53,0.1);border-radius:8px;padding:0.75rem;border:2px solid #4caf50">
         <div style="font-weight:700;color:#4caf50;margin-bottom:0.3rem">PE-skena</div>
         <div style="font-size:0.85rem;color:var(--muted)">GrönGul ledare kopplas hit. Alla skyddsjordsledare i anläggningen samlas på PE-skenan.</div>
       </div>
-      <div style="background:rgba(37,99,235,0.1);border-radius:8px;padding:0.75rem;border-left:3px solid #2563eb">
+      <div style="background:rgba(37,99,235,0.1);border-radius:8px;padding:0.75rem;border:2px solid #2563eb">
         <div style="font-weight:700;color:#60a5fa;margin-bottom:0.3rem">Neutral-skena (N)</div>
         <div style="font-size:0.85rem;color:var(--muted)">Blå ledare kopplas hit. Nolledaren från varje krets samlas här.</div>
       </div>
-      <div style="background:rgba(250,204,21,0.08);border-radius:8px;padding:0.75rem;border-left:3px solid var(--primary)">
+      <div style="background:rgba(250,204,21,0.08);border-radius:8px;padding:0.75rem;border:2px solid var(--primary)">
         <div style="font-weight:700;color:var(--primary);margin-bottom:0.3rem">DIN-skena</div>
         <div style="font-size:0.85rem;color:var(--muted)">Metallskena (räls) som säkringar och automatsäkringar snäpps fast på.</div>
       </div>
-      <div style="background:rgba(186,26,26,0.08);border-radius:8px;padding:0.75rem;border-left:3px solid var(--red)">
+      <div style="background:rgba(186,26,26,0.08);border-radius:8px;padding:0.75rem;border:2px solid var(--red)">
         <div style="font-weight:700;color:var(--red);margin-bottom:0.3rem">Fas-skena (kamskena)</div>
         <div style="font-size:0.85rem;color:var(--muted)">Bara fas kopplas hit — direkt till säkringarna. Matar underifrån i automatsäkringarna.</div>
       </div>
@@ -557,7 +557,7 @@
         <span style="color:var(--muted)">Övre terminalen går ut till t.ex. uttag och belysning</span>
       </div>
     </div>
-    <div style="background:rgba(186,26,26,0.07);border-radius:8px;padding:0.75rem;border-left:3px solid var(--red);font-size:0.85rem">
+    <div style="background:rgba(186,26,26,0.07);border-radius:8px;padding:0.75rem;border:2px solid var(--red);font-size:0.85rem">
       <strong style="color:var(--red)">Viktigt:</strong> Vi måste veta var <strong style="color:var(--white)">alla kablar börjar och slutar</strong> i installationen.
     </div>
   </div>
@@ -580,7 +580,7 @@
         <div style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">Reläer</div>
       </div>
     </div>
-    <div style="background:rgba(186,26,26,0.07);border-radius:8px;padding:0.75rem;border-left:3px solid var(--red);font-size:0.85rem;color:var(--muted)">
+    <div style="background:rgba(186,26,26,0.07);border-radius:8px;padding:0.75rem;border:2px solid var(--red);font-size:0.85rem;color:var(--muted)">
       Fas-skenan kopplas alltid i ordning: <strong style="color:var(--white)">1→1, 2→2, 3→3</strong> — dvs L1 till säkringsplats 1, L2 till plats 2, L3 till plats 3, sedan om igen.
     </div>
   </div>
@@ -606,11 +606,11 @@
   <div class="card">
     <h3>⚠️ JFB-koppling — Parallellt, INTE serie</h3>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.75rem">
-      <div style="background:rgba(0,107,53,0.08);border-radius:8px;padding:0.75rem;border-left:3px solid #2a7a4b">
+      <div style="background:rgba(0,107,53,0.08);border-radius:8px;padding:0.75rem;border:2px solid #2a7a4b">
         <div style="font-weight:700;color:#4caf50;margin-bottom:0.4rem">✓ Parallellt (rätt)</div>
         <div style="font-size:0.85rem;color:var(--muted)">Flera JFBs kopplas parallellt — en per grupp. Varje JFB skyddar sina egna kretsar.</div>
       </div>
-      <div style="background:rgba(186,26,26,0.07);border-radius:8px;padding:0.75rem;border-left:3px solid var(--red)">
+      <div style="background:rgba(186,26,26,0.07);border-radius:8px;padding:0.75rem;border:2px solid var(--red)">
         <div style="font-weight:700;color:var(--red);margin-bottom:0.4rem">✗ Serie (fel)</div>
         <div style="font-size:0.85rem;color:var(--muted)">JFBs ska inte staplas i serie — skyddet fungerar inte korrekt och koordinationen störs.</div>
       </div>
@@ -720,21 +720,21 @@
     </div>
 
     <div style="margin-top:1rem;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
-      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:0.85rem;border-left:3px solid #2a7a4b">
+      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:0.85rem;border:2px solid #2a7a4b">
         <div style="font-weight:700;color:#4caf50;margin-bottom:0.4rem">↙ Skruva IN</div>
         <p style="font-size:0.85rem;color:var(--muted)">PEN-skruven <strong style="color:var(--white)">avaktiveras</strong> — PE-skenan och N-skenan separeras. JFB kan nu installeras.</p>
       </div>
-      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.85rem;border-left:3px solid var(--outline)">
+      <div style="background:var(--bg-light);border-radius:0.6rem;padding:0.85rem;border:2px solid var(--outline)">
         <div style="font-weight:700;color:var(--white);margin-bottom:0.4rem">↗ Skruva UT</div>
         <p style="font-size:0.85rem;color:var(--muted)">PEN-skruven <strong style="color:var(--white)">aktiveras</strong> — PE och N kopplas ihop till PEN. TN-C-läge, ingen JFB.</p>
       </div>
     </div>
 
-    <div style="margin-top:0.75rem;background:rgba(119,90,25,0.08);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border-left:3px solid var(--primary)">
+    <div style="margin-top:0.75rem;background:rgba(119,90,25,0.08);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border:2px solid var(--primary)">
       <strong style="color:var(--primary)">Gängning:</strong> PEN-skruven är <strong style="color:var(--white)">högergängad</strong> — men funktionen är omvänd jämfört med vad man kanske förväntar sig. Skruva <em>in</em> för att separera, skruva <em>ut</em> för att koppla ihop.
     </div>
 
-    <div style="margin-top:0.75rem;background:rgba(220,38,38,0.07);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border-left:3px solid var(--red)">
+    <div style="margin-top:0.75rem;background:rgba(220,38,38,0.07);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border:2px solid var(--red)">
       <strong style="color:var(--red)">Viktigt:</strong> PEN-skruven <strong style="color:var(--white)">måste tas bort</strong> (skruvas in) innan JFB installeras. Annars är PE och N fortfarande samankopplade och JFB fungerar inte.
     </div>
   </div>
@@ -743,7 +743,7 @@
     <h3>Isolationsfel i anläggningen</h3>
     <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem">Om isoleringen på en fase-ledare skadas kan ström läcka ut till jordade delar. Vad som händer beror på om personen befinner sig i strömkretsen.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:1rem;border-left:3px solid #2a7a4b">
+      <div style="background:rgba(0,107,53,0.08);border-radius:0.6rem;padding:1rem;border:2px solid #2a7a4b">
         <div style="font-weight:700;color:#4caf50;margin-bottom:0.5rem">✓ Felfri anläggning</div>
         <div style="font-size:0.83rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted);margin-bottom:0.6rem;line-height:1.8">
           Trafo → L → Last → N → Trafo<br>
@@ -751,7 +751,7 @@
         </div>
         <p style="font-size:0.85rem;color:var(--muted)">All ström flödar via avsedd väg (L → Last → N). Jordfelsbrytaren mäter ingen obalans — ingen utlösning.</p>
       </div>
-      <div style="background:rgba(186,26,26,0.07);border-radius:0.6rem;padding:1rem;border-left:3px solid var(--red)">
+      <div style="background:rgba(186,26,26,0.07);border-radius:0.6rem;padding:1rem;border:2px solid var(--red)">
         <div style="font-weight:700;color:var(--red);margin-bottom:0.5rem">⚠️ Isolationsfel</div>
         <div style="font-size:0.83rem;background:var(--bg-light);border-radius:6px;padding:0.6rem;font-family:monospace;color:var(--muted);margin-bottom:0.6rem;line-height:1.8">
           L → Isolationsfel → <span style="color:var(--red)">Person → Jord</span><br>
@@ -760,7 +760,7 @@
         <p style="font-size:0.85rem;color:var(--muted)">Fas når ett jordat hölje. En person som rör höljet bildar krets mot jord. JFB (TN-S) eller säkring (TN-C via PE) ska bryta.</p>
       </div>
     </div>
-    <div style="margin-top:0.75rem;background:rgba(250,204,21,0.07);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border-left:3px solid var(--primary)">
+    <div style="margin-top:0.75rem;background:rgba(250,204,21,0.07);border-radius:0.6rem;padding:0.75rem 1rem;font-size:0.85rem;color:var(--muted);border:2px solid var(--primary)">
       <strong style="color:var(--primary)">TN-C vs TN-S:</strong> I TN-S leder PE felströmmen direkt till neutralpunkten → JFB detekterar obalansen och löser ut. I TN-C flödar felströmmen via PEN — JFB kan <em>inte</em> installeras utan att PEN delas (se ovan).
     </div>
   </div>
