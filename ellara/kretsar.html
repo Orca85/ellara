@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
@@ -8,40 +8,111 @@
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
-  <div class="nav-controls">
-    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+<!-- ===== FIXED LEFT SIDEBAR ===== -->
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
   </div>
-</nav>
-<div class="layout-wrapper">
-  <aside class="sidebar">
-    <div class="sidebar-section-label">
-      <span class="sidebar-label-text">Ellära</span>
-      <span class="sidebar-label-sub">Kapitelöversikt</span>
+
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="atomfysik.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">science</span>
+      Atomfysik
+    </a>
+    <a href="material.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">category</span>
+      Material
+    </a>
+    <a href="symboler.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">electric_bolt</span>
+      Symboler
+    </a>
+    <a href="kabeltyper.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">cable</span>
+      Kabeltyper
+    </a>
+    <a href="kabeldim.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">straighten</span>
+      Kabeldim.
+    </a>
+    <a href="kretsar.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">schema</span>
+      Kretsar
+    </a>
+    <a href="trefas.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">compress</span>
+      Trefas
+    </a>
+    <a href="skydd.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">shield</span>
+      Skydd
+    </a>
+    <a href="installation.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">build</span>
+      Installation
+    </a>
+    <a href="tecken.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">tag</span>
+      Tecken
+    </a>
+    <a href="matematik.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">calculate</span>
+      Matematik
+    </a>
+    <hr class="sidebar-divider">
+    <a href="formler.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">description</span>
+      Formelblad
+    </a>
+    <a href="ovningar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">fitness_center</span>
+      Övningar
+    </a>
+    <a href="flashcards.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">style</span>
+      Flashcards
+    </a>
+  </nav>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="app-content">
+
+  <!-- Top header bar -->
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html" class="active">Ellära</a>
+      </nav>
     </div>
-    <nav class="sidebar-nav">
-      <a href="index.html" class="sidebar-link "><span class="sidebar-icon">🏠</span> Hem</a>
-      <a href="atomfysik.html" class="sidebar-link "><span class="sidebar-icon">⚛️</span> Atomfysik</a>
-      <a href="material.html" class="sidebar-link "><span class="sidebar-icon">🧱</span> Material</a>
-      <a href="symboler.html" class="sidebar-link "><span class="sidebar-icon">📐</span> Symboler</a>
-      <a href="kabeltyper.html" class="sidebar-link "><span class="sidebar-icon">🔌</span> Kabeltyper</a>
-      <a href="kabeldim.html" class="sidebar-link "><span class="sidebar-icon">📏</span> Kabeldim.</a>
-      <a href="kretsar.html" class="sidebar-link active"><span class="sidebar-icon">⚙️</span> Kretsar</a>
-      <a href="trefas.html" class="sidebar-link "><span class="sidebar-icon">🔄</span> Trefas</a>
-      <a href="skydd.html" class="sidebar-link "><span class="sidebar-icon">🛡️</span> Skydd</a>
-      <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
-      <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
-      <a href="matematik.html" class="sidebar-link "><span class="sidebar-icon">🔢</span> Matematik</a>
-      <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
-      <a href="formler.html" class="sidebar-link"><span class="sidebar-icon">📄</span> Formelblad</a>
-    </nav>
-  </aside>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <button class="app-header-icon" title="Inställningar">
+        <span class="material-symbols-outlined">settings</span>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
+
   <div class="main-content">
 
 <div class="search-bar-wrap" id="search-wrap">
   <div class="search-inner">
-    <span class="search-icon">🔍</span>
+    <span class="search-icon">⌕</span>
     <input
       type="text"
       id="search-input"
@@ -75,6 +146,7 @@
       <a href="#krets-losare" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🧮 Guidad kretslösare</a>
       <a href="#kondensatorer-koppling" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">⊣⊢ Kondensatorer i serie/parallell</a>
       <a href="#induktorer-koppling" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🌀 Induktorer i serie/parallell</a>
+      <a href="#batterier" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔋 Batterier &amp; Inre resistans</a>
     </div>
   </div>
 </section>
@@ -1646,6 +1718,174 @@
 
 </section>
 
+<!-- ===== BATTERIER ===== -->
+<section class="section" id="batterier">
+  <div class="section-header">
+    <div class="section-icon">🔋</div>
+    <div>
+      <h4>Avsnitt</h4>
+      <h2>Batterier &amp; Inre resistans</h2>
+    </div>
+  </div>
+
+  <!-- Ah-triangel -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>🔋 Amperetimmar (Ah) — kapacitet</h3>
+    <p style="color:var(--muted);margin-bottom:1rem">Ah anger hur mycket laddning ett batteri kan lagra. Ett batteri på <strong>20 Ah</strong> kan leverera 2 A i 10 timmar, eller 4 A i 5 timmar.</p>
+
+    <!-- Triangle -->
+    <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;margin-bottom:1.5rem">
+      <div style="text-align:center">
+        <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" style="width:160px;height:140px">
+          <polygon points="100,10 190,155 10,155" fill="none" stroke="var(--outline)" stroke-width="2"/>
+          <line x1="100" y1="10" x2="100" y2="155" stroke="var(--outline)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <line x1="10" y1="82" x2="190" y2="82" stroke="var(--outline)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <!-- Ah top -->
+          <text x="100" y="62" text-anchor="middle" font-size="20" font-weight="700" fill="var(--primary)">Ah</text>
+          <!-- A bottom-left -->
+          <text x="60" y="135" text-anchor="middle" font-size="18" font-weight="700" fill="#059669">A</text>
+          <!-- h bottom-right -->
+          <text x="140" y="135" text-anchor="middle" font-size="18" font-weight="700" fill="#d97706">h</text>
+        </svg>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:0.3rem">Täck det du söker</p>
+      </div>
+      <div style="flex:1;min-width:200px">
+        <div style="display:flex;flex-direction:column;gap:0.75rem">
+          <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;border-left:3px solid var(--primary)">
+            <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.3rem">Kapacitet</div>
+            <div style="font-size:1.1rem;font-weight:700;color:var(--primary)">Ah = A × h</div>
+          </div>
+          <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;border-left:3px solid #059669">
+            <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.3rem">Ström</div>
+            <div style="font-size:1.1rem;font-weight:700;color:#059669">A = Ah ÷ h</div>
+          </div>
+          <div style="background:var(--bg-card);border-radius:0.6rem;padding:0.9rem;border-left:3px solid #d97706">
+            <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.3rem">Användningstid</div>
+            <div style="font-size:1.1rem;font-weight:700;color:#d97706">h = Ah ÷ A</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ah calculator -->
+    <div style="background:var(--bg-card);border-radius:0.75rem;padding:1.25rem;margin-top:1rem">
+      <h4 style="font-size:0.95rem;margin-bottom:1rem;color:var(--white)">🧮 Ah-kalkylator</h4>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-bottom:0.75rem">
+        <div>
+          <label style="font-size:0.78rem;color:var(--muted);display:block;margin-bottom:0.3rem">Kapacitet (Ah)</label>
+          <input type="number" id="bat-ah" placeholder="t.ex. 20" min="0" step="0.1"
+            style="width:100%;box-sizing:border-box;background:var(--bg-light);border:1px solid var(--outline);border-radius:6px;padding:0.5rem 0.7rem;color:var(--white);font-size:0.9rem"
+            oninput="batCalc('ah')">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;color:var(--muted);display:block;margin-bottom:0.3rem">Ström (A)</label>
+          <input type="number" id="bat-a" placeholder="t.ex. 2" min="0" step="0.1"
+            style="width:100%;box-sizing:border-box;background:var(--bg-light);border:1px solid var(--outline);border-radius:6px;padding:0.5rem 0.7rem;color:var(--white);font-size:0.9rem"
+            oninput="batCalc('a')">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;color:var(--muted);display:block;margin-bottom:0.3rem">Tid (h)</label>
+          <input type="number" id="bat-h" placeholder="t.ex. 10" min="0" step="0.1"
+            style="width:100%;box-sizing:border-box;background:var(--bg-light);border:1px solid var(--outline);border-radius:6px;padding:0.5rem 0.7rem;color:var(--white);font-size:0.9rem"
+            oninput="batCalc('h')">
+        </div>
+      </div>
+      <div id="bat-result" style="font-size:0.95rem;font-weight:700;color:var(--primary);min-height:1.4em"></div>
+    </div>
+  </div>
+
+  <!-- Inre resistans -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>⚡ Inre resistans (R<sub>i</sub>)</h3>
+    <p style="color:var(--muted);margin-bottom:1rem">Alla batterier har en inre resistans R<sub>i</sub> som begränsar strömmen och orsakar spänningsfall under belastning. Det totala motståndet i kretsen är summan av yttre och inre resistans.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.5rem">Total resistans</div>
+        <div style="font-size:1.15rem;font-weight:700;color:var(--primary)">R<sub>tot</sub> = R + R<sub>i</sub></div>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">R = yttre belastning, R<sub>i</sub> = batteriets inre resistans</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.5rem">Klämspänning (under last)</div>
+        <div style="font-size:1.15rem;font-weight:700;color:#059669">U<sub>last</sub> = E − I · R<sub>i</sub></div>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">E = EMK (tomgångsspänning), I · R<sub>i</sub> = spänningsfall i batteriet</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.5rem">Ström i kretsen</div>
+        <div style="font-size:1.15rem;font-weight:700;color:#d97706">I = E ÷ (R + R<sub>i</sub>)</div>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">Strömmen begränsas av den totala resistansen</p>
+      </div>
+    </div>
+
+    <!-- ASCII circuit diagram -->
+    <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;font-family:monospace;font-size:0.85rem;color:var(--muted);line-height:1.7">
+      <div style="color:var(--white);font-weight:700;margin-bottom:0.5rem;font-family:inherit">Kretsschema — Batteri med inre resistans:</div>
+      <div>┌──[R<sub>i</sub>]──[R]──┐</div>
+      <div>│  (inre) (last) │</div>
+      <div>[+E-]            │</div>
+      <div>└────────────────┘</div>
+    </div>
+
+    <div class="tip-box" style="margin-top:1rem">
+      <strong>Praktiskt:</strong> Ett fulladdat bilbatteri har E ≈ 12,6 V men kan ha R<sub>i</sub> = 0,05–0,2 Ω. Vid startström 200 A ger det spänningsfall på 10–40 V — därför sjunker spänningen kraftigt vid start.
+    </div>
+  </div>
+
+  <!-- Seriekoppling och parallellkoppling -->
+  <div class="card">
+    <h3>🔗 Koppling av batterier</h3>
+    <p style="color:var(--muted);margin-bottom:1rem">Batterier kan kopplas i serie eller parallell beroende på om man vill öka spänningen eller kapaciteten.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem">
+
+      <!-- Seriekoppling -->
+      <div style="background:var(--bg-card);border-radius:0.75rem;padding:1.1rem;border-top:3px solid var(--primary)">
+        <div style="font-size:0.78rem;color:var(--primary);text-transform:uppercase;letter-spacing:.05em;font-weight:700;margin-bottom:0.6rem">Seriekoppling</div>
+        <div style="font-size:1rem;font-weight:700;color:var(--white);margin-bottom:0.3rem">U<sub>tot</sub> = U<sub>1</sub> + U<sub>2</sub> + …</div>
+        <div style="font-size:1rem;font-weight:700;color:#d97706;margin-bottom:0.8rem">Ah<sub>tot</sub> = Ah (oförändrad)</div>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.8rem">Spänningarna adderas — kapaciteten (Ah) förblir densamma som för ett enskilt batteri.</p>
+        <div style="background:var(--bg-light);border-radius:0.5rem;padding:0.75rem;font-size:0.85rem">
+          <strong style="color:var(--white)">Exempel:</strong>
+          <div style="color:var(--muted);margin-top:0.3rem">3 st 12 V / 20 Ah i serie:</div>
+          <div style="color:var(--primary);font-weight:700;margin-top:0.2rem">U = 36 V, Ah = 20 Ah</div>
+        </div>
+        <div style="margin-top:0.8rem;font-family:monospace;font-size:0.8rem;color:var(--muted);line-height:1.6">
+          [+12V-]─[+12V-]─[+12V-]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ 36 V ut
+        </div>
+      </div>
+
+      <!-- Parallellkoppling -->
+      <div style="background:var(--bg-card);border-radius:0.75rem;padding:1.1rem;border-top:3px solid #059669">
+        <div style="font-size:0.78rem;color:#059669;text-transform:uppercase;letter-spacing:.05em;font-weight:700;margin-bottom:0.6rem">Parallellkoppling</div>
+        <div style="font-size:1rem;font-weight:700;color:var(--white);margin-bottom:0.3rem">U<sub>tot</sub> = U (oförändrad)</div>
+        <div style="font-size:1rem;font-weight:700;color:#059669;margin-bottom:0.8rem">Ah<sub>tot</sub> = Ah<sub>1</sub> + Ah<sub>2</sub> + …</div>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:0.8rem">Spänningen är densamma — kapaciteten (Ah) adderas. Används för längre drifttid.</p>
+        <div style="background:var(--bg-light);border-radius:0.5rem;padding:0.75rem;font-size:0.85rem">
+          <strong style="color:var(--white)">Exempel 1 — lika stora:</strong>
+          <div style="color:var(--muted);margin-top:0.3rem">3 st 12 V / 20 Ah i parallell:</div>
+          <div style="color:#059669;font-weight:700;margin-top:0.2rem">U = 12 V, Ah = 60 Ah</div>
+        </div>
+        <div style="background:var(--bg-light);border-radius:0.5rem;padding:0.75rem;font-size:0.85rem;margin-top:0.5rem">
+          <strong style="color:var(--white)">Exempel 2 — olika stora:</strong>
+          <div style="color:var(--muted);margin-top:0.3rem">12 V/2 Ah + 12 V/4 Ah + 12 V/6 Ah i parallell:</div>
+          <div style="color:#059669;font-weight:700;margin-top:0.2rem">U = 12 V, Ah = 2 + 4 + 6 = <strong>12 Ah</strong></div>
+        </div>
+        <div style="margin-top:0.8rem;font-family:monospace;font-size:0.8rem;color:var(--muted);line-height:1.6">
+          [+12V 2Ah-] ─┐<br>
+          [+12V 4Ah-] ─┼─ 12 V / 12 Ah<br>
+          [+12V 6Ah-] ─┘
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box" style="margin-top:1.25rem">
+      <strong>Minnesregel:</strong> Serie = spänning upp, Ah samma. Parallell = spänning samma, Ah upp. Blanda aldrig batterier med olika spänning eller laddningsnivå i parallell — det orsakar utjämningsströmmar.
+    </div>
+  </div>
+
+</section>
+
 <footer>
   <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
   <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard (SS 437 01 40). Kontrollera alltid med din lärare eller handledare.</p>
@@ -2162,8 +2402,60 @@ document.querySelector('.clear-btn').addEventListener('click', kkClear);
 
   lkRender();
 })();
+
+/* === AH-KALKYLATOR === */
+window.batCalc = function (changed) {
+  var ah = parseFloat(document.getElementById('bat-ah').value);
+  var a  = parseFloat(document.getElementById('bat-a').value);
+  var h  = parseFloat(document.getElementById('bat-h').value);
+  var res = document.getElementById('bat-result');
+  if (changed === 'ah' && !isNaN(a) && !isNaN(ah) && a > 0) {
+    var calc = ah / a;
+    document.getElementById('bat-h').value = calc.toFixed(2);
+    res.innerHTML = 'Tid = ' + ah + ' Ah ÷ ' + a + ' A = <strong>' + calc.toFixed(2) + ' h</strong>';
+  } else if (changed === 'ah' && !isNaN(h) && !isNaN(ah) && h > 0) {
+    var calc = ah / h;
+    document.getElementById('bat-a').value = calc.toFixed(2);
+    res.innerHTML = 'Ström = ' + ah + ' Ah ÷ ' + h + ' h = <strong>' + calc.toFixed(2) + ' A</strong>';
+  } else if (changed === 'a' && !isNaN(ah) && !isNaN(a) && a > 0) {
+    var calc = ah / a;
+    document.getElementById('bat-h').value = calc.toFixed(2);
+    res.innerHTML = 'Tid = ' + ah + ' Ah ÷ ' + a + ' A = <strong>' + calc.toFixed(2) + ' h</strong>';
+  } else if (changed === 'a' && !isNaN(h) && !isNaN(a)) {
+    var calc = a * h;
+    document.getElementById('bat-ah').value = calc.toFixed(2);
+    res.innerHTML = 'Kapacitet = ' + a + ' A × ' + h + ' h = <strong>' + calc.toFixed(2) + ' Ah</strong>';
+  } else if (changed === 'h' && !isNaN(ah) && !isNaN(h) && h > 0) {
+    var calc = ah / h;
+    document.getElementById('bat-a').value = calc.toFixed(2);
+    res.innerHTML = 'Ström = ' + ah + ' Ah ÷ ' + h + ' h = <strong>' + calc.toFixed(2) + ' A</strong>';
+  } else if (changed === 'h' && !isNaN(a) && !isNaN(h)) {
+    var calc = a * h;
+    document.getElementById('bat-ah').value = calc.toFixed(2);
+    res.innerHTML = 'Kapacitet = ' + a + ' A × ' + h + ' h = <strong>' + calc.toFixed(2) + ' Ah</strong>';
+  } else {
+    res.innerHTML = '';
+  }
+};
 </script>
+
   </div><!-- /main-content -->
-</div><!-- /layout-wrapper -->
+</div><!-- /app-content -->
+
+<!-- Mobile bottom nav -->
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item">
+    <span class="material-symbols-outlined">dashboard</span>
+  </a>
+  <a href="index.html" class="mobile-nav-item active">
+    <span class="material-symbols-outlined">menu_book</span>
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <span class="material-symbols-outlined">event_note</span>
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <span class="material-symbols-outlined">person</span>
+  </a>
+</nav>
 </body>
 </html>

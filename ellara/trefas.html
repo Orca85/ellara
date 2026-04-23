@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
@@ -8,40 +8,111 @@
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
-  <div class="nav-controls">
-    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+<!-- ===== FIXED LEFT SIDEBAR ===== -->
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
   </div>
-</nav>
-<div class="layout-wrapper">
-  <aside class="sidebar">
-    <div class="sidebar-section-label">
-      <span class="sidebar-label-text">Ellära</span>
-      <span class="sidebar-label-sub">Kapitelöversikt</span>
+
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="atomfysik.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">science</span>
+      Atomfysik
+    </a>
+    <a href="material.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">category</span>
+      Material
+    </a>
+    <a href="symboler.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">electric_bolt</span>
+      Symboler
+    </a>
+    <a href="kabeltyper.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">cable</span>
+      Kabeltyper
+    </a>
+    <a href="kabeldim.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">straighten</span>
+      Kabeldim.
+    </a>
+    <a href="kretsar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">schema</span>
+      Kretsar
+    </a>
+    <a href="trefas.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">compress</span>
+      Trefas
+    </a>
+    <a href="skydd.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">shield</span>
+      Skydd
+    </a>
+    <a href="installation.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">build</span>
+      Installation
+    </a>
+    <a href="tecken.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">tag</span>
+      Tecken
+    </a>
+    <a href="matematik.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">calculate</span>
+      Matematik
+    </a>
+    <hr class="sidebar-divider">
+    <a href="formler.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">description</span>
+      Formelblad
+    </a>
+    <a href="ovningar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">fitness_center</span>
+      Övningar
+    </a>
+    <a href="flashcards.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">style</span>
+      Flashcards
+    </a>
+  </nav>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="app-content">
+
+  <!-- Top header bar -->
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html" class="active">Ellära</a>
+      </nav>
     </div>
-    <nav class="sidebar-nav">
-      <a href="index.html" class="sidebar-link "><span class="sidebar-icon">🏠</span> Hem</a>
-      <a href="atomfysik.html" class="sidebar-link "><span class="sidebar-icon">⚛️</span> Atomfysik</a>
-      <a href="material.html" class="sidebar-link "><span class="sidebar-icon">🧱</span> Material</a>
-      <a href="symboler.html" class="sidebar-link "><span class="sidebar-icon">📐</span> Symboler</a>
-      <a href="kabeltyper.html" class="sidebar-link "><span class="sidebar-icon">🔌</span> Kabeltyper</a>
-      <a href="kabeldim.html" class="sidebar-link "><span class="sidebar-icon">📏</span> Kabeldim.</a>
-      <a href="kretsar.html" class="sidebar-link "><span class="sidebar-icon">⚙️</span> Kretsar</a>
-      <a href="trefas.html" class="sidebar-link active"><span class="sidebar-icon">🔄</span> Trefas</a>
-      <a href="skydd.html" class="sidebar-link "><span class="sidebar-icon">🛡️</span> Skydd</a>
-      <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
-      <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
-      <a href="matematik.html" class="sidebar-link "><span class="sidebar-icon">🔢</span> Matematik</a>
-      <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
-      <a href="formler.html" class="sidebar-link"><span class="sidebar-icon">📄</span> Formelblad</a>
-    </nav>
-  </aside>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <button class="app-header-icon" title="Inställningar">
+        <span class="material-symbols-outlined">settings</span>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
+
   <div class="main-content">
 
 <div class="search-bar-wrap" id="search-wrap">
   <div class="search-inner">
-    <span class="search-icon">🔍</span>
+    <span class="search-icon">⌕</span>
     <input type="text" id="search-input" class="search-input" placeholder="Sök — t.ex. neutralledare, symmetri, trefas…" autocomplete="off" spellcheck="false"/>
     <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
   </div>
@@ -74,6 +145,7 @@
       <a href="#rlc-kretsar" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">〰️ RLC-kretsar</a>
       <a href="#reaktans-slider" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">📈 X<sub>L</sub> vs X<sub>C</sub> — frekvensslider</a>
       <a href="#vad-hander-om" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🤔 Vad händer om…?</a>
+      <a href="#vaxelriktare" style="background:var(--bg-light);border-radius:8px;padding:0.6rem 0.85rem;color:var(--primary);text-decoration:none;border:1px solid var(--outline)">🔀 Växelriktare &amp; VFD</a>
     </div>
   </div>
 </section>
@@ -1347,6 +1419,142 @@
   <div id="who-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem"></div>
 </section>
 
+<!-- ===== VÄXELRIKTARE & FREKVENSOMRIKTARE ===== -->
+<section class="section" id="vaxelriktare">
+  <div class="section-header">
+    <div class="section-icon">🔀</div>
+    <div>
+      <h4>Avsnitt</h4>
+      <h2>Växelriktare &amp; Frekvensomriktare (VFD)</h2>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>🔀 Växelriktare — DC → AC</h3>
+    <p style="color:var(--muted);margin-bottom:1rem">En växelriktare (engelska: <em>inverter</em>) omvandlar likspänning (DC) till växelspänning (AC). Den är kärnan i solcellsanläggningar, UPS-system och elfordon.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;text-align:center">
+        <div style="font-size:2rem;margin-bottom:0.4rem">🔋</div>
+        <div style="font-weight:700;color:var(--white)">DC in</div>
+        <div style="color:var(--muted);font-size:0.85rem">Batteri, solpanel<br>t.ex. 48 V DC</div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;text-align:center;display:flex;align-items:center;justify-content:center">
+        <div>
+          <div style="font-size:1.5rem;font-weight:900;color:var(--primary)">→</div>
+          <div style="font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Växelriktare</div>
+        </div>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;text-align:center">
+        <div style="font-size:2rem;margin-bottom:0.4rem">⚡</div>
+        <div style="font-weight:700;color:var(--white)">AC ut</div>
+        <div style="color:var(--muted);font-size:0.85rem">1-fas eller 3-fas<br>t.ex. 230 V / 400 V AC</div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <strong>Obs:</strong> En växelriktare kan också konvertera 1-fas AC → 3-fas AC, t.ex. för att driva en trefasmotor från ett enfasnät.
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.5rem">
+    <h3>⚙️ Frekvensomriktare (VFD)</h3>
+    <p style="color:var(--muted);margin-bottom:1rem">En <strong>frekvensomriktare</strong> (VFD = Variable Frequency Drive, även kallad frekvensomformaren eller frekvensomvandlare) styr varvtalet på en elmotor genom att variera frekvens och spänning. Används i pumpar, fläktar, kompressorer och transportband.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:1.25rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;border-left:3px solid var(--primary)">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Principen</div>
+        <div style="font-weight:700;color:var(--white);margin-bottom:0.3rem">AC → DC → AC</div>
+        <p style="color:var(--muted);font-size:0.85rem">Nätet likriktas först, sedan skapar en växelriktare en ny AC-signal med önskad frekvens och spänning.</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;border-left:3px solid #059669">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Varvtalsreglering</div>
+        <div style="font-weight:700;color:#059669;margin-bottom:0.3rem">n ∝ f</div>
+        <p style="color:var(--muted);font-size:0.85rem">Motorns varvtal är proportionellt mot frekvensen. Sänk frekvensen → lägre varvtal.</p>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem;border-left:3px solid #d97706">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:0.4rem">Mjukstart</div>
+        <div style="font-weight:700;color:#d97706;margin-bottom:0.3rem">0 Hz → 50 Hz</div>
+        <p style="color:var(--muted);font-size:0.85rem">VFD:en kan starta motorn mjukt från 0 Hz — eliminerar startström och mekanisk stöt.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:0">🔌 Indata &amp; Utdata</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1rem">
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;margin-bottom:0.5rem">Vanlig indata</div>
+        <ul style="color:var(--muted);font-size:0.85rem;margin:0;padding-left:1.2rem;line-height:1.8">
+          <li>1-fas 230 V / 50 Hz</li>
+          <li>3-fas 400 V / 50 Hz</li>
+        </ul>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;margin-bottom:0.5rem">Utdata (variabelt)</div>
+        <ul style="color:var(--muted);font-size:0.85rem;margin:0;padding-left:1.2rem;line-height:1.8">
+          <li>3-fas 0–50 Hz (eller högre)</li>
+          <li>Spänning skalas med frekvens (U/f = konstant)</li>
+        </ul>
+      </div>
+      <div style="background:var(--bg-card);border-radius:0.6rem;padding:1rem">
+        <div style="font-size:0.78rem;color:var(--muted);text-transform:uppercase;margin-bottom:0.5rem">Storleksintervall</div>
+        <ul style="color:var(--muted);font-size:0.85rem;margin:0;padding-left:1.2rem;line-height:1.8">
+          <li>Från &lt; 1 kW (liten pump)</li>
+          <li>Till hundratals kW (industri)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <strong>U/f-styrning:</strong> För att hålla magnetflödet i motorn konstant sänks spänningen proportionellt mot frekvensen. Vid 25 Hz (halv frekvens) matas motorn med ≈ 200 V i stället för 400 V.
+    </div>
+  </div>
+
+  <!-- Jämförelsetabell: Namnvarianter -->
+  <div class="card">
+    <h3>📋 Namnvarianter — samma sak</h3>
+    <p style="color:var(--muted);margin-bottom:1rem">Samma enhet kallas olika beroende på sammanhang och tillverkare:</p>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:0.88rem">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:0.6rem 0.8rem;border-bottom:2px solid var(--outline);color:var(--white)">Namn</th>
+            <th style="text-align:left;padding:0.6rem 0.8rem;border-bottom:2px solid var(--outline);color:var(--white)">Förkortning</th>
+            <th style="text-align:left;padding:0.6rem 0.8rem;border-bottom:2px solid var(--outline);color:var(--white)">Vanlig i</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--outline)">
+            <td style="padding:0.6rem 0.8rem;color:var(--muted)">Frekvensomriktare</td>
+            <td style="padding:0.6rem 0.8rem;color:var(--primary);font-weight:700">—</td>
+            <td style="padding:0.6rem 0.8rem;color:var(--muted)">Sverige (industri, el-branschen)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--outline)">
+            <td style="padding:0.6rem 0.8rem;color:var(--muted)">Frekvensomvandlare</td>
+            <td style="padding:0.6rem 0.8rem;color:var(--primary);font-weight:700">—</td>
+            <td style="padding:0.6rem 0.8rem;color:var(--muted)">Sverige (vardagligt)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--outline)">
+            <td style="padding:0.6rem 0.8rem;color:var(--muted)">Frekvensomformaren</td>
+            <td style="padding:0.6rem 0.8rem;color:var(--primary);font-weight:700">—</td>
+            <td style="padding:0.6rem 0.8rem;color:var(--muted)">Sverige (äldre term)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--outline)">
+            <td style="padding:0.6rem 0.8rem;color:var(--muted)">Variable Frequency Drive</td>
+            <td style="padding:0.6rem 0.8rem;color:var(--primary);font-weight:700">VFD</td>
+            <td style="padding:0.6rem 0.8rem;color:var(--muted)">Engelska (USA)</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem 0.8rem;color:var(--muted)">Variable Speed Drive</td>
+            <td style="padding:0.6rem 0.8rem;color:var(--primary);font-weight:700">VSD</td>
+            <td style="padding:0.6rem 0.8rem;color:var(--muted)">Engelska (Europa)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+
 <footer>
   <p>⚡ <strong>Ellära</strong> – Interaktiv studieresurs</p>
   <p style="margin-top:0.5rem">Formlerna är baserade på svensk standard. Kontrollera alltid med din lärare eller handledare.</p>
@@ -1444,7 +1652,24 @@
   });
 })();
 </script>
+
   </div><!-- /main-content -->
-</div><!-- /layout-wrapper -->
+</div><!-- /app-content -->
+
+<!-- Mobile bottom nav -->
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item">
+    <span class="material-symbols-outlined">dashboard</span>
+  </a>
+  <a href="index.html" class="mobile-nav-item active">
+    <span class="material-symbols-outlined">menu_book</span>
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <span class="material-symbols-outlined">event_note</span>
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <span class="material-symbols-outlined">person</span>
+  </a>
+</nav>
 </body>
 </html>

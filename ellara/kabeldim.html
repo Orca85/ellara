@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
@@ -35,40 +35,111 @@
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
-  <div class="nav-controls">
-    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+<!-- ===== FIXED LEFT SIDEBAR ===== -->
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
   </div>
-</nav>
-<div class="layout-wrapper">
-  <aside class="sidebar">
-    <div class="sidebar-section-label">
-      <span class="sidebar-label-text">Ellära</span>
-      <span class="sidebar-label-sub">Kapitelöversikt</span>
+
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="atomfysik.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">science</span>
+      Atomfysik
+    </a>
+    <a href="material.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">category</span>
+      Material
+    </a>
+    <a href="symboler.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">electric_bolt</span>
+      Symboler
+    </a>
+    <a href="kabeltyper.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">cable</span>
+      Kabeltyper
+    </a>
+    <a href="kabeldim.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">straighten</span>
+      Kabeldim.
+    </a>
+    <a href="kretsar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">schema</span>
+      Kretsar
+    </a>
+    <a href="trefas.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">compress</span>
+      Trefas
+    </a>
+    <a href="skydd.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">shield</span>
+      Skydd
+    </a>
+    <a href="installation.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">build</span>
+      Installation
+    </a>
+    <a href="tecken.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">tag</span>
+      Tecken
+    </a>
+    <a href="matematik.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">calculate</span>
+      Matematik
+    </a>
+    <hr class="sidebar-divider">
+    <a href="formler.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">description</span>
+      Formelblad
+    </a>
+    <a href="ovningar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">fitness_center</span>
+      Övningar
+    </a>
+    <a href="flashcards.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">style</span>
+      Flashcards
+    </a>
+  </nav>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="app-content">
+
+  <!-- Top header bar -->
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html" class="active">Ellära</a>
+      </nav>
     </div>
-    <nav class="sidebar-nav">
-      <a href="index.html" class="sidebar-link "><span class="sidebar-icon">🏠</span> Hem</a>
-      <a href="atomfysik.html" class="sidebar-link "><span class="sidebar-icon">⚛️</span> Atomfysik</a>
-      <a href="material.html" class="sidebar-link "><span class="sidebar-icon">🧱</span> Material</a>
-      <a href="symboler.html" class="sidebar-link "><span class="sidebar-icon">📐</span> Symboler</a>
-      <a href="kabeltyper.html" class="sidebar-link "><span class="sidebar-icon">🔌</span> Kabeltyper</a>
-      <a href="kabeldim.html" class="sidebar-link active"><span class="sidebar-icon">📏</span> Kabeldim.</a>
-      <a href="kretsar.html" class="sidebar-link "><span class="sidebar-icon">⚙️</span> Kretsar</a>
-      <a href="trefas.html" class="sidebar-link "><span class="sidebar-icon">🔄</span> Trefas</a>
-      <a href="skydd.html" class="sidebar-link "><span class="sidebar-icon">🛡️</span> Skydd</a>
-      <a href="installation.html" class="sidebar-link "><span class="sidebar-icon">🏗️</span> Installation</a>
-      <a href="tecken.html" class="sidebar-link "><span class="sidebar-icon">🔤</span> Tecken</a>
-      <a href="matematik.html" class="sidebar-link "><span class="sidebar-icon">🔢</span> Matematik</a>
-      <a href="ovningar.html" class="sidebar-link "><span class="sidebar-icon">✏️</span> Övningar</a>
-      <a href="formler.html" class="sidebar-link"><span class="sidebar-icon">📄</span> Formelblad</a>
-    </nav>
-  </aside>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <button class="app-header-icon" title="Inställningar">
+        <span class="material-symbols-outlined">settings</span>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
+
   <div class="main-content">
 
 <div class="search-bar-wrap" id="search-wrap">
   <div class="search-inner">
-    <span class="search-icon">🔍</span>
+    <span class="search-icon">⌕</span>
     <input type="text" id="search-input" class="search-input" placeholder="Sök — t.ex. kabeldimensionering, säkring, trefas, VP-rör…" autocomplete="off" spellcheck="false"/>
     <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
   </div>
@@ -338,7 +409,24 @@
 </footer>
 
 <script src="../script.js"></script>
+
   </div><!-- /main-content -->
-</div><!-- /layout-wrapper -->
+</div><!-- /app-content -->
+
+<!-- Mobile bottom nav -->
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item">
+    <span class="material-symbols-outlined">dashboard</span>
+  </a>
+  <a href="index.html" class="mobile-nav-item active">
+    <span class="material-symbols-outlined">menu_book</span>
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <span class="material-symbols-outlined">event_note</span>
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <span class="material-symbols-outlined">person</span>
+  </a>
+</nav>
 </body>
 </html>

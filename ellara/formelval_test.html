@@ -10,17 +10,127 @@
   </style>
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
-  <div class="nav-controls">
-    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+
+<!-- ===== FIXED LEFT SIDEBAR ===== -->
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
   </div>
-</nav>
-<div class="layout-wrapper">
-  <div class="main-content" style="max-width:680px;margin:0 auto;padding-bottom:5rem">
+
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="atomfysik.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">science</span>
+      Atomfysik
+    </a>
+    <a href="material.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">category</span>
+      Material
+    </a>
+    <a href="symboler.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">electric_bolt</span>
+      Symboler
+    </a>
+    <a href="kabeltyper.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">cable</span>
+      Kabeltyper
+    </a>
+    <a href="kabeldim.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">straighten</span>
+      Kabeldim.
+    </a>
+    <a href="kretsar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">schema</span>
+      Kretsar
+    </a>
+    <a href="trefas.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">compress</span>
+      Trefas
+    </a>
+    <a href="skydd.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">shield</span>
+      Skydd
+    </a>
+    <a href="installation.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">build</span>
+      Installation
+    </a>
+    <a href="tecken.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">tag</span>
+      Tecken
+    </a>
+    <a href="matematik.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">calculate</span>
+      Matematik
+    </a>
+    <hr class="sidebar-divider">
+    <a href="formler.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">description</span>
+      Formelblad
+    </a>
+    <a href="ovningar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">fitness_center</span>
+      Övningar
+    </a>
+    <a href="flashcards.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">style</span>
+      Flashcards
+    </a>
+  </nav>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="app-content">
+
+  <!-- Top header bar -->
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html" class="active">Ellära</a>
+      </nav>
+    </div>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <button class="app-header-icon" title="Inställningar">
+        <span class="material-symbols-outlined">settings</span>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
+
+  <div class="main-content">
     <div id="quiz-root"></div>
-  </div>
-</div>
+  </div><!-- /main-content -->
+</div><!-- /app-content -->
+
+<!-- Mobile bottom nav -->
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item">
+    <span class="material-symbols-outlined">dashboard</span>
+  </a>
+  <a href="index.html" class="mobile-nav-item active">
+    <span class="material-symbols-outlined">menu_book</span>
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <span class="material-symbols-outlined">event_note</span>
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <span class="material-symbols-outlined">person</span>
+  </a>
+</nav>
 <script>
 const QUIZ_DATA = {
   chapterId: 'formelval',

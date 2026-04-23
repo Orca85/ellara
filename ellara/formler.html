@@ -404,36 +404,105 @@
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo"><span>⚡</span> Ellära</a>
-  <div class="nav-controls">
-    <button class="theme-toggle" id="theme-toggle" title="Byt tema">🌙</button>
+<!-- ===== FIXED LEFT SIDEBAR ===== -->
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
   </div>
-</nav>
 
-<div class="layout-wrapper">
-  <aside class="sidebar">
-    <div class="sidebar-section-label">
-      <span class="sidebar-label-text">Ellära</span>
-      <span class="sidebar-label-sub">Kapitelöversikt</span>
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="atomfysik.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">science</span>
+      Atomfysik
+    </a>
+    <a href="material.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">category</span>
+      Material
+    </a>
+    <a href="symboler.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">electric_bolt</span>
+      Symboler
+    </a>
+    <a href="kabeltyper.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">cable</span>
+      Kabeltyper
+    </a>
+    <a href="kabeldim.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">straighten</span>
+      Kabeldim.
+    </a>
+    <a href="kretsar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">schema</span>
+      Kretsar
+    </a>
+    <a href="trefas.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">compress</span>
+      Trefas
+    </a>
+    <a href="skydd.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">shield</span>
+      Skydd
+    </a>
+    <a href="installation.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">build</span>
+      Installation
+    </a>
+    <a href="tecken.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">tag</span>
+      Tecken
+    </a>
+    <a href="matematik.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">calculate</span>
+      Matematik
+    </a>
+    <hr class="sidebar-divider">
+    <a href="formler.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">description</span>
+      Formelblad
+    </a>
+    <a href="ovningar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">fitness_center</span>
+      Övningar
+    </a>
+    <a href="flashcards.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">style</span>
+      Flashcards
+    </a>
+  </nav>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="app-content">
+
+  <!-- Top header bar -->
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html" class="active">Ellära</a>
+      </nav>
     </div>
-    <nav class="sidebar-nav">
-      <a href="index.html"        class="sidebar-link"><span class="sidebar-icon">🏠</span> Hem</a>
-      <a href="atomfysik.html"    class="sidebar-link"><span class="sidebar-icon">⚛️</span> Atomfysik</a>
-      <a href="material.html"     class="sidebar-link"><span class="sidebar-icon">🧱</span> Material</a>
-      <a href="symboler.html"     class="sidebar-link"><span class="sidebar-icon">📐</span> Symboler</a>
-      <a href="kabeltyper.html"   class="sidebar-link"><span class="sidebar-icon">🔌</span> Kabeltyper</a>
-      <a href="kabeldim.html"     class="sidebar-link"><span class="sidebar-icon">📏</span> Kabeldim.</a>
-      <a href="kretsar.html"      class="sidebar-link"><span class="sidebar-icon">⚙️</span> Kretsar</a>
-      <a href="trefas.html"       class="sidebar-link"><span class="sidebar-icon">🔄</span> Trefas</a>
-      <a href="skydd.html"        class="sidebar-link"><span class="sidebar-icon">🛡️</span> Skydd</a>
-      <a href="installation.html" class="sidebar-link"><span class="sidebar-icon">🏗️</span> Installation</a>
-      <a href="tecken.html"       class="sidebar-link"><span class="sidebar-icon">🔤</span> Tecken</a>
-      <a href="matematik.html"    class="sidebar-link"><span class="sidebar-icon">🔢</span> Matematik</a>
-      <a href="ovningar.html"     class="sidebar-link"><span class="sidebar-icon">✏️</span> Övningar</a>
-      <a href="formler.html"      class="sidebar-link active"><span class="sidebar-icon">📄</span> Formelblad</a>
-    </nav>
-  </aside>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <button class="app-header-icon" title="Inställningar">
+        <span class="material-symbols-outlined">settings</span>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
 
   <div class="main-content">
 
@@ -571,6 +640,21 @@
         <p class="f-sub">Impedans</p>
         <div class="f-row">Z = √(R² + X²) &nbsp;&nbsp; U = Z · I</div>
 
+        <p class="f-sub">Effektivvärde</p>
+        <div class="f-row">
+          U<sub>eff</sub> =
+          <span class="frac"><span>U<sub>max</sub></span><span>√2</span></span>
+          &nbsp;&nbsp;
+          I<sub>eff</sub> =
+          <span class="frac"><span>I<sub>max</sub></span><span>√2</span></span>
+        </div>
+
+        <p class="f-sub">Resonansfrekvens</p>
+        <div class="f-row">
+          f<sub>0</sub> =
+          <span class="frac"><span>1</span><span>2·π·√(L·C)</span></span>
+        </div>
+
         <p class="f-sub">Trefaseffekt</p>
         <div class="f-row">P<sub>tot</sub> = 3 · U<sub>fas</sub> · I = √3 · U<sub>linje</sub> · I</div>
       </div>
@@ -597,6 +681,96 @@
           </div>
 
         </div>
+      </div>
+
+      <!-- 9. Y- och D-koppling -->
+      <div class="f-card f-card-wide">
+        <h2>9. Y- och D-koppling</h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem 2rem;">
+          <div>
+            <p class="f-sub">Y-koppling (stjärna)</p>
+            <div class="f-row">U<sub>linje</sub> = √3 · U<sub>fas</sub></div>
+            <div class="f-row">I<sub>linje</sub> = I<sub>fas</sub></div>
+            <div class="f-info">Neutral­ledare möjlig</div>
+          </div>
+          <div>
+            <p class="f-sub">D-koppling (triangel)</p>
+            <div class="f-row">U<sub>linje</sub> = U<sub>fas</sub></div>
+            <div class="f-row">I<sub>linje</sub> = √3 · I<sub>fas</sub></div>
+            <div class="f-info">Ingen neutral­ledare</div>
+          </div>
+        </div>
+        <div class="f-note">Y/D-start: Motor startar i Y (1/3 av D-effekt), kopplas om till D vid normalt varvtal.</div>
+      </div>
+
+      <!-- 10. Verkningsgrad -->
+      <div class="f-card">
+        <h2>10. Verkningsgrad</h2>
+        <div class="f-row">
+          η =
+          <span class="frac"><span>P<sub>ut</sub></span><span>P<sub>in</sub></span></span>
+          · 100 %
+        </div>
+        <div class="f-row">P<sub>ut</sub> = η · P<sub>in</sub></div>
+        <div class="f-row">P<sub>förlust</sub> = P<sub>in</sub> − P<sub>ut</sub></div>
+        <div class="f-note">η = 1 (100 %) = ideal, ingen förlust. Typiskt 0,8–0,98 för elmotorer.</div>
+      </div>
+
+      <!-- 11. Kondensatorer & Induktorer (koppling) -->
+      <div class="f-card">
+        <h2>11. Kondensatorer &amp; Induktorer</h2>
+
+        <p class="f-sub">Kondensatorer — serie</p>
+        <div class="f-row">
+          <span class="frac"><span>1</span><span>C<sub>tot</sub></span></span>
+          =
+          <span class="frac"><span>1</span><span>C₁</span></span>
+          +
+          <span class="frac"><span>1</span><span>C₂</span></span>
+          + …
+        </div>
+
+        <p class="f-sub">Kondensatorer — parallell</p>
+        <div class="f-row">C<sub>tot</sub> = C₁ + C₂ + …</div>
+
+        <p class="f-sub">Induktorer — serie</p>
+        <div class="f-row">L<sub>tot</sub> = L₁ + L₂ + …</div>
+
+        <p class="f-sub">Induktorer — parallell</p>
+        <div class="f-row">
+          <span class="frac"><span>1</span><span>L<sub>tot</sub></span></span>
+          =
+          <span class="frac"><span>1</span><span>L₁</span></span>
+          +
+          <span class="frac"><span>1</span><span>L₂</span></span>
+          + …
+        </div>
+        <div class="f-note">C: omvända regler jämfört med R. L: samma regler som R.</div>
+      </div>
+
+      <!-- 12. Batterier -->
+      <div class="f-card f-card-wide">
+        <h2>12. Batterier</h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem 2rem;">
+          <div>
+            <p class="f-sub">Kapacitet</p>
+            <div class="f-row">Ah = A · h</div>
+            <div class="f-row">A = <span class="frac"><span>Ah</span><span>h</span></span></div>
+            <div class="f-row">h = <span class="frac"><span>Ah</span><span>A</span></span></div>
+          </div>
+          <div>
+            <p class="f-sub">Inre resistans (Rᵢ)</p>
+            <div class="f-row">R<sub>tot</sub> = R + R<sub>i</sub></div>
+            <div class="f-row">U<sub>last</sub> = E − I · R<sub>i</sub></div>
+            <div class="f-row">I = <span class="frac"><span>E</span><span>R + R<sub>i</sub></span></span></div>
+          </div>
+          <div>
+            <p class="f-sub">Koppling av batterier</p>
+            <div class="f-info"><strong>Serie:</strong> U adderas, Ah samma</div>
+            <div class="f-info"><strong>Parallell:</strong> U samma, Ah adderas</div>
+          </div>
+        </div>
+        <div class="f-note">E = EMK (tomgångsspänning). Klämspänning sjunker under belastning pga. R<sub>i</sub>.</div>
       </div>
 
     </div><!-- /formula-grid -->
@@ -674,8 +848,25 @@
       </div><!-- /ref-grid -->
     </div><!-- /ref-tables -->
 
+
   </div><!-- /main-content -->
-</div><!-- /layout-wrapper -->
+</div><!-- /app-content -->
+
+<!-- Mobile bottom nav -->
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item">
+    <span class="material-symbols-outlined">dashboard</span>
+  </a>
+  <a href="index.html" class="mobile-nav-item active">
+    <span class="material-symbols-outlined">menu_book</span>
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <span class="material-symbols-outlined">event_note</span>
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <span class="material-symbols-outlined">person</span>
+  </a>
+</nav>
 
 <script src="../script.js"></script>
 <script>

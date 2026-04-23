@@ -563,17 +563,66 @@
 (function () {
   function apply(light) {
     document.body.classList.toggle('light', light);
-    document.getElementById('theme-toggle').textContent = light ? '☀️' : '🌙';
+    const btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = light ? 'Mörkt' : 'Ljust';
   }
 
   function init() {
     const saved = localStorage.getItem('theme');
-    apply(saved !== 'dark'); // light is default when no preference saved
+    apply(saved === 'light'); // dark is default
 
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      const isLight = document.body.classList.toggle('light');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-      document.getElementById('theme-toggle').textContent = isLight ? '☀️' : '🌙';
+    const btn = document.getElementById('theme-toggle');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const isLight = document.body.classList.toggle('light');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        btn.textContent = isLight ? 'Mörkt' : 'Ljust';
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
+
+
+/* =========================================================
+   MOBILE SIDEBAR TOGGLE
+   ========================================================= */
+(function () {
+  function init() {
+    const sidebar = document.querySelector('.app-sidebar');
+    if (!sidebar) return;
+
+    // Create hamburger button (only shown < 900px via CSS)
+    const hamburger = document.createElement('button');
+    hamburger.className = 'app-hamburger';
+    hamburger.setAttribute('aria-label', 'Öppna meny');
+    hamburger.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+    document.body.appendChild(hamburger);
+
+    // Overlay backdrop
+    const overlay = document.createElement('div');
+    overlay.className = 'app-sidebar-overlay';
+    document.body.appendChild(overlay);
+
+    function openSidebar() {
+      sidebar.classList.add('is-open');
+      overlay.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('is-open');
+      overlay.classList.remove('is-visible');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    // Close on nav item click (mobile UX)
+    sidebar.querySelectorAll('.app-nav-item').forEach(item => {
+      item.addEventListener('click', closeSidebar);
     });
   }
 
@@ -668,6 +717,10 @@
     { course: 'Ellära', title: 'Procenträkning', section: 'Matematik', anchor: 'matematik.html', keywords: 'procent % beräkna andel spänningsfall 4% av 230v' },
     // Formelblad
     { course: 'Ellära', title: 'Formelblad – alla formler samlade', section: 'Formelblad', anchor: 'formler.html', keywords: 'formelblad alla formler ohms lag effekt reaktans impedans trefas spänningsfall serie parallell transformator' },
+
+    // ── Installationsteknik – Nivå 1 ────────────────────────
+    // (Lägg till poster här allt eftersom kapitel byggs ut)
+    { course: 'Installationsteknik', title: 'Kursöversikt – Installationsteknik Nivå 1', section: 'Hem', anchor: '../installationsteknik/index.html', keywords: 'installationsteknik nivå 1 förläggning kapsling motorer styrning säkerhet ritningar felsökning hållbarhet' },
   ];
 
   let activeIdx = -1;
@@ -2625,73 +2678,10 @@ function format(n) {
     }
   }
 
-  /* ---------- Index page: roadmap + progress on cards ---------- */
+  /* ---------- Index page: done dots on chapter cards ---------- */
   function initIndexProgress() {
-    // Only run on ellara/index.html (has chapter cards)
     if (!document.querySelector('.chapter-card')) return;
-
     const progress = getProgress();
-    const doneCount = CHAPTERS.filter(c => progress.has(c.id)).length;
-    const total = CHAPTERS.length;
-
-    // 1. Progress summary bar
-    const summary = document.createElement('div');
-    summary.className = 'ch-progress-summary';
-    const pct = total > 0 ? Math.round((doneCount / total) * 100) : 0;
-    summary.innerHTML = `
-      <span class="ch-progress-text">${doneCount} av ${total} kapitel klara</span>
-      <div class="ch-progress-bar"><div class="ch-progress-fill" style="width:${pct}%"></div></div>
-    `;
-    const sectionHeader = document.querySelector('#kapitel .section-header');
-    if (sectionHeader) sectionHeader.insertAdjacentElement('afterend', summary);
-
-    // 2. Roadmap strip
-    const roadmap = document.createElement('div');
-    roadmap.className = 'ch-roadmap';
-    const roadTitle = document.createElement('div');
-    roadTitle.className = 'ch-roadmap-title';
-    roadTitle.textContent = 'Studiepath – rekommenderad ordning';
-    roadmap.appendChild(roadTitle);
-
-    const path = document.createElement('div');
-    path.className = 'ch-roadmap-path';
-
-    CHAPTERS.forEach((ch, i) => {
-      const done = progress.has(ch.id);
-      const node = document.createElement('a');
-      node.href = ch.url;
-      node.className = 'ch-roadmap-node' + (done ? ' ch-roadmap-node--done' : '');
-
-      const iconEl = document.createElement('div');
-      iconEl.className = 'ch-roadmap-node-icon';
-      iconEl.textContent = ch.icon;
-
-      const labelEl = document.createElement('div');
-      labelEl.className = 'ch-roadmap-node-label';
-      labelEl.textContent = ch.title;
-
-      node.appendChild(iconEl);
-      node.appendChild(labelEl);
-      if (done) {
-        const check = document.createElement('div');
-        check.className = 'ch-roadmap-node-check';
-        check.textContent = '✓';
-        node.appendChild(check);
-      }
-      path.appendChild(node);
-
-      if (i < CHAPTERS.length - 1) {
-        const arrow = document.createElement('span');
-        arrow.className = 'ch-roadmap-arrow';
-        arrow.textContent = '→';
-        path.appendChild(arrow);
-      }
-    });
-
-    roadmap.appendChild(path);
-    if (sectionHeader) sectionHeader.insertAdjacentElement('afterend', roadmap);
-
-    // 3. Done dots on chapter cards
     document.querySelectorAll('.chapter-card').forEach(card => {
       const href = card.getAttribute('href') || '';
       const file = href.split('/').pop();
