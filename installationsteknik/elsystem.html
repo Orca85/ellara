@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elsystem – Installationsteknik</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .sys-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.25rem; margin-top:1.25rem; }
+    .sys-card { background:var(--bg-card); border-radius:1rem; padding:1.4rem; box-shadow:var(--shadow); }
+    .sys-card h3 { font-size:1.1rem; font-weight:700; color:var(--primary); margin-bottom:0.6rem; }
+    .sys-card h4 { font-size:0.88rem; font-weight:700; color:var(--white); margin:0.8rem 0 0.3rem; }
+    .sys-card p { font-size:0.85rem; color:var(--muted); line-height:1.55; margin:0; }
+    .sys-card ul { list-style:none; padding:0; margin:0.5rem 0; }
+    .sys-card ul li { font-size:0.84rem; color:var(--muted); padding:0.25rem 0; border-bottom:1px solid var(--outline); }
+    .sys-card ul li::before { content:"› "; color:var(--primary); }
+    .highlight-box { background:var(--bg-card); border-left:3px solid var(--primary); border-radius:0 0.75rem 0.75rem 0; padding:1rem 1.25rem; margin-top:1rem; }
+    .highlight-box.warn { border-color:#cc4400; }
+    .steps-list { list-style:none; padding:0; margin:1rem 0; counter-reset:step-counter; }
+    .steps-list li { display:flex; gap:0.75rem; padding:0.6rem 0; border-bottom:1px solid var(--outline); font-size:0.87rem; color:var(--muted); counter-increment:step-counter; }
+    .steps-list li::before { content:counter(step-counter); background:var(--primary); color:#000; font-weight:700; font-size:0.75rem; width:1.4rem; height:1.4rem; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:0.1rem; }
+    .compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-top:1.25rem; }
+    @media (max-width:600px) { .compare-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
+  </div>
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="ledningar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">cable</span>
+      Ledningar
+    </a>
+    <a href="normcentral.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">dashboard</span>
+      Normcentral
+    </a>
+    <a href="motorer.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">settings</span>
+      Motorer & Styrning
+    </a>
+    <a href="elsystem.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">bolt</span>
+      Elsystem
+    </a>
+    <a href="matning.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">straighten</span>
+      Mätning & Idrift
+    </a>
+    <a href="sakerhet.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">security</span>
+      Säkerhetsregler
+    </a>
+  </nav>
+</aside>
+
+<div class="app-content">
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html">Installationsteknik</a>
+        <a href="elsystem.html" class="active">Elsystem</a>
+      </nav>
+    </div>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser"><span class="material-symbols-outlined">notifications</span></button>
+      <button class="app-header-icon" title="Inställningar"><span class="material-symbols-outlined">settings</span></button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <div class="search-bar-wrap" id="search-wrap">
+      <div class="search-inner">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Sök — t.ex. TN-C, TN-S, PEN-ledare, vagabonderande…" autocomplete="off" spellcheck="false" />
+        <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+    </div>
+
+    <!-- ===== TN-C vs TN-S ===== -->
+    <section class="section" id="tnsystem">
+      <div class="section-header">
+        <div class="section-icon">🔄</div>
+        <div>
+          <h4>Kapitel 4 — Elsystem</h4>
+          <h2>TN-C och TN-S systemet</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1.25rem">Sverige använder TN-systemet (jordad nollpunkt). Det finns två huvudvarianter: TN-C och TN-S — skillnaden är om PE och N är kombinerade eller separata.</p>
+
+      <div class="compare-grid">
+        <div class="sys-card">
+          <h3>TN-C (äldre)</h3>
+          <p>PE och N är kombinerade i en enda ledare: <strong>PEN-ledaren</strong>. Används i äldre installationer och i distributionsnätet fram till fastigheten.</p>
+          <h4>Kännetecken</h4>
+          <ul>
+            <li>PEN-ledaren har dubbel funktion (jord + neutral)</li>
+            <li>Spänningssättning på alla metalldelar om PEN bryts</li>
+            <li>Jordfelsbrytare (JFB) kan ej användas</li>
+            <li>Lägre kostnad — färre ledare</li>
+          </ul>
+        </div>
+        <div class="sys-card">
+          <h3>TN-S (modern)</h3>
+          <p>PE och N är separata ledare från hela vägen. Standard för nyinstallationer i Sverige.</p>
+          <h4>Kännetecken</h4>
+          <ul>
+            <li>Separat PE-ledare (gul/grön) och N-ledare (blå)</li>
+            <li>JFB kan och ska användas</li>
+            <li>Säkrare vid kabelfels eller jordfel</li>
+            <li>Krävs av moderna elinstallationsregler</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TNC-CENTRAL MED JFB ===== -->
+    <section class="section" id="tncjfb">
+      <div class="section-header">
+        <div class="section-icon">🏗️</div>
+        <div>
+          <h4>Kapitel 4 — Elsystem</h4>
+          <h2>TNC-central med JFB</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">När man installerar en jordfelsbrytare i en TNC-anläggning finns viktiga regler att följa för att den ska fungera korrekt.</p>
+
+      <ul class="steps-list">
+        <li>Lär dig hur en TNC-central med JFB kopplas in</li>
+        <li>Om en JFB används ska det <strong>inte</strong> finnas någon förbindelse mellan PE- och N-skenorna innanför JFB</li>
+        <li>Det ska finnas en blå hylsa till elcentralens PE-skena</li>
+        <li>Den gul/gröna PEN-ledaren ansluts till elcentralens PE-skena</li>
+        <li>JFB kopplas in som ett mellanleds — PE-skenan och N-skenan ska vara separata på belastningssidan</li>
+      </ul>
+    </section>
+
+    <!-- ===== VAGABONDERANDE STRÖMMAR ===== -->
+    <section class="section" id="vagabond">
+      <div class="section-header">
+        <div class="section-icon">⚡</div>
+        <div>
+          <h4>Kapitel 4 — TNC-system</h4>
+          <h2>Vagabonderande strömmar</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">I ett TNC-system delar PE- och N-ledaren samma ledare (PEN). Det innebär att neutralströmmen alltid flödar i PEN-ledaren — och det kan orsaka vagabonderande strömmar i metalldelar.</p>
+
+      <div class="highlight-box" style="margin-bottom:1.25rem">
+        <p style="font-size:0.88rem;color:var(--muted);margin:0">
+          <strong>Vad är det?</strong> I ett TNC-system är PE-skenan och N-skenan hopkopplade i centralen. De utgör samma kopplpunkt (neutralpunkt). Utsatta metalldelar (t.ex. tvättmaskin, diskmaskin) är via PE-ledaren förbundna med denna neutralpunkt.
+        </p>
+      </div>
+
+      <div class="sys-grid">
+        <div class="sys-card">
+          <h3>Problemet</h3>
+          <p>I ett TNC-system flödar returströmmen från alla belastningar hem via PEN-ledaren. Om PEN-ledaren är gemensam för flera anläggningar kan strömmarna ta "alternativa vägar" — t.ex. via vattenledningsrör, värmesystem eller byggnadsstommen.</p>
+          <p style="margin-top:0.6rem">Det skapar spänningssättning på metalldelar som normalt ska vara på nollpotential.</p>
+        </div>
+        <div class="sys-card">
+          <h3>Konsekvenser</h3>
+          <ul>
+            <li>Metalldelar i anläggningen får spänning mot jord</li>
+            <li>Risk för elstötar vid beröring</li>
+            <li>Korrosion på rörledningar via elektrolytisk process</li>
+            <li>Störningar i kommunikationssystem, pumpar och värmesystem</li>
+          </ul>
+        </div>
+        <div class="sys-card">
+          <h3>Sammanfattning</h3>
+          <p>I ett TNC-system är PE- och N-skena hopkopplade i varje central och utgör neutralpunkten. Spänningsfallet innebär att centralernas neutralledare inte är på samma spänningspotential — det är den mekanismen som driver vagabonderande strömmar.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== INSTALLATIONSFEL ===== -->
+    <section class="section" id="installfel">
+      <div class="section-header">
+        <div class="section-icon">⚠️</div>
+        <div>
+          <h4>Kapitel 4 — Elsystem</h4>
+          <h2>Installationsfel i anläggning</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">Felaktiga installationer i TN-system kan ge farliga spänningar på metallhöljen som användaren kan ta i.</p>
+
+      <div class="highlight-box warn">
+        <p style="font-size:0.88rem;color:var(--muted);margin:0">
+          <strong style="color:#cc4400">Typiskt scenario:</strong> Om en fas kortsluter mot metallhöljet på en apparat (t.ex. en tvättmaskin) och skyddsjorden inte fungerar korrekt, spänningssätts höljet. En person som tar i höljet och jord samtidigt tar upp hela fasströmmen — med dödlig utgång om JFB saknas.
+        </p>
+      </div>
+
+      <div class="sys-grid" style="margin-top:1.25rem">
+        <div class="sys-card">
+          <h3>Skyddsmekanismer</h3>
+          <ul>
+            <li>Fungerande PE-ledare (skyddsjord)</li>
+            <li>Jordfelsbrytare (JFB) — löser vid 30 mA</li>
+            <li>Automatsäkring / smältsäkring</li>
+            <li>Klass II-apparat (dubbelisolering)</li>
+          </ul>
+        </div>
+        <div class="sys-card">
+          <h3>Vad kontrolleras vid idrifttagning</h3>
+          <ul>
+            <li>Att PE-ledaren är korrekt ansluten (kontinuitetstest)</li>
+            <li>Att ingen fas kortsluter mot PE (isolationstest)</li>
+            <li>Att JFB löser ut vid korrekt ström</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>🔄 <strong>Installationsteknik – Kapitel 4</strong> — Elsystem</p>
+      <p style="margin-top:0.5rem">Baserad på kursplan för Installationsteknik Nivå 1. Kontrollera alltid med din lärare eller handledare.</p>
+    </footer>
+
+  </div>
+</div>
+
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item"><span class="material-symbols-outlined">dashboard</span></a>
+  <a href="index.html" class="mobile-nav-item active"><span class="material-symbols-outlined">menu_book</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">event_note</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">person</span></a>
+</nav>
+
+<script src="../script.js"></script>
+</body>
+</html>

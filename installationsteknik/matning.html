@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mätning & Idrifttagning – Installationsteknik</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .dim-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.25rem; margin-top:1.25rem; }
+    .dim-card { background:var(--bg-card); border-radius:1rem; padding:1.4rem; box-shadow:var(--shadow); }
+    .dim-card .symbol { font-size:2.5rem; font-weight:900; font-family:'Space Grotesk',sans-serif; color:var(--primary); line-height:1; }
+    .dim-card h4 { font-size:0.9rem; font-weight:700; color:var(--white); margin:0.4rem 0 0.3rem; }
+    .dim-card p { font-size:0.83rem; color:var(--muted); line-height:1.5; margin:0; }
+    .formula-box { background:var(--bg-card); border-radius:1rem; padding:1.25rem 1.5rem; margin-top:1rem; text-align:center; }
+    .formula-big { font-size:1.5rem; font-family:'Courier New',monospace; color:var(--primary); letter-spacing:0.04em; }
+    .formula-note { font-size:0.82rem; color:var(--muted); margin-top:0.5rem; }
+    .steps-list { list-style:none; padding:0; margin:1rem 0; counter-reset:step-counter; }
+    .steps-list li { display:flex; gap:0.75rem; padding:0.65rem 0; border-bottom:1px solid var(--outline); font-size:0.87rem; color:var(--muted); counter-increment:step-counter; line-height:1.45; }
+    .steps-list li::before { content:counter(step-counter); background:var(--primary); color:#000; font-weight:700; font-size:0.75rem; width:1.4rem; height:1.4rem; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:0.1rem; }
+    .steps-list li strong { color:var(--white); }
+    .highlight-box { background:var(--bg-card); border-left:3px solid var(--primary); border-radius:0 0.75rem 0.75rem 0; padding:1rem 1.25rem; margin-top:1rem; }
+    .highlight-box.warn { border-color:#cc4400; }
+    .mat-section { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-top:1.25rem; }
+    @media (max-width:640px) { .mat-section { grid-template-columns:1fr; } }
+    .mat-card { background:var(--bg-card); border-radius:1rem; padding:1.25rem; box-shadow:var(--shadow); }
+    .mat-card h4 { font-size:0.92rem; font-weight:700; color:var(--primary); margin-bottom:0.4rem; }
+    .mat-card p { font-size:0.84rem; color:var(--muted); line-height:1.5; margin:0; }
+    .ib-formula { display:inline-block; background:rgba(208,199,160,0.08); border:1px solid var(--outline); border-radius:0.5rem; padding:0.6rem 1rem; font-family:'Courier New',monospace; font-size:0.95rem; color:var(--primary); margin-top:0.5rem; }
+  </style>
+</head>
+<body>
+
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
+  </div>
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="ledningar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">cable</span>
+      Ledningar
+    </a>
+    <a href="normcentral.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">dashboard</span>
+      Normcentral
+    </a>
+    <a href="motorer.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">settings</span>
+      Motorer & Styrning
+    </a>
+    <a href="elsystem.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">bolt</span>
+      Elsystem
+    </a>
+    <a href="matning.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">straighten</span>
+      Mätning & Idrift
+    </a>
+    <a href="sakerhet.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">security</span>
+      Säkerhetsregler
+    </a>
+  </nav>
+</aside>
+
+<div class="app-content">
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html">Installationsteknik</a>
+        <a href="matning.html" class="active">Mätning & Idrift</a>
+      </nav>
+    </div>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser"><span class="material-symbols-outlined">notifications</span></button>
+      <button class="app-header-icon" title="Inställningar"><span class="material-symbols-outlined">settings</span></button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <div class="search-bar-wrap" id="search-wrap">
+      <div class="search-inner">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Sök — t.ex. Ib, meggning, kontinuitetstest, isolationstest…" autocomplete="off" spellcheck="false" />
+        <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+    </div>
+
+    <!-- ===== DIMENSIONERINGSREGELN ===== -->
+    <section class="section" id="dimregel">
+      <div class="section-header">
+        <div class="section-icon">📐</div>
+        <div>
+          <h4>Kapitel 5 — Dimensionering</h4>
+          <h2>Dimensioneringsregeln</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">För en säker och korrekt dimensionering av ledningar och säkringar gäller alltid följande relation:</p>
+
+      <div class="formula-box">
+        <div class="formula-big">Ib ≤ In ≤ Iz</div>
+        <div class="formula-note">Belastningsström ≤ Märkström ≤ Tillåten belastningsström</div>
+      </div>
+
+      <div class="highlight-box" style="margin-top:1.25rem">
+        <p style="font-size:0.88rem;color:var(--muted);margin:0">
+          <strong>Förklaring:</strong><br>
+          1. Belastningsströmmen (Ib) får <em>inte vara större</em> än säkringens märkström (In) — annars löser säkringen ut vid normal drift.<br>
+          2. Säkringens märkström (In) får <em>inte vara större</em> än vad ledningen tål (Iz) — annars kan ledningen bli varm utan att säkringen löser.
+        </p>
+      </div>
+
+      <div class="dim-grid">
+        <div class="dim-card">
+          <div class="symbol">Ib</div>
+          <h4>Belastningsström (Brukström)</h4>
+          <p>Den ström en elektrisk apparat eller installation faktiskt förbrukar under normal drift.</p>
+          <div class="ib-formula">Ib = P / (U · cos φ)</div>
+          <p style="margin-top:0.5rem">Resistiv last: <span style="font-family:'Courier New';color:var(--primary)">Ib = P / U</span></p>
+          <p style="margin-top:0.4rem"><strong>Exempel:</strong> En spis på 7,2 kW vid 230 V:<br>Ib = 7200 / 230 ≈ 31,3 A</p>
+        </div>
+
+        <div class="dim-card">
+          <div class="symbol">In</div>
+          <h4>Märkström (Säkring / Dvärgbrytare)</h4>
+          <p>Den ström säkringen är märkt för — alltså när den börjar lösa ut vid överlast.</p>
+          <p style="margin-top:0.5rem"><strong>Exempel:</strong> En dvärgbrytare märkt C16 har In = 16 A</p>
+          <p style="margin-top:0.4rem;font-size:0.82rem">In är den ström som säkringen <em>börjar</em> reagera på — den löser inte ut direkt, utan efter en viss tid beroende på överlastens storlek.</p>
+        </div>
+
+        <div class="dim-card">
+          <div class="symbol">Iz</div>
+          <h4>Tillåten belastningsström (Ledare)</h4>
+          <p>Den maximala ström en kabel eller ledning kontinuerligt får leda utan att bli överhettad.</p>
+          <p style="margin-top:0.5rem">Beror på: ledarens tvärsnitt, material (koppar/aluminium), installationssätt, omgivningstemperatur.</p>
+          <p style="margin-top:0.4rem;font-size:0.82rem">Finns i tabeller i t.ex. SS 436 40 00 (Elinstallationsreglerna).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ISOLATIONSTEST ===== -->
+    <section class="section" id="meggning">
+      <div class="section-header">
+        <div class="section-icon">🔬</div>
+        <div>
+          <h4>Kapitel 5 — Idrifttagning</h4>
+          <h2>Isolationstest "Meggning" — TN-S</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">Meggning utförs <strong>innan</strong> anläggningen tas i drift. Testet kontrollerar att ingen ledare kortsluter mot jord eller mot en annan ledare.</p>
+
+      <div class="mat-section">
+        <div class="mat-card">
+          <h4>Utrustning</h4>
+          <p>Isolationstestare — t.ex. Kyoritsu mod 3132A<br>Testas på 500 V / 200 MOhm-inställning.</p>
+        </div>
+        <div class="mat-card">
+          <h4>Godkänt värde</h4>
+          <p>Värden från <strong>1 MOhm till oändlighet</strong> är godkända. Under 1 MOhm indikerar ett isolationsfel.</p>
+        </div>
+      </div>
+
+      <ol class="steps-list">
+        <li>Börja med att göra <strong>batteritest</strong> på instrumentet</li>
+        <li>Ställ in instrumentet på <strong>500 V / 200 MOhm</strong></li>
+        <li>Använd "bläckfisken" för att <strong>kortsluta N-L1-L2-L3</strong> på undersidan av JFB</li>
+        <li>Slå på alla säkringar och strömbrytare i anläggningen — alla kablar måste vara inkopplade under testet</li>
+        <li>Gör isolationstestet mot <strong>jordplinten</strong><br><em>OBS! Värden från 1 MOhm till oändlighet är godkända</em></li>
+      </ol>
+    </section>
+
+    <!-- ===== KONTINUITETSTEST ===== -->
+    <section class="section" id="kontinuitet">
+      <div class="section-header">
+        <div class="section-icon">🔗</div>
+        <div>
+          <h4>Kapitel 5 — Idrifttagning</h4>
+          <h2>Kontinuitetstest</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">Kontinuitetstestet kontrollerar att <strong>PE-ledaren</strong> (skyddsjorden) löper obruten till alla skyddsjordade delar i anläggningen.</p>
+
+      <div class="mat-section" style="margin-bottom:1.25rem">
+        <div class="mat-card">
+          <h4>Utrustning</h4>
+          <p>Kontinuitetstestare — t.ex. Testboy 20<br>Kalibrera mätsladdar mot varandra innan mätning.</p>
+        </div>
+        <div class="mat-card">
+          <h4>Vad som ska finnas / inte finnas</h4>
+          <p><strong style="color:var(--primary)">SKALL finnas:</strong> Kontakt PE-plint → PE-ledare, PE-plint → skyddsjordade delar<br><strong style="color:#cc4400">SKALL INTE finnas:</strong> Kontakt PE-plint → N-plint i centralen</p>
+        </div>
+      </div>
+
+      <ol class="steps-list">
+        <li>Lägg ihop instrumentets mätsladdar för att <strong>kalibrera</strong> och se att instrumentet fungerar</li>
+        <li><strong>Lossa inkommande PE-ledare</strong> från PE-plinten</li>
+        <li>Mät mellan den lossade PE-ledaren och den inkommande N-ledaren<br><em>OBS! Kontakt <strong>SKALL finnas</strong> mellan dessa</em></li>
+        <li>Mät nu mellan PE-plinten och N-plinten i centralen<br><em>OBS! Kontakt <strong>SKALL INTE finnas</strong> mellan dessa</em></li>
+        <li>Koppla tillbaka PE-ledaren till PE-plinten</li>
+        <li>Mät mellan PE-plinten och alla skyddsjordade delar i anläggningen (vägguttag, armaturer, jordade armaturer)<br><em>OBS! Kontakt <strong>SKALL alltid finnas</strong></em></li>
+      </ol>
+    </section>
+
+    <footer>
+      <p>📏 <strong>Installationsteknik – Kapitel 5</strong> — Praktiskt arbete & Mätning</p>
+      <p style="margin-top:0.5rem">Baserad på kursplan för Installationsteknik Nivå 1. Kontrollera alltid med din lärare eller handledare.</p>
+    </footer>
+
+  </div>
+</div>
+
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item"><span class="material-symbols-outlined">dashboard</span></a>
+  <a href="index.html" class="mobile-nav-item active"><span class="material-symbols-outlined">menu_book</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">event_note</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">person</span></a>
+</nav>
+
+<script src="../script.js"></script>
+</body>
+</html>

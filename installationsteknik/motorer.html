@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motorer & Styrning – Installationsteknik</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .markplat-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+    .markplat-table th { font-size:0.78rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; padding:0.5rem 0.75rem; text-align:left; }
+    .markplat-table td { padding:0.55rem 0.75rem; font-size:0.88rem; border-top:1px solid var(--outline); color:var(--white); }
+    .markplat-table td:first-child { font-weight:700; color:var(--primary); width:2.5rem; text-align:center; }
+    .rela-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem; margin-top:1.25rem; }
+    .rela-card { background:var(--bg-card); border-radius:1rem; padding:1.25rem; box-shadow:var(--shadow); }
+    .rela-card h4 { font-size:0.95rem; font-weight:700; color:var(--primary); margin-bottom:0.5rem; }
+    .rela-card p { font-size:0.85rem; color:var(--muted); line-height:1.5; margin:0; }
+    .brytare-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; margin-top:1.25rem; }
+    .brytare-card { background:var(--bg-card); border-radius:1rem; padding:1.1rem; box-shadow:var(--shadow); }
+    .brytare-card h4 { font-size:0.88rem; font-weight:700; color:var(--white); margin-bottom:0.35rem; }
+    .brytare-card ul { list-style:none; padding:0; margin:0; }
+    .brytare-card ul li { font-size:0.82rem; color:var(--muted); padding:0.2rem 0; }
+    .brytare-card ul li::before { content:"· "; color:var(--primary); }
+    .schema-box { background:var(--bg-card); border-radius:1rem; padding:1.5rem; box-shadow:var(--shadow); margin-top:1rem; font-family:'Courier New', monospace; }
+    .schema-legend { margin-top:1rem; display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:0.4rem; }
+    .schema-legend-item { font-size:0.82rem; color:var(--muted); }
+    .schema-legend-item strong { color:var(--primary); }
+    .highlight-box { background:var(--bg-card); border-left:3px solid var(--primary); border-radius:0 0.75rem 0.75rem 0; padding:1rem 1.25rem; margin-top:1rem; }
+    .formula-pill { display:inline-block; background:rgba(208,199,160,0.1); border:1px solid var(--outline); border-radius:0.5rem; padding:0.75rem 1.25rem; font-size:1.1rem; font-family:'Courier New', monospace; color:var(--primary); margin-top:0.5rem; }
+    .inkopplings-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+    .inkopplings-table th { font-size:0.78rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; padding:0.5rem 0.75rem; text-align:left; }
+    .inkopplings-table td { padding:0.55rem 0.75rem; font-size:0.88rem; border-top:1px solid var(--outline); color:var(--white); }
+    .inkopplings-table td:first-child { font-weight:700; color:var(--primary); width:3rem; text-align:center; }
+  </style>
+</head>
+<body>
+
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
+  </div>
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="ledningar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">cable</span>
+      Ledningar
+    </a>
+    <a href="normcentral.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">dashboard</span>
+      Normcentral
+    </a>
+    <a href="motorer.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">settings</span>
+      Motorer & Styrning
+    </a>
+    <a href="elsystem.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">bolt</span>
+      Elsystem
+    </a>
+    <a href="matning.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">straighten</span>
+      Mätning & Idrift
+    </a>
+    <a href="sakerhet.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">security</span>
+      Säkerhetsregler
+    </a>
+  </nav>
+</aside>
+
+<div class="app-content">
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html">Installationsteknik</a>
+        <a href="motorer.html" class="active">Motorer & Styrning</a>
+      </nav>
+    </div>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser"><span class="material-symbols-outlined">notifications</span></button>
+      <button class="app-header-icon" title="Inställningar"><span class="material-symbols-outlined">settings</span></button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <div class="search-bar-wrap" id="search-wrap">
+      <div class="search-inner">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Sök — t.ex. relä, kontaktor, märkplåt, nödstopp…" autocomplete="off" spellcheck="false" />
+        <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+    </div>
+
+    <!-- ===== BRYTARTYPER ===== -->
+    <section class="section" id="brytare">
+      <div class="section-header">
+        <div class="section-icon">🔘</div>
+        <div>
+          <h4>Kapitel 3 — Styrning</h4>
+          <h2>Brytartyper</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1.25rem">Brytare delas in i mekaniska och elektriska varianter. De kan också klassificeras efter montering och aktiveringstyp.</p>
+
+      <div class="brytare-grid">
+        <div class="brytare-card">
+          <h4>Mekaniska — Effektbrytare</h4>
+          <ul>
+            <li>Säkerhetsbrytare</li>
+            <li>Arbetsbrytare</li>
+            <li>Huvudbrytare</li>
+            <li>Enfasbrytare</li>
+            <li>Trefasbrytare</li>
+            <li>Mångpolsbrytare</li>
+          </ul>
+        </div>
+        <div class="brytare-card">
+          <h4>Mekaniska — Knappar</h4>
+          <ul>
+            <li>Enpolsbrytare</li>
+            <li>Korskopplingsbrytare</li>
+            <li>Trappbrytare</li>
+            <li>Kronbrytare</li>
+            <li>Tryckknappar</li>
+            <li>Tidbrytare</li>
+          </ul>
+        </div>
+        <div class="brytare-card">
+          <h4>Elektriska</h4>
+          <ul>
+            <li>Kontaktor</li>
+            <li>Relä</li>
+            <li>Hjälprelä</li>
+          </ul>
+        </div>
+        <div class="brytare-card">
+          <h4>Givare / Styrning</h4>
+          <ul>
+            <li>Dimmer</li>
+            <li>Timer</li>
+            <li>Termostat</li>
+            <li>Ljussensor</li>
+            <li>Fuktsensor</li>
+            <li>Rörelsedetektor</li>
+          </ul>
+        </div>
+        <div class="brytare-card">
+          <h4>Kontaktläge</h4>
+          <ul>
+            <li><strong>NO</strong> — Normally Open (öppen i vila)</li>
+            <li><strong>NC</strong> — Normally Closed (sluten i vila)</li>
+          </ul>
+        </div>
+        <div class="brytare-card">
+          <h4>Montering</h4>
+          <ul>
+            <li>Infälld</li>
+            <li>Utanpåliggande</li>
+            <li>Hängande / Tillfällig</li>
+            <li>Industrivariant</li>
+            <li>Skåpmontering</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MOTORNS MÄRKPLÅT ===== -->
+    <section class="section" id="markplat">
+      <div class="section-header">
+        <div class="section-icon">🏷️</div>
+        <div>
+          <h4>Kapitel 3 — Motorer</h4>
+          <h2>Motorns märkplåt</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">All information om en motors elektriska och mekaniska specifikationer sitter på märkplåten. Nedan förklaras vad varje position betyder (baserat på ABB Motors-standard).</p>
+
+      <div class="formula-pill">Uₙ · Iₙ · √3 · cos φ = S</div>
+      <p style="color:var(--muted);font-size:0.82rem;margin-top:0.5rem">Formel för att beräkna skenbar effekt (S) i en trefasmotor.</p>
+
+      <table class="markplat-table">
+        <thead>
+          <tr><th>Pos.</th><th>Beteckning</th><th>Förklaring</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Motor</td><td>Motortyp — t.ex. 3-fas</td></tr>
+          <tr><td>2</td><td>Frekvens</td><td>Nätfrekvens — 50 Hz (Sverige) / 60 Hz (USA)</td></tr>
+          <tr><td>3</td><td>Effekt aktiv (P)</td><td>Avgiven axeleffekt i kW</td></tr>
+          <tr><td>4</td><td>Volt Y-koppling</td><td>Spänning för Y-koppling (stjärnkoppling)</td></tr>
+          <tr><td>5</td><td>Volt D-koppling</td><td>Spänning för D-koppling (deltatrikoppling)</td></tr>
+          <tr><td>6</td><td>Modellbeteckning</td><td>Tillverkarens artikelnummer</td></tr>
+          <tr><td>7</td><td>Varvtal</td><td>Varvtal vid märklast (r/min)</td></tr>
+          <tr><td>8</td><td>Effektfaktor</td><td>cos φ — förhållandet aktiv/skenbar effekt</td></tr>
+          <tr><td>9</td><td>Märkström Y</td><td>Strömförbrukning vid Y-koppling (A)</td></tr>
+          <tr><td>10</td><td>Märkström D</td><td>Strömförbrukning vid D-koppling (A)</td></tr>
+          <tr><td>11</td><td>IP-klass</td><td>Kapslingsklss — t.ex. IP55</td></tr>
+          <tr><td>12</td><td>Temperaturklass</td><td>Isolationsklass — F = 155 °C max</td></tr>
+          <tr><td>13</td><td>Vikt</td><td>Motorns vikt i kg</td></tr>
+          <tr><td>14</td><td>Standard</td><td>IEC 34-1 (internationell motorstandard)</td></tr>
+          <tr><td>15</td><td>Tillverkare</td><td>Tillverkarens namn</td></tr>
+          <tr><td>16</td><td>Bygelstorlek</td><td>Motorstorlek — siffran = axelhöjd i mm</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== RELÄ & KONTAKTOR ===== -->
+    <section class="section" id="rela">
+      <div class="section-header">
+        <div class="section-icon">🔁</div>
+        <div>
+          <h4>Kapitel 3 — Styrning</h4>
+          <h2>Relä & Kontaktor</h2>
+        </div>
+      </div>
+
+      <div class="rela-grid">
+
+        <div class="rela-card">
+          <h4>1 — Funktion</h4>
+          <p>Ett relä/kontaktor är en <strong>elektriskt manövrerad strömbrytare</strong> — en strömbrytare som du kan styra på avstånd med en liten kontrollström för att styra en stor arbetsström.</p>
+          <p style="margin-top:0.6rem">Exempel: Du kan styra en stor lift med hydraulikkolvar och lyfta 10 ton last via en liten knapp i ett kontrollrum. Den lilla knappen klarar bara de låga styrströmmarna — man slipper dra tjocka kraftkablar till varje knapp.</p>
+        </div>
+
+        <div class="rela-card">
+          <h4>2 — Inuti reläet (Byggnad)</h4>
+          <p>Reläet är uppbyggt av en <strong>spole</strong> — koppartråd lindad på en rulle. När en svag ström matas genom spolen bildas ett magnetfält (elektromagnet).</p>
+          <p style="margin-top:0.6rem">Magnetfältet magnetiserar och påverkar ett <strong>ankare</strong> (en järnbit) inne i reläet. Ankaret rör sig och de kraftiga elbrytarkontakterna inne i reläet kopplas in.</p>
+        </div>
+
+        <div class="rela-card">
+          <h4>3 — Inkoppling (delar)</h4>
+          <p>Huvuddelar i ett relä:</p>
+          <ul style="list-style:none;padding:0;margin:0.5rem 0;font-size:0.83rem;color:var(--muted);line-height:1.8">
+            <li>1 – Spole</li>
+            <li>2 – Ankare</li>
+            <li>3 – Järnbit</li>
+            <li>4 – Strömkopplingsplatser</li>
+            <li>5 – Chassi</li>
+            <li>6 – "Andra halvan"</li>
+            <li>7/8/9 – Pinnar (strömtillförsel)</li>
+          </ul>
+          <p style="font-size:0.82rem;color:var(--muted)">Vanliga spänningar: 400 / 250 / 48 / 24 / 12 / 5 / 3 V</p>
+        </div>
+
+        <div class="rela-card">
+          <h4>4 — Skillnad relä vs kontaktor</h4>
+          <p>En <strong>kontaktor</strong> fungerar likt ett relä men är mer lämpad för att styra starkare elektriska strömmar. Aktiveringen sker med högre kraft, vilket minskar slitage och ökar livslängden.</p>
+          <p style="margin-top:0.6rem">Kontaktorn har tre slutande kontakter för trefasbelastning (L1/L2/L3 in → T1/T2/T3 ut). Kan kompletteras med tillbehör som termiska överlastrelä och hjälpkontaktblock.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== HUVUDKRETSCHEMA ===== -->
+    <section class="section" id="kretschema">
+      <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div>
+          <h4>Kapitel 3 — Kretsar</h4>
+          <h2>Huvudkretschema — beteckningar</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">I ett huvudkretschema för motorstyrning används standardiserade beteckningar för varje komponent.</p>
+
+      <table class="inkopplings-table">
+        <thead>
+          <tr><th>Beteckning</th><th>Komponent</th><th>Beskrivning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>QF1</td><td>Säkerhetsbrytare</td><td>Bryter alla faser — används för underhåll. Ingår ej i de båda NC-kontakterna.</td></tr>
+          <tr><td>K1</td><td>Kontaktor</td><td>Kopplar in motorn när styrspolen aktiveras</td></tr>
+          <tr><td>W1</td><td>Plint</td><td>Anslutningsplint för motorns ledare (1U1, 1V1, 1W1)</td></tr>
+          <tr><td>SB1</td><td>Nödstoppsknapp</td><td>NC-kontakt (normalt sluten) — bryter styrspänningen vid nödfall</td></tr>
+          <tr><td>3M</td><td>Motor (3-fas)</td><td>Trefasig asynkronmotor</td></tr>
+          <tr><td>1U1-1, 1V1-1, 1W1-1</td><td>Ledarebeteckningar</td><td>Fasledarnas in- och utgångar (IEC-standard)</td></tr>
+          <tr><td>PEN</td><td>Skyddsledare</td><td>Kombinerad jord och neutral (i TN-C-system)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <p>⚙️ <strong>Installationsteknik – Kapitel 3</strong> — Motorer & Styrning</p>
+      <p style="margin-top:0.5rem">Baserad på kursplan för Installationsteknik Nivå 1. Kontrollera alltid med din lärare eller handledare.</p>
+    </footer>
+
+  </div>
+</div>
+
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item"><span class="material-symbols-outlined">dashboard</span></a>
+  <a href="index.html" class="mobile-nav-item active"><span class="material-symbols-outlined">menu_book</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">event_note</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">person</span></a>
+</nav>
+
+<script src="../script.js"></script>
+</body>
+</html>

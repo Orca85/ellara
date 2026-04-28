@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Normcentral – Installationsteknik</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .komp-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem; margin-top:1.25rem; }
+    .komp-card { background:var(--bg-card); border-radius:1rem; padding:1.25rem; box-shadow:var(--shadow); }
+    .komp-card h4 { font-size:0.95rem; font-weight:700; color:var(--primary); margin-bottom:0.4rem; }
+    .komp-card p { font-size:0.85rem; color:var(--muted); line-height:1.5; margin:0; }
+    .char-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; margin-top:1.25rem; }
+    .char-card { background:var(--bg-card); border-radius:1rem; padding:1.25rem; box-shadow:var(--shadow); border-top:3px solid var(--primary); }
+    .char-card .char-label { font-size:2rem; font-weight:900; color:var(--primary); line-height:1; }
+    .char-card h4 { font-size:0.9rem; font-weight:700; color:var(--white); margin:0.4rem 0 0.35rem; }
+    .char-card p { font-size:0.82rem; color:var(--muted); line-height:1.5; margin:0; }
+    .jfb-list { list-style:none; padding:0; margin:1rem 0; }
+    .jfb-list li { display:flex; gap:0.6rem; padding:0.4rem 0; font-size:0.88rem; color:var(--muted); border-bottom:1px solid var(--outline); }
+    .jfb-list li::before { content:"›"; color:var(--primary); font-weight:700; flex-shrink:0; }
+    .highlight-box { background:var(--bg-card); border-left:3px solid var(--primary); border-radius:0 0.75rem 0.75rem 0; padding:1rem 1.25rem; margin-top:1rem; }
+    .highlight-box strong { color:var(--primary); }
+  </style>
+</head>
+<body>
+
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
+  </div>
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="ledningar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">cable</span>
+      Ledningar
+    </a>
+    <a href="normcentral.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">dashboard</span>
+      Normcentral
+    </a>
+    <a href="motorer.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">settings</span>
+      Motorer & Styrning
+    </a>
+    <a href="elsystem.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">bolt</span>
+      Elsystem
+    </a>
+    <a href="matning.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">straighten</span>
+      Mätning & Idrift
+    </a>
+    <a href="sakerhet.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">security</span>
+      Säkerhetsregler
+    </a>
+  </nav>
+</aside>
+
+<div class="app-content">
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html">Installationsteknik</a>
+        <a href="normcentral.html" class="active">Normcentral</a>
+      </nav>
+    </div>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser"><span class="material-symbols-outlined">notifications</span></button>
+      <button class="app-header-icon" title="Inställningar"><span class="material-symbols-outlined">settings</span></button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <div class="search-bar-wrap" id="search-wrap">
+      <div class="search-inner">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Sök — t.ex. DIN-skena, jordfelsbrytare, dvärgbrytare…" autocomplete="off" spellcheck="false" />
+        <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+    </div>
+
+    <!-- ===== NORMCENTRALENS KOMPONENTER ===== -->
+    <section class="section" id="komponenter">
+      <div class="section-header">
+        <div class="section-icon">🏗️</div>
+        <div>
+          <h4>Kapitel 2 — Material</h4>
+          <h2>El(Norm)centralens komponenter</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1.25rem">En normcentral (elcentral) innehåller flera standardiserade delar som samarbetar för att fördela, skydda och mäta elen i en anläggning.</p>
+
+      <div class="komp-grid">
+        <div class="komp-card">
+          <h4>PE- och neutralskenor</h4>
+          <p>Används för att ansluta skyddsjord (PE) och neutralledare (N). PE-skenan är vanligtvis grön/gul och N-skenan är blå. Alla skyddsjordade apparater kopplas till PE-skenan.</p>
+        </div>
+        <div class="komp-card">
+          <h4>DIN-skena</h4>
+          <p>En standardiserad metallskena (35 mm bred) som automatsäkringar, jordfelsbrytare och andra modulära komponenter snäpper fast på. Gör det enkelt att montera och byta ut komponenter.</p>
+        </div>
+        <div class="komp-card">
+          <h4>Normcentralens kapsling</h4>
+          <p>Elcentralens skåp eller box som skyddar de inre komponenterna. Väljs efter IP-klass beroende på installationsmiljön (inomhus, utomhus, dammigt, fuktigt).</p>
+        </div>
+        <div class="komp-card">
+          <h4>Trefasskena</h4>
+          <p>Kopplar ihop de tre faserna (L1, L2, L3) med komponenter som automatsäkringar och jordfelsbrytare. Fördelar spänningen jämnt till de olika grupperna i centralen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== JORDFELSBRYTAREN ===== -->
+    <section class="section" id="jfb">
+      <div class="section-header">
+        <div class="section-icon">🔵</div>
+        <div>
+          <h4>Kapitel 2 — Skyddskomponenter</h4>
+          <h2>Jordfelsbrytaren (JFB)</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">En jordfelsbrytare är en billig och effektiv livförsäkring som samtidigt förbättrar brandsäkerheten.</p>
+
+      <ul class="jfb-list">
+        <li>Jordfelsbrytare är <strong>obligatorisk vid alla nyinstallationer</strong></li>
+        <li>Finns i både en- och trefasutförande</li>
+        <li>Kan kopplas som portabel enhet mellan apparaten och vägguttaget</li>
+        <li>En JFB för <strong>personligt skydd</strong> löser ut vid 50 % av märkutlösningsströmmen — alltså redan vid <strong>15 mA</strong></li>
+        <li>En JFB måste lösa ut vid <strong>30 mA</strong> (märkvärde)</li>
+        <li>Det går att koppla en portabel JFB till ett ojordat uttag</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p style="font-size:0.88rem;color:var(--muted);margin:0"><strong>Hur den fungerar:</strong> JFB mäter skillnaden mellan strömmen i fas- och neutralledaren. Om det uppstår en jordfelsström (t.ex. att någon tar i en spänningssatt del) är dessa inte längre lika — brytaren löser omedelbart ut.</p>
+      </div>
+    </section>
+
+    <!-- ===== AUTOMATSÄKRINGAR ===== -->
+    <section class="section" id="automat">
+      <div class="section-header">
+        <div class="section-icon">⚡</div>
+        <div>
+          <h4>Kapitel 2 — Skyddskomponenter</h4>
+          <h2>Automatsäkringar (dvärgbrytare)</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">Automatsäkringar (dvärgbrytare) ersätter vanliga smältsäkringar i de flesta nyinstallationer. De kan återställas efter utlösning.</p>
+
+      <div class="highlight-box" style="margin-bottom:1.25rem">
+        <p style="font-size:0.88rem;color:var(--muted);margin:0">
+          <strong>Hur de fungerar:</strong> En långvarig överström värmer upp ett bimetall som böjer sig och bryter kretsen. Kortvariga höga strömmar aktiverar en elektromekanisk brytare som slår upp kretsen direkt.
+        </p>
+      </div>
+
+      <p style="color:var(--muted);font-size:0.88rem;margin-bottom:1rem">Dvärgbrytaren ska skydda anslutna ledningar och väljs efter belastningens inkopplingsström:</p>
+
+      <div class="char-grid">
+        <div class="char-card">
+          <div class="char-label">B</div>
+          <h4>Låg inkopplingsström</h4>
+          <p>Resistiva laster och vanliga uttag i bostäder. Löser ut vid 3–5 × In.</p>
+        </div>
+        <div class="char-card" style="border-color:var(--teal)">
+          <div class="char-label" style="color:var(--teal)">C</div>
+          <h4>Måttlig inkopplingsström</h4>
+          <p>Mikrovågsugnar, lysrör, mindre motorer, uttag på industri. Löser ut vid 5–10 × In.</p>
+        </div>
+        <div class="char-card" style="border-color:#FF9B4D">
+          <div class="char-label" style="color:#FF9B4D">D</div>
+          <h4>Stor inkopplingsström</h4>
+          <p>Transformatorer, vissa typer av motordrifter. Löser ut vid 10–20 × In.</p>
+        </div>
+      </div>
+
+      <p style="color:var(--muted);font-size:0.82rem;margin-top:1rem">Utlösningskarakteristik: B / C enligt EN 60 898 · D enligt IEC 947-2</p>
+    </section>
+
+    <footer>
+      <p>🏗️ <strong>Installationsteknik – Kapitel 2</strong> — Material & Kapslingsklasser</p>
+      <p style="margin-top:0.5rem">Baserad på kursplan för Installationsteknik Nivå 1. Kontrollera alltid med din lärare eller handledare.</p>
+    </footer>
+
+  </div>
+</div>
+
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item"><span class="material-symbols-outlined">dashboard</span></a>
+  <a href="index.html" class="mobile-nav-item active"><span class="material-symbols-outlined">menu_book</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">event_note</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">person</span></a>
+</nav>
+
+<script src="../script.js"></script>
+</body>
+</html>

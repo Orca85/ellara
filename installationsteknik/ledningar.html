@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ledningar & Kablar – Installationsteknik</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .kabel-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+    .kabel-table th { font-size:0.78rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; padding:0.5rem 0.75rem; text-align:left; }
+    .kabel-table td { padding:0.6rem 0.75rem; font-size:0.87rem; border-top:1px solid var(--outline); color:var(--white); }
+    .kabel-table td:first-child { font-weight:700; color:var(--primary); }
+    .vp-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+    .vp-table th { font-size:0.78rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; padding:0.5rem 0.75rem; text-align:center; }
+    .vp-table td { padding:0.55rem 0.75rem; text-align:center; font-size:0.87rem; border-top:1px solid var(--outline); color:var(--white); }
+    .vp-table td:first-child { text-align:left; font-weight:700; color:var(--primary); }
+    .fuse-table { width:100%; border-collapse:collapse; margin-top:1rem; }
+    .fuse-table th { font-size:0.78rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; padding:0.5rem 0.75rem; text-align:left; }
+    .fuse-table td { padding:0.6rem 0.75rem; font-size:0.9rem; border-top:1px solid var(--outline); color:var(--white); }
+    .fuse-dot { display:inline-block; width:16px; height:16px; border-radius:50%; vertical-align:middle; margin-right:0.4rem; }
+    .volt-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; margin-top:1rem; }
+    .volt-card { background:var(--bg-card); border-radius:1rem; padding:1.25rem; box-shadow:var(--shadow); }
+    .volt-card h4 { font-size:0.95rem; font-weight:700; margin-bottom:0.75rem; color:var(--white); }
+    .wire { display:flex; align-items:center; gap:0.5rem; margin:0.3rem 0; font-size:0.85rem; color:var(--muted); }
+    .wire-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; border:1px solid rgba(255,255,255,0.15); }
+    .volt-row { display:flex; justify-content:space-between; font-size:0.82rem; color:var(--muted); padding:0.25rem 0; border-top:1px solid var(--outline); margin-top:0.6rem; }
+    .volt-row strong { color:var(--primary); }
+    .dim-rule { background:var(--bg-card); border-radius:1rem; padding:1.25rem 1.5rem; border-left:3px solid var(--primary); margin-top:1rem; }
+  </style>
+</head>
+<body>
+
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
+  </div>
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="ledningar.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">cable</span>
+      Ledningar
+    </a>
+    <a href="normcentral.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">dashboard</span>
+      Normcentral
+    </a>
+    <a href="motorer.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">settings</span>
+      Motorer & Styrning
+    </a>
+    <a href="elsystem.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">bolt</span>
+      Elsystem
+    </a>
+    <a href="matning.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">straighten</span>
+      Mätning & Idrift
+    </a>
+    <a href="sakerhet.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">security</span>
+      Säkerhetsregler
+    </a>
+  </nav>
+</aside>
+
+<div class="app-content">
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html">Installationsteknik</a>
+        <a href="ledningar.html" class="active">Ledningar & Kablar</a>
+      </nav>
+    </div>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser"><span class="material-symbols-outlined">notifications</span></button>
+      <button class="app-header-icon" title="Inställningar"><span class="material-symbols-outlined">settings</span></button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <div class="search-bar-wrap" id="search-wrap">
+      <div class="search-inner">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Sök — t.ex. VP-rör, kabelbeteckning, trefas…" autocomplete="off" spellcheck="false" />
+        <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+    </div>
+
+    <!-- ===== SPÄNNINGAR I KABLAR ===== -->
+    <section class="section" id="spanningar">
+      <div class="section-header">
+        <div class="section-icon">⚡</div>
+        <div>
+          <h4>Kapitel 1 — Ledningar</h4>
+          <h2>Spänningar i kablar</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1.5rem">Spänningar mellan olika kabelparter i installationskablar anslutna till trefas-, tvåfas- och enfasbelastningar i det svenska systemet (400 VAC / 230 VAC).</p>
+
+      <div class="volt-grid">
+        <div class="volt-card">
+          <h4>Trefasmatning</h4>
+          <div class="wire"><span class="wire-dot" style="background:#aaa"></span> Skyddsledare (PE) — gul/grön</div>
+          <div class="wire"><span class="wire-dot" style="background:#8B4513"></span> Fasledare L1 — brun</div>
+          <div class="wire"><span class="wire-dot" style="background:#222"></span> Fasledare L2 — svart</div>
+          <div class="wire"><span class="wire-dot" style="background:#888"></span> Fasledare L3 — grå</div>
+          <div class="wire"><span class="wire-dot" style="background:#3a7bd5"></span> Neutralledare (N) — blå</div>
+          <div class="volt-row"><span>Fas – Fas</span><strong>400 V</strong></div>
+          <div class="volt-row"><span>Fas – Neutral</span><strong>230 V</strong></div>
+          <div class="volt-row"><span>PE – Neutral</span><strong>0 V</strong></div>
+        </div>
+
+        <div class="volt-card">
+          <h4>Tvåfasmatning <span style="font-size:0.7rem;font-weight:500;color:var(--muted);background:rgba(255,255,255,0.07);padding:0.15rem 0.45rem;border-radius:0.4rem;vertical-align:middle">Föråldrad</span></h4>
+          <div class="wire"><span class="wire-dot" style="background:#aaa"></span> Skyddsledare (PE) — gul/grön</div>
+          <div class="wire"><span class="wire-dot" style="background:#8B4513"></span> Fasledare L1 — brun</div>
+          <div class="wire"><span class="wire-dot" style="background:#222"></span> Fasledare L2 — svart</div>
+          <div class="wire"><span class="wire-dot" style="background:#3a7bd5"></span> Neutralledare (N) — blå</div>
+          <div class="volt-row"><span>Fas – Fas</span><strong>400 V</strong></div>
+          <div class="volt-row"><span>Fas – Neutral</span><strong>230 V</strong></div>
+          <div class="volt-row"><span>PE – Neutral</span><strong>0 V</strong></div>
+        </div>
+
+        <div class="volt-card">
+          <h4>Enfasmatning</h4>
+          <div class="wire"><span class="wire-dot" style="background:#aaa"></span> Skyddsledare (PE) — gul/grön</div>
+          <div class="wire"><span class="wire-dot" style="background:#8B4513"></span> Fasledare — brun</div>
+          <div class="wire"><span class="wire-dot" style="background:#3a7bd5"></span> Neutralledare (N) — blå</div>
+          <div class="volt-row"><span>Fas – Neutral</span><strong>230 V</strong></div>
+          <div class="volt-row"><span>PE – Neutral</span><strong>0 V</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== KABELBETECKNINGAR ===== -->
+    <section class="section" id="kabelbeteckningar">
+      <div class="section-header">
+        <div class="section-icon">🏷️</div>
+        <div>
+          <h4>Kapitel 1 — Ledningar</h4>
+          <h2>Vanliga kabelbeteckningar</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">Kortfattad fusklapp för de vanligaste kabeltyper som används inom elinstallation.</p>
+
+      <table class="kabel-table">
+        <thead>
+          <tr>
+            <th>Beteckning</th>
+            <th>Beskrivning</th>
+            <th>Typisk användning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>EKLK</td><td>PVC-ledare, monterad installationskabel</td><td>Fast installation utanpå vägg/kanal</td></tr>
+          <tr><td>EK</td><td>PVC-ledare, fast kopplad ledning</td><td>Fast installation utanpå vägg</td></tr>
+          <tr><td>FK</td><td>PVC-ledare, löstagbar kabel med mantel</td><td>Torra utrymmen, fast installation</td></tr>
+          <tr><td>EVQ</td><td>Halogenfri installationskabel</td><td>Brandofarliga byggnader</td></tr>
+          <tr><td>EQLO</td><td>Halogenfri variant, låghaltig rök</td><td>Installation med höga brandkrav</td></tr>
+          <tr><td>FQ</td><td>Halogenfri, flexibel</td><td>Bostäder/offentliga byggnader</td></tr>
+          <tr><td>FXK</td><td>Extra flexibel kopplingsledning</td><td>Apparatkoppling, maskiner</td></tr>
+          <tr><td>AXQJ</td><td>Aluminiumkabel, halogenfri, med skyddsledare</td><td>Servicekabel i mark</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== VP-RÖR ===== -->
+    <section class="section" id="vpror">
+      <div class="section-header">
+        <div class="section-icon">🔧</div>
+        <div>
+          <h4>Kapitel 1 — Förläggning</h4>
+          <h2>Minsta VP-rörstorlek</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">VP-rör (vinylplastör) används för att skydda kablar vid förläggning. Välj rör utifrån antal ledare och deras area. Fyll max 40 % av rörets tvärsnittsarea.</p>
+
+      <table class="vp-table">
+        <thead>
+          <tr>
+            <th style="text-align:left">Area (mm²)</th>
+            <th>2 led.</th>
+            <th>3 led.</th>
+            <th>4 led.</th>
+            <th>5 led.</th>
+            <th>6 led.</th>
+            <th>7 led.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1,5 mm²</td><td>16</td><td>16</td><td>16</td><td>16</td><td>20</td><td>20</td></tr>
+          <tr><td>2,5 mm²</td><td>16</td><td>16</td><td>16</td><td>16</td><td>20</td><td>20</td></tr>
+          <tr><td>4 mm²</td><td>16</td><td>20</td><td>20</td><td>20</td><td>25</td><td>25</td></tr>
+          <tr><td>6 mm²</td><td>20</td><td>20</td><td>25</td><td>25</td><td>25</td><td>32</td></tr>
+          <tr><td>10 mm²</td><td>20</td><td>25</td><td>32</td><td>32</td><td>32</td><td>—</td></tr>
+          <tr><td>16 mm²</td><td>25</td><td>32</td><td>40</td><td>40</td><td>40</td><td>—</td></tr>
+          <tr><td>25 mm²</td><td>32</td><td>40</td><td>40</td><td>50</td><td>—</td><td>—</td></tr>
+          <tr><td>35 mm²</td><td>40</td><td>40</td><td>50</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>50 mm²</td><td>40</td><td>50</td><td>63</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.8rem;color:var(--muted);margin-top:0.75rem">Värdena anger rördiameter i mm.</p>
+    </section>
+
+    <!-- ===== KABELDIMENSIONERING ===== -->
+    <section class="section" id="kabeldim">
+      <div class="section-header">
+        <div class="section-icon">📏</div>
+        <div>
+          <h4>Kapitel 1 — Dimensionering</h4>
+          <h2>Snabbregel för kabeldimensionering</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:1rem">En korrekt dimensionering är viktig för att ingen kabel ska bli varm under normal drift, och för att klara de höga kortslutningsströmmar som kan uppkomma innan säkringen löser ut.</p>
+
+      <div class="dim-rule">
+        <p style="font-size:0.9rem;color:var(--muted);margin-bottom:0.75rem">För att dimensionera (välja rätt ledararea) krävs kunskap om:</p>
+        <ul style="color:var(--muted);font-size:0.88rem;line-height:1.8;margin:0;padding-left:1.25rem">
+          <li>Hur hög ström som ska användas</li>
+          <li>Kabelns längd</li>
+          <li>Ledarmaterial (koppar eller aluminium)</li>
+          <li>Omgivningstemperatur</li>
+          <li>Förläggningssätt</li>
+        </ul>
+      </div>
+
+      <p style="color:var(--muted);margin:1.25rem 0 0.5rem;font-size:0.88rem">Förenklad snabbregel för normala installationer med kortare längder (60–80 m), kopparledare:</p>
+
+      <table class="fuse-table">
+        <thead>
+          <tr>
+            <th>Säkring</th>
+            <th>Färg</th>
+            <th>Min. kabelarea</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>10 A</td>
+            <td><span class="fuse-dot" style="background:#cc2222"></span>Röd</td>
+            <td>1,5 mm²</td>
+          </tr>
+          <tr>
+            <td>16 A</td>
+            <td><span class="fuse-dot" style="background:#aaa"></span>Grå</td>
+            <td>2,5 mm²</td>
+          </tr>
+          <tr>
+            <td>20 A</td>
+            <td><span class="fuse-dot" style="background:#3a7bd5"></span>Blå</td>
+            <td>4 mm²</td>
+          </tr>
+          <tr>
+            <td>25 A</td>
+            <td><span class="fuse-dot" style="background:#d4a017"></span>Gul</td>
+            <td>6 mm²</td>
+          </tr>
+          <tr>
+            <td>32 A</td>
+            <td><span class="fuse-dot" style="background:#222;border:1px solid #555"></span>Svart</td>
+            <td>10 mm²</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <p>🔌 <strong>Installationsteknik – Kapitel 1</strong> — Ledningar & Kablar</p>
+      <p style="margin-top:0.5rem">Baserad på kursplan för Installationsteknik Nivå 1. Kontrollera alltid med din lärare eller handledare.</p>
+    </footer>
+
+  </div>
+</div>
+
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item"><span class="material-symbols-outlined">dashboard</span></a>
+  <a href="index.html" class="mobile-nav-item active"><span class="material-symbols-outlined">menu_book</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">event_note</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">person</span></a>
+</nav>
+
+<script src="../script.js"></script>
+</body>
+</html>

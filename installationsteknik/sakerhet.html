@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Säkerhetsregler – Installationsteknik</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .sak-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.25rem; margin-top:1.5rem; }
+    .sak-card { background:var(--bg-card); border-radius:1rem; padding:1.5rem; box-shadow:var(--shadow); border-top:3px solid var(--primary); }
+    .sak-card .regel-num { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--primary); margin-bottom:0.35rem; }
+    .sak-card h3 { font-size:1rem; font-weight:700; color:var(--white); margin-bottom:0.75rem; line-height:1.3; }
+    .sak-card ul { list-style:none; padding:0; margin:0; }
+    .sak-card ul li { font-size:0.84rem; color:var(--muted); padding:0.3rem 0; border-bottom:1px solid var(--outline); line-height:1.4; }
+    .sak-card ul li:last-child { border-bottom:none; }
+    .sak-card ul li::before { content:"○ "; color:var(--primary); }
+    .warning-banner { background:rgba(204,68,0,0.08); border:1px solid rgba(204,68,0,0.25); border-radius:1rem; padding:1.25rem 1.5rem; margin-top:1.5rem; }
+    .warning-banner h4 { font-size:0.92rem; font-weight:700; color:#cc4400; margin-bottom:0.5rem; }
+    .warning-banner p { font-size:0.85rem; color:var(--muted); margin:0; line-height:1.5; }
+    .rule-flow { display:flex; flex-direction:column; gap:0; margin-top:1.5rem; }
+    .rule-step { display:flex; gap:1rem; align-items:flex-start; padding:1rem 0; border-bottom:1px solid var(--outline); }
+    .rule-step:last-child { border-bottom:none; }
+    .rule-step .num { background:var(--primary); color:#000; font-weight:900; font-size:1rem; width:2rem; height:2rem; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:0.1rem; }
+    .rule-step .content h4 { font-size:0.95rem; font-weight:700; color:var(--white); margin-bottom:0.3rem; }
+    .rule-step .content p { font-size:0.84rem; color:var(--muted); margin:0 0 0.4rem; line-height:1.45; }
+    .rule-step .content ul { list-style:none; padding:0; margin:0; }
+    .rule-step .content ul li { font-size:0.82rem; color:var(--muted); padding:0.15rem 0; }
+    .rule-step .content ul li::before { content:"→ "; color:var(--primary); }
+  </style>
+</head>
+<body>
+
+<aside class="app-sidebar">
+  <div class="atelier-header">
+    <a href="../index.html" class="app-header-logo">Studieguiden</a>
+    <span class="atelier-sub">Technical Learning</span>
+  </div>
+  <nav class="app-nav">
+    <a href="../index.html" class="app-nav-item">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Alla kurser
+    </a>
+    <hr class="sidebar-divider">
+    <a href="index.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">home</span>
+      Hem
+    </a>
+    <a href="ledningar.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">cable</span>
+      Ledningar
+    </a>
+    <a href="normcentral.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">dashboard</span>
+      Normcentral
+    </a>
+    <a href="motorer.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">settings</span>
+      Motorer & Styrning
+    </a>
+    <a href="elsystem.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">bolt</span>
+      Elsystem
+    </a>
+    <a href="matning.html" class="app-nav-item app-nav-item--sm">
+      <span class="material-symbols-outlined">straighten</span>
+      Mätning & Idrift
+    </a>
+    <a href="sakerhet.html" class="app-nav-item app-nav-item--sm active">
+      <span class="material-symbols-outlined">security</span>
+      Säkerhetsregler
+    </a>
+  </nav>
+</aside>
+
+<div class="app-content">
+  <header class="app-header">
+    <div class="app-header-left">
+      <nav class="app-header-nav">
+        <a href="../index.html">Kurser</a>
+        <a href="index.html">Installationsteknik</a>
+        <a href="sakerhet.html" class="active">Säkerhetsregler</a>
+      </nav>
+    </div>
+    <div class="app-header-right">
+      <button class="app-header-icon" title="Notiser"><span class="material-symbols-outlined">notifications</span></button>
+      <button class="app-header-icon" title="Inställningar"><span class="material-symbols-outlined">settings</span></button>
+      <button class="theme-toggle" id="theme-toggle" title="Byt tema">Ljust</button>
+      <div class="app-avatar">T</div>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+    <div class="search-bar-wrap" id="search-wrap">
+      <div class="search-inner">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="search-input" class="search-input" placeholder="Sök — t.ex. frånskilj, spänningslös, jordning, kortslutning…" autocomplete="off" spellcheck="false" />
+        <button class="search-clear" id="search-clear" aria-label="Rensa">✕</button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+    </div>
+
+    <!-- ===== DE 5 SÄKERHETSREGLERNA ===== -->
+    <section class="section" id="regler">
+      <div class="section-header">
+        <div class="section-icon">🛡️</div>
+        <div>
+          <h4>Kapitel 6 — Säkerhet</h4>
+          <h2>De 5 säkerhetsreglerna</h2>
+        </div>
+      </div>
+      <p style="color:var(--muted);margin-bottom:0.5rem">Dessa regler ska alltid följas i rätt ordning innan arbete på eller i närheten av en elektrisk anläggning påbörjas.</p>
+
+      <div class="warning-banner">
+        <h4>⚠️ Följs de inte kan det vara dödligt</h4>
+        <p>Elektrisk ström dödar vid relativt låga strömstyrkor. Redan 50–80 mA kan orsaka hjärtstillestånd. Reglerna är inte frivilliga — de är obligatoriska och ska utföras i angiven ordning.</p>
+      </div>
+
+      <div class="rule-flow">
+
+        <div class="rule-step">
+          <div class="num">1</div>
+          <div class="content">
+            <h4>Frånskilj anläggningen (bryt spänningen)</h4>
+            <p>Bryt all spänning till den del av anläggningen som ska arbetas på.</p>
+            <ul>
+              <li>Dra ur säkringar eller bryt huvudbrytaren</li>
+              <li>Stäng av strömmen helt — en fas räcker inte</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rule-step">
+          <div class="num">2</div>
+          <div class="content">
+            <h4>Skydda mot återinkoppling (lås och märk)</h4>
+            <p>Hindra att någon annan sätter på strömmen medan arbetet pågår.</p>
+            <ul>
+              <li>Lås brytaren eller sätt upp ett tydligt varningsskyltar</li>
+              <li>Ingen ska kunna slå på strömmen av misstag</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rule-step">
+          <div class="num">3</div>
+          <div class="content">
+            <h4>Kontrollera att anläggningen är spänningslös</h4>
+            <p>Lita aldrig enbart på att du har stängt av. Mät alltid!</p>
+            <ul>
+              <li>Mät med godkänd mätutrustning</li>
+              <li>Lita aldrig bara på att du har stängt av (vid behov)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rule-step">
+          <div class="num">4</div>
+          <div class="content">
+            <h4>Jorda och kortslut (vid behov)</h4>
+            <p>Används framför allt vid arbete i högspänningsanläggningar och vid risk för återspänning.</p>
+            <ul>
+              <li>Används särskilt vid högspänning</li>
+              <li>Skyddar om spänning plötsligt skulle komma tillbaka</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rule-step">
+          <div class="num">5</div>
+          <div class="content">
+            <h4>Skydda mot närliggande spänningsförande delar</h4>
+            <p>Även om din del är spänningslös kan angränsande delar fortfarande vara spänningssatta.</p>
+            <ul>
+              <li>Täck över eller avskärma delar som fortfarande är spänningssatta</li>
+              <li>Håll säkert avstånd till spänningsförande delar</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== KORTVERSION (KORTKORT) ===== -->
+    <section class="section" id="kortversion">
+      <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div>
+          <h4>Kapitel 6 — Snabbkort</h4>
+          <h2>De 5 reglerna — snabbversion</h2>
+        </div>
+      </div>
+
+      <div class="sak-grid">
+        <div class="sak-card">
+          <div class="regel-num">Regel 1</div>
+          <h3>Frånskilj</h3>
+          <ul>
+            <li>Bryt spänningen</li>
+            <li>Dra säkringar / bryt huvudbrytare</li>
+            <li>Stäng av strömmen helt</li>
+          </ul>
+        </div>
+        <div class="sak-card">
+          <div class="regel-num">Regel 2</div>
+          <h3>Lås och märk</h3>
+          <ul>
+            <li>Lås brytaren</li>
+            <li>Sätt upp varningsskyltar</li>
+            <li>Förhindra återinkoppling</li>
+          </ul>
+        </div>
+        <div class="sak-card">
+          <div class="regel-num">Regel 3</div>
+          <h3>Kontrollera spänningslöst</h3>
+          <ul>
+            <li>Mät med godkänd mätutrustning</li>
+            <li>Lita aldrig bara på brytarens position</li>
+          </ul>
+        </div>
+        <div class="sak-card">
+          <div class="regel-num">Regel 4</div>
+          <h3>Jorda och kortslut</h3>
+          <ul>
+            <li>Vid behov (framför allt högspänning)</li>
+            <li>Skyddar mot återkommande spänning</li>
+          </ul>
+        </div>
+        <div class="sak-card">
+          <div class="regel-num">Regel 5</div>
+          <h3>Skydda mot angränsande delar</h3>
+          <ul>
+            <li>Täck spänningsförande delar</li>
+            <li>Håll säkert avstånd</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>⚠️ <strong>Installationsteknik – Kapitel 6</strong> — Säkerhet & Regler</p>
+      <p style="margin-top:0.5rem">Baserad på kursplan för Installationsteknik Nivå 1. Kontrollera alltid med din lärare eller handledare.</p>
+    </footer>
+
+  </div>
+</div>
+
+<nav class="mobile-nav">
+  <a href="../index.html" class="mobile-nav-item"><span class="material-symbols-outlined">dashboard</span></a>
+  <a href="index.html" class="mobile-nav-item active"><span class="material-symbols-outlined">menu_book</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">event_note</span></a>
+  <a href="#" class="mobile-nav-item"><span class="material-symbols-outlined">person</span></a>
+</nav>
+
+<script src="../script.js"></script>
+</body>
+</html>
